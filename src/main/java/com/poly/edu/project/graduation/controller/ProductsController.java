@@ -24,12 +24,26 @@ public class ProductsController {
 	ProductServices productServices;
 	@Autowired
 	ProductsRepository productsRepository;
-
+	
+	@Autowired
+	ProductsRepository dao;
 	@RequestMapping("getListProduct")
 	public List<ProductsEntity> getAllProduct() {
 		try {
 			 
 			List<ProductsEntity> dataProduct = productServices.findAllProducts();
+			return dataProduct;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@RequestMapping("report/Product")
+	public List<ProductsEntity> getReportProduct() {
+		try {
+			 
+			List<ProductsEntity> dataProduct = dao.getReport();
 			return dataProduct;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

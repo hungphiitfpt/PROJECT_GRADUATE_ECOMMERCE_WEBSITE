@@ -1,5 +1,7 @@
 package com.poly.edu.project.graduation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
