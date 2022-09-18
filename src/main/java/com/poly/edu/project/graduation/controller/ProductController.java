@@ -31,8 +31,7 @@ public class ProductController {
 			@RequestParam("name") String name, @RequestParam("sizeProduct") String sizeProduct,
 			@RequestParam("color") String color, @RequestParam("price") String price, Model model) {
 
-		model.addAttribute("products",
-				productServices.findAllBy(category, name, sizeProduct, color, price, PageRequest.of(page, size)));
+		model.addAttribute("products",productServices.findAllBy(category, name, sizeProduct, color, price, PageRequest.of(page, size)));
 		model.addAttribute("categories", categoryServices.findAll());
 		model.addAttribute("productsSaleOff", productServices.findAllProductSaleOff());
 		model.addAttribute("colors", colorServices.findAll());
