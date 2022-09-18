@@ -8,22 +8,23 @@ import java.util.List;
 @Entity
 @Table(name = "category", schema = "PROJECT_GRADUATE_ECOMMERCE_WEBSITE", catalog = "")
 public class CategoryEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
     @Id
     @Column(name = "idcategory", nullable = false)
-    private int idcategory;
+    private String idcategory;
     @Basic
     @Column(name = "name", nullable = true, length = 100)
     private String name;
     @OneToMany(mappedBy = "categoryByCategory")
     @JsonBackReference
+    
     private List<ProductsEntity> productsByIdcategory;
 
-    public int getIdcategory() {
+    public String getIdcategory() {
         return idcategory;
     }
 
-    public void setIdcategory(int idcategory) {
+    public void setIdcategory(String idcategory) {
         this.idcategory = idcategory;
     }
 
@@ -35,27 +36,20 @@ public class CategoryEntity {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        CategoryEntity that = (CategoryEntity) o;
+    public CategoryEntity(String idcategory, String name, List<ProductsEntity> productsByIdcategory) {
+		super();
+		this.idcategory = idcategory;
+		this.name = name;
+		this.productsByIdcategory = productsByIdcategory;
+	}
 
-        if (idcategory != that.idcategory) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+    
+	public CategoryEntity() {
+		super();
+	}
 
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = idcategory;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
-    }
-
-    public List<ProductsEntity> getProductsByIdcategory() {
+	public List<ProductsEntity> getProductsByIdcategory() {
         return productsByIdcategory;
     }
 
