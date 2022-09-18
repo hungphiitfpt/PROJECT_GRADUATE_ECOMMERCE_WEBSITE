@@ -11,7 +11,7 @@ public class SizeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idsize", nullable = false)
-    private int idsize;
+    private String idsize;
     @Basic
     @Column(name = "name", nullable = true, length = 100)
     private String name;
@@ -19,11 +19,11 @@ public class SizeEntity {
     @JsonBackReference
     private List<ProductsEntity> productsByIdsize;
 
-    public int getIdsize() {
+    public String getIdsize() {
         return idsize;
     }
 
-    public void setIdsize(int idsize) {
+    public void setIdsize(String idsize) {
         this.idsize = idsize;
     }
 
@@ -48,12 +48,6 @@ public class SizeEntity {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = idsize;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
-    }
 
     public List<ProductsEntity> getProductsByIdsize() {
         return productsByIdsize;

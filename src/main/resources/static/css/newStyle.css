@@ -1,0 +1,13 @@
+.pagination .disabled {
+    cursor: not-allowed !important;
+    color: white;
+    background: #c2c2c2;
+}
+
+.price-saleoff-product {
+	align-items: baseline;
+    justify-content: center;
+}
+.price-range-wrap .range-slider .price-input .price-ranger {
+	max-width: 49% !important;
+}
