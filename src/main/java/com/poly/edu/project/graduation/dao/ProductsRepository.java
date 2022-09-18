@@ -1,19 +1,15 @@
 package com.poly.edu.project.graduation.dao;
 
-import com.poly.edu.project.graduation.model.ProductsEntity;
-
 import java.util.List;
 
-<<<<<<< HEAD
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-=======
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
->>>>>>> developer
+
+import com.poly.edu.project.graduation.model.ProductsEntity;
+
 
 public interface ProductsRepository extends JpaRepository<ProductsEntity, Integer> {
 	
@@ -24,6 +20,7 @@ public interface ProductsRepository extends JpaRepository<ProductsEntity, Intege
 //	@Query(value ="SELECT * FROM products WHERE quantity > 0 AND category LIKE %% AND name LIKE %:name% AND size LIKE %% AND color LIKE %% AND price LIKE %%" ,nativeQuery = true)
 //	Page<ProductsEntity> findAllBy(@Param("name") String name, Pageable pageable);
 	
+	// Câu lệnh search điều kiện số lượng tồn kho của sản phẩm lớn hơn 0 và tìm kiếm theo danh mục, tên, kích cỡ, màu sắc, giá tiền ....
 	@Query(value ="SELECT * FROM products WHERE quantity > 0 AND category LIKE %:category% AND name LIKE %:name% AND size LIKE %:size% AND color LIKE %:color% AND price LIKE %:price%" ,nativeQuery = true)
 	Page<ProductsEntity> findAllBy(@Param("category") String category, @Param("name") String name, @Param("size") String size, @Param("color") String color, @Param("price") String price, Pageable pageable);
 	
