@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 // lớp này sử dụng để giao tiếp với db
 @Service
+// lớp này sử dụng để tạo ra các phương thức 
 public interface ProductServices {
 
 	List<ProductsEntity> findAllProducts();
