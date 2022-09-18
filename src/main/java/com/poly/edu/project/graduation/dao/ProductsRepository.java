@@ -4,11 +4,16 @@ import com.poly.edu.project.graduation.model.ProductsEntity;
 
 import java.util.List;
 
+<<<<<<< HEAD
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+=======
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+>>>>>>> developer
 
 public interface ProductsRepository extends JpaRepository<ProductsEntity, Integer> {
 	
@@ -24,4 +29,6 @@ public interface ProductsRepository extends JpaRepository<ProductsEntity, Intege
 	
 //	@Query(value ="{CALL getAllProduct()}" ,nativeQuery = true)
 //	List<ProductDataModel> getAllProducts() throws Exception;
+	@Query(value ="select count(idproduct) from products where category = 1 union  select count(idproduct) from products where category = 2 union select count(idproduct) from products where category = 3 " ,nativeQuery = true)
+    List<ProductsEntity> getReport();
 }
