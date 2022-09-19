@@ -23,7 +23,7 @@ import com.poly.edu.project.graduation.model.ResponseObject;
 import com.poly.edu.project.graduation.services.ProductServices;
 
 @RestController
-@RequestMapping("/api/graduation/products/")
+@RequestMapping("/api/graduation/")
 public class ProductsRestController {
 	@Autowired
 	ProductServices productServices;
