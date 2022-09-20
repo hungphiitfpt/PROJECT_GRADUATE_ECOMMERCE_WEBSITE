@@ -32,6 +32,9 @@ public class ProductsEntity {
 	@Basic
 	@Column(name = "saleoff", nullable = true, precision = 0)
 	private Integer saleoff;
+	@Basic
+	@Column(name = "quantity", nullable = true, precision = 0)
+	private Integer quantity;
 	@ManyToOne
 	@JoinColumn(name = "size", referencedColumnName = "idsize", insertable = false, updatable = false)
 	private SizeEntity sizeBySize;
@@ -41,6 +44,33 @@ public class ProductsEntity {
 	@ManyToOne
 	@JoinColumn(name = "category", referencedColumnName = "idcategory", insertable = false, updatable = false)
 	private CategoryEntity categoryByCategory;
+
+	
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public ProductsEntity(int idproduct, String name, String size, String color, String category, String image,
+			Double price, Integer saleoff, Integer quantity, SizeEntity sizeBySize, ColorEntity colorByColor,
+			CategoryEntity categoryByCategory) {
+		super();
+		this.idproduct = idproduct;
+		this.name = name;
+		this.size = size;
+		this.color = color;
+		this.category = category;
+		this.image = image;
+		this.price = price;
+		this.saleoff = saleoff;
+		this.quantity = quantity;
+		this.sizeBySize = sizeBySize;
+		this.colorByColor = colorByColor;
+		this.categoryByCategory = categoryByCategory;
+	}
 
 	public int getIdproduct() {
 		return idproduct;
@@ -105,24 +135,6 @@ public class ProductsEntity {
 	public void setSaleoff(Integer saleoff) {
 		this.saleoff = saleoff;
 	}
-
-	public ProductsEntity(int idproduct, String name, String size, String color, String category, String image,
-			Double price, int saleoff, SizeEntity sizeBySize, ColorEntity colorByColor,
-			CategoryEntity categoryByCategory) {
-		super();
-		this.idproduct = idproduct;
-		this.name = name;
-		this.size = size;
-		this.color = color;
-		this.category = category;
-		this.image = image;
-		this.price = price;
-		this.saleoff = saleoff;
-		this.sizeBySize = sizeBySize;
-		this.colorByColor = colorByColor;
-		this.categoryByCategory = categoryByCategory;
-	}
-
 	public ProductsEntity() {
 		super();
 	}
