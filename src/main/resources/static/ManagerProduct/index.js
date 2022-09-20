@@ -28,7 +28,7 @@ function loadAllDataColor() {
         console.log(res.data);
         for (let i = 0; i < res.data.length; i++) {
                 $('#color_product_manager_product').append(`
-                <option value="1">`${res.data[i].name}`</option>`)
+                <option value="1"></option>`)
         }
       })
       .catch(function (error) {
