@@ -223,8 +223,6 @@
 
 })(jQuery);
 
-var baseUrlApi = `http://localhost:8080/api/graduation`
-var baseUrlLocalhost = `http://localhost:8080`;
 var sizeProduct = '';
 var color = '';
 var price = '';

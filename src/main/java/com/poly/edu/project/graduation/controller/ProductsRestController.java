@@ -71,16 +71,16 @@ public class ProductsRestController {
 		}
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseObject("failed", "Xoá thất bại", null));
 	}
-	@PostMapping("add")
-	ResponseEntity<ResponseObject> addProducts(@RequestBody ProductsEntity product, Model model) {
-		try {
-			productServices.saveProduct(product);
-			return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Thêm Mới Thành Công", getAllProduct()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseObject("failed", "Xoá thất bại", null));
-	}
+//	@PostMapping("add")
+//	ResponseEntity<ResponseObject> addProducts(@RequestBody ProductsEntity product, Model model) {
+//		try {
+//			productServices.saveProduct(product);
+//			return ResponseEntity.status(HttpStatus.OK).body(new ResponseObject("ok", "Thêm Mới Thành Công", getAllProduct()));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseObject("failed", "Xoá thất bại", null));
+//	}
 
 	@PostMapping("update/{id}")
 	ResponseEntity<ResponseObject> updateProductById(@RequestBody ProductsEntity prd, @PathVariable int id) {
