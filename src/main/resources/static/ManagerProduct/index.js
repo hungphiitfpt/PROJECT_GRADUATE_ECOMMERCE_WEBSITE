@@ -2,6 +2,7 @@ $(function() {
 	loadAllDataColor();
 	loadAllDataSize();
 	loadAllDataCategory();
+	loadAllProductManager();
 })
 
 function CreateNewProduct() {
@@ -62,6 +63,45 @@ function loadAllDataCategory() {
 			for (let i = 0; i < res.data.length; i++) {
 				$('#category_product_manager_product').append(`
                 <option value="${res.data[i].idcategory}">${res.data[i].name}</option>`)
+			}
+		})
+		.catch(function(error) {
+
+		});
+}
+
+function loadAllProductManager() {
+	axios.get(`${baseUrlApi}/getListProduct`, {})
+		.then(function(res) {
+			console.log(res.data);
+			$('#table-product-admin tr').remove();
+			for (let i = 0; i < res.data.length; i++) {
+				$('#table-product-admin').append(`
+				<tr role="row" class="odd">
+							<td class="table-plus" tabindex="0">
+								<img src="${baseUrlLocalhost}/api/v1/FileUpload/files/${res.data[i].image}" width="70" height="70" alt="">
+							</td>
+							<td>
+								<h5 class="font-16">${res.data[i].name}</h5>
+								by ${res.data[i].categoryByCategory.name}
+							</td>
+							<td>${res.data[i].colorByColor.name}</td>
+							<td>${res.data[i].sizeBySize.name}</td>
+							<td style="">${res.data[i].price}</td>
+							<td style="">1</td>
+							<td style="">
+								<div class="dropdown">
+									<a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+										<i class="dw dw-more"></i>
+									</a>
+									<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+										<a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+										<a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+										<a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+									</div>
+								</div>
+							</td>
+						</tr>`)
 			}
 		})
 		.catch(function(error) {
