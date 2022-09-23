@@ -70,6 +70,7 @@ function loadAllDataCategory() {
 		});
 }
 
+// chức năng hiển thị tất cả sản phẩm lên table 
 function loadAllProductManager() {
 	axios.get(`${baseUrlApi}/getListProduct`, {})
 		.then(function(res) {
