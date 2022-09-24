@@ -28,4 +28,5 @@ public interface ProductServices {
 
 	Page<ProductsEntity> findAllBy(String category, String name, String size, String color, String price, Pageable pageable);
 
+	
 }

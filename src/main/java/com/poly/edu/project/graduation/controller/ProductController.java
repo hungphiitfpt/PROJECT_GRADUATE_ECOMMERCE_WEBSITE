@@ -39,11 +39,11 @@ public class ProductController {
 		model.addAttribute("items",list);
 		return "product/shop-grid";
 	}
-	
 	//gọi chi tiết sp
 	@RequestMapping("/detailProduct/{id}")
 	public String detail(Model model, @PathVariable("id") Integer id) {
 		ProductsEntity details = productServices.findProductById(id);
+//		biến details này sẽ truyền qua bên file html . Ví dụ: ${details.biến_ở_class}
 		model.addAttribute("details", details );
 		return "product/ogani-master/shop-details";
 	}

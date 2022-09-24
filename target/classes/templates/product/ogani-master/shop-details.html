@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- link thư viện thymleaf vào -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -231,6 +232,7 @@
                         <div class="breadcrumb__option">
                             <a href="./index.html">Trang Chủ</a>
                             <a href="./index.html">Chi tiết sản phẩm</a>
+                           <!--  truyền biến đã tạo bên controller có tên funtion detail -->
                             <span th:text="${details.name}"></span>
                         </div>
                     </div>
@@ -264,6 +266,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__text">
+                     <!--  truyền biến đã tạo bên controller có tên funtion detail -->
                         <h3 id="nameProductDetails" th:text="${details.name}"></h3>
                         <div class="product__details__rating">
                             <i class="fa fa-star"></i>
@@ -274,10 +277,12 @@
                             <span>(18 reviews)</span>
                         </div>
                         <div class="product__details__price" th:text="${#numbers.formatDecimal(details.price, 0, 'COMMA', 0, 'POINT')}+' ₫'" ></div>
+                        <!--  truyền biến đã tạo bên controller có tên funtion detail -->
                         <p th:text="${details.description}"></p>
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
+                                 <!--  truyền biến đã tạo bên controller có tên funtion detail -->
                                     <input type="text" th:value="${details.quantity}">
                                 </div>
                             </div>
@@ -319,12 +324,14 @@
                             <div class="tab-pane active" id="tabs-1" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Thông Tin Sản Phẩm</h6>
+                                     <!--  truyền biến đã tạo bên controller có tên funtion detail -->
                                     <p th:text="${details.description}"></p>
                                 </div>
                             </div>
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Thông Tin Sản Phẩm</h6>
+                                     <!--  truyền biến đã tạo bên controller có tên funtion detail -->
                                     <p th:text="${details.description}"></p>
                                     <p th:text="${details.description}"></p>
                                 </div>
@@ -332,6 +339,7 @@
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Thông Tim Sản Phẩm</h6>
+                                     <!--  truyền biến đã tạo bên controller có tên funtion detail -->
                                     <p th:text="${details.description}"></p>
                                 </div>
                             </div>
