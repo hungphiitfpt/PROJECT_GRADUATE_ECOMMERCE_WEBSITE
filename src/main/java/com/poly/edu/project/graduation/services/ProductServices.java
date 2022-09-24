@@ -15,13 +15,14 @@ import org.springframework.stereotype.Service;
 // lớp này sử dụng để tạo ra các phương thức 
 public interface ProductServices {
 
+	ProductsEntity findProductById(Integer id);
 	List<ProductsEntity> findAllProducts();
 
 	void saveProduct(ProductsEntity products);
 
 	void deleteProductById(int id);  
 
-	Optional<ProductsEntity> findProductById(int id);
+//	Optional<ProductsEntity> findProductById(int id);
 
 	List<ProductsEntity> findAllProductSaleOff();
 

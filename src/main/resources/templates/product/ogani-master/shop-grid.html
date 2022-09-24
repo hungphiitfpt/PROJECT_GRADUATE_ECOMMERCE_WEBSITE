@@ -429,7 +429,8 @@
 										<div class="product__discount__item__text">
 											<span th:text="${productSale.categoryByCategory.name}"></span>
 											<h5>
-												<a href="#" th:text="${productSale.name}">Raisin’n’nuts</a>
+												<a th:href="@{|/product/ogani-master/shop-details/${productSale.idproduct}|}" 
+												th:text="${productSale.name}">Raisin’n’nuts</a>
 											</h5>
 											<div class="row price-saleoff-product">
 												<div class="product__item__price mr-1"
@@ -475,7 +476,7 @@
 								</div>
 								<div class="product__item__text">
 									<h6>
-										<a href="#" th:text="${p.name}"></a>
+										<a th:href="@{|/product/ogani-master/shop-details/${p.idproduct}|}" th:text="${p.name}"></a>
 									</h6>
 									<h5
 										th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')}+' ₫'"></h5>
