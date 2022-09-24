@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
@@ -13,15 +13,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/newStyle.css" type="text/css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <link rel="stylesheet" href="../css/newStyle.css" type="text/css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
@@ -429,7 +429,7 @@
 										<div class="product__discount__item__text">
 											<span th:text="${productSale.categoryByCategory.name}"></span>
 											<h5>
-												<a th:href="@{|/product/ogani-master/shop-details/${productSale.idproduct}|}" 
+												<a th:href="@{detailProduct/}+${productSale.idproduct}" 
 												th:text="${productSale.name}">Raisin’n’nuts</a>
 											</h5>
 											<div class="row price-saleoff-product">
@@ -476,7 +476,7 @@
 								</div>
 								<div class="product__item__text">
 									<h6>
-										<a th:href="@{|/product/ogani-master/shop-details/${p.idproduct}|}" th:text="${p.name}"></a>
+										<a th:href="@{/detailProduct/}+${p.idproduct}" th:text="${p.name}"></a>
 									</h6>
 									<h5
 										th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')}+' ₫'"></h5>
@@ -589,16 +589,16 @@
 
     <!-- Js Plugins -->
 	<!-- Js Plugins -->
-	<script src="js/jquery-3.3.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.nice-select.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
-	<script src="js/jquery.slicknav.js"></script>
-	<script src="js/mixitup.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/variable.js"></script>
-	<script src="ManagerProduct/index.js"></script>
-    <script src="js/main.js"></script>
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/jquery.nice-select.min.js"></script>
+	<script src="../js/jquery-ui.min.js"></script>
+	<script src="../js/jquery.slicknav.js"></script>
+	<script src="../js/mixitup.min.js"></script>
+	<script src="../js/owl.carousel.min.js"></script>
+	<script src="../js/variable.js"></script>
+	<script src="../js/ManagerProduct/index.js"></script>
+    <script src="../js/main.js"></script>
 
 
 

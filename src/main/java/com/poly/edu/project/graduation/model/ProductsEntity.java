@@ -35,6 +35,9 @@ public class ProductsEntity {
 	@Basic
 	@Column(name = "quantity", nullable = true, precision = 0)
 	private Integer quantity;
+	@Basic
+	@Column(name = "description", nullable = true, precision = 0)
+	private String description;
 	@ManyToOne
 	@JoinColumn(name = "size", referencedColumnName = "idsize", insertable = false, updatable = false)
 	private SizeEntity sizeBySize;
@@ -137,6 +140,14 @@ public class ProductsEntity {
 	}
 	public ProductsEntity() {
 		super();
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

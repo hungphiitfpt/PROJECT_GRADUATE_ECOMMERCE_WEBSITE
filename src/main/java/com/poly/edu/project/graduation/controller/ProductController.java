@@ -41,15 +41,16 @@ public class ProductController {
 	}
 	
 	//gọi chi tiết sp
-	@RequestMapping("product/ogani-master/shop-details/{id}")
-		public String detail(Model model, @PathVariable("id") Integer id) {
-			ProductsEntity item= productServices.findProductById(id);
-			model.addAttribute("item",item);
-			return "product/ogani-master/shop-details";
-		}
+	@RequestMapping("/detailProduct/{id}")
+	public String detail(Model model, @PathVariable("id") Integer id) {
+		ProductsEntity details = productServices.findProductById(id);
+		model.addAttribute("details", details );
+		return "product/ogani-master/shop-details";
+	}
+
 	
-	
-	@GetMapping("productShop")
+	// Chức trang gọi trang sản phẩm .
+	@GetMapping("/productShop")
 	public String viewProductShop(@RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "9") int size, 
 			@ModelAttribute("category") String category,

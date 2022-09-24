@@ -18,8 +18,6 @@
 --
 -- Table structure for table `accounts`
 --
-create database project_graduate_ecommerce_website;
-use project_graduate_ecommerce_website;
 
 DROP TABLE IF EXISTS `accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -89,7 +87,7 @@ CREATE TABLE `color` (
 
 LOCK TABLES `color` WRITE;
 /*!40000 ALTER TABLE `color` DISABLE KEYS */;
-INSERT INTO `color` VALUES ('1','Đỏ '),('2','Vàng'),('3','Đen'),('4','Xanh'),('5','Cam');
+INSERT INTO `color` VALUES ('1','Đỏ '),('2','Vàng'),('3','Đen'),('4','Xanh nước biển'),('5','Xanh lá cây'),('6','Trắng');
 /*!40000 ALTER TABLE `color` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,6 +166,8 @@ CREATE TABLE `products` (
   `quantitysold` int DEFAULT NULL,
   `saleoff` int DEFAULT NULL,
   `quantity` int NOT NULL,
+  `datecreate` date DEFAULT NULL,
+  `description` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   PRIMARY KEY (`idproduct`),
   KEY `FKcolor_idx` (`color`),
   KEY `fksize_idx` (`size`),
@@ -175,7 +175,7 @@ CREATE TABLE `products` (
   CONSTRAINT `fkcategory` FOREIGN KEY (`category`) REFERENCES `category` (`idcategory`),
   CONSTRAINT `fkcolor` FOREIGN KEY (`color`) REFERENCES `color` (`idcolor`),
   CONSTRAINT `fksize` FOREIGN KEY (`size`) REFERENCES `size` (`idsize`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,7 +184,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Cá basa cắt khúc khay 500g','2','2','2','product-1.jpg',109999,NULL,30,44),(2,'Sườn non heo G khay 300g (2-4 miếng)','2','2','3','product-2.jpg',123000,NULL,NULL,55),(3,'Đùi bò Úc tươi Trung Đồng hút chân không khay 250g','1','1','3','product-3.jpg',213000,NULL,20,64),(4,'Cốt lết heo nhập khẩu đông lạnh khay 500g (2-4 miếng)','3','4','4','product-3.jpg',230111,NULL,NULL,324),(5,'Ức gà tươi phi lê C.P khay 500g (1-3 miếng)','2','2','2','product-4.jpg',23300,NULL,20,43),(6,'Đùi gà góc tư C.P khay 500g (1-3 miếng)','1','3','2','product-3.jpg',4000,NULL,NULL,34),(7,'Sườn già heo C.P khay 500g (9-11 miếng)','1','3','2','product-3.jpg',5000,NULL,NULL,234),(8,'Đuôi heo C.P khay 500g (7-9 miếng)','3','1','2','product-5.jpg',2000,NULL,10,654),(9,'213','3','1','2','product-3.jpg',2000,NULL,NULL,675),(10,'ádasd','2','1','2','product-3.jpg',4000,NULL,NULL,234),(11,'123','3','1','2','product-3.jpg',3000,NULL,NULL,324),(12,'123','3','1','2','product-6.jpg',2000200,NULL,50,34),(13,'ád','3','2','2','product-3.jpg',2000,NULL,NULL,234),(14,'fds','3','2','2','product-3.jpg',20000,NULL,NULL,435),(15,'sdf','3','3','3','product-3.jpg',20000,NULL,NULL,23),(16,'dsf','3','4','2','product-3.jpg',10000,NULL,NULL,324),(17,'qưe','3','3','2','product-3.jpg',20000,NULL,NULL,45),(18,'sdf','3','3','2','product-3.jpg',30000,NULL,NULL,234),(19,'ưqe','3','2','2','product-3.jpg',40000,NULL,NULL,234),(20,'33','3','2','2','product-3.jpg',3000,NULL,NULL,435),(21,'32','3','2','2','product-2.jpg',30000,NULL,NULL,634);
+INSERT INTO `products` VALUES (1,'Cá basa cắt khúc khay 500g','2','2','2','product-1.jpg',109999,NULL,30,44,NULL,'Mô Tả chi tiết Cá ba sa'),(2,'Sườn non heo G khay 300g (2-4 miếng)','2','2','3','product-2.jpg',123000,NULL,NULL,55,NULL,'Mô tả sườn non'),(3,'Đùi bò Úc tươi Trung Đồng hút chân không khay 250g','1','1','3','product-3.jpg',213000,NULL,20,64,NULL,'đây là mô tả'),(4,'Cốt lết heo nhập khẩu đông lạnh khay 500g (2-4 miếng)','3','4','4','product-3.jpg',230111,NULL,NULL,324,NULL,'đây là mô tả'),(5,'Ức gà tươi phi lê C.P khay 500g (1-3 miếng)','2','2','2','product-4.jpg',23300,NULL,20,43,NULL,'đây là mô tả'),(6,'Đùi gà góc tư C.P khay 500g (1-3 miếng)','1','3','2','product-3.jpg',4000,NULL,NULL,34,NULL,'đây là mô tả'),(7,'Sườn già heo C.P khay 500g (9-11 miếng)','1','3','2','product-3.jpg',5000,NULL,NULL,234,NULL,'đây là mô tả'),(8,'Đuôi heo C.P khay 500g (7-9 miếng)','3','1','2','product-5.jpg',2000,NULL,10,654,NULL,'đây là mô tả'),(9,'213','3','1','2','product-3.jpg',2000,NULL,NULL,0,NULL,'đây là mô tả'),(10,'ádasd','2','1','2','product-3.jpg',4000,NULL,NULL,234,NULL,'đây là mô tả'),(11,'123','3','1','2','product-3.jpg',3000,NULL,NULL,324,NULL,'đây là mô tả'),(12,'123','3','1','2','product-6.jpg',2000200,NULL,50,34,NULL,'đây là mô tả'),(13,'ád','3','2','2','product-3.jpg',2000,NULL,NULL,0,NULL,'đây là mô tả'),(14,'fds','3','2','2','product-3.jpg',20000,NULL,NULL,435,NULL,'đây là mô tả'),(15,'sdf','3','3','3','product-3.jpg',20000,NULL,NULL,23,NULL,'đây là mô tả'),(16,'dsf','3','4','2','product-3.jpg',10000,NULL,NULL,324,NULL,'đây là mô tả'),(17,'qưe','3','3','2','product-3.jpg',20000,NULL,NULL,45,NULL,'đây là mô tả'),(18,'sdf','3','3','2','product-3.jpg',30000,NULL,NULL,234,NULL,'đây là mô tả'),(19,'ưqe','3','2','2','product-3.jpg',40000,NULL,NULL,234,NULL,'đây là mô tả'),(20,'33','3','2','2','product-3.jpg',3000,NULL,NULL,435,NULL,'đây là mô tả'),(21,'','3','2','2','product-2.jpg',30000,NULL,NULL,634,NULL,'đây là mô tả'),(22,'Cá heo cắt khúc khay 500g','2','2','2','product-1.jpg',109999,NULL,30,3,'2022-09-09','đây là mô tả'),(23,'cá chà bá hà bá ','2','1','2',NULL,100000,NULL,10,1002,NULL,'đây là mô tả'),(24,'thịt bò mỹ tho','1','2','2',NULL,1000,NULL,10,10000,NULL,NULL),(25,'cá kakaka','1','1','1',NULL,10000,NULL,9,102,NULL,NULL),(26,'Khoai Lang','1','1','1',NULL,300000,NULL,320000,3423,NULL,NULL),(27,'thảo cứt','1','1','1',NULL,100000,NULL,NULL,100,NULL,NULL);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,36 +208,9 @@ CREATE TABLE `size` (
 
 LOCK TABLES `size` WRITE;
 /*!40000 ALTER TABLE `size` DISABLE KEYS */;
-INSERT INTO `size` VALUES ('1','S'),('2','M'),('3','L'),('4','XL'),('5','XXL');
+INSERT INTO `size` VALUES ('1','Nhỏ'),('2','Vừa'),('3','Lớn'),('4','Oversize');
 /*!40000 ALTER TABLE `size` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'project_graduate_ecommerce_website'
---
-
---
--- Dumping routines for database 'project_graduate_ecommerce_website'
---
-/*!50003 DROP PROCEDURE IF EXISTS `findAllProductSaleOff` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `findAllProductSaleOff`()
-BEGIN
- SELECT * FROM products WHERE saleoff > 0 ORDER BY saleoff DESC;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -248,4 +221,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-18 14:34:31
+-- Dump completed on 2022-09-24 15:34:36
