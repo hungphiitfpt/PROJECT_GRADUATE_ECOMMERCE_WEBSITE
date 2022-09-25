@@ -11,3 +11,25 @@
 .price-range-wrap .range-slider .price-input .price-ranger {
 	max-width: 49% !important;
 }
+.header__top__right__auth{
+	position: relative;
+}
+
+.logout-class button  {
+	border: none;
+    background: #f7f7f7;
+    position: absolute;
+    left: 9em;
+    top: 0;
+}
+
+.login-class button  {
+	border: none;
+    background: #f7f7f7;
+    position: absolute;
+    left: 9em;
+    top: 0;
+}
+
+
+

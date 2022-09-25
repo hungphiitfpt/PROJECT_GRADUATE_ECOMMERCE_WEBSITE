@@ -213,6 +213,39 @@ INSERT INTO `size` VALUES ('1','Nhỏ'),('2','Vừa'),('3','Lớn'),('4','Oversi
 UNLOCK TABLES;
 
 --
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(45) DEFAULT NULL,
+  `password` varchar(64) DEFAULT NULL,
+  `firstname` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `lastname` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `username` varchar(45) DEFAULT NULL,
+  `city` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `country` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `cmnd` varchar(45) DEFAULT NULL,
+  `address` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (8,'hungphiitfpt@gmail.com','$2a$10$lbAHDV9vafnvwZHWH5NYQemvbmDSwW925Ex126M9KODI92Jc77P/6','Hùng','Phi','admin','Việt Nam',NULL,NULL,NULL,NULL),(11,'abc@gmail.com','$2a$10$Bd3WUTC9ZW2DVyZezkc83u9kYdhRrOg79u2UPgGb2VhQliLwSzDH2','ads','ád','hungphias','Việt Nam','123123','123213','23123',NULL),(12,'ac@gmail.com','$2a$10$KENVhntFtCAtBI/eGkrSquMntvqHfLMqEIuNhDt1KU1b7MHrC4LW6','ads','ád','223','Việt Nam','123123','123213','23123',NULL),(13,'23321@gmail.com','$2a$10$u4XcUgxb6YRioD2fDzTjl.7fPD/0f6wWwMSBKOkMLuSE/kPVIWIp2','ads','ád','2asd','Việt Nam','123123','123213','jjaskd',NULL);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping events for database 'project_graduate_ecommerce_website'
 --
 
@@ -248,4 +281,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-24 17:29:02
+-- Dump completed on 2022-09-25 14:51:38
