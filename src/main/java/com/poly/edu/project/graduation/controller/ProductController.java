@@ -68,6 +68,30 @@ public class ProductController {
 		return "product/ogani-master/shop-grid";
 
 	}
+	
+@GetMapping("/blog")
+public String blog() {
+	return "product/ogani-master/blog";
+}
 
+@GetMapping("/blog-details")
+public String blogdetails() {
+	return "product/ogani-master/blog-details";
+}
+
+@GetMapping("/checkout")
+public String checkout() {
+	return "product/ogani-master/checkout";
+}
+
+@GetMapping("/contact")
+public String contact() {
+	return "product/ogani-master/contact";
+}
+
+@GetMapping("/shoping-cart")
+public String shopingcart() {
+	return "product/ogani-master/shoping-cart";
+}
 
 }

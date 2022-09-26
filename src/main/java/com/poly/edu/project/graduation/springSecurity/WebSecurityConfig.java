@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/registerUser").permitAll()
 //			.antMatchers("/users").authenticated()
-			.antMatchers("/productShop").authenticated()
+//			.antMatchers("/productShop").authenticated()
 			.antMatchers("/admin/manage_product").authenticated()
 			.anyRequest().permitAll()
 			.and()
@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginPage("/login")
 				.usernameParameter("email")
 //				.defaultSuccessUrl("/users")
-				.defaultSuccessUrl("/productShop")
+//				.defaultSuccessUrl("/productShop")
 				.defaultSuccessUrl("/admin/manage_product")
 				.permitAll();
 			http.rememberMe().rememberMeParameter("remember")
