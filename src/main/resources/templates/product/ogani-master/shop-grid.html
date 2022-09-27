@@ -51,6 +51,7 @@
 								<li th:each="category: ${categories}"><a
 									th:href="@{/productShop(name=${name}, sizeProduct=${sizeProduct},color=${color},price=${price},category=${category.idcategory})}"
 									th:text="${category.name}" th:name="category"></a></li>
+								<li><a th:href="@{/productShop(name=${name}, sizeProduct=${sizeProduct},color=${color},price=${price},category=)}">Không chọn danh mục</a></li>
 							</ul>
 						</div>
 						<div class="sidebar__item">
@@ -327,12 +328,6 @@
 	<!-- Footer Section Begin -->
 	<div th:replace="fragments/footer:: footer-template-user"></div>
 
-<div>
-	
-</div>
-	<!-- Footer Section End -->
-
-	<!-- Js Plugins -->
 	<!-- Js Plugins -->
 	<script src="../js/jquery-3.3.1.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>

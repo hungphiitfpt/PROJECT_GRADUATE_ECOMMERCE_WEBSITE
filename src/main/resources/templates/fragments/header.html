@@ -110,9 +110,10 @@
 						</div>
 						<form th:action="@{productShop}" method="post">
 							<ul>
-								<li th:each="category: ${categories}"><a
-									th:href="@{/productShop(category=${category},name=${name},sizeProduct=${sizeProduct},color=${color},price=${price})}"
-									name="category" th:text="${category.name}"></a></li>
+								<li th:each="c : ${categories}"><a
+									th:href="@{/productShop(name=${name}, sizeProduct=${sizeProduct},color=${color},price=${price},category=${c.idcategory})}"
+									name="category" th:text="${c.name}"></a></li>
+									<li><a th:href="@{/productShop(name=${name}, sizeProduct=${sizeProduct},color=${color},price=${price},category=)}">Không chọn danh mục</a></li>
 							</ul>
 						</form>
 
