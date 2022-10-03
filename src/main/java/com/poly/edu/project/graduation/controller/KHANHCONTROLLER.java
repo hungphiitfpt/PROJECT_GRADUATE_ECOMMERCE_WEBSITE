@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class KHANHCONTROLLER {
 
 	@RequestMapping("/shop")
+	
 	public String index() {
-		
+
 		return "template/shop";
-		
+
 	}
 }
