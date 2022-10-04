@@ -13,4 +13,8 @@ public interface CategoryServices {
 
 	List<ShopCategoriesEntity> findAll();
 
+
 }
+
+
+

@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
+import com.poly.edu.project.graduation.services.CategoryServices;
 
 @RestController
 @RequestMapping("/api/graduation/")
 public class CategoryRestController {
+
 	@Autowired
 	CategoryServices categoryServices;
 
@@ -20,5 +23,4 @@ public class CategoryRestController {
 		return categoryServices.findAll();
 
 	}
-	
 }

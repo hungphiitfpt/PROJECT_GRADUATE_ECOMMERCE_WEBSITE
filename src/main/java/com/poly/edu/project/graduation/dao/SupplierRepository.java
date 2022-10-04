@@ -13,4 +13,8 @@ public interface SupplierRepository extends JpaRepository<ShopSuplierEntity, Lon
 				 + "FROM shop_suplier as c WHERE is_deleted = false", nativeQuery = true)
 	List<ShopSuplierEntity> findAllSupplier();
 
+
 }
+
+
+

@@ -11,4 +11,7 @@ public interface SupplierService {
 
 	List<ShopSuplierEntity> findAllSupplier();
 
+
 }
+
+

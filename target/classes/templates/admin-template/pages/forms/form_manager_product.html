@@ -5,23 +5,32 @@
 
 <meta charset="utf-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <title>Admin</title>
 
-<link rel="stylesheet" href="../admin-static/vendors/typicons/typicons.css">
+<link rel="stylesheet"
+	href="../admin-static/vendors/typicons/typicons.css">
 
-<link rel="stylesheet" href="../admin-static/vendors/css/vendor.bundle.base.css">
+<link rel="stylesheet"
+	href="../admin-static/vendors/css/vendor.bundle.base.css">
 
-<link rel="stylesheet" href="../admin-static/vendors/select2/select2.min.css">
+<link rel="stylesheet"
+	href="../admin-static/vendors/select2/select2.min.css">
 
-<link rel="stylesheet" href="../admin-static/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+<link rel="stylesheet"
+	href="../admin-static/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
 
-<link rel="stylesheet" href="../admin-static/css/vertical-layout-light/style.css">
+<link rel="stylesheet"
+	href="../admin-static/css/vertical-layout-light/style.css">
 
-<link rel="stylesheet" href="../admin-static/css/vertical-layout-light/newStyle.css">
+<link rel="stylesheet"
+	href="../admin-static/css/vertical-layout-light/newStyle.css">
 
 <link rel="shortcut icon" href="../admin-static/images/favicon.png" />
+
+<script src="../variable_template/variable_index.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -30,69 +39,113 @@
 <body>
 	<div class="container-scroller">
 		<!-- partial:../../partials/_navbar.html -->
-			<div th:replace="admin-template/partials/_navbar:: navbar_template_admin"></div>
+		<div
+			th:replace="admin-template/partials/_navbar:: navbar_template_admin"></div>
 		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
 			<!-- partial:../../partials/_settings-panel.html -->
-			<div th:replace="admin-template/partials/_settings-panel:: settings-panel-template-user"></div>
+			<div
+				th:replace="admin-template/partials/_settings-panel:: settings-panel-template-user"></div>
 			<!-- partial -->
 			<!-- partial:../../partials/_sidebar.html -->
-		<div th:replace="admin-template/partials/_sidebar:: sidebar-template-user"></div>
+			<div
+				th:replace="admin-template/partials/_sidebar:: sidebar-template-user"></div>
 			<!-- partial -->
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="row">
-				
+
 						<div class="col-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
 									<h4 class="card-title">Quản Lý Sản Phẩm</h4>
 									<p class="card-description">Trang dành cho người quản trị</p>
 									<form class="forms-sample">
-										<div class="form-group">
-											<label for="exampleInputName1">Name</label> <input
-												type="text" class="form-control" id="exampleInputName1"
-												placeholder="Name">
+										<div class="row">
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Tên Sản Phẩm</label> <input
+													type="text" class="form-control" id="exampleInputName1"
+													placeholder="Name">
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Mã Code</label> <input
+													type="text" class="form-control" id="exampleInputName1"
+													placeholder="Name">
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Mô tả ngắn</label> <input
+													type="text" class="form-control" id="exampleInputName1"
+													placeholder="Name">
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Phí ship cơ bản </label> <input
+													type="text" class="form-control" id="exampleInputName1"
+													placeholder="Name">
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label>Loại Sản Phẩm</label> 
+												<select
+													id="list-category-manager" class="select-manager-product js-example-basic-single w-100 select2-hidden-accessible"
+													tabindex="-1" aria-hidden="true">
+													<option value="AL">Alabama</option>
+												</select>
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputEmail3">Số lượng</label> <input
+													type="text" class="form-control" id="exampleInputEmail3"
+													placeholder="Email">
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputEmail3">Giảm giá (%)</label> <input
+													type="text" class="form-control" id="exampleInputEmail3"
+													placeholder="Email">
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputEmail3">Kho nhập</label> <input
+													type="text" class="form-control" id="exampleInputEmail3"
+													placeholder="Email">
+											</div>
 										</div>
-										<div class="form-group">
-											<label for="exampleInputEmail3">Email address</label> <input
-												type="email" class="form-control" id="exampleInputEmail3"
-												placeholder="Email">
+										<div class="form-group col-lg-6 col-sm-12">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text bg-primary text-white">$</span>
+												</div>
+												<input type="text" class="form-control"
+													aria-label="Amount (to the nearest dollar)">
+												<div class="input-group-append">
+													<span class="input-group-text">.00</span>
+												</div>
+											</div>
 										</div>
-										<div class="form-group">
-											<label for="exampleInputPassword4">Password</label> <input
-												type="password" class="form-control"
-												id="exampleInputPassword4" placeholder="Password">
+										<div class="form-group col-lg-12 col-sm-12">
+											<label for="exampleTextarea1">Mô tả chi tiết</label>
+											<textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
 										</div>
-										<div class="form-group">
-											<label for="exampleSelectGender">Gender</label> <select
-												class="form-control" id="exampleSelectGender">
-												<option>Male</option>
-												<option>Female</option>
-											</select>
-										</div>
+
 										<div class="form-group">
 											<div class="upload__box">
 												<div class="text-center upload__btn-box">
 													<label class="upload__btn">
-														<p>Hình Ảnh</p>
-												 <input type="file" onchange="upFile($(this))"
-													 class="upload__inputfile">
-													
+														<p>Hình Ảnh</p> <input type="file"
+														onchange="upFile($(this))" class="upload__inputfile">
+
 													</label>
 												</div>
 												<div class="upload__img-wrap"></div>
 											</div>
 										</div>
-										<div class="form-group">
-											<label for="exampleInputCity1">City</label> <input
-												type="text" class="form-control" id="exampleInputCity1"
-												placeholder="Location">
-										</div>
-										<div class="form-group">
-											<label for="exampleTextarea1">Textarea</label>
-											<textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-										</div>
+
+
+
+
 										<button type="submit" class="btn btn-primary mr-2">Submit</button>
 										<button class="btn btn-light">Cancel</button>
 									</form>
@@ -703,7 +756,8 @@
 				</div>
 				<!-- content-wrapper ends -->
 				<!-- partial:../../partials/_footer.html -->
-				<div th:replace="admin-template/partials/_footer:: footer_template_admin"></div>
+				<div
+					th:replace="admin-template/partials/_footer:: footer_template_admin"></div>
 				<!-- partial -->
 			</div>
 			<!-- main-panel ends -->
@@ -718,13 +772,16 @@
 	<script src="../admin-static/js/settings.js"></script>
 	<script src="../admin-static/js/todolist.js"></script>
 
-	<script src="../admin-static/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+	<script
+		src="../admin-static/vendors/typeahead.js/typeahead.bundle.min.js"></script>
 	<script src="../admin-static/vendors/select2/select2.min.js"></script>
-	
+
 	<script src="../admin-static/js/file-upload.js"></script>
 	<script src="../admin-static/js/typeahead.js"></script>
 	<script src="../admin-static/js/select2.js"></script>
 	<script src="../admin-static/js/upload_template.js"></script>
+	<!-- nhúng file js tự customize--> 
+	<script src="../template-js/Manager_Product/index.js"></script>
 
 </body>
 
