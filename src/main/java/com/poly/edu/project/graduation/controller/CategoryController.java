@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class CategoryController {
-// mai thy đang test
-	
-//	hùng phi commit developer
+
 
 }

@@ -74,4 +74,7 @@ html * {
 	 position: relative;
 	 padding-bottom: 100%;
 }
+.select-manager-product {
+	max-width: 500px !important;
+}
  
