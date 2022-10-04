@@ -3,22 +3,23 @@ package com.poly.edu.project.graduation.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poly.edu.project.graduation.model.ShopSuplierEntity;
+import com.poly.edu.project.graduation.services.SupplierService;
 
 @RestController
 @RequestMapping("/api/graduation/")
-public class CategoryRestController {
+
+public class SupplierRestController {
 	@Autowired
-	CategoryServices categoryServices;
+	SupplierService service;
 
-	@GetMapping("category/getAllCategory")
-	public List<ShopCategoriesEntity> getAllCategory() {
+	@RequestMapping("getAllSupplider")
+	public List<ShopSuplierEntity> getAllSupplider() {
 
-		return categoryServices.findAll();
+		return service.findAllSupplier();
 
 	}
-	
 }

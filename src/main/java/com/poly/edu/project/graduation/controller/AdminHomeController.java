@@ -20,7 +20,7 @@ public class AdminHomeController {
 
 	@RequestMapping("/")
 	public String index() {
-		
+//		hungphi
 		return "admin-template/index";
 			
 	}
