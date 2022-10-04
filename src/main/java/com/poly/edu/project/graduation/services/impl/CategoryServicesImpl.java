@@ -21,7 +21,4 @@ public class CategoryServicesImpl implements CategoryServices {
 		return categoryRepository.findAll();
 	}
 
-
-
 }
-
