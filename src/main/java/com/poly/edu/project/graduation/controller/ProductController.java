@@ -37,6 +37,7 @@
 //		model.addAttribute("items",list);
 //		return "product/shop-grid";
 //	}
+
 //	//gọi chi tiết sp
 //	@RequestMapping("/detailProduct/{id}")
 //	public String detail(Model model, @PathVariable("id") Integer id) {
