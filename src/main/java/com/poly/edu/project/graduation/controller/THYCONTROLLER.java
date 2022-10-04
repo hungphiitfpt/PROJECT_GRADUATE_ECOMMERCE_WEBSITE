@@ -16,9 +16,9 @@ public class THYCONTROLLER {
 	Thyservices thyservices;
 	@RequestMapping("/index")
 	public String list(Model model) throws Exception {
-		List <ShopProductsEntity> list= thyservices.findAllProductDiscountASC();
+		List<ShopProductsEntity> list = thyservices.findAllProductDiscountASC();
 		System.out.println(list.size());
-		model.addAttribute("items",list);
+		model.addAttribute("items", list);
 		return "template/index";
 	}
 }
