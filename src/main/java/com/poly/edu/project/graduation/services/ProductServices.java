@@ -14,17 +14,18 @@ import com.poly.edu.project.graduation.model.ShopProductsEntity;
 public interface ProductServices {
 
 	ShopProductsEntity findProductById(Integer id);
+
 	List<ShopProductsEntity> findAllProducts() throws Exception;
 
 	void saveProduct(ShopProductsEntity products);
 
-	void deleteProductById(int id);  
+	void deleteProductById(int id);
 
 //	Optional<ProductsEntity> findProductById(int id);
 
 	List<ShopProductsEntity> findAllProductSaleOff();
 
-	Page<ShopProductsEntity> findAllBy(String category, String name, String size, String color, String price, Pageable pageable);
+	Page<ShopProductsEntity> findAllBy(String category, String name, String size, String color, String price,
+			Pageable pageable);
 
-	
 }

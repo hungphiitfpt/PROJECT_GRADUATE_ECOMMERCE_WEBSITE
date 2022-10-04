@@ -17,7 +17,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "shop_products", schema = "ecommer_db", catalog = "")
 public class ShopProductsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
