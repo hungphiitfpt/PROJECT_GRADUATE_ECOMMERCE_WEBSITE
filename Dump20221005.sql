@@ -4,6 +4,7 @@
 -- ------------------------------------------------------
 -- Server version	8.0.30
 
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -11,7 +12,7 @@
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40014 SET @OLD_FOREshop_categoriesIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
@@ -68,7 +69,22 @@ CREATE TABLE `shop_categories` (
 
 LOCK TABLES `shop_categories` WRITE;
 /*!40000 ALTER TABLE `shop_categories` DISABLE KEYS */;
-INSERT INTO `shop_categories` VALUES (1,'THIT','Thịt',NULL,NULL,'2022-10-02 10:17:47','2022-10-02 10:17:47',_binary '\0'),(2,'CA','Cá',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(3,'GA','Gà',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(4,'HAISAN','Hải Sản',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(5,'RAUCUQUA','Rau Củ',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0');
+INSERT INTO `shop_categories` VALUES 
+(1,'TP01','Thực phẩm',NULL,NULL,'2022-10-02 10:17:47','2022-10-02 10:17:47',_binary '\0'),
+(2,'HS02','Hải sản',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(3,'DL','đông lạnh',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(4,'DK','đồ khô',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(5,'DH','đóng hộp',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(6,'RAUCUQUA','Rau Củ',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(7,'GV','gia vị',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(8,'GD','gia dụng',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(9,'CS','Chăm sóc',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(10,'GK','giải khát',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(11,'BK','bánh kẹo',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(12,'VS','vệ sinh',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(13,'TS','sản phẩm từ sữa',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(14,'CB','chế biến sắn',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),
+(15,'PK','phụ kiện',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0');
 /*!40000 ALTER TABLE `shop_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,6 +286,28 @@ CREATE TABLE `shop_product_image` (
 
 LOCK TABLES `shop_product_image` WRITE;
 /*!40000 ALTER TABLE `shop_product_image` DISABLE KEYS */;
+INSERT INTO `shop_product_image` VALUES 
+('1','pd01','1.png'),
+('2','pd02','2.png'),
+('3','pd03','3.png'),
+('4','pd04','4.png'),
+('5','pd05','5.png'),
+('6','pd06','6.png'),
+('7','pd07','7.png'),
+('8','pd08','8.png'),
+('9','pd09','9.png'),
+('10','pd010','10.png'),
+('11','pd011','11.png'),
+('12','pd012','12.png'),
+('13','pd013','13.png'),
+('14','pd014','14.png'),
+('15','pd015','15.png'),
+('16','pd016','16.png'),
+('17','pd017','17.png'),
+('18','pd018','18.png'),
+('19','pd019','19.png'),
+('20','pd020','20.png');
+
 /*!40000 ALTER TABLE `shop_product_image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -301,6 +339,17 @@ CREATE TABLE `shop_product_reviews` (
 
 LOCK TABLES `shop_product_reviews` WRITE;
 /*!40000 ALTER TABLE `shop_product_reviews` DISABLE KEYS */;
+INSERT INTO `shop_product_reviews` VALUES 
+( '1','PD01','KH01','4','GOOD',NULL,NULL,NULL),
+( '2','PD02','KH02','4,3','bad',NULL,NULL,NULL),
+( '3','PD03','KH03','3','bad',NULL,NULL,NULL),
+( '4','PD04','KH04','5','GOOD',NULL,NULL,NULL),
+( '5','PD05','KH05','3,2','bad',NULL,NULL,NULL),
+( '6','PD06','KH06','4,5','GOOD',NULL,NULL,NULL),
+( '7','PD07','KH07','5','GOOD',NULL,NULL,NULL),
+( '8','PD08','KH08','3,2','bad',NULL,NULL,NULL),
+( '9','PD09','KH09','3,0','bad',NULL,NULL,NULL),
+( '10','PD010','KH010','4','GOOD',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `shop_product_reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -371,7 +420,27 @@ CREATE TABLE `shop_products` (
 
 LOCK TABLES `shop_products` WRITE;
 /*!40000 ALTER TABLE `shop_products` DISABLE KEYS */;
-INSERT INTO `shop_products` VALUES (1,'sd','d','ds','ds','d',NULL,NULL,NULL,NULL,_binary '\0',_binary '\0',NULL,NULL,'2022-10-05 20:14:53','2022-10-05 20:14:53'),(2,'THITBO23','thịt bò','ds','ds','d',NULL,NULL,NULL,NULL,_binary '\0',_binary '\0',NULL,NULL,NULL,NULL),(3,'THITBOCOBE','Thịt bò  ok',NULL,'thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(4,'THITBOCOBE 3','Thịt bò  ok 2',NULL,'thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL);
+INSERT INTO `shop_products` VALUES 
+(1,'TP','thịt heo','1','ds','d',10000.0000,90000,NULL,NULL,_binary '\0',_binary '\0',NULL,NULL,'2022-10-05 20:14:53','2022-10-05 20:14:53'),
+(2,'TP','thịt bò','2','ds','d',10000.0000,90000,NULL,NULL,_binary '\0',_binary '\0',NULL,NULL,NULL,NULL),
+(3,'HS','cá','3','thịt bò cô bé ','',12000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(4,'HS','mực','4','thịt bò cô bé ','',13000.0000,50000,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(5,'GD','bàn ủi','5','thịt bò cô bé ','',10000.0000,60000,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(6,'GD','hút bụi','6','thịt bò cô bé ','',10000.0000,75000,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(7,'GV','nước măm','7','thịt bò cô bé ','',10000.0000,80000,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(8,'GV','hạt nêm','8','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(9,'DH','PATE','9','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(10,'DH','SPAM','10','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(11,'CS','BÀN CHẢI ','11','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(12,'CS','KHĂN GIẤY','12','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(13,'RC','RAU CẦN','13','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(14,'RC','CÀ RỐT','14','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(15,'VS','nước rửa chén','15','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(16,'VS','nước giặt','16','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(17,'DK','bún khô','17','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(18,'DK','mì gói','18','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(19,'GK','bia','19','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),
+(20,'BK','socola','20','thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL);
 /*!40000 ALTER TABLE `shop_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -401,7 +470,18 @@ CREATE TABLE `shop_suplier` (
 
 LOCK TABLES `shop_suplier` WRITE;
 /*!40000 ALTER TABLE `shop_suplier` DISABLE KEYS */;
-INSERT INTO `shop_suplier` VALUES (1,'NCC001','Nhà cung cấp chị bảy','Chị bảy béo',NULL,NULL,NULL,_binary '\0'),(2,'NCC002','Nhà cung cấp chị 6','Chị 6 gầy',NULL,NULL,NULL,_binary '\0');
+INSERT INTO `shop_suplier` VALUES 
+(1,'NCC001','Nhà cung cấp chị bảy','Chị bảy béo',NULL,NULL,NULL,_binary '\0'),
+(2,'NCC002','Nhà cung cấp A','Chị 6 gầy',NULL,NULL,NULL,_binary '\0'),
+(3,'NCC003','Nhà cung cấp B','Chị 6 gầy',NULL,NULL,NULL,_binary '\0'),
+(4,'NCC004','Nhà cung cấp AEON','Chị 6 gầy',NULL,NULL,NULL,_binary '\0'),
+(5,'NCC005','Nhà cung cấp BIGC','Chị 6 gầy',NULL,NULL,NULL,_binary '\0'),
+(6,'NCC006','Nhà cung cấp COOPMART','Chị 6 gầy',NULL,NULL,NULL,_binary '\0'),
+(7,'NCC007','Nhà cung cấp KIM BIÊN','Chị 6 gầy',NULL,NULL,NULL,_binary '\0'),
+(8,'NCC008','Nhà cung cấp ĐỒNG XUÂN','Chị 6 gầy',NULL,NULL,NULL,_binary '\0'),
+(9,'NCC009','Nhà cung cấp HAI BA','Chị 6 gầy',NULL,NULL,NULL,_binary '\0'),
+(10,'NCC010','Nhà cung cấp BỐN NĂM','Chị 6 gầy',NULL,NULL,NULL,_binary '\0')
+;
 /*!40000 ALTER TABLE `shop_suplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
