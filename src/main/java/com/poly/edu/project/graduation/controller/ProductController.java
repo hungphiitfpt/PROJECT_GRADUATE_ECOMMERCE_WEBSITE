@@ -27,7 +27,7 @@
 //	CategoryServices categoryServices;
 //
 ////	@Autowired
-////	ColorServices colorServices;
+////	ColorServices colorServices;2	ơ]]=
 //
 //	
 //	//gọi danh sách sp

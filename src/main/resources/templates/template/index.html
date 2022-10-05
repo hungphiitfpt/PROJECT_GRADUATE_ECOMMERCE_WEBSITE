@@ -222,8 +222,8 @@
         </div>   		
     	</div>
     	<div class="container">
-    		<div class="row" th:each="product:${items}">
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    		<div class="row" >
+    			<div class="col-md-6 col-lg-3 ftco-animate" th:each="product:${items}">
     				<div class="product" >
     					<a href="#" class="img-prod"><img class="img-fluid" src="../template-static/images/product-1.jpg" alt="Colorlib Template">
     						<span class="status">30%</span>
@@ -234,7 +234,7 @@
     						<div class="d-flex">
     							<div class="pricing">
    
-		    						<p class="price"><span class="mr-2 price-dc">[[${product.listPrice}]]</span><span class="price-sale">[[${product.standCost}]]</span></p>
+		    						<p class="price" ><span class="mr-2 price-dc" th:text="${#numbers.formatDecimal(product.listPrice, 0, 'COMMA', 0, 'POINT')}">[[${product.listPrice}]]</span><span class="price-sale" th:text="${#numbers.formatDecimal(product.standCost, 0, 'COMMA', 0, 'POINT')}">[[${product.standCost}]]</span></p>
 		    					</div>
 	    					</div>
 	    					<div class="bottom-area d-flex px-3">
