@@ -1,106 +1,120 @@
 package com.poly.edu.project.graduation.model;
 
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
-
 @Entity
 @Table(name = "shop_products", schema = "ecommer_db", catalog = "")
 public class ShopProductsEntity {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
     private long id;
+    
     @Basic
     @Column(name = "product_code", nullable = true, length = 25)
     private String productCode;
+    
     @Basic
     @Column(name = "product_name", nullable = true, length = 50)
     private String productName;
+    
     @Basic
     @Column(name = "image", nullable = true, length = 200)
     private String image;
+    
     @Basic
     @Column(name = "short_decription", nullable = true, length = 250)
     private String shortDecription;
+    
     @Basic
     @Column(name = "decription", nullable = true, length = 500)
     private String decription;
+    
     @Basic
     @Column(name = "stand_cost", nullable = true, precision = 4)
     private BigDecimal standCost;
+    
     @Basic
     @Column(name = "list_price", nullable = true, precision = 4)
     private BigDecimal listPrice;
+    
     @Basic
     @Column(name = "quantity_per_unit", nullable = true, length = 50)
     private String quantityPerUnit;
+    
     @Basic
     @Column(name = "discountinued", nullable = true)
     private Byte discountinued;
+    
     @Basic
     @Column(name = "is_featured", nullable = false)
     private boolean isFeatured;
+    
     @Basic
     @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
+    
     @Basic
     @Column(name = "category_id", nullable = true)
     private Long categoryId;
+    
     @Basic
     @Column(name = "supplier_id", nullable = true)
     private Long supplierId;
+    
     @Basic
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
+    
     @Basic
     @Column(name = "updated_at", nullable = true)
     private Timestamp updatedAt;
     
     @OneToMany(mappedBy = "shopProductsByProductId")
-    private List<ShopOrderDetailEntity> shopOrderDetailsById;
-    
-    @OneToMany(mappedBy = "shopProductsByProductId")
-    @JsonSetter
     private List<ShopProductDiscountEntity> shopProductDiscountsById;
     
     @OneToMany(mappedBy = "shopProductsByProductId")
-    @JsonSetter
     private List<ShopProductImageEntity> shopProductImagesById;
     
     @OneToMany(mappedBy = "shopProductsByProductId")
-    @JsonSetter
     private List<ShopProductReviewsEntity> shopProductReviewsById;
     
     @OneToMany(mappedBy = "shopProductsByProductId")
     private List<ShopProductVouchersEntity> shopProductVouchersById;
     
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "category_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopCategoriesEntity shopCategoriesByCategoryId;
     
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "supplier_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopSuplierEntity shopSuplierBySupplierId;
     
     @OneToMany(mappedBy = "shopProductsByProductId")
     private List<ShopWarehouseEntity> shopWarehousesById;
+    
+    @OneToMany(mappedBy = "shopProductsByProductId")
+    private List<ShopOrderDetailEntity> shopOrderDetailsById;
+    
+    
 
-    public long getId() {
+//    public List<ShopOrderDetailEntity> getShopOrderDetailsById() {
+//		return shopOrderDetailsById;
+//	}
+
+//	public void setShopOrderDetailsById(List<ShopOrderDetailEntity> shopOrderDetailsById) {
+//		this.shopOrderDetailsById = shopOrderDetailsById;
+//	}
+
+	public long getId() {
         return id;
     }
 
@@ -228,14 +242,6 @@ public class ShopProductsEntity {
         this.updatedAt = updatedAt;
     }
 
-//    public List<ShopOrderDetailEntity> getShopOrderDetailsById() {
-//        return shopOrderDetailsById;
-//    }
-//
-//    public void setShopOrderDetailsById(List<ShopOrderDetailEntity> shopOrderDetailsById) {
-//        this.shopOrderDetailsById = shopOrderDetailsById;
-//    }
-//
     public List<ShopProductDiscountEntity> getShopProductDiscountsById() {
         return shopProductDiscountsById;
     }

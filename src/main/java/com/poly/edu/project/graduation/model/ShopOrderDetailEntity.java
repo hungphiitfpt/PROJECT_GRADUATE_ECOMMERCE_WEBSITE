@@ -38,15 +38,16 @@ public class ShopOrderDetailEntity {
     @Basic
     @Column(name = "date_allocated", nullable = true)
     private Timestamp dateAllocated;
+    
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "order_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopOrdersEntity shopOrdersByOrderId;
+    
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopProductsEntity shopProductsByProductId;
-
     public long getId() {
         return id;
     }
@@ -119,44 +120,6 @@ public class ShopOrderDetailEntity {
         this.dateAllocated = dateAllocated;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ShopOrderDetailEntity that = (ShopOrderDetailEntity) o;
-
-        if (id != that.id) return false;
-        if (orderId != null ? !orderId.equals(that.orderId) : that.orderId != null) return false;
-        if (productId != null ? !productId.equals(that.productId) : that.productId != null) return false;
-        if (quantity != null ? !quantity.equals(that.quantity) : that.quantity != null) return false;
-        if (unitPrice != null ? !unitPrice.equals(that.unitPrice) : that.unitPrice != null) return false;
-        if (discountPercentage != null ? !discountPercentage.equals(that.discountPercentage) : that.discountPercentage != null)
-            return false;
-        if (discountAmount != null ? !discountAmount.equals(that.discountAmount) : that.discountAmount != null)
-            return false;
-        if (orderDetailStatus != null ? !orderDetailStatus.equals(that.orderDetailStatus) : that.orderDetailStatus != null)
-            return false;
-        if (dateAllocated != null ? !dateAllocated.equals(that.dateAllocated) : that.dateAllocated != null)
-            return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (orderId != null ? orderId.hashCode() : 0);
-        result = 31 * result + (productId != null ? productId.hashCode() : 0);
-        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
-        result = 31 * result + (unitPrice != null ? unitPrice.hashCode() : 0);
-        result = 31 * result + (discountPercentage != null ? discountPercentage.hashCode() : 0);
-        result = 31 * result + (discountAmount != null ? discountAmount.hashCode() : 0);
-        result = 31 * result + (orderDetailStatus != null ? orderDetailStatus.hashCode() : 0);
-        result = 31 * result + (dateAllocated != null ? dateAllocated.hashCode() : 0);
-        return result;
-    }
-
     public ShopOrdersEntity getShopOrdersByOrderId() {
         return shopOrdersByOrderId;
     }
@@ -165,11 +128,13 @@ public class ShopOrderDetailEntity {
         this.shopOrdersByOrderId = shopOrdersByOrderId;
     }
 
-    public ShopProductsEntity getShopProductsByProductId() {
-        return shopProductsByProductId;
-    }
+	public ShopProductsEntity getShopProductsByProductId() {
+		return shopProductsByProductId;
+	}
 
-    public void setShopProductsByProductId(ShopProductsEntity shopProductsByProductId) {
-        this.shopProductsByProductId = shopProductsByProductId;
-    }
+	public void setShopProductsByProductId(ShopProductsEntity shopProductsByProductId) {
+		this.shopProductsByProductId = shopProductsByProductId;
+	}
+    
+    
 }

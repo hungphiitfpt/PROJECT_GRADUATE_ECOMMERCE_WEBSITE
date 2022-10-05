@@ -59,7 +59,7 @@ CREATE TABLE `shop_categories` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `is_deleted` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,7 @@ CREATE TABLE `shop_categories` (
 
 LOCK TABLES `shop_categories` WRITE;
 /*!40000 ALTER TABLE `shop_categories` DISABLE KEYS */;
-INSERT INTO `shop_categories` VALUES (1,'pd0213','sad',NULL,NULL,'2022-10-02 10:17:47','2022-10-02 10:17:47',_binary '\0');
+INSERT INTO `shop_categories` VALUES (1,'THIT','Thịt',NULL,NULL,'2022-10-02 10:17:47','2022-10-02 10:17:47',_binary '\0'),(2,'CA','Cá',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(3,'GA','Gà',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(4,'HAISAN','Hải Sản',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(5,'RAUCUQUA','Rau Củ',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0');
 /*!40000 ALTER TABLE `shop_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,10 +127,10 @@ CREATE TABLE `shop_order_detail` (
   `order_detail_status` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `date_allocated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fkorderdetai_product_idx` (`product_id`),
   KEY `fkorderdetai_order_idx` (`order_id`),
+  KEY `fkorderdetail_product_idx` (`product_id`),
   CONSTRAINT `fkorderdetai_order` FOREIGN KEY (`order_id`) REFERENCES `shop_orders` (`id`),
-  CONSTRAINT `fkorderdetai_product` FOREIGN KEY (`product_id`) REFERENCES `shop_products` (`id`)
+  CONSTRAINT `fkorderdetail_product` FOREIGN KEY (`product_id`) REFERENCES `shop_products` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -174,7 +174,7 @@ CREATE TABLE `shop_orders` (
   CONSTRAINT `fk_order_customer` FOREIGN KEY (`customer_id`) REFERENCES `shop_customer` (`id`),
   CONSTRAINT `fk_order_payment` FOREIGN KEY (`payment_type_id`) REFERENCES `shop_payment_types` (`id`),
   CONSTRAINT `fk_order_user` FOREIGN KEY (`employee_id`) REFERENCES `role_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,6 +183,7 @@ CREATE TABLE `shop_orders` (
 
 LOCK TABLES `shop_orders` WRITE;
 /*!40000 ALTER TABLE `shop_orders` DISABLE KEYS */;
+INSERT INTO `shop_orders` VALUES (2,NULL,NULL,'2009-08-02 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,'2022-10-05 01:09:04','2022-10-05 01:09:04');
 /*!40000 ALTER TABLE `shop_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,6 +213,7 @@ CREATE TABLE `shop_payment_types` (
 
 LOCK TABLES `shop_payment_types` WRITE;
 /*!40000 ALTER TABLE `shop_payment_types` DISABLE KEYS */;
+INSERT INTO `shop_payment_types` VALUES (1,'MOMO','Thanh Toán Momo','Thanh toán bằng phương thức momo',NULL,'2022-10-05 01:08:57','2022-10-05 01:08:57',NULL);
 /*!40000 ALTER TABLE `shop_payment_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +270,6 @@ CREATE TABLE `shop_product_image` (
 
 LOCK TABLES `shop_product_image` WRITE;
 /*!40000 ALTER TABLE `shop_product_image` DISABLE KEYS */;
-INSERT INTO `shop_product_image` VALUES (1,1,'abc'),(2,1,'ád');
 /*!40000 ALTER TABLE `shop_product_image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,8 +290,8 @@ CREATE TABLE `shop_product_reviews` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `is_deleted` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`),
-  KEY `fkproduct_reviews_idx` (`product_id`),
-  CONSTRAINT `fkproduct_reviews` FOREIGN KEY (`product_id`) REFERENCES `shop_products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fkreview_product_idx` (`product_id`),
+  CONSTRAINT `fkreview_product` FOREIGN KEY (`product_id`) REFERENCES `shop_products` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -300,7 +301,6 @@ CREATE TABLE `shop_product_reviews` (
 
 LOCK TABLES `shop_product_reviews` WRITE;
 /*!40000 ALTER TABLE `shop_product_reviews` DISABLE KEYS */;
-INSERT INTO `shop_product_reviews` VALUES (1,1,231,2,'Rất ngon, tuyệt 10 điểm','2022-10-02 10:14:06','2022-10-02 10:14:06',_binary '\0');
 /*!40000 ALTER TABLE `shop_product_reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,8 +319,8 @@ CREATE TABLE `shop_product_vouchers` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `isdeleted_at` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`),
-  KEY `fk_voucher_product_idx` (`product_id`),
-  CONSTRAINT `fk_voucher_product` FOREIGN KEY (`product_id`) REFERENCES `shop_products` (`id`)
+  KEY `fkvoucher_product_idx` (`product_id`),
+  CONSTRAINT `fkvoucher_product` FOREIGN KEY (`product_id`) REFERENCES `shop_products` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -341,7 +341,7 @@ DROP TABLE IF EXISTS `shop_products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shop_products` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `product_code` varchar(25) DEFAULT NULL,
   `product_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `image` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
@@ -362,7 +362,7 @@ CREATE TABLE `shop_products` (
   KEY `fkproduct_category_idx` (`category_id`),
   CONSTRAINT `fkproduct_category` FOREIGN KEY (`category_id`) REFERENCES `shop_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fkproduct_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `shop_suplier` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -371,7 +371,7 @@ CREATE TABLE `shop_products` (
 
 LOCK TABLES `shop_products` WRITE;
 /*!40000 ALTER TABLE `shop_products` DISABLE KEYS */;
-INSERT INTO `shop_products` VALUES (1,'BO001','Bò Mỹ ','abc.png','bò mỹ','bò mỹ ',12000.0000,190000.0000,'1000',0,_binary '\0',_binary '\0',NULL,NULL,'2022-10-02 14:35:05','2022-10-02 14:35:05');
+INSERT INTO `shop_products` VALUES (1,'sd','d','ds','ds','d',NULL,NULL,NULL,NULL,_binary '\0',_binary '\0',NULL,NULL,'2022-10-05 20:14:53','2022-10-05 20:14:53'),(2,'THITBO23','thịt bò','ds','ds','d',NULL,NULL,NULL,NULL,_binary '\0',_binary '\0',NULL,NULL,NULL,NULL),(3,'THITBOCOBE','Thịt bò  ok',NULL,'thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(4,'THITBOCOBE 3','Thịt bò  ok 2',NULL,'thịt bò cô bé ','',10000.0000,NULL,'',10,_binary '\0',_binary '\0',1,2,NULL,NULL);
 /*!40000 ALTER TABLE `shop_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -401,6 +401,7 @@ CREATE TABLE `shop_suplier` (
 
 LOCK TABLES `shop_suplier` WRITE;
 /*!40000 ALTER TABLE `shop_suplier` DISABLE KEYS */;
+INSERT INTO `shop_suplier` VALUES (1,'NCC001','Nhà cung cấp chị bảy','Chị bảy béo',NULL,NULL,NULL,_binary '\0'),(2,'NCC002','Nhà cung cấp chị 6','Chị 6 gầy',NULL,NULL,NULL,_binary '\0');
 /*!40000 ALTER TABLE `shop_suplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -418,8 +419,8 @@ CREATE TABLE `shop_warehouse` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `fkwarehouse_product_idx` (`product_id`),
-  CONSTRAINT `fkwarehouse_product` FOREIGN KEY (`product_id`) REFERENCES `shop_products` (`id`)
+  KEY `fkwarehouse_idx` (`product_id`),
+  CONSTRAINT `fkwarehouse` FOREIGN KEY (`product_id`) REFERENCES `shop_products` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -478,6 +479,48 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'ecommer_db'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `getListImageByProductId` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getListImageByProductId`(IN product_id int)
+BEGIN
+	SELECT 	p.id, 
+		p.product_name, 
+        JSON_UNQUOTE(CONCAT('[',GROUP_CONCAT(
+		JSON_OBJECT(
+		'nameImage', i.image
+		)SEPARATOR ','),']')) AS images,
+        p.short_decription, 
+		p.decription, 
+        p.list_price, 
+		p.image, 
+        p.discountinued, 
+        p.quantity_per_unit, 
+		p.category_id, 
+        p.supplier_id ,
+        p.created_at,
+        p.updated_at,
+        p.is_deleted,
+        p.is_featured,
+        p.product_code,
+        p.stand_cost
+FROM 	shop_products as p
+		LEFT JOIN shop_product_image as i ON p.id = i.product_id 
+where 	is_deleted = false and p.id = product_id
+GROUP BY p.id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -488,4 +531,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-03 19:58:23
+-- Dump completed on 2022-10-05 20:34:06
