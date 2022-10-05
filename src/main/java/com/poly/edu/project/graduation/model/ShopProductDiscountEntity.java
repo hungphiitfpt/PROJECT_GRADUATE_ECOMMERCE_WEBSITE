@@ -31,6 +31,7 @@ public class ShopProductDiscountEntity {
     @Basic
     @Column(name = "end_date", nullable = true)
     private Timestamp endDate;
+    
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)

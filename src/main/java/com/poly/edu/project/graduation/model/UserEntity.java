@@ -1,6 +1,9 @@
 package com.poly.edu.project.graduation.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.sql.Timestamp;
 
 @Entity
@@ -56,6 +59,7 @@ public class UserEntity {
     @Column(name = "role_id", nullable = false)
     private long roleId;
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     private RoleUserEntity roleUserByRoleId;
 

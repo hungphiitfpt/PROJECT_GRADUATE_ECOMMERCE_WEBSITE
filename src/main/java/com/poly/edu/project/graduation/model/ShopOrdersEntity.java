@@ -57,18 +57,23 @@ public class ShopOrdersEntity {
     @Basic
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
+    
     @Basic
     @Column(name = "updated_at", nullable = true)
     private Timestamp updatedAt;
     @OneToMany(mappedBy = "shopOrdersByOrderId")
     private List<ShopOrderDetailEntity> shopOrderDetailsById;
+    
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "employee_id", referencedColumnName = "id", insertable = false, updatable = false)
     private RoleUserEntity roleUserByEmployeeId;
+    
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopCustomerEntity shopCustomerByCustomerId;
+    
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "payment_type_id", referencedColumnName = "id", insertable = false, updatable = false)
