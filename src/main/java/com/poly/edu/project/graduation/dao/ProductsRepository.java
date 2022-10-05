@@ -21,6 +21,7 @@ public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Lo
 	@Query(value ="{call ecommer_db.getListImageByProductId(:id)}" ,nativeQuery = true)
 	ShopProductsEntity findListImageByID(@Param("id") int id);
 
+
 //	@Query(value ="SELECT * FROM products WHERE quantity > 0 AND category LIKE %% AND name LIKE %:name% AND size LIKE %% AND color LIKE %% AND price LIKE %%" ,nativeQuery = true)
 //	Page<ProductsEntity> findAllBy(@Param("name") String name, Pageable pageable);
 	

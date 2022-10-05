@@ -1,6 +1,7 @@
 $(function() {
 	loadAllCategory();
 	loadAllSupplier();
+	loadAllProduct();
 })
 async function loadAllCategory() {
 	let categoryHTML = '';
@@ -26,12 +27,57 @@ async function loadAllSupplier() {
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
 
-	
+
 	for (let i = 0; i < res.data.length; i++) {
 		SupplierHTML += `<option value="${res.data[i].id}">${res.data[i].supplierName}</option>`;
 	}
 	$('#list-supplier-manager').html(SupplierHTML);
-	
+
+}
+async function loadAllProduct() {
+
+	let ProductHTML = ''
+
+	let method = 'get',
+
+		url = `${api_admin}getAllProductTableManager`,
+
+		params = null,
+
+		data = {};
+
+	let res = await axiosTemplate(method, url, params, data);
+
+	for (let i = 0; i < res.data.length; i++) {
+		ProductHTML += `<tr>
+		<td>${res.data[i].id}</td>
+		<td>${res.data[i].productName}</td>
+		<td><img src="${api_images}${res.data[i].image}"></img></td>
+		<td>${res.data[i].listPrice}</td>
+		<td> <div class="progress">
+			 	<div class="progress-bar bg-primary" 
+				 	 role="progressbar" 
+				 	 style="width: ${res.data[i].quantityPerUnit / 10}%" 
+				 	 aria-valuenow="25" 
+				 	 aria-valuemin="0" 
+				 	 aria-valuemax="100">
+			 	</div>
+	 		 </div>
+	  </td>
+		<td><label class="badge badge-danger">Pending</label></td>
+		<td><div class="row justify-content-around">
+		<button type="button"
+			class="btn btn-primary btn-rounded btn-icon">
+			<i class="typcn typcn-home-outline"></i>
+		</button>
+		<button type="button"
+			class="btn btn-info btn-rounded btn-icon">
+			<i class="typcn typcn-star"></i>
+		</button>
+	</div></td>
+	  </tr>`;
+	}
+	$('#table-list-product-manager').prepend(ProductHTML);
 }
 
 async function insertProduct() {
@@ -39,9 +85,9 @@ async function insertProduct() {
 		url = `${api_admin}insert_product`,
 		params = null,
 		data = {
-			id : 4,
-			productCode : $('#code-create-manager-product').val(),
-			productName : $('#name-create-manager-product').val(),
+			id: 4,
+			productCode: $('#code-create-manager-product').val(),
+			productName: $('#name-create-manager-product').val(),
 			shortDecription: $('#description-short-create-manager-product').val(),
 			decription: $('#exampleTextarea1').text(),
 			standCost: $('#fee-ship-create-manager-product').val(),
@@ -53,7 +99,7 @@ async function insertProduct() {
 		};
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
-	sweatAlert('thành công','success');
+	sweatAlert('thành công', 'success');
 }
 
 function sweatAlert(message, status) {
@@ -64,13 +110,13 @@ function sweatAlert(message, status) {
 		timer: 3000,
 		timerProgressBar: true,
 		didOpen: (toast) => {
-		  toast.addEventListener('mouseenter', Swal.stopTimer)
-		  toast.addEventListener('mouseleave', Swal.resumeTimer)
+			toast.addEventListener('mouseenter', Swal.stopTimer)
+			toast.addEventListener('mouseleave', Swal.resumeTimer)
 		}
-	  })
-	  
-	  Toast.fire({
+	})
+
+	Toast.fire({
 		icon: status,
 		title: message
-	  })
+	})
 }

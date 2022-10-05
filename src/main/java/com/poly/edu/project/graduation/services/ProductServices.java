@@ -29,4 +29,6 @@ public interface ProductServices {
 
 	List<ShopProductsEntity> findByProductName(String trim);
 
+	List<ShopProductsEntity> getAllProductTableManager();
+
 }

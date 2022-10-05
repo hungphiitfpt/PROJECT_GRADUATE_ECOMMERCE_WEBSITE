@@ -30,5 +30,7 @@ public class AdminHomeController {
 		return "admin-template/pages/forms/form_manager_product";
 
 	}
+	
+
 
 }

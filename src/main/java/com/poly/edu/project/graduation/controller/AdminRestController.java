@@ -35,4 +35,12 @@ public class AdminRestController {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(new ResponseObject("200", "Thêm Thành Công ", productsRepository.save(shopProductsEntity)));
 	}
+	
+	@RequestMapping(value = "/getAllProductTableManager", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public List<ShopProductsEntity> getAllProductTableManager() {
+		
+		return productServices.getAllProductTableManager();
+
+	}
 }
