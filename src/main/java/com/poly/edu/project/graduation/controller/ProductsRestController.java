@@ -1,31 +1,36 @@
 package com.poly.edu.project.graduation.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.poly.edu.project.graduation.dao.ProductsRepository;
+import com.poly.edu.project.graduation.model.ShopProductsEntity;
+import com.poly.edu.project.graduation.services.ProductServices;
 
 
 @RestController
 @RequestMapping("/api/graduation/")
 public class ProductsRestController {
-//	@Autowired
-//	ProductServices productServices;
-//	@Autowired
-//	ProductsRepository productsRepository;
-//	
-//	@Autowired
-//	ProductsRepository dao;
-//	@RequestMapping("getListProduct")
-//	public List<ShopProductsEntity> getAllProduct() throws Exception {
-//		try {
-//			 
-//			List<ShopProductsEntity> dataProduct = productServices.findAllProducts();
-//			return dataProduct;
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
+	@Autowired
+	ProductServices productServices;
+	@Autowired
+	ProductsRepository productsRepository;
+
+	@RequestMapping("getListProduct")
+	public List<ShopProductsEntity> getAllProduct() throws Exception {
+		try {
+			 
+			List<ShopProductsEntity> dataProduct = productsRepository.findAll();
+			return dataProduct;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 
 //	

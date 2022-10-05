@@ -16,16 +16,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "shop_products", schema = "ecommer_db", catalog = "")
 public class ShopProductsEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
     private long id;
@@ -74,24 +70,33 @@ public class ShopProductsEntity {
     @Basic
     @Column(name = "updated_at", nullable = true)
     private Timestamp updatedAt;
+    
     @OneToMany(mappedBy = "shopProductsByProductId")
     private List<ShopOrderDetailEntity> shopOrderDetailsById;
+    
     @OneToMany(mappedBy = "shopProductsByProductId")
+    @JsonSetter
     private List<ShopProductDiscountEntity> shopProductDiscountsById;
+    
     @OneToMany(mappedBy = "shopProductsByProductId")
+    @JsonSetter
     private List<ShopProductImageEntity> shopProductImagesById;
+    
     @OneToMany(mappedBy = "shopProductsByProductId")
+    @JsonSetter
     private List<ShopProductReviewsEntity> shopProductReviewsById;
+    
     @OneToMany(mappedBy = "shopProductsByProductId")
     private List<ShopProductVouchersEntity> shopProductVouchersById;
+    
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "category_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopCategoriesEntity shopCategoriesByCategoryId;
+    
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "supplier_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopSuplierEntity shopSuplierBySupplierId;
+    
     @OneToMany(mappedBy = "shopProductsByProductId")
     private List<ShopWarehouseEntity> shopWarehousesById;
 
@@ -223,65 +228,14 @@ public class ShopProductsEntity {
         this.updatedAt = updatedAt;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ShopProductsEntity that = (ShopProductsEntity) o;
-
-        if (id != that.id) return false;
-        if (isFeatured != that.isFeatured) return false;
-        if (isDeleted != that.isDeleted) return false;
-        if (productCode != null ? !productCode.equals(that.productCode) : that.productCode != null) return false;
-        if (productName != null ? !productName.equals(that.productName) : that.productName != null) return false;
-        if (image != null ? !image.equals(that.image) : that.image != null) return false;
-        if (shortDecription != null ? !shortDecription.equals(that.shortDecription) : that.shortDecription != null)
-            return false;
-        if (decription != null ? !decription.equals(that.decription) : that.decription != null) return false;
-        if (standCost != null ? !standCost.equals(that.standCost) : that.standCost != null) return false;
-        if (listPrice != null ? !listPrice.equals(that.listPrice) : that.listPrice != null) return false;
-        if (quantityPerUnit != null ? !quantityPerUnit.equals(that.quantityPerUnit) : that.quantityPerUnit != null)
-            return false;
-        if (discountinued != null ? !discountinued.equals(that.discountinued) : that.discountinued != null)
-            return false;
-        if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) return false;
-        if (supplierId != null ? !supplierId.equals(that.supplierId) : that.supplierId != null) return false;
-        if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
-        if (updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (productCode != null ? productCode.hashCode() : 0);
-        result = 31 * result + (productName != null ? productName.hashCode() : 0);
-        result = 31 * result + (image != null ? image.hashCode() : 0);
-        result = 31 * result + (shortDecription != null ? shortDecription.hashCode() : 0);
-        result = 31 * result + (decription != null ? decription.hashCode() : 0);
-        result = 31 * result + (standCost != null ? standCost.hashCode() : 0);
-        result = 31 * result + (listPrice != null ? listPrice.hashCode() : 0);
-        result = 31 * result + (quantityPerUnit != null ? quantityPerUnit.hashCode() : 0);
-        result = 31 * result + (discountinued != null ? discountinued.hashCode() : 0);
-        result = 31 * result + (isFeatured ? 1 : 0);
-        result = 31 * result + (isDeleted ? 1 : 0);
-        result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
-        result = 31 * result + (supplierId != null ? supplierId.hashCode() : 0);
-        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-        result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
-        return result;
-    }
-
-    public List<ShopOrderDetailEntity> getShopOrderDetailsById() {
-        return shopOrderDetailsById;
-    }
-
-    public void setShopOrderDetailsById(List<ShopOrderDetailEntity> shopOrderDetailsById) {
-        this.shopOrderDetailsById = shopOrderDetailsById;
-    }
-
+//    public List<ShopOrderDetailEntity> getShopOrderDetailsById() {
+//        return shopOrderDetailsById;
+//    }
+//
+//    public void setShopOrderDetailsById(List<ShopOrderDetailEntity> shopOrderDetailsById) {
+//        this.shopOrderDetailsById = shopOrderDetailsById;
+//    }
+//
     public List<ShopProductDiscountEntity> getShopProductDiscountsById() {
         return shopProductDiscountsById;
     }
