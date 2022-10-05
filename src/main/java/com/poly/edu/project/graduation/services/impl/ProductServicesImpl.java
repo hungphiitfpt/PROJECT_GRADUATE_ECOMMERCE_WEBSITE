@@ -62,6 +62,12 @@ public class ProductServicesImpl implements ProductServices {
 		return productsRepository.findByName(name);
 	}
 
+	@Override
+	public List<ShopProductsEntity> getAllProductTableManager() {
+		// TODO Auto-generated method stub
+		return productsRepository.findAll();
+	}
+
 //	@Override
 //	public List<ShopProductsEntity> findAllProducts() throws Exception {
 //		return productsRepository.findAll();
