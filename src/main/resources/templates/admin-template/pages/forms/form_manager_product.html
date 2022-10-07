@@ -34,7 +34,19 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="../template-js/validation-template/css/opensans-font.css">
+
+<link rel="stylesheet" type="text/css"
+	href="../template-js/validation-template/fonts/line-awesome/css/line-awesome.min.css">
+
+<link rel="stylesheet"
+	href="https://jqueryvalidation.org/files/demo/site-demos.css">
+
+<link rel="stylesheet"
+	href="../template-js/validation-template/css/style.css" />
 
 </head>
 
@@ -56,120 +68,128 @@
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="row">
-
 						<div class="col-12 grid-margin stretch-card">
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title">Quản Lý Sản Phẩm</h4>
-									<p class="card-description">Trang dành cho người quản trị</p>
+							<form class="form-detail" action="#" method="post" id="myform">
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title">Quản Lý Sản Phẩm</h4>
+										<p class="card-description">Trang dành cho người quản trị</p>
 
-									<div class="row">
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputName1">Tên Sản Phẩm</label> <input
-												type="text" class="form-control"
-												id="name-create-manager-product" placeholder="Name">
-										</div>
+										<div class="row">
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Tên Sản Phẩm</label> <input
+													type="text" class="form-control"
+													id="name-create-manager-product"
+													name="name_create_manager_product" placeholder="Name"
+													required>
 
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputName1">Mã Code</label> <input
-												type="text" class="form-control"
-												id="code-create-manager-product" placeholder="Name">
-										</div>
-
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputName1">Mô tả ngắn</label> <input
-												type="text" class="form-control"
-												id="description-short-create-manager-product"
-												placeholder="Name">
-										</div>
-
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputName1">Phí ship cơ bản </label> <input
-												type="text" class="form-control"
-												id="fee-ship-create-manager-product" placeholder="Name">
-										</div>
-
-										<div class="form-group col-lg-6 col-sm-12">
-											<label>Loại Sản Phẩm</label> <select
-												id="list-category-manager"
-												class="select-manager-product js-example-basic-single w-100 select2-hidden-accessible"
-												tabindex="-1" aria-hidden="true">
-												<option value="AL">Alabama</option>
-											</select>
-										</div>
-
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputEmail3">Số lượng</label> <input
-												type="text" class="form-control"
-												id="quantity-create-manager-product">
-										</div>
-
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputEmail3">Giảm giá (%)</label> <input
-												type="text" class="form-control"
-												id="discount-create-manager-product">
-										</div>
-
-										<div class="form-group col-lg-6 col-sm-12">
-											<label>Nhà Cung Cấp</label> <select
-												id="list-supplier-manager"
-												class="select-manager-product js-example-basic-single w-100 select2-hidden-accessible"
-												tabindex="-1" aria-hidden="true">
-
-											</select>
-										</div>
-									</div>
-									<div class="form-group col-lg-6 col-sm-12">
-										<div class="input-group">
-											<div class="input-group-prepend">
-												<span class="input-group-text bg-primary text-white">$</span>
 											</div>
-											<input type="text" class="form-control"
-												id="price-product-manager"
-												aria-label="Amount (to the nearest dollar)">
-											<div class="input-group-append">
-												<span class="input-group-text">.00</span>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Mã Code</label> <input
+													type="text" class="form-control"
+													id="code-create-manager-product"
+													name="code_create_manager_product" placeholder="Name"
+													required>
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Mô tả ngắn</label> <input
+													type="text" class="form-control"
+													id="description-short-create-manager-product"
+													name="description_short_create_manager_product"
+													placeholder="Name" required>
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Phí ship cơ bản </label> <input
+													type="text" class="form-control"
+													id="fee-ship-create-manager-product"
+													name="fee_ship_create_manager_product" placeholder="Name"
+													required>
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label>Loại Sản Phẩm</label> <select
+													id="list-category-manager"
+													class="select-manager-product js-example-basic-single w-100 select2-hidden-accessible"
+													tabindex="-1" aria-hidden="true">
+													<option value="AL">Alabama</option>
+												</select>
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputEmail3">Số lượng</label> <input
+													type="text" class="form-control"
+													id="quantity-create-manager-product"
+													name="quantity_create_manager_product" required>
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputEmail3">Giảm giá (%)</label> <input
+													type="text" class="form-control"
+													id="discount-create-manager-product"
+													name="discount_create_manager_product" required>
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label>Nhà Cung Cấp</label> <select
+													id="list-supplier-manager"
+													class="select-manager-product js-example-basic-single w-100 select2-hidden-accessible"
+													tabindex="-1" aria-hidden="true">
+
+												</select>
 											</div>
 										</div>
-									</div>
-									<div class="form-group col-lg-12 col-sm-12">
-										<label for="exampleTextarea1">Mô tả chi tiết</label>
-										<textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-									</div>
+										<div class="form-group col-lg-6 col-sm-12">
 
-									<div class="form-group">
-										<div class="upload__box">
-											<div class="text-center upload__btn-box">
-												<label class="upload__btn">
-													<p>Hình Ảnh</p> <input type="file"
-													onchange="upFile($(this))" class="upload__inputfile">
+											<label for="exampleInputEmail3">Giá tiền</label> <input
+												type="text" class="form-control" id="price-product-manager"
+												name="price_product_manager" required>
 
-												</label>
-											</div>
-											<div class="upload__img-wrap"></div>
 										</div>
+										<div class="form-group col-lg-12 col-sm-12">
+											<label for="exampleTextarea1">Mô tả chi tiết</label>
+											<textarea class="form-control" id="exampleTextarea1"
+												name="description_detail" rows="4" required></textarea>
+										</div>
+
+										<div class="form-group">
+											<div class="upload__box">
+												<div class="text-center upload__btn-box">
+													<label class="upload__btn">
+														<p>Hình Ảnh</p> <input type="file"
+														onchange="upFile($(this))" class="upload__inputfile">
+
+													</label>
+												</div>
+												<div class="upload__img-wrap"></div>
+											</div>
+										</div>
+										<button type="submit" onclick="insertProduct()"
+											class="btn btn-primary mr-2">Lưu</button>
+										<button class="btn btn-light">Clear</button>
 									</div>
-
-
-
-
-									<button type="submit" onclick="insertProduct()"
-										class="btn btn-primary mr-2">Lưu</button>
-									<button class="btn btn-light">Clear</button>
-
 								</div>
-							</div>
+							</form>
 						</div>
 						<div class="col-lg-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">Danh sách sản phẩm</h4>
-									<p class="card-description">
-										Add class
-										<code>.table</code>
-									</p>
+									<div class="row">
+										<h4 class="card-title">Danh sách sản phẩm</h4>
+										<div class="input-group">
+											<input type="text" class="form-control"
+												placeholder="Recipient's username"
+												aria-label="Recipient's username">
+											<div class="input-group-append">
+												<button class="btn btn-sm btn-primary" type="button">Search</button>
+											</div>
+										</div>
+									</div>
+									<p class="card-description"></p>
 									<div class="table-responsive">
-										<table class="table">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 													<th>ID</th>
@@ -182,50 +202,7 @@
 												</tr>
 											</thead>
 											<tbody id="table-list-product-manager">
-												<tr>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td></td>
-													<td><label class="badge badge-danger"></label></td>
-													<td>
-														
-													</td>
-												</tr>
-												<tr>
-													<td>Jacob</td>
-													<td>53275531</td>
-													<td>12 May 2017</td>
-													<td><label class="badge badge-danger">Pending</label></td>
-												</tr>
-												<tr>
-													<td>Messsy</td>
-													<td>53275532</td>
-													<td>15 May 2017</td>
-													<td><label class="badge badge-warning">In
-															progress</label></td>
-												</tr>
-												<tr>
-													<td>John</td>
-													<td>53275533</td>
-													<td>14 May 2017</td>
-													<td><label class="badge badge-info">Fixed</label></td>
-												</tr>
-												<tr>
-													<td>Peter</td>
-													<td>53275534</td>
-													<td>16 May 2017</td>
-													<td><label class="badge badge-success">Completed</label></td>
-												</tr>
-												<tr>
-													<td>Dave</td>
-													<td>53275535</td>
-													<td>20 May 2017</td>
-													<td><label class="badge badge-warning">In
-															progress</label></td>
-												</tr>
+
 											</tbody>
 										</table>
 									</div>
@@ -832,6 +809,38 @@
 								</div>
 							</div>
 						</div>
+						
+						<div class="container">
+  <h2>Large Modal</h2>
+
+  <!-- Modal -->
+  <div class="modal fade" id="open_detail_products" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Chi Tiết Sản Phẩm</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row col-lg-12">
+          	<div class="col-lg-4">
+          		<img src="http://localhost:8080/api/v1/FileUpload/files/product-2.jpg" alt="" />
+          	</div>
+          	<div class="col-lg-8">
+          		
+          	</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+						
+						
+						
 					</div>
 				</div>
 				<!-- content-wrapper ends -->
@@ -862,7 +871,12 @@
 	<script src="../admin-static/js/upload_template.js"></script>
 	<!-- nhúng file js tự customize-->
 	<script src="../template-js/Manager_Product/index.js"></script>
-
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script src="../template-js/validation-template/validation.js"></script>
 </body>
 
 </html>

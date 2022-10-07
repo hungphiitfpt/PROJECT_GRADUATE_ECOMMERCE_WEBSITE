@@ -27,18 +27,10 @@ async function loadAllSupplier() {
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
 
-
 	for (let i = 0; i < res.data.length; i++) {
 		SupplierHTML += `<option value="${res.data[i].id}">${res.data[i].supplierName}</option>`;
 	}
-<<<<<<< HEAD
 
-}
-
-
-
-
-=======
 	$('#list-supplier-manager').html(SupplierHTML);
 
 }
@@ -75,12 +67,16 @@ async function loadAllProduct() {
 		<td><label class="badge badge-danger">Pending</label></td>
 		<td><div class="row justify-content-around">
 		<button type="button"
-			class="btn btn-primary btn-rounded btn-icon">
-			<i class="typcn typcn-home-outline"></i>
+			class="btn btn-info btn-rounded btn-icon" data-toggle="modal" data-target="#open_detail_products">
+			<i class="typcn typcn-eye"></i>
 		</button>
 		<button type="button"
-			class="btn btn-info btn-rounded btn-icon">
-			<i class="typcn typcn-star"></i>
+			class="btn btn-success btn-rounded btn-icon">
+			<i class="typcn typcn-edit"></i>
+		</button>
+		<button type="button"
+			class="btn btn-danger btn-rounded btn-icon">
+			<i class="typcn typcn-delete"></i>
 		</button>
 	</div></td>
 	  </tr>`;
@@ -106,31 +102,11 @@ async function insertProduct() {
 			supplierId: $('#list-supplier-manager option:selected').val(),
 		};
 	let res = await axiosTemplate(method, url, params, data);
-	console.log(res);
-	sweatAlert('thành công', 'success');
+	console.log("res");
+	sweatAlert("Bạn Đã Thêm Sản Phẩm Mới Thành Công", "success")
+	
 }
 
-function sweatAlert(message, status) {
-	const Toast = Swal.mixin({
-		toast: true,
-		position: 'top-end',
-		showConfirmButton: false,
-		timer: 3000,
-		timerProgressBar: true,
-		didOpen: (toast) => {
-			toast.addEventListener('mouseenter', Swal.stopTimer)
-			toast.addEventListener('mouseleave', Swal.resumeTimer)
-		}
-	})
 
-	Toast.fire({
-		icon: status,
-		title: message
-<<<<<<< HEAD
-	  })
-}
->>>>>>> developer
-=======
-	})
-}
->>>>>>> developer
+
+

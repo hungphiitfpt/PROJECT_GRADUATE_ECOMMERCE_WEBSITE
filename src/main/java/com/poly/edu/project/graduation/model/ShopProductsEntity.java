@@ -1,15 +1,32 @@
 package com.poly.edu.project.graduation.model;
 
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "shop_products", schema = "ecommer_db", catalog = "")
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"}, 
+                      allowGetters = true)
 public class ShopProductsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -88,23 +105,23 @@ public class ShopProductsEntity {
     @OneToMany(mappedBy = "shopProductsByProductId")
     private List<ShopProductVouchersEntity> shopProductVouchersById;
     
+    @JsonIgnore
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "category_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopCategoriesEntity shopCategoriesByCategoryId;
     
+    @JsonIgnore
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "supplier_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopSuplierEntity shopSuplierBySupplierId;
     
     @OneToMany(mappedBy = "shopProductsByProductId")
     private List<ShopWarehouseEntity> shopWarehousesById;
-    
-    @OneToMany(mappedBy = "shopProductsByProductId")
-    private List<ShopOrderDetailEntity> shopOrderDetailsById;
-    
-    
+//    
+//    @OneToMany(mappedBy = "shopProductsByProductId")
+//    private List<ShopOrderDetailEntity> shopOrderDetailsById;
+//    
+//    
 
 //    public List<ShopOrderDetailEntity> getShopOrderDetailsById() {
 //		return shopOrderDetailsById;
