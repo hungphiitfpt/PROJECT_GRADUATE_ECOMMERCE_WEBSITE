@@ -68,6 +68,12 @@ public class ProductServicesImpl implements ProductServices {
 		return productsRepository.findAll();
 	}
 
+	@Override
+	public List<ShopProductsEntity> findByKeyWord(String keyword) {
+		// TODO Auto-generated method stub
+		return productsRepository.findByKeyWord(keyword);
+	}
+
 //	@Override
 //	public List<ShopProductsEntity> findAllProducts() throws Exception {
 //		return productsRepository.findAll();
