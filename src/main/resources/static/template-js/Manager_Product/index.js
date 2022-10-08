@@ -126,7 +126,7 @@ async function SearchProductByKey() {
 	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',
 		url = `${api_graduation}getProducts`,
-		params = {keyWord:keyWord},
+		params = {keyword:keyWord},
 		data = {
 		};
 	let res = await axiosTemplate(method, url, params, data);
