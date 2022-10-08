@@ -1,3 +1,4 @@
+
 $(function() {
 	loadAllCategory();
 	loadAllSupplier();
@@ -54,11 +55,12 @@ async function drawTableProductManager(res) {
 	var ProductHTML = ``;
 	var pagination = ``;
 	for (let i = 0; i < res.data.content.length; i++) {
+		let price = formatMoney(`${res.data.content[i].listPrice}`);
 		ProductHTML += `<tr>
 		<td>${res.data.content[i].id}</td>
 		<td>${res.data.content[i].productName}</td>
 		<td><img src="${api_images}${res.data.content[i].image}"></img></td>
-		<td>${res.data.content[i].listPrice}</td>
+		<td value="${res.data.content[i].listPrice}">${price}</td>
 		<td> <div class="progress">
 			 	<div class="progress-bar bg-primary" 
 				 	 role="progressbar" 
@@ -75,7 +77,7 @@ async function drawTableProductManager(res) {
 			class="btn btn-info btn-rounded btn-icon" data-toggle="modal" data-target="#open_detail_products">
 			<i class="typcn typcn-eye"></i>
 		</button>
-		<button type="button"
+		<button onclick="openModalDetailProduct($(this))" data-id="${res.data.content[i].id}" type="button"
 			class="btn btn-success btn-rounded btn-icon">
 			<i class="typcn typcn-edit"></i>
 		</button>
@@ -115,7 +117,6 @@ async function insertProduct() {
 			supplierId: $('#list-supplier-manager option:selected').val(),
 		};
 	let res = await axiosTemplate(method, url, params, data);
-	console.log(res);
 	sweatAlert("Bạn Đã Thêm Sản Phẩm Mới Thành Công", "success")
 
 }
@@ -124,22 +125,58 @@ async function SearchProductByKey() {
 
 	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',
-		url = `${api_graduation}getProducts?keyword=${keyWord}`,
-		params = null,
+		url = `${api_graduation}getProducts`,
+		params = {keyWord:keyWord},
 		data = {
 		};
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
 	drawTableProductManager(res,$('#table-list-product-manager'))
+	sweatAlert("Tìm Kiếm Thành Công", "success")
 }
 $(document).on('click','.button-panigation-manager-product', async function () {
+		$('.button-panigation-manager-product').removeClass('active')
 		let page = $(this).val();
+		localStorage.setItem('currentPage', page);
 		let keyWord = $('#input-search-product-keyword').val();
 		let method = 'get',
-		url = `${api_graduation}getProducts?keyword=${keyWord}&page=${page}`,
-		params = null,
+		url = `${api_graduation}getProducts`,
+		params = {keyWord: keyWord, page: page},
 		data = {
 		};
 	let res = await axiosTemplate(method, url, params, data);
 	drawTableProductManager(res,$('#table-list-product-manager'))
+
+	let currentPage = localStorage.getItem('currentPage');
+	$(`.button-panigation-manager-product[value='${currentPage}']`).addClass('active')
+	sweatAlert(`Bạn đang ở trang thứ ${page}`, "success")
 })
+async function openModalDetailProduct(r) {
+	let id = r.data('id');
+	let method = 'get',
+	url = `${api_graduation}getProductById`,
+	params = {id: id},
+	data = {};
+	let res = await axiosTemplate(method, url, params, data);
+	console.log(res);
+}
+function getDataDetailProduct() {
+	let id = r.data('id');
+	let method = 'get',
+	url = `${api_graduation}getProductById`,
+	params = {id: id},
+	data = {};
+	let res = await axiosTemplate(method, url, params, data);
+	
+	$('#name-create-manager-product')
+	$('#code-create-manager-product')
+	$('#description-short-create-manager-product')
+	$('#fee-ship-create-manager-product')
+	$('#list-category-manager')
+	$('#quantity-create-manager-product')
+	$('#discount-create-manager-product')
+	$('#list-supplier-manager')
+	$('#price-product-manager')
+	$('#description-detail-product')
+	
+}

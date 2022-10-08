@@ -1,13 +1,12 @@
 package com.poly.edu.project.graduation.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.poly.edu.project.graduation.model.ResponseObject;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 
 @Service
@@ -32,5 +31,7 @@ public interface ProductServices {
 	List<ShopProductsEntity> getAllProductTableManager();
 
 	Page<ShopProductsEntity> findByKeyWord(String keyword, Pageable pageable);
+
+
 
 }

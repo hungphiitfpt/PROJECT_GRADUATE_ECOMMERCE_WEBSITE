@@ -2,7 +2,6 @@ package com.poly.edu.project.graduation.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,7 +30,8 @@ public class AdminRestController {
 	ProductsRepository productsRepository;
 
 	// api thêm sản phẩm, kiểm tra nếu đã có sản phẩm trùng trên không được thêm
-	@RequestMapping(value = "/insert_product", method = RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_UTF8_VALUE})
+	@RequestMapping(value = "/insert_product", method = RequestMethod.POST, consumes = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	ResponseEntity<ResponseObject> insertProduct(@RequestBody ShopProductsEntity shopProductsEntity) {
 		List<ShopProductsEntity> foundProducts = productServices
 				.findByProductName(shopProductsEntity.getProductName().trim());
@@ -41,18 +41,5 @@ public class AdminRestController {
 		}
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(new ResponseObject("200", "Thêm Thành Công ", productsRepository.save(shopProductsEntity)));
-	}
-	
-	// api lấy tất cả sản phẩm
-	@RequestMapping(value = "/getAllProductTableManager", method = RequestMethod.GET, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public Page<ShopProductsEntity> getAllProductTableManager(
-			@RequestParam(name = "keyword", required = false, defaultValue = "")  String keyword,
-			@RequestParam(name = "size", required = false, defaultValue = "10")  int size,
-			@RequestParam(name = "page", required = false, defaultValue = "0")  int page,
-			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
-		
-		return productServices.findByKeyWord(keyword, PageRequest.of(page, size));
-
 	}
 }

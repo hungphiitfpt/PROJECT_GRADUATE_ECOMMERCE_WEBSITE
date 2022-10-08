@@ -9,6 +9,8 @@ async function axiosTemplate(method, url, params, data) {
 	});
 	return res;
 }
+
+
 function sweatAlert(message, status) {
 	const Toast = Swal.mixin({
 		toast: true,
@@ -47,4 +49,10 @@ swal({
     swal("Your imaginary file is safe!");
   }
 });
+}
+
+function formatMoney(str) {
+	return str.split('').reverse().reduce((prev, next, index) => {
+		return ((index % 3) ? next : (next + ',')) + prev
+	})
 }
