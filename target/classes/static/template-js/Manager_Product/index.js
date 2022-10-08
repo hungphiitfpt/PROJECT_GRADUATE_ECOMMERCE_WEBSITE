@@ -160,3 +160,23 @@ async function openModalDetailProduct(r) {
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
 }
+async function getDataDetailProduct() {
+	let id = r.data('id');
+	let method = 'get',
+	url = `${api_graduation}getProductById`,
+	params = {id: id},
+	data = {};
+	let res = await axiosTemplate(method, url, params, data);
+	
+	$('#name-create-manager-product')
+	$('#code-create-manager-product')
+	$('#description-short-create-manager-product')
+	$('#fee-ship-create-manager-product')
+	$('#list-category-manager')
+	$('#quantity-create-manager-product')
+	$('#discount-create-manager-product')
+	$('#list-supplier-manager')
+	$('#price-product-manager')
+	$('#description-detail-product')
+	
+}

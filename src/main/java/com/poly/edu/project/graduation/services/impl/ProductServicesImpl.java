@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.poly.edu.project.graduation.dao.ProductsRepository;
+import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 import com.poly.edu.project.graduation.services.ProductServices;
 
@@ -75,6 +76,30 @@ public class ProductServicesImpl implements ProductServices {
 		return productsRepository.findByKeyWord(keyword, pageable);
 	}
 
+	@Override
+	public Optional<ShopCategoriesEntity> findAllCategory() {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
+	@Override
+	public List<ShopProductsEntity> findAllProductById(Long idCategory) {
+		// TODO Auto-generated method stub
+		return productsRepository.findAllProductById(idCategory);
+	}
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 //	@Override

@@ -1,6 +1,7 @@
 package com.poly.edu.project.graduation.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 
 public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Long> {
@@ -29,5 +31,11 @@ public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Lo
 			+ "OR shop_products.image 				LIKE CONCAT('%',:keyword,'%') "
 			+ "OR shop_products.created_at 			LIKE CONCAT('%',:keyword,'%') "
 			+ "OR shop_products.updated_at 			LIKE CONCAT('%',:keyword,'%') " ,nativeQuery = true)
-	Page<ShopProductsEntity> findByKeyWord(@Param("keyword") String keyword, Pageable pageable);	
+	Page<ShopProductsEntity> findByKeyWord(@Param("keyword") String keyword, Pageable pageable);
+	
+	@Query("SELECT u FROM ShopProductsEntity u WHERE u.id = ?1")
+	List<ShopProductsEntity> findAllProductById(Long idCategory);
+	
+
+
 }

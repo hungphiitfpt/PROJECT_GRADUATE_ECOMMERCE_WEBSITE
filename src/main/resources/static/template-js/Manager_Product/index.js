@@ -160,7 +160,7 @@ async function openModalDetailProduct(r) {
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
 }
-function getDataDetailProduct() {
+async function getDataDetailProduct() {
 	let id = r.data('id');
 	let method = 'get',
 	url = `${api_graduation}getProductById`,
