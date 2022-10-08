@@ -36,28 +36,33 @@ async function loadAllSupplier() {
 }
 async function loadAllProduct() {
 
-	let ProductHTML = ''
-
 	let method = 'get',
 
-		url = `${api_admin}getAllProductTableManager`,
+		url = `${api_graduation}getProducts`,
 
 		params = null,
 
 		data = {};
 
 	let res = await axiosTemplate(method, url, params, data);
+	console.log(res.data);
+	drawTableProductManager(res,$('#table-list-product-manager'))
+	
+}
 
-	for (let i = 0; i < res.data.length; i++) {
+async function drawTableProductManager(res) {
+	var ProductHTML = ``;
+	var pagination = ``;
+	for (let i = 0; i < res.data.content.length; i++) {
 		ProductHTML += `<tr>
-		<td>${res.data[i].id}</td>
-		<td>${res.data[i].productName}</td>
-		<td><img src="${api_images}${res.data[i].image}"></img></td>
-		<td>${res.data[i].listPrice}</td>
+		<td>${res.data.content[i].id}</td>
+		<td>${res.data.content[i].productName}</td>
+		<td><img src="${api_images}${res.data.content[i].image}"></img></td>
+		<td>${res.data.content[i].listPrice}</td>
 		<td> <div class="progress">
 			 	<div class="progress-bar bg-primary" 
 				 	 role="progressbar" 
-				 	 style="width: ${res.data[i].quantityPerUnit / 10}%" 
+				 	 style="width: ${res.data.content[i].quantityPerUnit / 10}%" 
 				 	 aria-valuenow="25" 
 				 	 aria-valuemin="0" 
 				 	 aria-valuemax="100">
@@ -81,10 +86,18 @@ async function loadAllProduct() {
 	</div></td>
 	  </tr>`;
 	}
-	$('#table-list-product-manager').prepend(ProductHTML);
+	for (let i = 0; i < res.data.totalPages; i++) {
+		pagination += `<button type="button" value="${i}" 
+					           class="button-panigation-manager-product btn btn-outline-secondary">${i}
+					   </button>`
+	}
+	$('#panigation-manager-product').html(pagination);
+	$('#table-list-product-manager').html(ProductHTML);
+
 }
 
 async function insertProduct() {
+	
 	let method = 'post',
 		url = `${api_admin}insert_product`,
 		params = null,
@@ -102,11 +115,31 @@ async function insertProduct() {
 			supplierId: $('#list-supplier-manager option:selected').val(),
 		};
 	let res = await axiosTemplate(method, url, params, data);
-	console.log("res");
+	console.log(res);
 	sweatAlert("Bạn Đã Thêm Sản Phẩm Mới Thành Công", "success")
-	
+
 }
 
+async function SearchProductByKey() {
 
-
-
+	let keyWord = $('#input-search-product-keyword').val();
+	let method = 'get',
+		url = `${api_graduation}getProducts?keyword=${keyWord}`,
+		params = null,
+		data = {
+		};
+	let res = await axiosTemplate(method, url, params, data);
+	console.log(res);
+	drawTableProductManager(res,$('#table-list-product-manager'))
+}
+$(document).on('click','.button-panigation-manager-product', async function () {
+		let page = $(this).val();
+		let keyWord = $('#input-search-product-keyword').val();
+		let method = 'get',
+		url = `${api_graduation}getProducts?keyword=${keyWord}&page=${page}`,
+		params = null,
+		data = {
+		};
+	let res = await axiosTemplate(method, url, params, data);
+	drawTableProductManager(res,$('#table-list-product-manager'))
+})

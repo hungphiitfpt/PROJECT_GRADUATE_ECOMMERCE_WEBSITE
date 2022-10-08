@@ -31,6 +31,6 @@ public interface ProductServices {
 
 	List<ShopProductsEntity> getAllProductTableManager();
 
-	List<ShopProductsEntity> findByKeyWord(String keyword);
+	Page<ShopProductsEntity> findByKeyWord(String keyword, Pageable pageable);
 
 }

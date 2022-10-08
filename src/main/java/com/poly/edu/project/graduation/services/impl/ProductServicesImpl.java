@@ -69,9 +69,9 @@ public class ProductServicesImpl implements ProductServices {
 	}
 
 	@Override
-	public List<ShopProductsEntity> findByKeyWord(String keyword) {
+	public Page<ShopProductsEntity> findByKeyWord(String keyword, Pageable pageable) {
 		// TODO Auto-generated method stub
-		return productsRepository.findByKeyWord(keyword);
+		return productsRepository.findByKeyWord(keyword, pageable);
 	}
 
 //	@Override

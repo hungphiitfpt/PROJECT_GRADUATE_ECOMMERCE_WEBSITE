@@ -2,49 +2,32 @@ package com.poly.edu.project.graduation.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 
-
-
-
 public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Long> {
 	
+	// Câu lệnh query lấy tất cả sản phẩm theo tên sản phẩm
 	@Query("SELECT u FROM ShopProductsEntity u WHERE u.productName = ?1")
 	List<ShopProductsEntity> findByName(String name);
-
 	
-//	 STORE PROCEDURE đã được viết sẵn trong mysql thay vì viết câu lệnh tại đây
-	@Query(value ="{call ecommer_db.getListImageByProductId(:id)}" ,nativeQuery = true)
-	ShopProductsEntity findListImageByID(@Param("id") int id);
-
-	@Query(value ="SELECT * FROM shop_products as p where p.is_deleted = false "
-			+ "AND p.id LIKE %:keyword% "
-			+ "OR p.product_code LIKE %:keyword% "
-			+ "OR p.product_name LIKE %:keyword% "
-			+ "OR p.short_decription LIKE %:keyword% "
-			+ "OR p.list_price LIKE %:keyword% "
-			+ "OR p.discountinued LIKE %:keyword% "
-			+ "OR p.quantity_per_unit LIKE %:keyword% "
-			+ "OR p.category_id LIKE %:keyword% "
-			+ "OR p.quantity_per_unit LIKE %:keyword% "
-			+ "OR p.created_at LIKE %:keyword% "
-			+ "OR p.updated_at LIKE %:keyword% " ,nativeQuery = true)
-	List<ShopProductsEntity> findByKeyWord(String keyword);
-
-
-//	@Query(value ="SELECT * FROM products WHERE quantity > 0 AND category LIKE %% AND name LIKE %:name% AND size LIKE %% AND color LIKE %% AND price LIKE %%" ,nativeQuery = true)
-//	Page<ProductsEntity> findAllBy(@Param("name") String name, Pageable pageable);
-	
-	// Câu lệnh search điều kiện số lượng tồn kho của sản phẩm lớn hơn 0 và tìm kiếm theo danh mục, tên, kích cỡ, màu sắc, giá tiền ....
-//	@Query(value ="SELECT * FROM Product WHERE quantity > 0 AND category LIKE %:category% AND name LIKE %:name% AND size LIKE %:size% AND color LIKE %:color% AND price LIKE %:price%" ,nativeQuery = true)
-//	Page<ProductEntity> findAllBy(@Param("category") String category, @Param("name") String name, @Param("size") String size, @Param("color") String color, @Param("price") String price, Pageable pageable);
-	
-//	@Query(value ="{CALL getAllProduct()}" ,nativeQuery = true)
-//	List<ProductDataModel> getAllProducts() throws Exception;
-//	@Query(value ="select count(idproduct) from products where category = 1 union  select count(idproduct) from products where category = 2 union select count(idproduct) from products where category = 3 " ,nativeQuery = true)
-//    List<ProductEntity> getReport();
+	// Câu lệnh tìm kiếm sản phẩm theo nhiều điều kiện
+	@Query(value ="SELECT * FROM shop_products  where shop_products.is_deleted = false "
+			+ "AND shop_products.id 				LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_products.product_code 		LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_products.product_name 		LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_products.list_price 			LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_products.discountinued 		LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_products.quantity_per_unit 	LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_products.category_id 		LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_products.quantity_per_unit 	LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_products.image 				LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_products.created_at 			LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_products.updated_at 			LIKE CONCAT('%',:keyword,'%') " ,nativeQuery = true)
+	Page<ShopProductsEntity> findByKeyWord(@Param("keyword") String keyword, Pageable pageable);	
 }

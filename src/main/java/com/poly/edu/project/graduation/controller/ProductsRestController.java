@@ -3,16 +3,18 @@ package com.poly.edu.project.graduation.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.edu.project.graduation.dao.ProductsRepository;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 import com.poly.edu.project.graduation.services.ProductServices;
-
 
 @RestController
 @RequestMapping("/api/graduation")
@@ -25,7 +27,7 @@ public class ProductsRestController {
 	@RequestMapping("getListProduct")
 	public List<ShopProductsEntity> getAllProduct() throws Exception {
 		try {
-			 
+
 			List<ShopProductsEntity> dataProduct = productsRepository.findAll();
 			return dataProduct;
 		} catch (Exception e) {
@@ -34,11 +36,15 @@ public class ProductsRestController {
 		}
 		return null;
 	}
-	@RequestMapping(value = "/getProducts", method = RequestMethod.GET, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public List<ShopProductsEntity> findListProductByKey(@Param("keyword") String keyword) throws Exception {
+
+	@RequestMapping(value = "/getProducts", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public Page<ShopProductsEntity> findListProductByKey(
+			@RequestParam(name = "keyword", required = false, defaultValue = "")  String keyword,
+			@RequestParam(name = "size", required = false, defaultValue = "10")  int size,
+			@RequestParam(name = "page", required = false, defaultValue = "0")  int page,
+			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) throws Exception {
 		try {
-			List<ShopProductsEntity> dataProduct = productServices.findByKeyWord(keyword);
+			Page<ShopProductsEntity> dataProduct = productServices.findByKeyWord(keyword, PageRequest.of(page, size));
 			return dataProduct;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -46,7 +52,6 @@ public class ProductsRestController {
 		}
 		return null;
 	}
-	
 
 //	
 //	@RequestMapping("report/Product")
