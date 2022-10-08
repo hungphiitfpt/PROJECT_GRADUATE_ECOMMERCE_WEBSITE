@@ -98,7 +98,7 @@
 // Modal header
 // Top section of the modal w/ title and dismiss
 .modal-header {
-  display: flex;
+  // display: flex;
   align-items: flex-start; // so the close btn always stays on the upper right corner
   justify-content: space-between; // Put modal header elements (title and dismiss) on opposite ends
   padding: $modal-header-padding;
