@@ -24,34 +24,4 @@ import com.poly.edu.project.graduation.services.ProductServices;
 public class KHANHCONTROLLER {
 	@Autowired
 	ProductServices productServices;
-	
-	@Autowired
-	CategoryServices categoryServices;
-	
-
-	
-	@RequestMapping("/shop")
-	public String index(Model model) {
-		List<ShopCategoriesEntity> listCategory = categoryServices.findAll();
-		model.addAttribute("category", listCategory);
-		return "template/shop";
-
-	}
-	
-	@RequestMapping("/getProductByCategoryid/{idCategory}")
-	public String getProductByCategoryid(Model model, @PathVariable Long idCategory) {
-		
-		List<ShopCategoriesEntity> listCategory = categoryServices.findAll();
-		model.addAttribute("category", listCategory);
-		
-		List<ShopProductsEntity> product = productServices.findAllProductById(idCategory);
-		model.addAttribute("product", product);
-		
-		
-		
-		return "template/shop";
-
-	}
-	
-	
 }

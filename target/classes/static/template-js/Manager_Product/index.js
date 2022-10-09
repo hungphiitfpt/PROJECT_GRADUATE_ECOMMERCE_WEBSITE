@@ -15,7 +15,7 @@ async function loadAllCategory() {
 	let res = await axiosTemplate(method, url, params, data);
 
 	for (let i = 0; i < res.data.length; i++) {
-		categoryHTML += `<option value="${res.data[i].id}">${res.data[i].categoryName}</option>`;
+		categoryHTML += `<option data-id="${res.data[i].id}" value="${res.data[i].id}">${res.data[i].categoryName}</option>`;
 	}
 
 	$('#list-category-manager').html(categoryHTML);
@@ -29,7 +29,7 @@ async function loadAllSupplier() {
 	let res = await axiosTemplate(method, url, params, data);
 
 	for (let i = 0; i < res.data.length; i++) {
-		SupplierHTML += `<option value="${res.data[i].id}">${res.data[i].supplierName}</option>`;
+		SupplierHTML += `<option data-id="${res.data[i].id}" value="${res.data[i].id}">${res.data[i].supplierName}</option>`;
 	}
 
 	$('#list-supplier-manager').html(SupplierHTML);
@@ -77,7 +77,7 @@ async function drawTableProductManager(res) {
 			class="btn btn-info btn-rounded btn-icon" data-toggle="modal" data-target="#open_detail_products">
 			<i class="typcn typcn-eye"></i>
 		</button>
-		<button onclick="openModalDetailProduct($(this))" data-id="${res.data.content[i].id}" type="button"
+		<button onclick="getDataDetailProduct($(this))" data-id="${res.data.content[i].id}" type="button"
 			class="btn btn-success btn-rounded btn-icon">
 			<i class="typcn typcn-edit"></i>
 		</button>
@@ -160,23 +160,23 @@ async function openModalDetailProduct(r) {
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
 }
-async function getDataDetailProduct() {
+async function getDataDetailProduct(r) {
 	let id = r.data('id');
 	let method = 'get',
 	url = `${api_graduation}getProductById`,
 	params = {id: id},
 	data = {};
 	let res = await axiosTemplate(method, url, params, data);
-	
-	$('#name-create-manager-product')
-	$('#code-create-manager-product')
-	$('#description-short-create-manager-product')
-	$('#fee-ship-create-manager-product')
-	$('#list-category-manager')
-	$('#quantity-create-manager-product')
-	$('#discount-create-manager-product')
-	$('#list-supplier-manager')
-	$('#price-product-manager')
-	$('#description-detail-product')
+	console.log(res);
+	$('#name-create-manager-product').val(res.data.data.productName);
+	$('#code-create-manager-product').val(res.data.data.productCode);
+	$('#description-short-create-manager-product').val(res.data.data.shortDecription);
+	$('#fee-ship-create-manager-product').val(res.data.data.standCost);
+	$('#list-category-manager option[data-id ="' + res.data.data.categoryId + '"]').prop('selected', 'selected').change()
+	$('#quantity-create-manager-product').val(res.data.data.quantityPerUnit);
+	$('#discount-create-manager-product').val(res.data.data.discountinued);
+	$('#list-supplier-manager option[data-id ="' + res.data.data.supplierId + '"]').prop('selected', 'selected').change()
+	$('#price-product-manager').val(res.data.data.listPrice);
+	$('#description-detail-product').val(res.data.data.decription);
 	
 }

@@ -34,8 +34,11 @@ public interface ProductServices {
 	Page<ShopProductsEntity> findByKeyWord(String keyword, Pageable pageable);
 
 	Optional<ShopCategoriesEntity> findAllCategory();
-	List<ShopProductsEntity> findAllProductById(Long idCategory);
 
+	List<ShopProductsEntity> findAllProductByCategoryId(Long idCategory);
 
+	ShopProductsEntity findProductById(Long id);
+
+	ShopProductsEntity findAllReviewProduct(Long id);
 
 }

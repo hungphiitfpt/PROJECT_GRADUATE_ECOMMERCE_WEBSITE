@@ -107,14 +107,14 @@
     			
     			<div class="col-md-6 col-lg-3 ftco-animate" th:each="product : ${product}">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="../template-static/images/product-2.jpg" alt="Colorlib Template">
+    					<a th:href="@{'/getProductByid/' + ${product.id}}" class="img-prod"><img class="img-fluid" th:src="@{'/api/v1/FileUpload/files/' + ${product.image}}" alt="Colorlib Template">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#" th:text="${product.productName}">Strawberry</a></h3>
+    						<h3><a th:href="@{'/getProductByid/' + ${product.id}}" th:text="${product.productName}">Strawberry</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
-		    						<p class="price"><span>$120.00</span></p>
+		    						<p class="price"><span th:value="${product.listPrice}" th:text="${#numbers.formatDecimal(product.listPrice, 0, 'COMMA', 0, 'POINT')}">$120.00</span></p>
 		    					</div>
 	    					</div>
     						<div class="bottom-area d-flex px-3">

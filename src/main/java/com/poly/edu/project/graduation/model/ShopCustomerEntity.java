@@ -56,10 +56,32 @@ public class ShopCustomerEntity {
     @Basic
     @Column(name = "updated_at", nullable = true)
     private Timestamp updatedAt;
+    
     @OneToMany(mappedBy = "shopCustomerByCustomerId")
     private List<ShopOrdersEntity> shopOrdersById;
+    
+    @OneToMany(mappedBy = "shopProductReviewsByIdCustomer")
+    private List<ShopProductReviewsEntity>  productReviewsEntities;
+    
+    
 
-    public long getId() {
+    public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public List<ShopProductReviewsEntity> getProductReviewsEntities() {
+		return productReviewsEntities;
+	}
+
+	public void setProductReviewsEntities(List<ShopProductReviewsEntity> productReviewsEntities) {
+		this.productReviewsEntities = productReviewsEntities;
+	}
+
+	public long getId() {
         return id;
     }
 

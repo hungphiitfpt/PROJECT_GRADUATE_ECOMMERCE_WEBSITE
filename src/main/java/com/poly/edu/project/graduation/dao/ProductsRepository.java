@@ -33,8 +33,11 @@ public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Lo
 			+ "OR shop_products.updated_at 			LIKE CONCAT('%',:keyword,'%') " ,nativeQuery = true)
 	Page<ShopProductsEntity> findByKeyWord(@Param("keyword") String keyword, Pageable pageable);
 	
+	@Query("SELECT u FROM ShopProductsEntity u WHERE u.categoryId = ?1")
+	List<ShopProductsEntity> findAllProductByCategoryId(Long idCategory);
+	
 	@Query("SELECT u FROM ShopProductsEntity u WHERE u.id = ?1")
-	List<ShopProductsEntity> findAllProductById(Long idCategory);
+	ShopProductsEntity findProductById(Long id);
 	
 
 

@@ -28,7 +28,7 @@ public class ProductServicesImpl implements ProductServices {
 	@Override
 	public List<ShopProductsEntity> findAllProducts() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return productsRepository.findAll();
 	}
 
 	@Override
@@ -83,9 +83,21 @@ public class ProductServicesImpl implements ProductServices {
 	}
 
 	@Override
-	public List<ShopProductsEntity> findAllProductById(Long idCategory) {
+	public List<ShopProductsEntity> findAllProductByCategoryId(Long idCategory) {
 		// TODO Auto-generated method stub
-		return productsRepository.findAllProductById(idCategory);
+		return productsRepository.findAllProductByCategoryId(idCategory);
+	}
+
+	@Override
+	public ShopProductsEntity findProductById(Long id) {
+		// TODO Auto-generated method stub
+		return productsRepository.findProductById(id);
+	}
+
+	@Override
+	public ShopProductsEntity findAllReviewProduct(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
