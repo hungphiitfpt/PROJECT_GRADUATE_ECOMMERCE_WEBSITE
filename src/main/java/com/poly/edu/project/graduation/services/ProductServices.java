@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.poly.edu.project.graduation.model.ResponseObject;
 import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 
@@ -40,5 +42,7 @@ public interface ProductServices {
 	ShopProductsEntity findProductById(Long id);
 
 	ShopProductsEntity findAllReviewProduct(Long id);
+
+	ResponseEntity<ResponseObject> changeStatusIsdeleted(Long id);
 
 }

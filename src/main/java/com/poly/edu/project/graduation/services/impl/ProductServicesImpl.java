@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import com.poly.edu.project.graduation.dao.ProductsRepository;
+import com.poly.edu.project.graduation.model.ResponseObject;
 import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 import com.poly.edu.project.graduation.services.ProductServices;
@@ -96,6 +98,12 @@ public class ProductServicesImpl implements ProductServices {
 
 	@Override
 	public ShopProductsEntity findAllReviewProduct(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<ResponseObject> changeStatusIsdeleted(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

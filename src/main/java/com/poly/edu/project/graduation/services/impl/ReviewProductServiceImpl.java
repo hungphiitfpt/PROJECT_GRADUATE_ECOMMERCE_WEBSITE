@@ -18,7 +18,7 @@ public class ReviewProductServiceImpl implements ReviewProductService {
 	@Override
 	public List<ShopProductReviewsEntity> findAllReviewProduct(Long id) {
 		// TODO Auto-generated method stub
-		return reviewProductRepository.findAllReviewProduct(id);
+		return reviewProductRepository.countReviewProducts(id);
 	}
 
 
