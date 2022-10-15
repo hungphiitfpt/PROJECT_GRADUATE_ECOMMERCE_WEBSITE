@@ -67,21 +67,6 @@ public class ProductsRestController {
 
 	}
 
-	/**
-	 * Lấy danh sách sản phẩm theo categoryid
-	 */
-	@RequestMapping(value = "/getProductRanDomByCategory", method = RequestMethod.GET, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	List<ShopProductsEntity> getListProductsRanDomByCategory(@RequestParam(name = "idCategory") String idCategory) {
-		try {
-			List<ShopProductsEntity> listProductRandomByCategory = productServices.findProductRandomById(idCategory);
-			return listProductRandomByCategory;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-
-	}
 
 //	
 //	@RequestMapping("report/Product")

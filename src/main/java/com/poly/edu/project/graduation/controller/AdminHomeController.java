@@ -31,6 +31,13 @@ public class AdminHomeController {
 
 	}
 	
+	@RequestMapping("manager_employee")
+	public String ManagerEmployee() {
+
+		return "admin-template/pages/forms/form_manager_employee";
+
+	}
+	
 
 
 }

@@ -1,0 +1,333 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Admin</title>
+
+<link rel="stylesheet"
+	href="../admin-static/vendors/typicons/typicons.css">
+
+<link rel="stylesheet"
+	href="../admin-static/vendors/css/vendor.bundle.base.css">
+
+<link rel="stylesheet"
+	href="../admin-static/vendors/select2/select2.min.css">
+
+
+<link rel="stylesheet"
+	href="../admin-static/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+
+<link rel="stylesheet"
+	href="../admin-static/css/vertical-layout-light/style.css">
+
+<link rel="stylesheet"
+	href="../admin-static/css/vertical-layout-light/newStyle.css">
+
+<link rel="shortcut icon" href="../admin-static/images/favicon.png" />
+
+<script src="../variable_template/variable_index.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="../template-js/validation-template/css/opensans-font.css">
+
+<link rel="stylesheet" type="text/css"
+	href="../template-js/validation-template/fonts/line-awesome/css/line-awesome.min.css">
+
+<link rel="stylesheet"
+	href="https://jqueryvalidation.org/files/demo/site-demos.css">
+
+<link rel="stylesheet"
+	href="../template-js/validation-template/css/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<link rel="stylesheet"
+	href="../admin-static/vendors/mdi/css/materialdesignicons.min.css" />
+</head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+<body>
+	<div class="container-scroller">
+		<!-- partial:../../partials/_navbar.html -->
+		<div
+			th:replace="admin-template/partials/_navbar:: navbar_template_admin"></div>
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<!-- partial:../../partials/_settings-panel.html -->
+			<div
+				th:replace="admin-template/partials/_settings-panel:: settings-panel-template-user"></div>
+			<!-- partial -->
+			<!-- partial:../../partials/_sidebar.html -->
+			<div
+				th:replace="admin-template/partials/_sidebar:: sidebar-template-user"></div>
+			<!-- partial -->
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="row">
+						<div class="col-lg-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<h4 class="card-title">Danh sách sản phẩm</h4>
+										<div class="input-group">
+											<input type="text" class="form-control"
+												id="input-search-product-keyword">
+											<div class="input-group-append">
+												<button class="btn btn-sm btn-primary" type="button"
+													onclick="SearchDataByKey()">Search</button>
+											</div>
+										</div>
+									</div>
+									<p class="card-description"></p>
+									<div class="table-responsive">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>TÊN ĐĂNG NHẬP</th>
+													<th>TÊN</th>
+													<th>HÌNH ẢNH</th>
+													<th>THÀNH PHỐ</th>
+													<th>TÌNH TRẠNG</th>
+													<th>NGÀY SINH</th>
+													<th>Chức năng</th>
+												</tr>
+											</thead>
+											<tbody id="table-list-users-manager">
+
+											</tbody>
+
+										</table>
+
+									</div>
+									<div class="panigation-sort text-center">
+										<div id="panigation-manager-product"
+											class="btn-group  pt-3 text-center" role="group"
+											aria-label="Basic example"></div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+
+
+
+					</div>
+				</div>
+
+
+
+
+				<!-- Modal -->
+				<div class="modal fade" id="open_detail_product" role="dialog">
+					<div class="modal-dialog modal-lg">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Modal Header</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-lg-4 col-sm-12 text-center">
+										<img id="img-product-modal-info"
+											src=""
+											alt="" />
+									</div>
+									<div class="col-lg-8 col-sm-12">
+										<div class="row">
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Id</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="input-code-modal-info">
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Tên Người Dùng</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="input-name-modal-info">
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Phí Ship Cơ
+														Bản</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="input-cose-modal-info">
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Giá Tiền</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="input-code-price-info">
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Số Lượng</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="input-quantity-modal-info">
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Giảm Giá</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="input-discount-modal-info">
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row is-align-item-center">
+													<label class="col-sm-3 col-form-label">Trạng Thái</label>
+													<div class="col-sm-9 row">
+														<div class="col-lg-6">
+														<div class="form-check form-check-success">
+															<label class="form-check-label"> <input
+																type="radio" class="form-check-input"
+																name="ExampleRadio2" id="pending-product">
+																Hết Hàng <i class="input-helper"></i></label>
+														</div>		
+														</div>
+														<div class="col-lg-6">
+														<div class="form-check form-check-success">
+															<label class="form-check-label"> <input
+																type="radio" class="form-check-input"
+																name="ExampleRadio2" id="open-product">
+																Còn Hàng <i class="input-helper"></i></label>
+														</div>		
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row is-align-item-center">
+													<label class="col-sm-3 col-form-label">Danh Mục</label>
+													<div class="col-sm-9">
+														<select class="form-control form-control-sm"
+															id="select-category-modal-info">
+															<option>1</option>
+															<option>2</option>
+															<option>3</option>
+															<option>4</option>
+															<option>5</option>
+														</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row is-align-item-center">
+													<label class="col-sm-3 col-form-label">Nhà Cung Cấp</label>
+													<div class="col-sm-9">
+														<select class="form-control form-control-sm"
+															id="select-supplier-modal-info">
+														</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row is-align-item-center">
+													<label class="col-sm-3 col-form-label">Ngày Tạo</label>
+													<div class="col-sm-9">
+														<input id="input-createDate-modal-info"
+															class="form-control" placeholder="dd/mm/yyyy">
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal" onclick="closeModalDetailProduct()">Close</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+
+
+
+
+				<!-- content-wrapper ends -->
+				<!-- partial:../../partials/_footer.html -->
+				<div
+					th:replace="admin-template/partials/_footer:: footer_template_admin"></div>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<script src="../admin-static/vendors/js/vendor.bundle.base.js"></script>
+
+	<script src="../admin-static/js/off-canvas.js"></script>
+	<script src="../admin-static/js/hoverable-collapse.js"></script>
+	<script src="../admin-static/js/template.js"></script>
+	<script src="../admin-static/js/settings.js"></script>
+	<script src="../admin-static/js/todolist.js"></script>
+
+	<script
+		src="../admin-static/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+	<script src="../admin-static/vendors/select2/select2.min.js"></script>
+
+	<script src="../admin-static/js/file-upload.js"></script>
+	<script src="../admin-static/js/typeahead.js"></script>
+	<script src="../admin-static/js/select2.js"></script>
+	<!-- nhúng file js tự customize-->
+	<script src="../template-js/manager_employee/index.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script src="../template-js/validation-template/validation.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</body>
+
+</html>
