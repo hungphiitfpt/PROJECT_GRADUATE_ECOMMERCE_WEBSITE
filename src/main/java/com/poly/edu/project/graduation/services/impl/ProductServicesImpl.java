@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -28,23 +29,23 @@ public class ProductServicesImpl implements ProductServices {
 	}
 
 	@Override
-	public List<ShopProductsEntity> findAllProducts() throws Exception {
+	public Page<ShopProductsEntity> findAllProducts(String idCategory, PageRequest pageRequest) throws Exception {
 		// TODO Auto-generated method stub
-		return productsRepository.findAll();
+		return productsRepository.findAll(idCategory, pageRequest);
 	}
 
 	@Override
 	public ShopProductsEntity saveProduct(ShopProductsEntity products) {
-		
+
 		return productsRepository.save(products);
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteProductById(int id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -84,11 +85,7 @@ public class ProductServicesImpl implements ProductServices {
 		return Optional.empty();
 	}
 
-	@Override
-	public List<ShopProductsEntity> findAllProductByCategoryId(Long idCategory) {
-		// TODO Auto-generated method stub
-		return productsRepository.findAllProductByCategoryId(idCategory);
-	}
+
 
 	@Override
 	public ShopProductsEntity findProductById(Long id) {
@@ -108,19 +105,17 @@ public class ProductServicesImpl implements ProductServices {
 		return null;
 	}
 
-	
-	
+	@Override
+	public List<ShopProductsEntity> findAllProductByCategoryId(Long idCategory) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+	@Override
+	public List<ShopProductsEntity> findProductRandomById(String idCategory) {
+		// TODO Auto-generated method stub
+		return productsRepository.findProductRandomById(idCategory);
+	}
 
 //	@Override
 //	public List<ShopProductsEntity> findAllProducts() throws Exception {

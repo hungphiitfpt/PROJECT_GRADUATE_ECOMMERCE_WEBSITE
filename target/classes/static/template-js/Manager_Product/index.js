@@ -47,8 +47,8 @@ async function loadAllProduct() {
 
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res.data);
-	drawTableProductManager(res,$('#table-list-product-manager'))
-	
+	drawTableProductManager(res, $('#table-list-product-manager'))
+
 }
 
 async function drawTableProductManager(res) {
@@ -99,7 +99,7 @@ async function drawTableProductManager(res) {
 }
 
 async function insertProduct() {
-	
+	validateFormManagerProduct();
 	let method = 'post',
 		url = `${api_admin}insert_product`,
 		params = null,
@@ -126,26 +126,26 @@ async function SearchProductByKey() {
 	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',
 		url = `${api_graduation}getProducts`,
-		params = {keyword:keyWord},
+		params = { keyword: keyWord },
 		data = {
 		};
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
-	drawTableProductManager(res,$('#table-list-product-manager'))
+	drawTableProductManager(res, $('#table-list-product-manager'))
 	sweatAlert("Tìm Kiếm Thành Công", "success")
 }
-$(document).on('click','.button-panigation-manager-product', async function () {
-		$('.button-panigation-manager-product').removeClass('active')
-		let page = $(this).val();
-		localStorage.setItem('currentPage', page);
-		let keyWord = $('#input-search-product-keyword').val();
-		let method = 'get',
+$(document).on('click', '.button-panigation-manager-product', async function() {
+	$('.button-panigation-manager-product').removeClass('active')
+	let page = $(this).val();
+	localStorage.setItem('currentPage', page);
+	let keyWord = $('#input-search-product-keyword').val();
+	let method = 'get',
 		url = `${api_graduation}getProducts`,
-		params = {keyWord: keyWord, page: page},
+		params = { keyWord: keyWord, page: page },
 		data = {
 		};
 	let res = await axiosTemplate(method, url, params, data);
-	drawTableProductManager(res,$('#table-list-product-manager'))
+	drawTableProductManager(res, $('#table-list-product-manager'))
 
 	let currentPage = localStorage.getItem('currentPage');
 	$(`.button-panigation-manager-product[value='${currentPage}']`).addClass('active')
@@ -154,18 +154,19 @@ $(document).on('click','.button-panigation-manager-product', async function () {
 async function openModalDetailProduct(r) {
 	let id = r.data('id');
 	let method = 'get',
-	url = `${api_graduation}getProductById`,
-	params = {id: id},
-	data = {};
+		url = `${api_graduation}getProductById`,
+		params = { id: id },
+		data = {};
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
 }
 async function getDataDetailProduct(r) {
+	let listImage = ``;
 	let id = r.data('id');
 	let method = 'get',
-	url = `${api_graduation}getProductById`,
-	params = {id: id},
-	data = {};
+		url = `${api_graduation}getProductById`,
+		params = { id: id },
+		data = {};
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
 	$('#name-create-manager-product').val(res.data.data.productName);
@@ -178,5 +179,13 @@ async function getDataDetailProduct(r) {
 	$('#list-supplier-manager option[data-id ="' + res.data.data.supplierId + '"]').prop('selected', 'selected').change()
 	$('#price-product-manager').val(res.data.data.listPrice);
 	$('#description-detail-product').val(res.data.data.decription);
-	
+	console.log(res.data.data.shopProductImagesById)
+	if(res.data.data.shopProductImagesById.length > 0) {
+		for (let i = 0; i < res.data.data.shopProductImagesById.length; i++) {
+			listImage += `<image src="${api_images}${res.data.data.shopProductImagesById[i].image}">`;
+			console.log(listImage);
+		}
+		$('.upload__img-wrap').html(listImage);
+	}
+	sweatAlert(res.data.message, "success")
 }

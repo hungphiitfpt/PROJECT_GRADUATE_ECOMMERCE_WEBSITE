@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public interface ProductServices {
 
 	ShopProductsEntity findProductById(Integer id);
 
-	List<ShopProductsEntity> findAllProducts() throws Exception;
+	Page<ShopProductsEntity> findAllProducts(String idCategory, PageRequest pageRequest) throws Exception;
 
 	ShopProductsEntity saveProduct(ShopProductsEntity products);
 
@@ -44,5 +45,9 @@ public interface ProductServices {
 	ShopProductsEntity findAllReviewProduct(Long id);
 
 	ResponseEntity<ResponseObject> changeStatusIsdeleted(Long id);
+
+	List<ShopProductsEntity> findProductRandomById(String idCategory);
+
+	
 
 }

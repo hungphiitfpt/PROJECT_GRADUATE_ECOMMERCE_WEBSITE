@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.edu.project.graduation.dao.ProductsRepository;
 import com.poly.edu.project.graduation.model.ResponseObject;
+import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 import com.poly.edu.project.graduation.services.ProductServices;
 
@@ -29,12 +30,13 @@ public class ProductsRestController {
 	ProductServices productServices;
 	@Autowired
 	ProductsRepository productsRepository;
+
 	// api lấy tất cả sản phẩm search theo keyword nhập vào
 	@RequestMapping(value = "/getProducts", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	public Page<ShopProductsEntity> findListProductByKey(
-			@RequestParam(name = "keyword", required = false, defaultValue = "")  String keyword,
-			@RequestParam(name = "size", required = false, defaultValue = "10")  int size,
-			@RequestParam(name = "page", required = false, defaultValue = "0")  int page,
+			@RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
+			@RequestParam(name = "size", required = false, defaultValue = "10") int size,
+			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) throws Exception {
 		try {
 			Page<ShopProductsEntity> dataProduct = productServices.findByKeyWord(keyword, PageRequest.of(page, size));
@@ -46,20 +48,40 @@ public class ProductsRestController {
 		return null;
 	}
 
-	
 	// Lấy chi tiết sản phẩm
-	@RequestMapping(value = "/getProductById", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
-    //Let's return an object with: data, message, status
-    ResponseEntity<ResponseObject> findById(@RequestParam(name = "id")  Long id) {
-        Optional<ShopProductsEntity> foundProduct = productsRepository.findById(id);
-        return foundProduct.isPresent() ?
-                ResponseEntity.status(HttpStatus.OK).body(
-                        new ResponseObject("ok", "Tìm sản phẩm thành công", foundProduct)
-                ):
-                ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                        new ResponseObject("failed", "Cannot find product with id = "+id, "")
-                );
-    }
+	@RequestMapping(value = "/getProductById", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	// Let's return an object with: data, message, status
+	ResponseEntity<ResponseObject> findById(@RequestParam(name = "id") Long id) {
+		try {
+			Optional<ShopProductsEntity> foundProduct = productsRepository.findById(id);
+			return foundProduct.isPresent()
+					? ResponseEntity.status(HttpStatus.OK)
+							.body(new ResponseObject("ok", "Tìm sản phẩm thành công", foundProduct))
+					: ResponseEntity.status(HttpStatus.NOT_FOUND)
+							.body(new ResponseObject("failed", "Cannot find product with id = " + id, ""));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	/**
+	 * Lấy danh sách sản phẩm theo categoryid
+	 */
+	@RequestMapping(value = "/getProductRanDomByCategory", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	List<ShopProductsEntity> getListProductsRanDomByCategory(@RequestParam(name = "idCategory") String idCategory) {
+		try {
+			List<ShopProductsEntity> listProductRandomByCategory = productServices.findProductRandomById(idCategory);
+			return listProductRandomByCategory;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
 
 //	
 //	@RequestMapping("report/Product")

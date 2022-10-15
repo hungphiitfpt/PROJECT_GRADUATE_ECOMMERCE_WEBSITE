@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,12 +34,15 @@ public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Lo
 			+ "OR shop_products.updated_at 			LIKE CONCAT('%',:keyword,'%') " ,nativeQuery = true)
 	Page<ShopProductsEntity> findByKeyWord(@Param("keyword") String keyword, Pageable pageable);
 	
-	@Query("SELECT u FROM ShopProductsEntity u WHERE u.categoryId = ?1")
-	List<ShopProductsEntity> findAllProductByCategoryId(Long idCategory);
-	
 	@Query("SELECT u FROM ShopProductsEntity u WHERE u.id = ?1")
 	ShopProductsEntity findProductById(Long id);
 	
-
+	@Query(value ="SELECT * FROM shop_products WHERE is_deleted = false "
+			+ "and category_id = :idCategory ", nativeQuery = true)
+	Page<ShopProductsEntity> findAll(@Param("idCategory") String idCategory, PageRequest pageRequest);
+	
+	@Query(value = "SELECT * FROM shop_products WHERE is_deleted = false AND category_id = ?1 "
+			+ "ORDER BY RAND() LIMIT 4 ", nativeQuery = true)
+	List<ShopProductsEntity> findProductRandomById(String idCategory);
 
 }

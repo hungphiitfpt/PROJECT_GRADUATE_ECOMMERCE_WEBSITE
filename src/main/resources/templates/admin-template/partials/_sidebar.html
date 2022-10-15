@@ -15,11 +15,12 @@
 						class="menu-title">Dashboard</span>
 						<div class="badge badge-danger">new</div>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" data-toggle="collapse"
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="collapse"
 					href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
 						<i class="typcn typcn-document-text menu-icon"></i> <span
 						class="menu-title">UI Elements</span> <i class="menu-arrow"></i>
-				</a>
+					</a>
 					<div class="collapse" id="ui-basic">
 						<ul class="nav flex-column sub-menu">
 							<li class="nav-item"><a class="nav-link"
@@ -29,7 +30,22 @@
 							<li class="nav-item"><a class="nav-link"
 								href="pages/ui-features/typography.html">Typography</a></li>
 						</ul>
-					</div></li>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a  class="nav-link" 
+						th:href="@{/manager_product}">
+						<i class="typcn typcn-mortar-board menu-icon"></i> 
+						<span class="menu-title">QUẢN LÝ SẢN PHẨM</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a  class="nav-link" 
+						href="">
+						<i class="typcn typcn-mortar-board menu-icon"></i> 
+						<span class="menu-title">QUẢN LÝ NHÂN VIÊN</span>
+					</a>
+				</li>
 				<li class="nav-item"><a class="nav-link" data-toggle="collapse"
 					href="#form-elements" aria-expanded="false"
 					aria-controls="form-elements"> <i
@@ -101,11 +117,13 @@
 								href="pages/samples/error-500.html"> 500 </a></li>
 						</ul>
 					</div></li>
-				<li class="nav-item"><a class="nav-link"
-					href="https://bootstrapdash.com/demo/polluxui-free/docs/documentation.html">
-						<i class="typcn typcn-mortar-board menu-icon"></i> <span
-						class="menu-title">Documentation</span>
-				</a></li>
+				<li class="nav-item">
+					<a  class="nav-link" 
+						href="https://bootstrapdash.com/demo/polluxui-free/docs/documentation.html">
+						<i class="typcn typcn-mortar-board menu-icon"></i> 
+						<span class="menu-title">Documentation</span>
+					</a>
+				</li>
 			</ul>
 		</nav>
 	</div>

@@ -222,5 +222,13 @@ strong {
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 10%), 0 2px 6px 2px rgb(60 64 67 / 15%);
     padding: 35px;
 }
+.product {
+	height: 390px !important;
+}
+.product .img-prod img {
+    min-height: 290px;
+    width: 300px !important;
+    object-fit: contain;
+}
 
 

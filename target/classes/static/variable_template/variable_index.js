@@ -50,7 +50,10 @@ swal({
   }
 });
 }
-
+function caculatorMoneyDiscount(money, discount) {
+		let moneyAfter = money * [(100 - discount) / 100];
+		return moneyAfter;
+}
 function formatMoney(str) {
 	return str.split('').reverse().reduce((prev, next, index) => {
 		return ((index % 3) ? next : (next + ',')) + prev

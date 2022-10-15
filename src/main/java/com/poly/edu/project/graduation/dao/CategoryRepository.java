@@ -13,5 +13,7 @@ public interface CategoryRepository extends JpaRepository<ShopCategoriesEntity, 
 				 + "FROM shop_categories as c WHERE is_deleted = false", nativeQuery = true)
 		List<CategoryRepository> findAllCategory();
 
+
+
 }
 

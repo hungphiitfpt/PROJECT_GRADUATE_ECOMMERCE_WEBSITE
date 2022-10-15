@@ -1,10 +1,58 @@
+
 $(function() {
     loadALLReviewProduct();
+    loadAllProductRandomByCategoryId();
 })
+
+async function loadAllProductRandomByCategoryId() {
+    let money = ``;
+    let price = ``;
+    let categoryId = $('#title-product-detail').data("categoryid");
+    var randomHTML = ``;
+    let method = 'get',
+    url = `${api_graduation}getProductRanDomByCategory`,
+    params = {idCategory: categoryId},
+    data = {};
+    let res = await axiosTemplate(method, url, params, data);
+    console.log(res.data);
+    for (let i = 0; i < res.data.length; i++) {
+		price = formatMoney(`${res.data[i].listPrice}`);
+        money = caculatorMoneyDiscount(`${res.data[i].listPrice}`,`${res.data[i].discountinued}`) 
+        randomHTML += `<div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
+        <div class="product">
+            <a href="#" class="img-prod text-center"><img class="img-fluid" src="${api_images}${res.data[i].image}" alt="Colorlib Template"> <span class="status">${res.data[i].discountinued}%</span>
+                <div class="overlay"></div> </a>
+            <div class="text py-3 pb-4 px-3 text-center">
+                <h3>
+                    <a href="#">${res.data[i].productName}</a>
+                </h3>
+                <div class="d-flex">
+                    <div class="pricing">
+                        <p class="price">
+                            <span class="mr-2 price-dc">${price} ₫</span><span class="price-sale">${money} ₫</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="bottom-area d-flex px-3">
+                    <div class="m-auto d-flex">
+                        <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                            <span><i class="ion-ios-menu"></i></span>
+                        </a> <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                            <span><i class="ion-ios-cart"></i></span>
+                        </a> <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                            <span><i class="ion-ios-heart"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`;
+    }
+    $('#list_product_random').html(randomHTML);
+}
 async function loadALLReviewProduct() {
     var reviewHTML = ``;
     let r = $('#title-product-detail').data("id");
-    console.log(r);
     let method = 'get',
 
     url = `${api_graduation}getAllReviewById`,
@@ -14,11 +62,10 @@ async function loadALLReviewProduct() {
     data = {};
 
     let res = await axiosTemplate(method, url, params, data);
-    console.log(res);
     for (let i = 0; i < res.data.length; i++) {
         let nameAvatar = `${res.data[i].lastName}`;
         let dateReview = formatDate(`${res.data[i].updatedAt}`)
-		reviewHTML += `<div class="boxReview-comment-item mb-4">
+        reviewHTML += `<div class="boxReview-comment-item mb-4">
         <div class="boxReview-comment-item-title row is-flex is-justify-content-space-between is-align-items-center">
             <div class="is-flex is-align-items-center">
                 <p class="mr-2  is-align-items-center is-justify-content-center name-letter">
@@ -63,6 +110,6 @@ async function loadALLReviewProduct() {
             </div>
         </div>
     </div>`;
-	}
+    }
     $('.boxReview-comment').html(reviewHTML);
 }
