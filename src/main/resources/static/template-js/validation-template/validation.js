@@ -92,5 +92,7 @@ function validateFormManagerProduct() {
 		}
 		
 	});
-	
+	if($('#description-short-create-manager-product-error').length > 0) {
+		return false;
+	}
 }

@@ -44,9 +44,11 @@ public interface ProductServices {
 
 	ShopProductsEntity findAllReviewProduct(Long id);
 
-	ResponseEntity<ResponseObject> changeStatusIsdeleted(Long id);
+	void changeStatusIsdeleted(long id);
 
 	List<ShopProductsEntity> findProductRandomById(String idCategory);
+
+	void changeStatusInstock(long id);
 
 	
 

@@ -73,4 +73,3 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
  
-console.log(formatDate('Sun May 11,2014'));

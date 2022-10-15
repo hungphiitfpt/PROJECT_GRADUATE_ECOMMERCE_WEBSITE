@@ -100,9 +100,9 @@ public class ProductServicesImpl implements ProductServices {
 	}
 
 	@Override
-	public ResponseEntity<ResponseObject> changeStatusIsdeleted(Long id) {
+	public void changeStatusIsdeleted(long id) {
 		// TODO Auto-generated method stub
-		return null;
+		productsRepository.changeStatusIsdeleted(id);
 	}
 
 	@Override
@@ -115,6 +115,12 @@ public class ProductServicesImpl implements ProductServices {
 	public List<ShopProductsEntity> findProductRandomById(String idCategory) {
 		// TODO Auto-generated method stub
 		return productsRepository.findProductRandomById(idCategory);
+	}
+
+	@Override
+	public void changeStatusInstock(long id) {
+		// TODO Auto-generated method stub
+		productsRepository.changeIstock(id);
 	}
 
 //	@Override

@@ -143,7 +143,8 @@
 									<div class="carousel__container">
 
 
-										<div class="carousel__slide" th:if="images : ${images}" th:each="images : ${images}">
+										<div class="carousel__slide" th:if="images : ${images}"
+											th:each="images : ${images}">
 											<div class="card">
 												<div class="card__inner">
 													<div class="card__image">
@@ -162,14 +163,12 @@
 												</div>
 											</div>
 										</div>
-										
-										<div class="carousel__slide" >
+
+										<div class="carousel__slide">
 											<div class="card">
 												<div class="card__inner">
 													<div class="card__image">
-														<a
-															href=""
-															class="image-popup"> <img
+														<a href="" class="image-popup"> <img
 															src="https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
 															alt="" class="img-fluid" />
 														</a>
@@ -197,9 +196,9 @@
 					</section>
 				</div>
 				<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-					<h3 id="title-product-detail" th:text="${product.productName}" 
-					th:data-id="${product.id}" 
-					th:data-categoryId="${product.categoryId}">Bell Pepper</h3>
+					<h3 id="title-product-detail" th:text="${product.productName}"
+						th:data-id="${product.id}"
+						th:data-categoryId="${product.categoryId}">Bell Pepper</h3>
 					<div class="rating d-flex">
 						<p class="text-left mr-4">
 							<a href="#" class="mr-2">5.0</a> <a href="#"><span
@@ -278,7 +277,10 @@
 		<div class="row">
 
 			<div class="container container-review">
-				<h2 class="title is-6 row"> <p>Đánh giá &amp; nhận xét </p> <p class="ml-2" th:text="${product.productName}"></p>  </h2>
+				<h2 class="title is-6 row">
+					<p>Đánh giá &amp; nhận xét</p>
+					<p class="ml-2" th:text="${product.productName}"></p>
+				</h2>
 				<div class="boxReview row col-lg-12">
 					<div
 						class="col-md-6 col-lg-6 boxReview-score text-center is-justify-content-center is-align-items-center">
@@ -322,7 +324,7 @@
 					</div>
 					<div
 						class="col-md-6 col-lg-6 boxReview-star is-justify-content-space-evenly">
-						<div 
+						<div
 							class="rating-level is-flex row is-align-items-center is-justify-content-space-evenly">
 							<div class="star-count row is-flex is-align-items-center">
 								<span class="has-text-weight-bold">5</span>
@@ -403,13 +405,13 @@
 
 				<div class="boxReview-comment my-2">
 					<div class="boxReview-comment-item mb-4">
-						<div 
+						<div
 							class="boxReview-comment-item-title row is-flex is-justify-content-space-between is-align-items-center">
 							<div class="is-flex is-align-items-center">
 								<p
 									class="mr-2  is-align-items-center is-justify-content-center name-letter">
 									M</p>
-								<span class="name" >Minh</span>
+								<span class="name">Minh</span>
 							</div>
 							<p class="date-time">3/10/2022 16:43</p>
 						</div>
@@ -476,7 +478,8 @@
 				<div class="col-md-12 heading-section text-center ftco-animate">
 					<span class="subheading">Sản Phẩm</span>
 					<h2 class="mb-4">Sản Phẩm Liên Quan</h2>
-					<p> Sản Phẩm đã được kiểm tra chất lượng sản phẩm trong sản xuất thuộc phạm vi quản lý của Bộ công thương</p>
+					<p>Sản Phẩm đã được kiểm tra chất lượng sản phẩm trong sản xuất
+						thuộc phạm vi quản lý của Bộ công thương</p>
 				</div>
 			</div>
 		</div>

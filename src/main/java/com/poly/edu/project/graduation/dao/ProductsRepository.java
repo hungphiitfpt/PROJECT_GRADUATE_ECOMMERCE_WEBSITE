@@ -3,16 +3,23 @@ package com.poly.edu.project.graduation.dao;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 
+import com.poly.edu.project.graduation.model.ResponseObject;
 import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 
+@Repository
 public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Long> {
 	
 	// Câu lệnh query lấy tất cả sản phẩm theo tên sản phẩm
@@ -44,5 +51,15 @@ public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Lo
 	@Query(value = "SELECT * FROM shop_products WHERE is_deleted = false AND category_id = ?1 "
 			+ "ORDER BY RAND() LIMIT 4 ", nativeQuery = true)
 	List<ShopProductsEntity> findProductRandomById(String idCategory);
+	
+	@Modifying  
+	@Query(value = "UPDATE ShopProductsEntity SET isDeleted = TRUE WHERE id = ?1")
+	@Transactional
+	void changeStatusIsdeleted(long id);
+
+	@Modifying  
+	@Query(value = "UPDATE ShopProductsEntity SET isDeleted = FALSE WHERE id = ?1")
+	@Transactional
+	void changeIstock(long id);
 
 }

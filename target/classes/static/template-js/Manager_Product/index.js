@@ -19,6 +19,8 @@ async function loadAllCategory() {
 	}
 
 	$('#list-category-manager').html(categoryHTML);
+	$('#select-category-modal-info').html(categoryHTML);
+
 }
 async function loadAllSupplier() {
 	let SupplierHTML = '';
@@ -33,6 +35,7 @@ async function loadAllSupplier() {
 	}
 
 	$('#list-supplier-manager').html(SupplierHTML);
+	$('#select-supplier-modal-info').html(SupplierHTML);
 
 }
 async function loadAllProduct() {
@@ -52,9 +55,24 @@ async function loadAllProduct() {
 }
 
 async function drawTableProductManager(res) {
+	let button = ``;
 	var ProductHTML = ``;
-	var pagination = ``;
+	var pagination 	= ``;
 	for (let i = 0; i < res.data.content.length; i++) {
+		if(res.data.content[i].deleted == true) {
+			res.data.content[i].deleted = `<label class="badge badge-danger">hết hàng</label>`;
+			 button = `<button type="button"
+			class="btn btn-warning btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="UpdateInstock($(this))">
+			<i class="typcn typcn-refresh-outline btn-icon-prepend"></i>
+		</button>`
+		} else {
+			res.data.content[i].deleted = `<label class="badge badge-success">còn hàng</label>`;
+			 button = `<button type="button"
+			class="btn btn-danger btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="UpdateChangeDelete($(this))">
+			<i class="typcn typcn-delete"></i>
+		</button>`
+		}
+		console.log(`${res.data.content[i].deleted}`);
 		let price = formatMoney(`${res.data.content[i].listPrice}`);
 		ProductHTML += `<tr>
 		<td>${res.data.content[i].id}</td>
@@ -70,21 +88,18 @@ async function drawTableProductManager(res) {
 				 	 aria-valuemax="100">
 			 	</div>
 	 		 </div>
-	  </td>
-		<td><label class="badge badge-danger">Pending</label></td>
+	  	</td>
+		<td>${res.data.content[i].deleted}</td>
 		<td><div class="row justify-content-around">
 		<button type="button"
-			class="btn btn-info btn-rounded btn-icon" data-toggle="modal" data-target="#open_detail_products">
+			class="btn btn-info btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="openModalDetailProduct($(this))" class="btn btn-info btn-lg" data-toggle="modal" data-target="#open_detail_product">
 			<i class="typcn typcn-eye"></i>
 		</button>
 		<button onclick="getDataDetailProduct($(this))" data-id="${res.data.content[i].id}" type="button"
 			class="btn btn-success btn-rounded btn-icon">
 			<i class="typcn typcn-edit"></i>
 		</button>
-		<button type="button"
-			class="btn btn-danger btn-rounded btn-icon">
-			<i class="typcn typcn-delete"></i>
-		</button>
+		${button}
 	</div></td>
 	  </tr>`;
 	}
@@ -99,7 +114,8 @@ async function drawTableProductManager(res) {
 }
 
 async function insertProduct() {
-	validateFormManagerProduct();
+	await validateFormManagerProduct()
+
 	let method = 'post',
 		url = `${api_admin}insert_product`,
 		params = null,
@@ -116,7 +132,7 @@ async function insertProduct() {
 			categoryId: $('#list-category-manager option:selected').val(),
 			supplierId: $('#list-supplier-manager option:selected').val(),
 		};
-	let res = await axiosTemplate(method, url, params, data);
+	let res =  axiosTemplate(method, url, params, data);
 	sweatAlert("Bạn Đã Thêm Sản Phẩm Mới Thành Công", "success")
 
 }
@@ -152,6 +168,7 @@ $(document).on('click', '.button-panigation-manager-product', async function() {
 	sweatAlert(`Bạn đang ở trang thứ ${page}`, "success")
 })
 async function openModalDetailProduct(r) {
+
 	let id = r.data('id');
 	let method = 'get',
 		url = `${api_graduation}getProductById`,
@@ -159,9 +176,38 @@ async function openModalDetailProduct(r) {
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
+	let checkIsDeleted = res.data.data.deleted;
+	console.log(checkIsDeleted);
+	if(checkIsDeleted == true) {
+		console.log("tắt")
+		$('#input-isDelete-modal-info').removeAttr("checked");
+	} else {
+		console.log("bật")
+		$('#input-isDelete-modal-info').click();
+	}
+	$('.modal-title').text("CHI TIẾT SẢN PHẨM");
+	$('#input-code-modal-info').val(res.data.data.productCode);
+	$('#input-name-modal-info').val(res.data.data.productName);
+	$('#input-cose-modal-info').val(res.data.data.standCost);
+	$('#input-code-price-info').val(res.data.data.listPrice);
+	$('#input-quantity-modal-info').val(res.data.data.quantityPerUnit);
+	$('#input-discount-modal-info').val(res.data.data.discountinued);
+	$("#select-supplier-modal-info").val(res.data.data.supplierId).trigger('change');
+	$("#select-category-modal-info").val(res.data.data.categoryId).trigger('change');
+	$('#input-createDate-modal-info').val(res.data.data.createdAt);
+	$('#img-product-modal-info').attr("src",`${api_images}${res.data.data.image}`);
+}
+function closeModalDetailProduct() {
+	$('#input-code-modal-info').val();
+	$('#input-name-modal-info').val();
+	$('#input-cose-modal-info').val();
+	$('#input-code-price-info').val();
+	$('#input-quantity-modal-info').val();
+	$('#input-discount-modal-info').val();
+	$('#input-createDate-modal-info').val();
+	$('#input-isDelete-modal-info').click();
 }
 async function getDataDetailProduct(r) {
-	let listImage = ``;
 	let id = r.data('id');
 	let method = 'get',
 		url = `${api_graduation}getProductById`,
@@ -180,12 +226,32 @@ async function getDataDetailProduct(r) {
 	$('#price-product-manager').val(res.data.data.listPrice);
 	$('#description-detail-product').val(res.data.data.decription);
 	console.log(res.data.data.shopProductImagesById)
-	if(res.data.data.shopProductImagesById.length > 0) {
-		for (let i = 0; i < res.data.data.shopProductImagesById.length; i++) {
-			listImage += `<image src="${api_images}${res.data.data.shopProductImagesById[i].image}">`;
-			console.log(listImage);
-		}
-		$('.upload__img-wrap').html(listImage);
-	}
 	sweatAlert(res.data.message, "success")
 }
+
+async function UpdateChangeDelete(r) {
+	let id = r.data('id');
+	let method = 'post',
+		url = `${api_admin}update/isdeleted`,
+		params = {id : id},
+		data = {};
+	let res = await axiosTemplate(method, url, params, data);
+	console.log(res);
+	loadAllProduct();
+	sweatAlert(`Cập nhật trạng thái hết hàng sản phẩm có id là : ${id} thành công `, "success")
+}
+
+async function UpdateInstock(r) {
+	let id = r.data('id');
+	let method = 'post',
+		url = `${api_admin}update/in_stock`,
+		params = {id : id},
+		data = {};
+	let res = await axiosTemplate(method, url, params, data);
+	console.log(res);
+	loadAllProduct();
+	sweatAlert(`Cập nhật trạng thái còn hàng sản phẩm có id là : ${id} thành công `, "success")
+}
+
+
+
