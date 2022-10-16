@@ -54,10 +54,6 @@
 <link rel="stylesheet"
 	href="../admin-static/vendors/mdi/css/materialdesignicons.min.css" />
 </head>
-
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-
 <body>
 	<div class="container-scroller">
 		<!-- partial:../../partials/_navbar.html -->
@@ -77,19 +73,22 @@
 				<div class="content-wrapper">
 					<div class="row">
 						<div class="col-12 grid-margin stretch-card">
-							<form class="form-detail" action="#" method="post" id="myform">
+							<form id="form">
 								<div class="card">
 									<div class="card-body">
 										<h4 class="card-title">Quản Lý Sản Phẩm</h4>
 										<p class="card-description">Trang dành cho người quản trị</p>
-
 										<div class="row">
 											<div class="form-group col-lg-6 col-sm-12">
 												<label for="exampleInputName1">Tên Sản Phẩm</label> <input
 													type="text" class="form-control"
 													id="name-create-manager-product"
-													name="name_create_manager_product" placeholder="Name"
-													required>
+													name="name_create_manager_product" placeholder="Name">
+												<i class="fas fa-exclamation-circle failure-icon mdi mdi-close-octagon"></i> <i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+
+												
 
 											</div>
 
@@ -97,8 +96,11 @@
 												<label for="exampleInputName1">Mã Code</label> <input
 													type="text" class="form-control"
 													id="code-create-manager-product"
-													name="code_create_manager_product" placeholder="Name"
-													required>
+													name="code_create_manager_product" placeholder="Name">
+												<i class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i> <i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+
 											</div>
 
 											<div class="form-group col-lg-6 col-sm-12">
@@ -106,15 +108,22 @@
 													type="text" class="form-control"
 													id="description-short-create-manager-product"
 													name="description_short_create_manager_product"
-													placeholder="Name" required>
+													placeholder="Name"> <i
+													class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i> <i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+										
 											</div>
 
 											<div class="form-group col-lg-6 col-sm-12">
 												<label for="exampleInputName1">Phí ship cơ bản </label> <input
 													type="text" class="form-control"
 													id="fee-ship-create-manager-product"
-													name="fee_ship_create_manager_product" placeholder="Name"
-													required>
+													name="fee_ship_create_manager_product" placeholder="Name">
+												<i class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i> <i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+										
 											</div>
 
 											<div class="form-group col-lg-6 col-sm-12">
@@ -130,14 +139,22 @@
 												<label for="exampleInputEmail3">Số lượng</label> <input
 													type="text" class="form-control"
 													id="quantity-create-manager-product"
-													name="quantity_create_manager_product" required>
+													name="quantity_create_manager_product"> <i
+													class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i> <i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+									
 											</div>
 
 											<div class="form-group col-lg-6 col-sm-12">
 												<label for="exampleInputEmail3">Giảm giá (%)</label> <input
 													type="text" class="form-control"
 													id="discount-create-manager-product"
-													name="discount_create_manager_product" required>
+													name="discount_create_manager_product"> <i
+													class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i> <i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+												
 											</div>
 
 											<div class="form-group col-lg-6 col-sm-12">
@@ -153,14 +170,21 @@
 
 											<label for="exampleInputEmail3">Giá tiền</label> <input
 												type="text" class="form-control" id="price-product-manager"
-												name="price_product_manager" required>
+												name="price_product_manager"> <i
+												class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i> <i
+												class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+											<div class="error"></div>
+								
 
 										</div>
 										<div class="form-group col-lg-12 col-sm-12">
 											<label for="exampleTextarea1">Mô tả chi tiết</label>
 											<textarea class="form-control"
 												id="description-detail-product" name="description_detail"
-												rows="4" required></textarea>
+												rows="4"></textarea>
+											<i class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i> <i
+												class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+											<div class="error"></div>
 										</div>
 										<button type="submit" onclick="insertProduct()"
 											class="btn btn-primary mr-2">Lưu</button>
@@ -237,9 +261,7 @@
 							<div class="modal-body">
 								<div class="row">
 									<div class="col-lg-4 col-sm-12 text-center">
-										<img id="img-product-modal-info"
-											src=""
-											alt="" />
+										<img id="img-product-modal-info" src="" alt="" />
 									</div>
 									<div class="col-lg-8 col-sm-12">
 										<div class="row">
@@ -310,20 +332,20 @@
 													<label class="col-sm-3 col-form-label">Trạng Thái</label>
 													<div class="col-sm-9 row">
 														<div class="col-lg-6">
-														<div class="form-check form-check-success">
-															<label class="form-check-label"> <input
-																type="radio" class="form-check-input"
-																name="ExampleRadio2" id="pending-product">
-																Hết Hàng <i class="input-helper"></i></label>
-														</div>		
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input
+																	type="radio" class="form-check-input"
+																	name="ExampleRadio2" id="pending-product"> Hết
+																	Hàng <i class="input-helper"></i></label>
+															</div>
 														</div>
 														<div class="col-lg-6">
-														<div class="form-check form-check-success">
-															<label class="form-check-label"> <input
-																type="radio" class="form-check-input"
-																name="ExampleRadio2" id="open-product">
-																Còn Hàng <i class="input-helper"></i></label>
-														</div>		
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input
+																	type="radio" class="form-check-input"
+																	name="ExampleRadio2" id="open-product"> Còn
+																	Hàng <i class="input-helper"></i></label>
+															</div>
 														</div>
 													</div>
 												</div>
@@ -412,8 +434,6 @@
 	<!-- nhúng file js tự customize-->
 	<script src="../template-js/Manager_Product/index.js"></script>
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 	<script src="../template-js/validation-template/validation.js"></script>

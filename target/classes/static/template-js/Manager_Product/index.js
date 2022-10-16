@@ -114,7 +114,10 @@ async function drawTableProductManager(res) {
 }
 
 async function insertProduct() {
-	await validateFormManagerProduct()
+	validation();
+	if($('.error').length > 0) {
+		return false;
+	}
 
 	let method = 'post',
 		url = `${api_admin}insert_product`,
