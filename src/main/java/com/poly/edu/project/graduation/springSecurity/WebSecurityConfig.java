@@ -12,46 +12,36 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig  {
-    @Autowired
-    private UserDetailsService userDetailsService;
+public class WebSecurityConfig {
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-    @Bean
-    public static PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public static PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/register/**").permitAll()
-                .antMatchers("/indexok").permitAll()
-                .antMatchers("/users").hasRole("ADMIN")
-                .and().
-                formLogin(
-                        form -> form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/users")
-                                .permitAll()
-                ).logout(
-                        logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .permitAll()
-                );
-        return http.build();
-    }
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.csrf().disable().authorizeRequests()
+		.antMatchers("/register/**").permitAll()
+		.antMatchers("/indexx")
+		.permitAll().antMatchers("/users").hasRole("ADMIN")
+		.antMatchers("/manager_employee").hasRole("ADMIN")
+		.antMatchers("/manager_product").hasRole("ADMIN").and()
+		.formLogin(form -> 
+		form.loginPage("/login")
+		.loginProcessingUrl("/login")
+		.defaultSuccessUrl("/index").permitAll())
+				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());
+		return http.build();
+	}
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
-    }
-	
-	
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	}
+
 }
