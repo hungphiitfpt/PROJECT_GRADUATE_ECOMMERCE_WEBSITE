@@ -45,4 +45,10 @@ public class UserRestController {
 		userService.changeStatusIsdeleted(id);
 	}
 	
+	@RequestMapping(value = "/updateUser/in_stock", method = RequestMethod.POST, consumes = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	void updateInstock(@Param("id") long id) {
+		userService.changeStatusInstock(id);
+	}
+	
 }

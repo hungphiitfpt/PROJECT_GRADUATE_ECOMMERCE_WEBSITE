@@ -17,7 +17,7 @@ public class AdminHomeController {
 	@Autowired
 	ProductsRepository productsRepository;
 
-	@RequestMapping("/")
+	@RequestMapping("/index2")
 	public String index() {
 		
 		return "admin-template/index";

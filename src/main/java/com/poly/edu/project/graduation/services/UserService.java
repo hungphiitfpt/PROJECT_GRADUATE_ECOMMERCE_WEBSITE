@@ -15,4 +15,6 @@ public interface UserService {
 
 	void changeStatusIsdeleted(long id);
 
+	void changeStatusInstock(long id);
+
 }

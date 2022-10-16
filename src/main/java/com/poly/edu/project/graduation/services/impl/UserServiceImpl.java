@@ -15,14 +15,23 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserRepository userRepository;
+	
 	@Override
 	public Page<UserEntity> findByKeyWord(String keyword, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return userRepository.findByKeyWord(keyword,pageable);
 	}
+	
 	@Override
 	public void changeStatusIsdeleted(long id) {
 		userRepository.changeStatusIsdeleted(id);
+	}
+
+	@Override
+	public void changeStatusInstock(long id) {
+		
+		userRepository.changeIstock(id);
+		
 	}
 
 }

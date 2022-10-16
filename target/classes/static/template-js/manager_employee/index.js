@@ -47,7 +47,7 @@ async function drawTableUsersManager(res) {
 			<i class="typcn typcn-refresh-outline btn-icon-prepend"></i>
 		</button>`
 		} else {
-			res.data.content[i].deleted = `<label class="badge badge-success">CÒN LÀM</label>`;
+			res.data.content[i].deleted = `<label class="badge badge-success">CÒN LÀM VIỆC</label>`;
 			 button = `<button type="button"
 			class="btn btn-danger btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="UpdateChangeDelete($(this))">
 			<i class="typcn typcn-delete"></i>
@@ -83,4 +83,28 @@ async function drawTableUsersManager(res) {
 	$('#panigation-manager-product').html(pagination);
 	$('#table-list-users-manager').html(ProductHTML);
 
+}
+
+async function UpdateChangeDelete(r) {
+	let id = r.data('id');
+	let method = 'post',
+		url = `${api_admin}updateUser/isdeleted`,
+		params = {id : id},
+		data = {};
+	let res = await axiosTemplate(method, url, params, data);
+	console.log(res);
+	loadAllUsers();
+	sweatAlert(`Cập nhật trạng thái Nghỉ Làm người dùng có id là : ${id} thành công `, "success")
+}
+
+async function UpdateInstock(r) {
+	let id = r.data('id');
+	let method = 'post',
+		url = `${api_admin}updateUser/in_stock`,
+		params = {id : id},
+		data = {};
+	let res = await axiosTemplate(method, url, params, data);
+	console.log(res);
+	loadAllUsers();
+	sweatAlert(`Cập nhật trạng thái Còn Làm Việc sản phẩm có id là : ${id} thành công `, "success")
 }

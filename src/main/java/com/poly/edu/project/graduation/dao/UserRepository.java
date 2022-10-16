@@ -29,12 +29,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	Page<UserEntity> findByKeyWord(String keyword, Pageable pageable);
 
 	@Modifying  
-	@Query(value = "UPDATE UserEntity SET isDeleted = False WHERE id = ?1")
+	@Query(value = "UPDATE UserEntity SET isDeleted = TRUE WHERE id = ?1")
 	@Transactional
 	void changeStatusIsdeleted(long id);
 
 	@Modifying  
-	@Query(value = "UPDATE UserEntity SET isDeleted = TRUE WHERE id = ?1")
+	@Query(value = "UPDATE UserEntity SET isDeleted = FALSE WHERE id = ?1")
 	@Transactional
 	void changeIstock(long id);
 
