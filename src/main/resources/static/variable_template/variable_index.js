@@ -72,4 +72,21 @@ function formatDate(date) {
 
     return [year, month, day].join('-');
 }
+ async function api_getCountryVietnamese() {
+	let method = 'get',
+		url = `https://provinces.open-api.vn/api/?depth=2`,
+		params = {depth : 1},
+		data = {};
+	let res = await axiosTemplate(method, url, params, data);
+
+	console.log(res)
+
+}
+
+var callAPI = (api) => {
+	return axios.get(api).then((response) => {
+		return response;
+	});
+}
+
  

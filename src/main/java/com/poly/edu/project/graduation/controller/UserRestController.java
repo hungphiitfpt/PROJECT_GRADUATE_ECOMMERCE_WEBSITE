@@ -1,15 +1,21 @@
 package com.poly.edu.project.graduation.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poly.edu.project.graduation.dao.UserRepository;
+import com.poly.edu.project.graduation.model.ResponseObject;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 import com.poly.edu.project.graduation.model.UserEntity;
 import com.poly.edu.project.graduation.services.UserService;
@@ -20,6 +26,9 @@ public class UserRestController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	
 	// api lấy tất cả sản phẩm search theo keyword nhập vào
@@ -37,6 +46,25 @@ public class UserRestController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	// Lấy chi tiết sản phẩm
+	@RequestMapping(value = "/getEmployeeById", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	// Let's return an object with: data, message, status
+	ResponseEntity<ResponseObject> findById(@RequestParam(name = "id") Long id) {
+		try {
+			Optional<UserEntity> foundProduct = userRepository.findById(id);
+			return foundProduct.isPresent()
+					? ResponseEntity.status(HttpStatus.OK)
+							.body(new ResponseObject("ok", "Tìm sản phẩm thành công", foundProduct))
+					: ResponseEntity.status(HttpStatus.NOT_FOUND)
+							.body(new ResponseObject("failed", "Cannot find employee with id = " + id, ""));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 	
 	@RequestMapping(value = "/updateUser/isdeleted", method = RequestMethod.POST, consumes = {

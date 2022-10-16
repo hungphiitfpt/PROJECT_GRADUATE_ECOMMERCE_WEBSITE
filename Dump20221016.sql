@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role_user`
+-- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `role_user`;
+DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `role_user` (
+CREATE TABLE `roles` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `role_id` bigint DEFAULT NULL,
   `name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `is_deleted` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role_user`
+-- Dumping data for table `roles`
 --
 
-LOCK TABLES `role_user` WRITE;
-/*!40000 ALTER TABLE `role_user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `role_user` ENABLE KEYS */;
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (4,'ROLE_ADMIN',NULL,NULL,NULL),(6,'ROLE_CUSTOMER','2022-10-16 21:25:55','2022-10-16 21:25:55',_binary '\0'),(7,'ROLE_USER','2022-10-16 21:25:55','2022-10-16 21:25:55',_binary '\0');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -171,10 +171,9 @@ CREATE TABLE `shop_orders` (
   PRIMARY KEY (`id`),
   KEY `fk_order_customer_idx` (`customer_id`),
   KEY `fk_order_payment_idx` (`payment_type_id`),
-  KEY `fk_order_user_idx` (`employee_id`),
-  CONSTRAINT `fk_order_customer` FOREIGN KEY (`customer_id`) REFERENCES `shop_customer` (`id`),
+  CONSTRAINT `fk_customer` FOREIGN KEY (`customer_id`) REFERENCES `shop_customer` (`id`),
   CONSTRAINT `fk_order_payment` FOREIGN KEY (`payment_type_id`) REFERENCES `shop_payment_types` (`id`),
-  CONSTRAINT `fk_order_user` FOREIGN KEY (`employee_id`) REFERENCES `role_user` (`id`)
+  CONSTRAINT `fk_roles` FOREIGN KEY (`id`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -184,7 +183,6 @@ CREATE TABLE `shop_orders` (
 
 LOCK TABLES `shop_orders` WRITE;
 /*!40000 ALTER TABLE `shop_orders` DISABLE KEYS */;
-INSERT INTO `shop_orders` VALUES (2,NULL,NULL,'2009-08-02 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL,'2022-10-05 01:09:04','2022-10-05 01:09:04');
 /*!40000 ALTER TABLE `shop_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -350,12 +348,12 @@ CREATE TABLE `shop_products` (
   `product_code` varchar(25) DEFAULT NULL,
   `product_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `image` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `short_decription` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `short_decription` varchar(250) DEFAULT 'Chúng tôi đảm bảo:\r\n- Mang lại cho quý khách những sản phẩm tốt nhất, đẹp nhất.\r\n- Nếu hàng bị lỗi do sản xuất. Shin Case cam kết sẽ hoàn tiền hoặc gửi lại sản mới thay thế cho quý khách.\r\n- Thương hiệu tạo niềm tin!',
   `decription` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `stand_cost` decimal(19,4) DEFAULT NULL,
-  `list_price` decimal(19,4) DEFAULT NULL,
+  `list_price` decimal(19,4) DEFAULT '0.0000',
   `quantity_per_unit` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `discountinued` tinyint DEFAULT NULL,
+  `discountinued` tinyint DEFAULT '0',
   `is_featured` bit(1) NOT NULL DEFAULT b'0',
   `is_deleted` bit(1) NOT NULL DEFAULT b'0',
   `category_id` bigint DEFAULT NULL,
@@ -367,7 +365,7 @@ CREATE TABLE `shop_products` (
   KEY `fkproduct_category_idx` (`category_id`),
   CONSTRAINT `fkproduct_category` FOREIGN KEY (`category_id`) REFERENCES `shop_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fkproduct_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `shop_suplier` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,7 +374,7 @@ CREATE TABLE `shop_products` (
 
 LOCK TABLES `shop_products` WRITE;
 /*!40000 ALTER TABLE `shop_products` DISABLE KEYS */;
-INSERT INTO `shop_products` VALUES (1,'Thịt bò','Thịt bò mỹ nhập khẩu từ trung quốc','product-10.jpg','ds','d',12000.0000,100000.0000,'101',9,_binary '\0',_binary '\0',10,6,NULL,'2022-10-05 20:14:53'),(2,'THITBO23','thịt bò','product-6.jpg','ds','d',NULL,200000.0000,'19',19,_binary '\0',_binary '\0',2,NULL,NULL,NULL),(3,'THITBOCOBE','Thịt bò  ok','product-11.jpg','thịt bò cô bé ','',10000.0000,300000.0000,'2',10,_binary '\0',_binary '\0',3,2,NULL,NULL),(4,'','',NULL,'','',NULL,NULL,'',NULL,_binary '\0',_binary '\0',4,1,NULL,NULL),(5,'TP','thịt heo','1.png','ds','d',10000.0000,90000.0000,'34',NULL,_binary '\0',_binary '\0',5,NULL,'2022-10-05 20:14:53','2022-10-05 20:14:53'),(6,'TP','thịt bò','2.png','ds','d',10000.0000,90000.0000,'123',NULL,_binary '\0',_binary '\0',6,3,NULL,NULL),(7,'HS','cá','3.png','thịt bò cô bé ','',12000.0000,12333.0000,'234',10,_binary '\0',_binary '\0',7,3,NULL,NULL),(8,'HS','mực','4.png','thịt bò cô bé ','',13000.0000,50000.0000,'123',10,_binary '\0',_binary '\0',1,1,NULL,NULL),(9,'GD','bàn ủi','5.png','thịt bò cô bé ','',10000.0000,60000.0000,'12',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(10,'GD','hút bụi','6.png','thịt bò cô bé ','',10000.0000,75000.0000,'324',10,_binary '\0',_binary '\0',1,1,NULL,NULL),(11,'GV','nước măm','7.png','thịt bò cô bé ','',10000.0000,80000.0000,'3',10,_binary '\0',_binary '\0',2,2,NULL,NULL),(12,'GV','hạt nêm','8.png','thịt bò cô bé ','',10000.0000,333333.0000,'23',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(13,'DH','PATE','9.png','thịt bò cô bé ','',10000.0000,123.0000,'2',10,_binary '\0',_binary '\0',4,2,NULL,NULL),(14,'DH','SPAM','10.png','thịt bò cô bé ','',10000.0000,123.0000,'33',10,_binary '\0',_binary '\0',6,3,NULL,NULL),(15,'CS','BÀN CHẢI ','11.png','thịt bò cô bé ','',10000.0000,1333.0000,'34',10,_binary '\0',_binary '\0',3,3,NULL,NULL),(16,'CS','KHĂN GIẤY','12.png','thịt bò cô bé ','',10000.0000,33333.0000,'43',10,_binary '\0',_binary '\0',1,4,NULL,NULL),(17,'RC','RAU CẦN','13.png','thịt bò cô bé ','',10000.0000,333.0000,'123',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(18,'RC','CÀ RỐT','14.png','thịt bò cô bé ','',10000.0000,123123.0000,'2',10,_binary '\0',_binary '\0',1,5,NULL,NULL),(19,'VS','nước rửa chén','15.png','thịt bò cô bé ','',10000.0000,331232.0000,'45',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(20,'VS','nước giặt','16.png','thịt bò cô bé ','',10000.0000,222233.0000,'54',10,_binary '\0',_binary '\0',1,6,NULL,NULL),(21,'DK','bún khô','17.png','thịt bò cô bé ','',10000.0000,222222.0000,'2',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(22,'DK','mì gói','18.png','thịt bò cô bé ','',10000.0000,33333.0000,'2',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(23,'GK','bia','19.png','thịt bò cô bé ','',10000.0000,123123.0000,'23',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(24,'BK','socola','20.png','thịt bò cô bé ','',10000.0000,123123.0000,'53',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(29,'sd','d','d',NULL,NULL,NULL,NULL,NULL,NULL,_binary '\0',_binary '\0',NULL,NULL,'2022-10-13 21:10:15','2022-10-13 21:10:15');
+INSERT INTO `shop_products` VALUES (1,'Thịt bò','Thịt bò mỹ nhập khẩu từ trung quốc','product-10.jpg','ds','d',12000.0000,100000.0000,'101',9,_binary '\0',_binary '\0',10,6,NULL,'2022-10-05 20:14:53'),(2,'THITBO23','thịt bò','product-6.jpg','ds','d',NULL,200000.0000,'19',19,_binary '\0',_binary '\0',2,NULL,NULL,NULL),(3,'THITBOCOBE','Thịt bò  ok','product-11.jpg','thịt bò cô bé ','',10000.0000,300000.0000,'2',10,_binary '\0',_binary '\0',3,2,NULL,NULL),(4,'','',NULL,'','',NULL,NULL,'',NULL,_binary '\0',_binary '\0',1,1,NULL,NULL),(5,'TP','thịt heo','1.png','ds','d',10000.0000,90000.0000,'34',0,_binary '\0',_binary '\0',5,NULL,'2022-10-05 20:14:53','2022-10-05 20:14:53'),(6,'TP','thịt bò','2.png','ds','d',10000.0000,90000.0000,'123',0,_binary '\0',_binary '\0',6,3,NULL,NULL),(7,'HS','cá','3.png','thịt bò cô bé ','',12000.0000,200000.0000,'234',10,_binary '\0',_binary '',7,3,NULL,NULL),(8,'HS','mực','4.png','thịt bò cô bé ','',13000.0000,50000.0000,'123',4,_binary '\0',_binary '\0',1,1,NULL,NULL),(9,'GD','bàn ủi','5.png','thịt bò cô bé ','',10000.0000,60000.0000,'12',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(10,'GD','hút bụi','6.png','thịt bò cô bé ','',10000.0000,75000.0000,'324',0,_binary '\0',_binary '\0',1,1,NULL,NULL),(11,'GV','nước măm','7.png','thịt bò cô bé ','',10000.0000,80000.0000,'3',8,_binary '\0',_binary '\0',2,2,NULL,NULL),(12,'GV','hạt nêm','8.png','thịt bò cô bé ','',10000.0000,100000.0000,'23',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(13,'DH','PATE','9.png','thịt bò cô bé ','',10000.0000,123.0000,'2',10,_binary '\0',_binary '\0',4,2,NULL,NULL),(14,'DH','SPAM','10.png','thịt bò cô bé ','',10000.0000,123.0000,'33',0,_binary '\0',_binary '\0',6,3,NULL,NULL),(15,'CS','BÀN CHẢI ','11.png','thịt bò cô bé ','',10000.0000,1000.0000,'34',10,_binary '\0',_binary '\0',3,3,NULL,NULL),(16,'CS','KHĂN GIẤY','12.png','thịt bò cô bé ','',10000.0000,20000.0000,'43',8,_binary '\0',_binary '\0',1,4,NULL,NULL),(17,'RC','RAU CẦN','13.png','thịt bò cô bé ','',10000.0000,333.0000,'123',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(18,'RC','CÀ RỐT','14.png','thịt bò cô bé ','',10000.0000,2000.0000,'2',10,_binary '\0',_binary '\0',1,5,NULL,NULL),(19,'VS','nước rửa chén','15.png','thịt bò cô bé ','',10000.0000,10000.0000,'45',0,_binary '\0',_binary '',1,2,NULL,NULL),(20,'VS','nước giặt','16.png','thịt bò cô bé ','',10000.0000,20000.0000,'54',3,_binary '\0',_binary '\0',1,6,NULL,NULL),(21,'DK','bún khô','17.png','thịt bò cô bé ','',10000.0000,300000.0000,'2',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(22,'DK','mì gói','18.png','thịt bò cô bé ','',10000.0000,50000.0000,'2',4,_binary '\0',_binary '\0',1,2,NULL,NULL),(23,'GK','bia','19.png','thịt bò cô bé ','',10000.0000,20000.0000,'23',2,_binary '\0',_binary '\0',1,2,NULL,NULL),(24,'BK','socola','20.png','thịt bò cô bé ','',10000.0000,10000.0000,'53',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(29,'sd','d','d',NULL,NULL,NULL,NULL,NULL,0,_binary '\0',_binary '\0',NULL,NULL,'2022-10-13 21:10:15','2022-10-13 21:10:15'),(30,'com ','sd','18.png','Chúng tôi đảm bảo:\r\n- Mang lại cho quý khách những sản phẩm tốt nhất, đẹp nhất.\r\n- Nếu hàng bị lỗi do sản xuất. Shin Case cam kết sẽ hoàn tiền hoặc gửi lại sản mới thay thế cho quý khách.\r\n- Thương hiệu tạo niềm tin!',NULL,NULL,0.0000,NULL,0,_binary '\0',_binary '',NULL,NULL,'2022-10-15 13:13:20','2022-10-15 13:13:20');
 /*!40000 ALTER TABLE `shop_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -461,11 +459,8 @@ CREATE TABLE `user` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `is_deleted` bit(1) DEFAULT b'0',
-  `role_id` bigint NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_user_role_idx` (`role_id`),
-  CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -474,7 +469,35 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (13,'hungphi','$2a$10$wG3qTlKwhXVZo2BR8J2CmeWiAS7ocJoRldPZTzJ9Q7.zlUYP5TgmS','nguyễn phạm','hùng phi',NULL,'hungphi2@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(14,'admin','$2a$10$9jgOvMCdSW9s6L3xKn465eMj8l8aChIWlpzsk7dZNQPdIe.ax0LDq','A ĐÊ MIN','Nguyễn ',NULL,'admin@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users_roles`
+--
+
+DROP TABLE IF EXISTS `users_roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users_roles` (
+  `user_id` bigint DEFAULT NULL,
+  `role_id` bigint DEFAULT NULL,
+  KEY `fk_user_idx` (`user_id`),
+  KEY `fk_roles_idx` (`role_id`),
+  CONSTRAINT `fk_roles_UR` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users_roles`
+--
+
+LOCK TABLES `users_roles` WRITE;
+/*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
+INSERT INTO `users_roles` VALUES (13,7),(14,4);
+/*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -563,4 +586,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-14  0:37:18
+-- Dump completed on 2022-10-16 22:03:40

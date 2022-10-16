@@ -60,13 +60,13 @@ async function drawTableProductManager(res) {
 	var pagination 	= ``;
 	for (let i = 0; i < res.data.content.length; i++) {
 		if(res.data.content[i].deleted == true) {
-			res.data.content[i].deleted = `<label class="badge badge-danger">hết hàng</label>`;
+			res.data.content[i].deleted = `<label class="badge badge-danger">ngưng bán</label>`;
 			 button = `<button type="button"
 			class="btn btn-warning btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="UpdateInstock($(this))">
 			<i class="typcn typcn-refresh-outline btn-icon-prepend"></i>
 		</button>`
 		} else {
-			res.data.content[i].deleted = `<label class="badge badge-success">còn hàng</label>`;
+			res.data.content[i].deleted = `<label class="badge badge-success">đang bán</label>`;
 			 button = `<button type="button"
 			class="btn btn-danger btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="UpdateChangeDelete($(this))">
 			<i class="typcn typcn-delete"></i>
@@ -179,11 +179,9 @@ async function openModalDetailProduct(r) {
 	let checkIsDeleted = res.data.data.deleted;
 	console.log(checkIsDeleted);
 	if(checkIsDeleted == true) {
-		console.log("tắt")
-		$('#input-isDelete-modal-info').removeAttr("checked");
+		$('#pending-product').prop("checked",true);
 	} else {
-		console.log("bật")
-		$('#input-isDelete-modal-info').click();
+		$('#open-product').prop("checked",true);
 	}
 	$('.modal-title').text("CHI TIẾT SẢN PHẨM");
 	$('#input-code-modal-info').val(res.data.data.productCode);
@@ -238,7 +236,7 @@ async function UpdateChangeDelete(r) {
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
 	loadAllProduct();
-	sweatAlert(`Cập nhật trạng thái hết hàng sản phẩm có id là : ${id} thành công `, "success")
+	sweatAlert(`Cập nhật trạng thái ngưng bán sản phẩm có id là : ${id} thành công `, "success")
 }
 
 async function UpdateInstock(r) {

@@ -1,4 +1,5 @@
-	<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -80,7 +81,7 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="row">
-										<h4 class="card-title">Danh sách sản phẩm</h4>
+										<h4 class="card-title">Danh sách Nhân Viên</h4>
 										<div class="input-group">
 											<input type="text" class="form-control"
 												id="input-search-product-keyword">
@@ -121,17 +122,8 @@
 
 							</div>
 						</div>
-
-
-
-
-
 					</div>
 				</div>
-
-
-
-
 				<!-- Modal -->
 				<div class="modal fade" id="open_detail_product" role="dialog">
 					<div class="modal-dialog modal-lg">
@@ -145,9 +137,7 @@
 							<div class="modal-body">
 								<div class="row">
 									<div class="col-lg-4 col-sm-12 text-center">
-										<img id="img-product-modal-info"
-											src=""
-											alt="" />
+										<img id="img-eployee-modal-info" class="img-avt-modal" src="" alt="" />
 									</div>
 									<div class="col-lg-8 col-sm-12">
 										<div class="row">
@@ -157,122 +147,113 @@
 													<label class="col-sm-3 col-form-label">Id</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control"
-															id="input-code-modal-info">
+															id="input-idUser-modal-employee-info">
 													</div>
 												</div>
 											</div>
 
 											<div class="col-md-6">
 												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Tên Người Dùng</label>
+													<label class="col-sm-3 col-form-label">Tên Đăng
+														Nhập</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control"
-															id="input-name-modal-info">
+															id="input-username-modal-employee-info">
 													</div>
 												</div>
 											</div>
 
 											<div class="col-md-6">
 												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Phí Ship Cơ
-														Bản</label>
+													<label class="col-sm-3 col-form-label">Mật Khẩu</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="input-cose-modal-info">
+														<input type="password" class="form-control"
+															id="input-password-modal-employee-info">
 													</div>
 												</div>
 											</div>
 
 											<div class="col-md-6">
 												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Giá Tiền</label>
+													<label class="col-sm-3 col-form-label">Tên Họ</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control"
-															id="input-code-price-info">
+															id="input-firstname-modal-employee-info">
 													</div>
 												</div>
 											</div>
 
 											<div class="col-md-6">
 												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Số Lượng</label>
+													<label class="col-sm-3 col-form-label">Tên Đệm</label>
 													<div class="col-sm-9">
 														<input type="text" class="form-control"
-															id="input-quantity-modal-info">
+															id="input-lastname-modal-employee-info">
 													</div>
 												</div>
 											</div>
 
 											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Giảm Giá</label>
+												<div class="form-group row is-align-item-center">
+													<label class="col-sm-3 col-form-label">Tỉnh</label>
 													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="input-discount-modal-info">
+														<select class="form-control form-control-sm"
+															id="select-country-modal-employee-info">
+														</select>
 													</div>
 												</div>
 											</div>
 
+											<div class="col-md-6">
+												<div class="form-group row is-align-item-center">
+													<label class="col-sm-3 col-form-label">Giới Tính</label>
+													<div class="col-sm-9 row">
+														<div class="col-lg-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input
+																	type="radio" class="form-check-input"
+																	name="ExampleRadio1" id="male-modal-employee">
+																	Nam <i class="input-helper"></i></label>
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input
+																	type="radio" class="form-check-input"
+																	name="ExampleRadio1" id="female-modal-employee">
+																	Nữ <i class="input-helper"></i></label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
 											<div class="col-md-6">
 												<div class="form-group row is-align-item-center">
 													<label class="col-sm-3 col-form-label">Trạng Thái</label>
 													<div class="col-sm-9 row">
 														<div class="col-lg-6">
-														<div class="form-check form-check-success">
-															<label class="form-check-label"> <input
-																type="radio" class="form-check-input"
-																name="ExampleRadio2" id="pending-product">
-																Hết Hàng <i class="input-helper"></i></label>
-														</div>		
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input
+																	type="radio" class="pending form-check-input"
+																	name="ExampleRadio2" id="pending-work-modal-employee">
+																	Nghỉ Làm <i class="input-helper"></i></label>
+															</div>
 														</div>
 														<div class="col-lg-6">
-														<div class="form-check form-check-success">
-															<label class="form-check-label"> <input
-																type="radio" class="form-check-input"
-																name="ExampleRadio2" id="open-product">
-																Còn Hàng <i class="input-helper"></i></label>
-														</div>		
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input
+																	type="radio" class="form-check-input"
+																	name="ExampleRadio2" id="open-work-modal-employee">
+																	Còn Làm <i class="input-helper"></i></label>
+															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 
-											<div class="col-md-6">
-												<div class="form-group row is-align-item-center">
-													<label class="col-sm-3 col-form-label">Danh Mục</label>
-													<div class="col-sm-9">
-														<select class="form-control form-control-sm"
-															id="select-category-modal-info">
-															<option>1</option>
-															<option>2</option>
-															<option>3</option>
-															<option>4</option>
-															<option>5</option>
-														</select>
-													</div>
-												</div>
-											</div>
 
-											<div class="col-md-6">
-												<div class="form-group row is-align-item-center">
-													<label class="col-sm-3 col-form-label">Nhà Cung Cấp</label>
-													<div class="col-sm-9">
-														<select class="form-control form-control-sm"
-															id="select-supplier-modal-info">
-														</select>
-													</div>
-												</div>
-											</div>
 
-											<div class="col-md-6">
-												<div class="form-group row is-align-item-center">
-													<label class="col-sm-3 col-form-label">Ngày Tạo</label>
-													<div class="col-sm-9">
-														<input id="input-createDate-modal-info"
-															class="form-control" placeholder="dd/mm/yyyy">
-													</div>
-												</div>
-											</div>
+
 
 										</div>
 									</div>
@@ -280,7 +261,8 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
-									data-dismiss="modal" onclick="closeModalDetailProduct()">Close</button>
+									data-dismiss="modal" onclick="closeModalDetailProduct()">Close
+								</button>
 							</div>
 						</div>
 

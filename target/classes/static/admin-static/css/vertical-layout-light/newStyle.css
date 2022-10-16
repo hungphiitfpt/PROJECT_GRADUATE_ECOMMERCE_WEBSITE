@@ -105,3 +105,14 @@ p {
 	font-weight: 600;
 }
 
+.image-avatar-employee-manager {
+    max-width: 65px;
+	width: 100% !important;
+	height: auto !important;
+	border-radius: 0 !important;
+}
+.img-avt-modal {
+	max-width: 200px
+}
+
+

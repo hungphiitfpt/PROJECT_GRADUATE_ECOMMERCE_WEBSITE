@@ -1,5 +1,5 @@
 $(function() {
-    loadAllUsers()
+	loadAllUsers()
 })
 
 async function loadAllUsers() {
@@ -18,7 +18,66 @@ async function loadAllUsers() {
 
 }
 
+async function openModalDetailEployee(r) {
+	CallAPIGetCountryVietNam();
+	let id = r.data('id');
+	let method = 'get',
+		url = `${api_admin}getEmployeeById`,
+		params = { id: id },
+		data = {};
+	let res = await axiosTemplate(method, url, params, data);
+	console.log(res);
+	let checkGender = res.data.data.gender;
+	let checkIsDeleted = res.data.data.deleted;
+	console.log("checkGender",checkGender)
+	console.log("checkIsDeleted",checkIsDeleted)
+	switch (checkIsDeleted) {
+		case true:
+			$('#pending-work-modal-employee').prop("checked", true);
+			break;
+	
+		default:
+			$('#open-work-modal-employee').prop("checked", true);
+			break;
+	}
 
+	switch (checkGender) {
+
+		case true:
+			$('#male-modal-employee').prop("checked", true);
+			break;
+	
+		default:
+			
+			$('#female-modal-employee').prop("checked", true);
+			
+			break;
+	}
+	$('#img-eployee-modal-info').attr("src", `${api_images}${res.data.data.avatar}`);
+	$('.modal-title').text("CHI TIẾT NHÂN VIÊN");
+	$('#input-idUser-modal-employee-info').val(res.data.data.id);
+	$('#input-username-modal-employee-info').val(res.data.data.username);
+	$('#input-password-modal-employee-info').val(res.data.data.password);
+	$('#input-firstname-modal-employee-info').val(res.data.data.firstName);
+	$('#input-lastname-modal-employee-info').val(res.data.data.lastName);
+ư
+	$("#select-country-modal-employee-info").val(res.data.data.country).trigger('change');
+	
+	
+
+
+
+}
+
+async function CallAPIGetCountryVietNam() {
+	let countryHTML = ``;
+	let res = await callAPI(`https://provinces.open-api.vn/api/?depth=2`);
+	for (let i = 0; i < res.data.length; i++) {
+		countryHTML += `<option data-id="${res.data[i].code}" value="${res.data[i].name}">${res.data[i].name}</option>`;
+	}
+
+	$('#select-country-modal-employee-info').html(countryHTML);
+}
 async function SearchDataByKey() {
 
 	let keyWord = $('#input-search-product-keyword').val();
@@ -34,21 +93,21 @@ async function SearchDataByKey() {
 }
 
 async function drawTableUsersManager(res) {
-    let birthday = ``;
+	let birthday = ``;
 	let button = ``;
 	var ProductHTML = ``;
-	var pagination 	= ``;
+	var pagination = ``;
 	for (let i = 0; i < res.data.content.length; i++) {
-        birthday = formatDate(`${res.data.content[i].birthday}`);
-		if(res.data.content[i].deleted == true) {
+		birthday = formatDate(`${res.data.content[i].birthday}`);
+		if (res.data.content[i].deleted == true) {
 			res.data.content[i].deleted = `<label class="badge badge-danger">ĐÃ NGHỈ</label>`;
-			 button = `<button type="button"
+			button = `<button type="button"
 			class="btn btn-warning btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="UpdateInstock($(this))">
 			<i class="typcn typcn-refresh-outline btn-icon-prepend"></i>
 		</button>`
 		} else {
 			res.data.content[i].deleted = `<label class="badge badge-success">CÒN LÀM VIỆC</label>`;
-			 button = `<button type="button"
+			button = `<button type="button"
 			class="btn btn-danger btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="UpdateChangeDelete($(this))">
 			<i class="typcn typcn-delete"></i>
 		</button>`
@@ -57,14 +116,14 @@ async function drawTableUsersManager(res) {
 		<td>${res.data.content[i].id}</td>
 		<td>${res.data.content[i].username}</td>
 		<td>${res.data.content[i].lastName}</td>
-		<td><img src="${api_images}${res.data.content[i].image}"></img></td>
+		<td class="text-center"><img class="image-avatar-employee-manager" src="${api_images}${res.data.content[i].avatar}"></img></td>
         <td> ${res.data.content[i].city}</td>
         <td>${res.data.content[i].deleted}</td>
 		<td>${birthday}</td>
 	
 		<td><div class="row justify-content-around">
 		<button type="button"
-			class="btn btn-info btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="openModalDetailProduct($(this))" class="btn btn-info btn-lg" data-toggle="modal" data-target="#open_detail_product">
+			class="btn btn-info btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="openModalDetailEployee($(this))" class="btn btn-info btn-lg" data-toggle="modal" data-target="#open_detail_product">
 			<i class="typcn typcn-eye"></i>
 		</button>
 		<button onclick="getDataDetailProduct($(this))" data-id="${res.data.content[i].id}" type="button"
@@ -89,22 +148,22 @@ async function UpdateChangeDelete(r) {
 	let id = r.data('id');
 	let method = 'post',
 		url = `${api_admin}updateUser/isdeleted`,
-		params = {id : id},
+		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
 	loadAllUsers();
-	sweatAlert(`Cập nhật trạng thái Nghỉ Làm người dùng có id là : ${id} thành công `, "success")
+	sweatAlert(`Cập nhật trạng thái người dùng có id là : ${id} thành công `, "success")
 }
 
 async function UpdateInstock(r) {
 	let id = r.data('id');
 	let method = 'post',
 		url = `${api_admin}updateUser/in_stock`,
-		params = {id : id},
+		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
 	loadAllUsers();
-	sweatAlert(`Cập nhật trạng thái Còn Làm Việc sản phẩm có id là : ${id} thành công `, "success")
+	sweatAlert(`Cập nhật trạng thái người dùng có id là : ${id} thành công `, "success")
 }

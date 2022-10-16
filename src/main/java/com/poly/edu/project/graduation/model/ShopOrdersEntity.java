@@ -61,6 +61,7 @@ public class ShopOrdersEntity {
     @Basic
     @Column(name = "updated_at", nullable = true)
     private Timestamp updatedAt;
+    
     @OneToMany(mappedBy = "shopOrdersByOrderId")
     private List<ShopOrderDetailEntity> shopOrderDetailsById;
     
