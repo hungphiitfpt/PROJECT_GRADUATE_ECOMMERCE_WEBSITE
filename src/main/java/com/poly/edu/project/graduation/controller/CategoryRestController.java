@@ -52,7 +52,7 @@ public class CategoryRestController {
 		return null;
 	}
 
-	@GetMapping("category/getAllCategory")
+	@GetMapping("/category/getAllCategory")
 	public List<ShopCategoriesEntity> getAllCategory() {
 
 		return categoryServices.findAll();

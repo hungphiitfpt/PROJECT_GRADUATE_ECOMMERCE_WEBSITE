@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.poly.edu.project.graduation.dao.CategoryRepository;
 import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
@@ -40,13 +41,13 @@ public class CategoryServicesImpl implements CategoryServices {
 	@Override
 	public void changeStatusIsdeleted(long id) {
 		// TODO Auto-generated method stub
-		
+		 categoryRepository.changeStatusIsdeleted(id);
 	}
 
 	@Override
 	public void changeStatusInstock(long id) {
 		// TODO Auto-generated method stub
-		
+		 categoryRepository.changeIstock(id);
 	}
 
 

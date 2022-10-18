@@ -32,11 +32,13 @@ public interface CategoryRepository extends JpaRepository<ShopCategoriesEntity, 
 	Page<ShopCategoriesEntity> findByKeyWord(@Param("keyword") String keyword, Pageable pageable);
 
 	@Modifying  
-	@Query(value = "UPDATE shop_categories SET is_deleted = TRUE WHERE id = 1",nativeQuery = true)
+	@Transactional
+	@Query(value = "UPDATE ShopCategoriesEntity SET isDeleted = TRUE WHERE id = ?1")
 	void changeStatusIsdeleted(long id);
 	
 	@Modifying  
-	@Query(value = "UPDATE shop_categories SET is_deleted = FALSE WHERE id = ?1",nativeQuery = true)
+	@Transactional
+	@Query(value = "UPDATE ShopCategoriesEntity SET isDeleted = FALSE WHERE id = ?1")
 	void changeIstock(long id);
 
 
