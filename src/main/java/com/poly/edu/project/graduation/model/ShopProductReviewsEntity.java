@@ -2,6 +2,9 @@ package com.poly.edu.project.graduation.model;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,10 +36,12 @@ public class ShopProductReviewsEntity {
 	private String comment;
 	
 	@Basic
+	@CreationTimestamp
 	@Column(name = "created_at", nullable = true)
 	private Timestamp createdAt;
 	
 	@Basic
+	@UpdateTimestamp
 	@Column(name = "updated_at", nullable = true)
 	private Timestamp updatedAt;
 	

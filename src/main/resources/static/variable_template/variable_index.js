@@ -96,5 +96,3 @@ var callAPI = (api) => {
 }
 
 
-// xử lý giao diện upload file
-

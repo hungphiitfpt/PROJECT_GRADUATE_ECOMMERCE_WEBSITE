@@ -13,6 +13,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 @Table(name = "roles", schema = "ecommer_db", catalog = "")
 public class RoleUserEntity {
@@ -27,10 +30,12 @@ public class RoleUserEntity {
 	private String name;
 	
 	@Basic
+	@CreationTimestamp
 	@Column(name = "created_at", nullable = true)
 	private Timestamp createdAt;
 	
 	@Basic
+	@UpdateTimestamp
 	@Column(name = "updated_at", nullable = true)
 	private Timestamp updatedAt;
 	

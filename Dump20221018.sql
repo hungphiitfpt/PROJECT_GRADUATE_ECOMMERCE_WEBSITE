@@ -259,7 +259,7 @@ CREATE TABLE `shop_product_image` (
   `image` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fkimage_product_idx` (`product_id`),
-  CONSTRAINT `fkimage_product` FOREIGN KEY (`product_id`) REFERENCES `shop_products` (`id`)
+  CONSTRAINT `fkimage_product` FOREIGN KEY (`product_id`) REFERENCES `shop_products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -269,7 +269,7 @@ CREATE TABLE `shop_product_image` (
 
 LOCK TABLES `shop_product_image` WRITE;
 /*!40000 ALTER TABLE `shop_product_image` DISABLE KEYS */;
-INSERT INTO `shop_product_image` VALUES (3,1,'1.png'),(4,2,'2.png'),(5,3,'3.png'),(6,4,'4.png'),(7,5,'5.png'),(8,6,'6.png'),(9,7,'7.png'),(10,1,'8.png'),(11,9,'9.png'),(12,1,'10.png'),(13,1,'11.png'),(14,1,'12.png'),(15,1,'13.png'),(16,14,'14.png'),(17,1,'15.png'),(18,15,'16.png'),(19,17,'17.png'),(20,18,'18.png'),(21,19,'19.png'),(22,20,'20.png');
+INSERT INTO `shop_product_image` VALUES (3,1,'1.png'),(4,2,'2.png'),(5,3,'3.png'),(7,5,'5.png'),(8,6,'6.png'),(9,7,'7.png'),(10,1,'8.png'),(11,9,'9.png'),(12,1,'10.png'),(13,1,'11.png'),(14,1,'12.png'),(15,1,'13.png'),(16,14,'14.png'),(17,1,'15.png'),(18,15,'16.png'),(19,17,'17.png'),(20,18,'18.png'),(21,19,'19.png'),(22,20,'20.png');
 /*!40000 ALTER TABLE `shop_product_image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -365,7 +365,7 @@ CREATE TABLE `shop_products` (
   KEY `fkproduct_category_idx` (`category_id`),
   CONSTRAINT `fkproduct_category` FOREIGN KEY (`category_id`) REFERENCES `shop_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fkproduct_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `shop_suplier` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -374,7 +374,7 @@ CREATE TABLE `shop_products` (
 
 LOCK TABLES `shop_products` WRITE;
 /*!40000 ALTER TABLE `shop_products` DISABLE KEYS */;
-INSERT INTO `shop_products` VALUES (1,'Thịt bò','Thịt bò mỹ nhập khẩu từ trung quốc','product-10.jpg','ds','d',12000.0000,100000.0000,'101',9,_binary '\0',_binary '\0',10,6,NULL,'2022-10-05 20:14:53'),(2,'THITBO23','thịt bò','product-6.jpg','ds','d',NULL,200000.0000,'19',19,_binary '\0',_binary '\0',2,NULL,NULL,NULL),(3,'THITBOCOBE','Thịt bò  ok','product-11.jpg','thịt bò cô bé ','',10000.0000,300000.0000,'2',10,_binary '\0',_binary '\0',3,2,NULL,NULL),(4,'','',NULL,'','',NULL,NULL,'',NULL,_binary '\0',_binary '\0',1,1,NULL,NULL),(5,'TP','thịt heo','1.png','ds','d',10000.0000,90000.0000,'34',0,_binary '\0',_binary '\0',5,NULL,'2022-10-05 20:14:53','2022-10-05 20:14:53'),(6,'TP','thịt bò','2.png','ds','d',10000.0000,90000.0000,'123',0,_binary '\0',_binary '\0',6,3,NULL,NULL),(7,'HS','cá','3.png','thịt bò cô bé ','',12000.0000,200000.0000,'234',10,_binary '\0',_binary '',7,3,NULL,NULL),(8,'HS','mực','4.png','thịt bò cô bé ','',13000.0000,50000.0000,'123',4,_binary '\0',_binary '\0',1,1,NULL,NULL),(9,'GD','bàn ủi','5.png','thịt bò cô bé ','',10000.0000,60000.0000,'12',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(10,'GD','hút bụi','6.png','thịt bò cô bé ','',10000.0000,75000.0000,'324',0,_binary '\0',_binary '\0',1,1,NULL,NULL),(11,'GV','nước măm','7.png','thịt bò cô bé ','',10000.0000,80000.0000,'3',8,_binary '\0',_binary '\0',2,2,NULL,NULL),(12,'GV','hạt nêm','8.png','thịt bò cô bé ','',10000.0000,100000.0000,'23',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(13,'DH','PATE','9.png','thịt bò cô bé ','',10000.0000,123.0000,'2',10,_binary '\0',_binary '\0',4,2,NULL,NULL),(14,'DH','SPAM','10.png','thịt bò cô bé ','',10000.0000,123.0000,'33',0,_binary '\0',_binary '\0',6,3,NULL,NULL),(15,'CS','BÀN CHẢI ','11.png','thịt bò cô bé ','',10000.0000,1000.0000,'34',10,_binary '\0',_binary '\0',3,3,NULL,NULL),(16,'CS','KHĂN GIẤY','12.png','thịt bò cô bé ','',10000.0000,20000.0000,'43',8,_binary '\0',_binary '\0',1,4,NULL,NULL),(17,'RC','RAU CẦN','13.png','thịt bò cô bé ','',10000.0000,333.0000,'123',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(18,'RC','CÀ RỐT','14.png','thịt bò cô bé ','',10000.0000,2000.0000,'2',10,_binary '\0',_binary '\0',1,5,NULL,NULL),(19,'VS','nước rửa chén','15.png','thịt bò cô bé ','',10000.0000,10000.0000,'45',0,_binary '\0',_binary '',1,2,NULL,NULL),(20,'VS','nước giặt','16.png','thịt bò cô bé ','',10000.0000,20000.0000,'54',3,_binary '\0',_binary '\0',1,6,NULL,NULL),(21,'DK','bún khô','17.png','thịt bò cô bé ','',10000.0000,300000.0000,'2',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(22,'DK','mì gói','18.png','thịt bò cô bé ','',10000.0000,50000.0000,'2',4,_binary '\0',_binary '\0',1,2,NULL,NULL),(23,'GK','bia','19.png','thịt bò cô bé ','',10000.0000,20000.0000,'23',2,_binary '\0',_binary '\0',1,2,NULL,NULL),(24,'BK','socola','20.png','thịt bò cô bé ','',10000.0000,10000.0000,'53',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(29,'sd','d','d',NULL,NULL,NULL,NULL,NULL,0,_binary '\0',_binary '\0',NULL,NULL,'2022-10-13 21:10:15','2022-10-13 21:10:15'),(30,'com ','sd','18.png','Chúng tôi đảm bảo:\r\n- Mang lại cho quý khách những sản phẩm tốt nhất, đẹp nhất.\r\n- Nếu hàng bị lỗi do sản xuất. Shin Case cam kết sẽ hoàn tiền hoặc gửi lại sản mới thay thế cho quý khách.\r\n- Thương hiệu tạo niềm tin!',NULL,NULL,0.0000,NULL,0,_binary '\0',_binary '',NULL,NULL,'2022-10-15 13:13:20','2022-10-15 13:13:20');
+INSERT INTO `shop_products` VALUES (1,'Thịt bò ','Thịt bò mỹ nhập khẩu từ trung quốcaa',NULL,'ds','ok ok',12000.0000,3456789.0000,'101',9,_binary '\0',_binary '',10,6,NULL,'2022-10-05 20:14:53'),(2,'THITBO23','thịt bò',NULL,'ds','',NULL,200000.0000,'19',19,_binary '\0',_binary '',2,6,NULL,NULL),(3,'ádasd','ádasdasda ádasdasd','ádasd','cccc','d',NULL,10000.0000,'1',NULL,_binary '\0',_binary '\0',NULL,NULL,NULL,NULL),(5,'TP','thịt heo','1.png','ds','d',10000.0000,90000.0000,'34',0,_binary '\0',_binary '\0',5,NULL,'2022-10-05 20:14:53','2022-10-05 20:14:53'),(6,'TP','thịt bò','2.png','ds','d',10000.0000,90000.0000,'123',0,_binary '\0',_binary '\0',6,3,NULL,NULL),(7,'HS','cá','3.png','thịt bò cô bé ','',12000.0000,200000.0000,'234',10,_binary '\0',_binary '\0',7,3,NULL,NULL),(8,'HS','mực',NULL,'thịt bò cô bé ','',13000.0000,50000.0000,'123',4,_binary '\0',_binary '\0',1,1,NULL,NULL),(9,'GD','bàn ủi','5.png','thịt bò cô bé ','',10000.0000,60000.0000,'12',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(10,'GD','hút bụi','6.png','thịt bò cô bé ','',10000.0000,75000.0000,'324',0,_binary '\0',_binary '\0',1,1,NULL,NULL),(11,'GV','nước măm','7.png','thịt bò cô bé ','',10000.0000,80000.0000,'3',8,_binary '\0',_binary '\0',2,2,NULL,NULL),(12,'GV','hạt nêm','8.png','thịt bò cô bé ','',10000.0000,100000.0000,'23',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(13,'DH','PATE','9.png','thịt bò cô bé ','',10000.0000,123.0000,'2',10,_binary '\0',_binary '\0',4,2,NULL,NULL),(14,'DH','SPAM','10.png','thịt bò cô bé ','',10000.0000,123.0000,'33',0,_binary '\0',_binary '\0',6,3,NULL,NULL),(15,'CS','BÀN CHẢI ','11.png','thịt bò cô bé ','',10000.0000,1000.0000,'34',10,_binary '\0',_binary '\0',3,3,NULL,NULL),(16,'CS','KHĂN GIẤY','12.png','thịt bò cô bé ','',10000.0000,20000.0000,'43',8,_binary '\0',_binary '\0',1,4,NULL,NULL),(17,'RC','RAU CẦN','13.png','thịt bò cô bé ','',10000.0000,333.0000,'123',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(18,'RC','CÀ RỐT','14.png','thịt bò cô bé ','',10000.0000,2000.0000,'2',10,_binary '\0',_binary '\0',1,5,NULL,NULL),(19,'VS','nước rửa chén','15.png','thịt bò cô bé ','',10000.0000,10000.0000,'45',0,_binary '\0',_binary '',1,2,NULL,NULL),(20,'VS','nước giặt','16.png','thịt bò cô bé ','',10000.0000,20000.0000,'54',3,_binary '\0',_binary '\0',1,6,NULL,NULL),(21,'DK','bún khô','17.png','thịt bò cô bé ','',10000.0000,300000.0000,'2',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(22,'DK','mì gói','18.png','thịt bò cô bé ','',10000.0000,50000.0000,'2',4,_binary '\0',_binary '\0',1,2,NULL,NULL),(23,'GK','bia','19.png','thịt bò cô bé ','',10000.0000,20000.0000,'23',2,_binary '\0',_binary '\0',1,2,NULL,NULL),(24,'BK','socola','20.png','thịt bò cô bé ','',10000.0000,10000.0000,'53',10,_binary '\0',_binary '\0',1,2,NULL,NULL),(42,'AOBOMBER2','Áo DirtyCoin bomber',NULL,'* Chất liệu vải: loại 100% cotton, 65/35, 100% PE, hoặc 100% Poly * Kiểu may: có thể phối màu cổ, tay, thân, trụ.','',12000.0000,59999.0000,'12',9,_binary '\0',_binary '\0',1,3,NULL,NULL),(58,'Thịt bò ','Thịt bò mỹ nhập khẩu từ trung quốcaauu','8447539185524e838cfd44cb1ff69089.png','ds','a',12000.0000,100201.0000,'2',9,_binary '\0',_binary '\0',3,4,NULL,NULL),(64,'','',NULL,'','',NULL,NULL,'',NULL,_binary '\0',_binary '\0',1,1,'2022-10-18 14:18:55','2022-10-18 14:18:55');
 /*!40000 ALTER TABLE `shop_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -469,7 +469,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (13,'hungphi','$2a$10$wG3qTlKwhXVZo2BR8J2CmeWiAS7ocJoRldPZTzJ9Q7.zlUYP5TgmS','nguyễn phạm','hùng phi',NULL,'hungphi2@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(14,'admin','$2a$10$9jgOvMCdSW9s6L3xKn465eMj8l8aChIWlpzsk7dZNQPdIe.ax0LDq','A ĐÊ MIN','Nguyễn ',NULL,'admin@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (13,'hungphi','$2a$10$wG3qTlKwhXVZo2BR8J2CmeWiAS7ocJoRldPZTzJ9Q7.zlUYP5TgmS','nguyễn phạm','hùng phi',NULL,'hungphi2@gmail.com',NULL,'nhanvien1.jpeg',NULL,NULL,NULL,NULL,NULL,_binary '\0'),(14,'admin','$2a$10$9jgOvMCdSW9s6L3xKn465eMj8l8aChIWlpzsk7dZNQPdIe.ax0LDq','A ĐÊ MIN','Nguyễn ',NULL,'admin@gmail.com',NULL,'nhanvien2.jpeg',NULL,NULL,NULL,NULL,NULL,_binary '\0');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -586,4 +586,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-16 22:03:40
+-- Dump completed on 2022-10-18 16:16:14

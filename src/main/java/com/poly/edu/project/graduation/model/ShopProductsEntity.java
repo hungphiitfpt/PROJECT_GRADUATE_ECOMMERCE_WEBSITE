@@ -2,6 +2,7 @@ package com.poly.edu.project.graduation.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -18,6 +19,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -86,10 +90,12 @@ public class ShopProductsEntity {
     @Basic
     @Column(name = "supplier_id", nullable = true)
     private Long supplierId;
-   
+    
+    @CreationTimestamp
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
     
+    @UpdateTimestamp
     @Column(name = "updated_at", nullable = true)
     private Timestamp updatedAt;
     

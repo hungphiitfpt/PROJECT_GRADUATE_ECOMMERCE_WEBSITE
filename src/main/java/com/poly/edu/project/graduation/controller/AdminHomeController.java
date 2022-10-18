@@ -40,6 +40,13 @@ public class AdminHomeController {
 
 	}
 	
+	@RequestMapping("manager_category")
+	public String ManagerCategory() {
+
+		return "admin-template/pages/forms/form_manager_cagegory";
+
+	}
+	
 
 
 }

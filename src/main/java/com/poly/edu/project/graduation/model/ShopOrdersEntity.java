@@ -2,6 +2,9 @@ package com.poly.edu.project.graduation.model;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.math.BigDecimal;
@@ -55,10 +58,12 @@ public class ShopOrdersEntity {
     @Column(name = "order_status", nullable = true, length = 50)
     private String orderStatus;
     @Basic
+    @CreationTimestamp
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
     
     @Basic
+    @UpdateTimestamp
     @Column(name = "updated_at", nullable = true)
     private Timestamp updatedAt;
     

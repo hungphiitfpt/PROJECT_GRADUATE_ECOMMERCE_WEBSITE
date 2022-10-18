@@ -49,7 +49,6 @@ async function loadAllProduct() {
 
 	let res = await axiosTemplate(method, url, params, data);
 	drawTableProductManager(res, $('#table-list-product-manager'))
-	clearData();
 
 }
 
@@ -143,7 +142,6 @@ async function updateProduct() {
 	 if ($('.error.vad-false').length > 0) {
 		return false;
 	}
-	console.log($('.error.vad-true').length);
 	let method = 'post',
 		url = `${api_admin}update_product`,
 		params = {
@@ -163,7 +161,9 @@ async function updateProduct() {
 			image: sessionStorage.getItem("image")
 		};
 	let res =  await axiosTemplate(method, url, params, data);
-	clearData();
+	sweatAlert(`${res.data.message}`, "success")
+	loadAllProduct();
+
 }
 
 async function SearchProductByKey() {
@@ -257,6 +257,10 @@ async function getDataDetailProduct(r) {
 
 	if(res.data.data.shopProductImagesById.length > 0) {
 		$('#imagePreview').css('background-image', `url(${api_images}${res.data.data.shopProductImagesById[0].image})`);
+	} else if (res.data.data.image != null) {
+		$('#imagePreview').css('background-image', `url(url(${api_images}${res.data.data.image})`);
+	} else if(res.data.data.image == null) {
+		$('#imagePreview').css('background-image', `url(${api_images}notFound.png)`);
 	}
 }
 
@@ -284,24 +288,7 @@ async function UpdateInstock(r) {
 	sweatAlert(`Cập nhật trạng thái còn hàng sản phẩm có id là : ${id} thành công `, "success")
 }
 
-async function upFile(e) {
-	const files = e.prop('files')
-	const formData = new FormData();
-	for (let index = 0; index < files.length; index++) {
-		const element = files[index];
-		formData.append('files', element)
-		console.log(...formData)
-	}
-	let res = await axios.post(`${api_upload}`, formData).then(resp => {
-		sessionStorage.setItem("image", resp.data.data);
-		$('#image_product_add_product').attr("data-image", resp.data.data)
-	})
-}
 
-
-$("#imageUpload").on("change", function() {
-	readURL(this);
-})
 
 function readURL(input) {
 	if (input.files && input.files[0]) {
@@ -315,8 +302,6 @@ function readURL(input) {
 	}
 }
 function clearData() {
-	$('#btn-save-product').removeClass("d-none")
-	$('#btn-update-product').addClass("d-none")
 	sessionStorage.removeItem("image");
 	$('#id-create-manager-product').val("");
 	$('#name-create-manager-product').val("");
@@ -329,4 +314,55 @@ function clearData() {
 	$('#description-detail-product').val("");
 }
 
+function validation () {
+	let id = (id) => document.getElementById(id);
 
+  let classes = (classes) => document.getElementsByClassName(classes);
+
+  let username = id("name-create-manager-product"),
+  code = id("code-create-manager-product"),
+  descriptionShort = id("description-short-create-manager-product"),
+  feeShip = id("fee-ship-create-manager-product"),
+  quantity = id("quantity-create-manager-product"),
+  discount = id("discount-create-manager-product"),
+  price = id("price-product-manager"),
+  description = id("description-detail-product"),
+  
+  form = id("form"),
+  errorMsg = classes("error"),
+  successIcon = classes("success-icon"),
+  failureIcon = classes("failure-icon");
+
+// Adding the submit event Listener
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  engine(username, 0, "Không được để trống trường này");
+  engine(code, 1, "Không được để trống trường này");
+  engine(descriptionShort, 2, "Không được để trống trường này");
+  engine(feeShip, 3, "Không được để trống trường này");
+  engine(quantity, 4, "Không được để trống trường này");
+  engine(discount, 5, "Không được để trống trường này");
+  engine(price, 6, "Không được để trống trường này");
+  engine(description, 7, "Không được để trống trường này");
+});
+
+// engine function which will do all the works
+
+let engine = (id, serial, message) => {
+  if (id.value.trim() === "") {
+    errorMsg[serial].innerHTML = message;
+    id.style.border = "2px solid red";
+    errorMsg[serial].classList.add("vad-false");
+    failureIcon[serial].style.opacity = "1";
+    successIcon[serial].style.opacity = "0";
+  } else {
+    errorMsg[serial].innerHTML = "";
+    errorMsg[serial].classList.remove("vad-false");
+    id.style.border = "2px solid green";
+    failureIcon[serial].style.opacity = "0";
+    successIcon[serial].style.opacity = "1";
+  }
+};
+}

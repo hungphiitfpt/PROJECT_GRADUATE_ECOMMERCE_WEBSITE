@@ -1,6 +1,10 @@
 package com.poly.edu.project.graduation.model;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -51,9 +55,11 @@ public class ShopCustomerEntity {
     @Column(name = "is_deleted", nullable = true)
     private Boolean isDeleted;
     @Basic
+    @CreationTimestamp
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
     @Basic
+    @UpdateTimestamp
     @Column(name = "updated_at", nullable = true)
     private Timestamp updatedAt;
     
