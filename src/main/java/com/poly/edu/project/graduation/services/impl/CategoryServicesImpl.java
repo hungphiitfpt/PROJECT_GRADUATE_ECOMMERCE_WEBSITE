@@ -37,6 +37,18 @@ public class CategoryServicesImpl implements CategoryServices {
 		return categoryRepository.findByKeyWord(keyword, pageable);
 	}
 
+	@Override
+	public void changeStatusIsdeleted(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changeStatusInstock(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	
 

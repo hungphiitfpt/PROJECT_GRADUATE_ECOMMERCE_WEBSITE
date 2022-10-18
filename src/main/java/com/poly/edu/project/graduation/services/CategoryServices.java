@@ -22,6 +22,10 @@ public interface CategoryServices {
 	
 	Page<ShopCategoriesEntity> findByKeyWord(String keyword, Pageable pageable);
 
+	void changeStatusIsdeleted(long id);
+
+	void changeStatusInstock(long id);
+
 
 
 

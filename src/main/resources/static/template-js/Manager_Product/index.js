@@ -288,9 +288,6 @@ async function UpdateInstock(r) {
 	sweatAlert(`Cập nhật trạng thái còn hàng sản phẩm có id là : ${id} thành công `, "success")
 }
 
-
-
-
 function clearData() {
 	sessionStorage.removeItem("image");
 	$('#id-create-manager-product').val("");

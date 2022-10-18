@@ -288,19 +288,6 @@ async function UpdateInstock(r) {
 	sweatAlert(`Cập nhật trạng thái còn hàng sản phẩm có id là : ${id} thành công `, "success")
 }
 
-
-
-function readURL(input) {
-	if (input.files && input.files[0]) {
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			$('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-			$('#imagePreview').hide();
-			$('#imagePreview').fadeIn(650);
-		}
-		reader.readAsDataURL(input.files[0]);
-	}
-}
 function clearData() {
 	sessionStorage.removeItem("image");
 	$('#id-create-manager-product').val("");
