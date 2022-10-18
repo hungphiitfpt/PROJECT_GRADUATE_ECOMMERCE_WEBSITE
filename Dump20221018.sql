@@ -66,19 +66,14 @@ CREATE TABLE `shop_categories` (
 -- Dumping data for table `shop_categories`
 --
 
-LOCK TABLES `shop_categories` WRITE;
-/*!40000 ALTER TABLE `shop_categories` DISABLE KEYS */;
+
 INSERT INTO `shop_categories` VALUES (1,'THIT','Thịt',NULL,'7abfbfee3c4844652b4a8245e473d857_tn.png','2022-10-02 10:17:47','2022-10-02 10:17:47',_binary '\0'),(2,'CA','Cá hEO',NULL,'8e71245b9659ea72c1b4e737be5cf42e_tn.png','2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(3,'GA','Gà',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(4,'HAISAN','Hải Sản',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(5,'RAUCUQUA','Rau Củ',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(6,'TP01','Thực phẩm',NULL,NULL,'2022-10-02 10:17:47','2022-10-02 10:17:47',_binary '\0'),(7,'HS02','Hải sản',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(8,'DL','đông lạnh',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(9,'DK','đồ khô',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(10,'DH','đóng hộp',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(11,'RAUCUQUA','Rau Củ',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(12,'GV','gia vị',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(13,'GD','gia dụng',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(14,'CS','Chăm sóc',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(15,'GK','giải khát',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(16,'BK','bánh kẹo',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(17,'VS','vệ sinh',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(18,'TS','sản phẩm từ sữa',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(19,'CB','chế biến sắn',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0'),(20,'PK','phụ kiện',NULL,NULL,'2022-10-05 20:30:30','2022-10-05 20:30:30',_binary '\0');
-/*!40000 ALTER TABLE `shop_categories` ENABLE KEYS */;
-UNLOCK TABLES;
+
 
 --
 -- Table structure for table `shop_customer`
 --
 
-DROP TABLE IF EXISTS `shop_customer`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shop_customer` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `username` varchar(200) DEFAULT NULL,
@@ -97,18 +92,13 @@ CREATE TABLE `shop_customer` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ;
 
---
--- Dumping data for table `shop_customer`
---
 
-LOCK TABLES `shop_customer` WRITE;
-/*!40000 ALTER TABLE `shop_customer` DISABLE KEYS */;
+
 INSERT INTO `shop_customer` VALUES (1,'hungphi12359','123','Nguyen','pHAM',_binary '','nguy@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,_binary '\0','2022-10-09 11:16:53','2022-10-09 11:16:53'),(2,'khanh12359','123','Quoc Khanh','Lanh',_binary '','khanh@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,_binary '\0','2022-10-09 11:18:34','2022-10-09 11:18:34'),(3,'thy124','123','Mai','Thy',_binary '\0','thy@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,_binary '\0','2022-10-09 11:19:01','2022-10-09 11:19:01');
-/*!40000 ALTER TABLE `shop_customer` ENABLE KEYS */;
-UNLOCK TABLES;
+
+
 
 --
 -- Table structure for table `shop_order_detail`

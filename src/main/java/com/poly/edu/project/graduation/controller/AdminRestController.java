@@ -101,10 +101,8 @@ public class AdminRestController {
 		productServices.changeStatusInstock(id);
 	}
 	
-	@RequestMapping("/hellothaonhung")  
-	public String hello()   
-	{  
-	return "Hello Thảo nhung thúi ơi là thui";  
-	}  
+	
+	
+
 
 }
