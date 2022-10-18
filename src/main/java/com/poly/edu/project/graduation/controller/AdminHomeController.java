@@ -26,12 +26,12 @@ public class AdminHomeController {
 
 	}
 	
-	@RequestMapping("/helloYou")
+	@RequestMapping("/xinchao")
 	public String hello() {
 		
 		return "Hello Xin Chao Thao Nhung";
 
-	}
+	} 
 
 	@RequestMapping("manager_product")
 	public String ManagerProduct() {
