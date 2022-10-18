@@ -100,5 +100,11 @@ public class AdminRestController {
 	void updateInstock(@Param("id") long id) {
 		productServices.changeStatusInstock(id);
 	}
+	
+	@RequestMapping("/hellothaonhung")  
+	public String hello()   
+	{  
+	return "Hello Thảo nhung thúi ơi là thui";  
+	}  
 
 }
