@@ -25,6 +25,13 @@ public class AdminHomeController {
 		return "admin-template/index";
 
 	}
+	
+	@RequestMapping("/helloYou")
+	public String hello() {
+		
+		return "Hello Xin Chao Thao Nhung";
+
+	}
 
 	@RequestMapping("manager_product")
 	public String ManagerProduct() {
