@@ -1,13 +1,13 @@
 package com.poly.edu.project.graduation.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +28,35 @@ public class AdminRestController {
 	@Autowired
 	ProductsRepository productsRepository;
 
+	@RequestMapping(value = "/update_product", method = RequestMethod.POST, consumes = {
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@Transactional
+	ResponseEntity<ResponseObject> insertProduct(@RequestBody ShopProductsEntity newProduct, @Param("id") Long id) throws Exception {
+		ShopProductsEntity updatedProduct = productsRepository.findById(id).map(product -> {
+			product.setCategoryId(newProduct.getCategoryId());
+			product.setDiscountinued(newProduct.getDiscountinued());
+			product.setDecription(newProduct.getDecription());
+			product.setImage(newProduct.getImage());
+			product.setListPrice(newProduct.getListPrice());
+			product.setProductCode(newProduct.getProductCode());
+			product.setProductName(newProduct.getProductName());
+			product.setQuantityPerUnit(newProduct.getQuantityPerUnit());
+			product.setShortDecription(newProduct.getShortDecription());
+			product.setStandCost(newProduct.getStandCost());
+			product.setSupplierId(newProduct.getSupplierId());
+			return productsRepository.save(product);
+		}).orElseGet(() -> {
+			newProduct.setId(0);
+			return productsRepository.save(newProduct);
+		});
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(new ResponseObject("ok", "Update Product successfully", updatedProduct));
+	}
+	
 	// api thêm sản phẩm, kiểm tra nếu đã có sản phẩm trùng trên không được thêm
 	@RequestMapping(value = "/insert_product", method = RequestMethod.POST, consumes = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@Transactional
 	ResponseEntity<ResponseObject> insertProduct(@RequestBody ShopProductsEntity shopProductsEntity) {
 		List<ShopProductsEntity> foundProducts = productServices
 				.findByProductName(shopProductsEntity.getProductName().trim());
@@ -42,26 +68,26 @@ public class AdminRestController {
 				.body(new ResponseObject("200", "Thêm Thành Công ", productsRepository.save(shopProductsEntity)));
 	}
 
-	@RequestMapping(value = "/update/product", method = RequestMethod.POST, consumes = {
-			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	ResponseEntity<ResponseObject> updateProduct(@RequestBody ShopProductsEntity newProduct, @Param("id") Long id) {
-		Optional<ShopProductsEntity> updatedProduct = productsRepository.findById(id).map(product -> {
-			product.setCategoryId(newProduct.getCategoryId());
-			product.setCreatedAt(newProduct.getCreatedAt());
-			product.setDecription(newProduct.getDecription());
-			product.setDeleted(newProduct.isDeleted());
-			product.setDiscountinued(newProduct.getDiscountinued());
-			product.setFeatured(newProduct.isFeatured());
-			product.setImage(newProduct.getImage());
-			product.setListPrice(newProduct.getListPrice());
-			product.setProductCode(newProduct.getProductCode());
-			product.setProductName(newProduct.getProductName());
-			product.setQuantityPerUnit(newProduct.getQuantityPerUnit());
-			return productsRepository.save(product);
-		});
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(new ResponseObject("ok", "Update Product successfully", updatedProduct));
-	}
+//	@RequestMapping(value = "/update/product", method = RequestMethod.POST, consumes = {
+//			MediaType.APPLICATION_JSON_UTF8_VALUE })
+//	ResponseEntity<ResponseObject> updateProduct(@RequestBody ShopProductsEntity newProduct, @Param("id") Long id) {
+//		Optional<ShopProductsEntity> updatedProduct = productsRepository.findById(id).map(product -> {
+//			product.setCategoryId(newProduct.getCategoryId());
+//			product.setCreatedAt(newProduct.getCreatedAt());
+//			product.setDecription(newProduct.getDecription());
+//			product.setDeleted(newProduct.isDeleted());
+//			product.setDiscountinued(newProduct.getDiscountinued());
+//			product.setFeatured(newProduct.isFeatured());
+//			product.setImage(newProduct.getImage());
+//			product.setListPrice(newProduct.getListPrice());
+//			product.setProductCode(newProduct.getProductCode());
+//			product.setProductName(newProduct.getProductName());
+//			product.setQuantityPerUnit(newProduct.getQuantityPerUnit());
+//			return productsRepository.save(product);
+//		});
+//		return ResponseEntity.status(HttpStatus.OK)
+//				.body(new ResponseObject("ok", "Update Product successfully", updatedProduct));
+//	}
 
 	@RequestMapping(value = "/update/isdeleted", method = RequestMethod.POST, consumes = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })

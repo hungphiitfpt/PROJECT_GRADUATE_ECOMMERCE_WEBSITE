@@ -120,43 +120,6 @@ p {
 
 
 
-
-.btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 15px;
-}
-
-.btn-1,
-.btn-2 {
-  padding: 10px 5px;
-  width: 100%;
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid #c4c4c4;
-  border-radius: 8px;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
-
-.btn-2 {
-  background-color: #4f70b5;
-  color: white;
-  border: 2px solid #4f70b5;
-}
-
-.or {
-  text-align: center;
-}
-
-.question {
-  font-size: 15px;
-}
-
-
 /**
 * ! style rules for form icons
 **/
@@ -187,6 +150,95 @@ form div i {
   margin-top: 5px;
 }
 
+/* css upload image */
+body {
+  background: whitesmoke;
+  font-family: 'Open Sans', sans-serif;
+}
+.container {
+  max-width: 960px;
+  margin: 30px auto;
+  padding: 20px;
+}
+.design-name{
+  color:red;
+}
+h1 {
+  font-size: 20px;
+  text-align: center;
+  margin: 20px 0 20px;
+}
+h1 small {
+  display: block;
+  font-size: 15px;
+  padding-top: 8px;
+  color: gray;
+}
+.avatar-upload {
+  position: relative;
+  max-width: 205px;
+  margin: 50px auto;
+}
+.avatar-upload .avatar-edit {
+  position: absolute;
+  right: 12px;
+  z-index: 1;
+  top: 10px;
+}
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+.avatar-upload .avatar-edit input + label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #FFFFFF;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+.avatar-upload .avatar-edit input + label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
 
+.avatar-upload .avatar-preview {
+  width: 192px;
+  height: 192px;
+  position: relative;
+  border-radius: 100%;
+  border: 6px solid var(--background-color-template);;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+.avatar-upload .avatar-preview > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.icon-upload {
+	font-size: 20px;
+}
+.input-not-edit {
+	cursor: no-drop;
+    background-color: #aaaaaa4d;
+}
 
+.img-detail {
+	max-width: 200px;
+} 
 
+.icon-upload {
+	color: var(--background-color-template);
+	font-size: 20px;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    margin: -5px -4px;
+}

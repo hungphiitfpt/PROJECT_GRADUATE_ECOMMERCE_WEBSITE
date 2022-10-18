@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -84,12 +86,10 @@ public class ShopProductsEntity {
     @Basic
     @Column(name = "supplier_id", nullable = true)
     private Long supplierId;
-    
-    @Basic
+   
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
     
-    @Basic
     @Column(name = "updated_at", nullable = true)
     private Timestamp updatedAt;
     

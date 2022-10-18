@@ -29,13 +29,13 @@ async function openModalDetailEployee(r) {
 	console.log(res);
 	let checkGender = res.data.data.gender;
 	let checkIsDeleted = res.data.data.deleted;
-	console.log("checkGender",checkGender)
-	console.log("checkIsDeleted",checkIsDeleted)
+	console.log("checkGender", checkGender)
+	console.log("checkIsDeleted", checkIsDeleted)
 	switch (checkIsDeleted) {
 		case true:
 			$('#pending-work-modal-employee').prop("checked", true);
 			break;
-	
+
 		default:
 			$('#open-work-modal-employee').prop("checked", true);
 			break;
@@ -46,11 +46,11 @@ async function openModalDetailEployee(r) {
 		case true:
 			$('#male-modal-employee').prop("checked", true);
 			break;
-	
+
 		default:
-			
+
 			$('#female-modal-employee').prop("checked", true);
-			
+
 			break;
 	}
 	$('#img-eployee-modal-info').attr("src", `${api_images}${res.data.data.avatar}`);
@@ -60,10 +60,10 @@ async function openModalDetailEployee(r) {
 	$('#input-password-modal-employee-info').val(res.data.data.password);
 	$('#input-firstname-modal-employee-info').val(res.data.data.firstName);
 	$('#input-lastname-modal-employee-info').val(res.data.data.lastName);
-ư
+	ư
 	$("#select-country-modal-employee-info").val(res.data.data.country).trigger('change');
-	
-	
+
+
 
 
 

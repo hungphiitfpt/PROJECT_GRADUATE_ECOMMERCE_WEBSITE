@@ -28,6 +28,7 @@ public class AdminHomeController {
 
 	@RequestMapping("manager_product")
 	public String ManagerProduct() {
+		
 		return "admin-template/pages/forms/form_manager_product";
 
 	}

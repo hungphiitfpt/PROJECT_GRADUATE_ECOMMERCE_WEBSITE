@@ -1,4 +1,3 @@
-
 $(function() {
 	loadAllCategory();
 	loadAllSupplier();
@@ -49,25 +48,25 @@ async function loadAllProduct() {
 		data = {};
 
 	let res = await axiosTemplate(method, url, params, data);
-	console.log(res.data);
 	drawTableProductManager(res, $('#table-list-product-manager'))
+	clearData();
 
 }
 
 async function drawTableProductManager(res) {
 	let button = ``;
 	var ProductHTML = ``;
-	var pagination 	= ``;
+	var pagination = ``;
 	for (let i = 0; i < res.data.content.length; i++) {
-		if(res.data.content[i].deleted == true) {
+		if (res.data.content[i].deleted == true) {
 			res.data.content[i].deleted = `<label class="badge badge-danger">ngưng bán</label>`;
-			 button = `<button type="button"
+			button = `<button type="button"
 			class="btn btn-warning btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="UpdateInstock($(this))">
 			<i class="typcn typcn-refresh-outline btn-icon-prepend"></i>
 		</button>`
 		} else {
 			res.data.content[i].deleted = `<label class="badge badge-success">đang bán</label>`;
-			 button = `<button type="button"
+			button = `<button type="button"
 			class="btn btn-danger btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="UpdateChangeDelete($(this))">
 			<i class="typcn typcn-delete"></i>
 		</button>`
@@ -115,29 +114,56 @@ async function drawTableProductManager(res) {
 
 async function insertProduct() {
 	validation();
-	if($('.error').length > 0) {
+	if ($('.error.vad-false').length > 0) {
 		return false;
 	}
-
+	console.log($('.error.vad-false').length);
 	let method = 'post',
 		url = `${api_admin}insert_product`,
-		params = null,
+		params = {},
 		data = {
-			id: 4,
 			productCode: $('#code-create-manager-product').val(),
 			productName: $('#name-create-manager-product').val(),
 			shortDecription: $('#description-short-create-manager-product').val(),
-			decription: $('#exampleTextarea1').text(),
+			decription: $('#description-detail-product').val(),
 			standCost: $('#fee-ship-create-manager-product').val(),
-			listPrice: $('#price-product-manager1').val(),
+			listPrice: $('#price-product-manager').val(),
 			quantityPerUnit: $('#quantity-create-manager-product').val(),
 			discountinued: $('#discount-create-manager-product').val(),
 			categoryId: $('#list-category-manager option:selected').val(),
 			supplierId: $('#list-supplier-manager option:selected').val(),
+			image: sessionStorage.getItem("image")
 		};
-	let res =  axiosTemplate(method, url, params, data);
-	sweatAlert("Bạn Đã Thêm Sản Phẩm Mới Thành Công", "success")
+	let res = await axiosTemplate(method, url, params, data);
+	clearData();
+}
 
+async function updateProduct() {
+	 validation();
+	 if ($('.error.vad-false').length > 0) {
+		return false;
+	}
+	console.log($('.error.vad-true').length);
+	let method = 'post',
+		url = `${api_admin}update_product`,
+		params = {
+			id: $('#id-create-manager-product').val(),
+		},
+		data = {
+			productCode: $('#code-create-manager-product').val(),
+			productName: $('#name-create-manager-product').val(),
+			shortDecription: $('#description-short-create-manager-product').val(),
+			decription: $('#description-detail-product').val(),
+			standCost: $('#fee-ship-create-manager-product').val(),
+			listPrice: $('#price-product-manager').val(),
+			quantityPerUnit: $('#quantity-create-manager-product').val(),
+			discountinued: $('#discount-create-manager-product').val(),
+			categoryId: $('#list-category-manager option:selected').val(),
+			supplierId: $('#list-supplier-manager option:selected').val(),
+			image: sessionStorage.getItem("image")
+		};
+	let res =  await axiosTemplate(method, url, params, data);
+	clearBtn();
 }
 
 async function SearchProductByKey() {
@@ -181,10 +207,10 @@ async function openModalDetailProduct(r) {
 	console.log(res);
 	let checkIsDeleted = res.data.data.deleted;
 	console.log(checkIsDeleted);
-	if(checkIsDeleted == true) {
-		$('#pending-product').prop("checked",true);
+	if (checkIsDeleted == true) {
+		$('#pending-product').prop("checked", true);
 	} else {
-		$('#open-product').prop("checked",true);
+		$('#open-product').prop("checked", true);
 	}
 	$('.modal-title').text("CHI TIẾT SẢN PHẨM");
 	$('#input-code-modal-info').val(res.data.data.productCode);
@@ -196,7 +222,7 @@ async function openModalDetailProduct(r) {
 	$("#select-supplier-modal-info").val(res.data.data.supplierId).trigger('change');
 	$("#select-category-modal-info").val(res.data.data.categoryId).trigger('change');
 	$('#input-createDate-modal-info').val(res.data.data.createdAt);
-	$('#img-product-modal-info').attr("src",`${api_images}${res.data.data.image}`);
+	$('#img-product-modal-info').attr("src", `${api_images}${res.data.data.image}`);
 }
 function closeModalDetailProduct() {
 	$('#input-code-modal-info').val();
@@ -209,13 +235,15 @@ function closeModalDetailProduct() {
 	$('#input-isDelete-modal-info').click();
 }
 async function getDataDetailProduct(r) {
+	$('#btn-save-product').addClass("d-none");
+	$('#btn-update-product').removeClass("d-none")
 	let id = r.data('id');
 	let method = 'get',
 		url = `${api_graduation}getProductById`,
 		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
-	console.log(res);
+	$('#id-create-manager-product').val(res.data.data.id);
 	$('#name-create-manager-product').val(res.data.data.productName);
 	$('#code-create-manager-product').val(res.data.data.productCode);
 	$('#description-short-create-manager-product').val(res.data.data.shortDecription);
@@ -226,15 +254,17 @@ async function getDataDetailProduct(r) {
 	$('#list-supplier-manager option[data-id ="' + res.data.data.supplierId + '"]').prop('selected', 'selected').change()
 	$('#price-product-manager').val(res.data.data.listPrice);
 	$('#description-detail-product').val(res.data.data.decription);
-	console.log(res.data.data.shopProductImagesById)
-	sweatAlert(res.data.message, "success")
+
+	if(res.data.data.shopProductImagesById.length > 0) {
+		$('#imagePreview').css('background-image', `url(${api_images}${res.data.data.shopProductImagesById[0].image})`);
+	}
 }
 
 async function UpdateChangeDelete(r) {
 	let id = r.data('id');
 	let method = 'post',
 		url = `${api_admin}update/isdeleted`,
-		params = {id : id},
+		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
@@ -246,7 +276,7 @@ async function UpdateInstock(r) {
 	let id = r.data('id');
 	let method = 'post',
 		url = `${api_admin}update/in_stock`,
-		params = {id : id},
+		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
@@ -254,5 +284,51 @@ async function UpdateInstock(r) {
 	sweatAlert(`Cập nhật trạng thái còn hàng sản phẩm có id là : ${id} thành công `, "success")
 }
 
+async function upFile(e) {
+	const files = e.prop('files')
+	const formData = new FormData();
+	for (let index = 0; index < files.length; index++) {
+		const element = files[index];
+		formData.append('files', element)
+		console.log(...formData)
+	}
+	let res = await axios.post(`${api_upload}`, formData).then(resp => {
+		sessionStorage.setItem("image", resp.data.data);
+		$('#image_product_add_product').attr("data-image", resp.data.data)
+	})
+}
+
+
+$("#imageUpload").on("change", function() {
+	readURL(this);
+})
+
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+			$('#imagePreview').hide();
+			$('#imagePreview').fadeIn(650);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+function clearData() {
+	sessionStorage.removeItem("image");
+	$('#id-create-manager-product').val("");
+	$('#name-create-manager-product').val("");
+	$('#code-create-manager-product').val("");
+	$('#description-short-create-manager-product').val("");
+	$('#fee-ship-create-manager-product').val("");
+	$('#quantity-create-manager-product').val("");
+	$('#discount-create-manager-product').val("");
+	$('#price-product-manager').val("");
+	$('#description-detail-product').val("");
+}
+function clearBtn() {
+	$('#btn-save-product').removeClass("d-none")
+	$('#btn-update-product').addClass("d-none")
+}
 
 

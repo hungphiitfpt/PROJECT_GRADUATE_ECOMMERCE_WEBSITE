@@ -1,12 +1,18 @@
+var host = `http://localhost:8080/`;
 var api_graduation = `http://localhost:8080/api/graduation/`;
 var api_admin = `http://localhost:8080/api/admin/`;
 var api_images = `http://localhost:8080/api/v1/FileUpload/files/`;
-
+var api_upload = `http://localhost:8080/api/v1/FileUpload`;
+sessionStorage.removeItem("image");
 
 async function axiosTemplate(method, url, params, data) {
 	let res = await axios({
 		method: method, url: url, params: params, data: data
 	});
+	console.log(res);
+	if (res.data.status == 200) {
+		sweatAlert(res.data.message, "success")
+	}
 	return res;
 }
 
@@ -32,27 +38,27 @@ function sweatAlert(message, status) {
 }
 
 function SweatAlertConfirmDelete() {
-swal({
-  title: "Are you sure?",
-  text: "Once deleted, you will not be able to recover this imaginary file!",
-  icon: "warning",
-  buttons: true,
-  dangerMode: true,
-})
-.then((willDelete) => {
-  if (willDelete) {
-	
-    swal("Poof! Your imaginary file has been deleted!", {
-      icon: "success",
-    });
-  } else {
-    swal("Your imaginary file is safe!");
-  }
-});
+	swal({
+		title: "Are you sure?",
+		text: "Once deleted, you will not be able to recover this imaginary file!",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+
+				swal("Poof! Your imaginary file has been deleted!", {
+					icon: "success",
+				});
+			} else {
+				swal("Your imaginary file is safe!");
+			}
+		});
 }
 function caculatorMoneyDiscount(money, discount) {
-		let moneyAfter = money * [(100 - discount) / 100];
-		return moneyAfter;
+	let moneyAfter = money * [(100 - discount) / 100];
+	return moneyAfter;
 }
 function formatMoney(str) {
 	return str.split('').reverse().reduce((prev, next, index) => {
@@ -60,22 +66,22 @@ function formatMoney(str) {
 	})
 }
 function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+	var d = new Date(date),
+		month = '' + (d.getMonth() + 1),
+		day = '' + d.getDate(),
+		year = d.getFullYear();
 
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
+	if (month.length < 2)
+		month = '0' + month;
+	if (day.length < 2)
+		day = '0' + day;
 
-    return [year, month, day].join('-');
+	return [year, month, day].join('-');
 }
- async function api_getCountryVietnamese() {
+async function api_getCountryVietnamese() {
 	let method = 'get',
 		url = `https://provinces.open-api.vn/api/?depth=2`,
-		params = {depth : 1},
+		params = { depth: 1 },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
 
@@ -89,4 +95,6 @@ var callAPI = (api) => {
 	});
 }
 
- 
+
+// xử lý giao diện upload file
+
