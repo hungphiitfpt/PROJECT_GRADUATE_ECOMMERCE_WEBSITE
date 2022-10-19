@@ -117,9 +117,6 @@ public class ShopProductsEntity {
     private ShopCategoriesEntity shopCategoriesByCategoryId;
     
 
-    
-    @OneToMany(mappedBy = "shopProductsByProductId")
-    private List<ShopWarehouseEntity> shopWarehousesById;
 //    
 //    @OneToMany(mappedBy = "shopProductsByProductId")
 //    private List<ShopOrderDetailEntity> shopOrderDetailsById;
@@ -303,11 +300,4 @@ public class ShopProductsEntity {
     }
 
 
-    public List<ShopWarehouseEntity> getShopWarehousesById() {
-        return shopWarehousesById;
-    }
-
-    public void setShopWarehousesById(List<ShopWarehouseEntity> shopWarehousesById) {
-        this.shopWarehousesById = shopWarehousesById;
-    }
 }

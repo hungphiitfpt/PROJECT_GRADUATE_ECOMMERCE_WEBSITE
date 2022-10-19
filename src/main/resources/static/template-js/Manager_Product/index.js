@@ -1,6 +1,5 @@
 $(function() {
-	loadAllCategory();
-	loadAllSupplier();
+	loadAllCategory();	
 	loadAllProduct();
 })
 async function loadAllCategory() {
