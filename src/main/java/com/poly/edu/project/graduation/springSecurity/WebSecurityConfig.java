@@ -29,9 +29,8 @@ public class WebSecurityConfig {
 		.antMatchers("/register/**").permitAll()
 		.antMatchers("/indexx")
 		.permitAll().antMatchers("/users").hasRole("ADMIN")
-//		.antMatchers("/manager_employee").hasRole("ADMIN")
-//		.antMatchers("/manager_product").hasRole("ADMIN")
-		.antMatchers("/s").hasRole("ADMIN")
+		.antMatchers("/manager_employee").hasRole("ADMIN")
+		.antMatchers("/manager_product").hasRole("ADMIN")
 		.and()
 		.formLogin(form -> 
 		form.loginPage("/login")

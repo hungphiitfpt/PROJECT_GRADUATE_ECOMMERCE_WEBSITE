@@ -38,28 +38,40 @@ public class ProductController {
 	@Autowired
 	ReviewProductService reviewProductService;
 
-	@RequestMapping("/shop")
-	public String index(Model model, HttpServletRequest request,
-			@ModelAttribute(name = "idCategory") String idCategory,
-			@RequestParam(name = "size", required = false, defaultValue = "12") int size,
-			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
-			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
-
-		try {
-
-			Page<ShopProductsEntity> listProduct = productServices.findAllProducts(idCategory,
-					PageRequest.of(page, size));
-			List<ShopCategoriesEntity> listCategory = categoryServices.findAll();
-			model.addAttribute("category", listCategory);
-			model.addAttribute("product", listProduct);
+//	@RequestMapping("/shop")
+//	public String index(Model model, HttpServletRequest request,
+//			@ModelAttribute(name = "idCategory") String idCategory,
+//			@RequestParam(name = "size", required = false, defaultValue = "12") int size,
+//			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+//			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+//
+//		try {
+//
+//			Page<ShopProductsEntity> listProduct = productServices.findAllProducts(idCategory,
+//					PageRequest.of(page, size));
+//			List<ShopCategoriesEntity> listCategory = categoryServices.findAll();
+//			model.addAttribute("category", listCategory);
+//			model.addAttribute("product", listProduct);
+//		
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		return "template/shop";
+//
+//	}
+	
+	@RequestMapping("/index")
+	public String index () {
+		return "shop-template/index";
 		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return "template/shop";
-
+	}
+	
+	@RequestMapping("/shop")
+	public String shop () {
+		return "shop-template/shop";
+		
 	}
 
 //	@RequestMapping("/getProductByCategoryid/{idCategory}")

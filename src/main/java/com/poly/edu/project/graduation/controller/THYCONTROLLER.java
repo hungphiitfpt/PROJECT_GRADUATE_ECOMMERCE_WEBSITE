@@ -12,13 +12,5 @@ import com.poly.edu.project.graduation.services.Thyservices;
 
 @Controller
 public class THYCONTROLLER {
-	@Autowired
-	Thyservices thyservices;
-	@RequestMapping("/index")
-	public String list(Model model) throws Exception {
-		List<ShopProductsEntity> list = thyservices.findAllProductDiscountASC();
-		System.out.println(list.size());
-		model.addAttribute("items", list);
-		return "template/index";
-	}
+
 }

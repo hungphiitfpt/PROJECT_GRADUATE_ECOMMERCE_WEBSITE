@@ -116,10 +116,7 @@ public class ShopProductsEntity {
     @JoinColumn(name = "category_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopCategoriesEntity shopCategoriesByCategoryId;
     
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "supplier_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private ShopSuplierEntity shopSuplierBySupplierId;
+
     
     @OneToMany(mappedBy = "shopProductsByProductId")
     private List<ShopWarehouseEntity> shopWarehousesById;
@@ -305,13 +302,6 @@ public class ShopProductsEntity {
         this.shopCategoriesByCategoryId = shopCategoriesByCategoryId;
     }
 
-    public ShopSuplierEntity getShopSuplierBySupplierId() {
-        return shopSuplierBySupplierId;
-    }
-
-    public void setShopSuplierBySupplierId(ShopSuplierEntity shopSuplierBySupplierId) {
-        this.shopSuplierBySupplierId = shopSuplierBySupplierId;
-    }
 
     public List<ShopWarehouseEntity> getShopWarehousesById() {
         return shopWarehousesById;

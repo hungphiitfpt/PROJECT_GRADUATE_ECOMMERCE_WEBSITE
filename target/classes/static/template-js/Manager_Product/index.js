@@ -21,22 +21,8 @@ async function loadAllCategory() {
 	$('#select-category-modal-info').html(categoryHTML);
 
 }
-async function loadAllSupplier() {
-	let SupplierHTML = '';
-	let method = 'get',
-		url = `${api_graduation}getAllSupplider`,
-		params = null,
-		data = {};
-	let res = await axiosTemplate(method, url, params, data);
 
-	for (let i = 0; i < res.data.length; i++) {
-		SupplierHTML += `<option data-id="${res.data[i].id}" value="${res.data[i].id}">${res.data[i].supplierName}</option>`;
-	}
 
-	$('#list-supplier-manager').html(SupplierHTML);
-	$('#select-supplier-modal-info').html(SupplierHTML);
-
-}
 async function loadAllProduct() {
 
 	let method = 'get',
@@ -251,7 +237,6 @@ async function getDataDetailProduct(r) {
 	$('#list-category-manager option[data-id ="' + res.data.data.categoryId + '"]').prop('selected', 'selected').change()
 	$('#quantity-create-manager-product').val(res.data.data.quantityPerUnit);
 	$('#discount-create-manager-product').val(res.data.data.discountinued);
-	$('#list-supplier-manager option[data-id ="' + res.data.data.supplierId + '"]').prop('selected', 'selected').change()
 	$('#price-product-manager').val(res.data.data.listPrice);
 	$('#description-detail-product').val(res.data.data.decription);
 
