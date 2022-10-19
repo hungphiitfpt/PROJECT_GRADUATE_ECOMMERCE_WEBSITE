@@ -61,17 +61,32 @@ public class ProductController {
 //		return "template/shop";
 //
 //	}
-	
+
 	@RequestMapping("/index")
-	public String index () {
+	public String index() {
 		return "shop-template/index";
-		
+
 	}
-	
+
 	@RequestMapping("/shop")
-	public String shop () {
+	public String shop(Model model, HttpServletRequest request, @ModelAttribute(name = "idCategory") String idCategory,
+			@RequestParam(name = "size", required = false, defaultValue = "12") int size,
+			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
+
+		try {
+			Page<ShopProductsEntity> listProduct;
+			listProduct = productServices.findAllProducts(idCategory, PageRequest.of(page, size));
+			List<ShopCategoriesEntity> listCategory = categoryServices.findAll();
+			model.addAttribute("category", listCategory);
+			model.addAttribute("product", listProduct);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		return "shop-template/shop";
-		
+
 	}
 
 //	@RequestMapping("/getProductByCategoryid/{idCategory}")
@@ -88,7 +103,6 @@ public class ProductController {
 //	}
 // 
 
-	
 	@RequestMapping("/getProductByid/{id}")
 	public String getProductById(Model model, @PathVariable Long id) {
 
@@ -104,7 +118,6 @@ public class ProductController {
 
 		model.addAttribute("review", product.getShopProductReviewsById());
 
-	
 		return "template/product-single";
 
 	}
