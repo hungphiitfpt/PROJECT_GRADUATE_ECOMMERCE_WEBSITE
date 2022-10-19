@@ -87,7 +87,7 @@ async function updateCategory() {
 		return false;
 	}
 	let method = 'post',
-		url = `${api_graduation}update_category`,
+		url = `${api_admin}update_category`,
 		params = {
 			id: $('#id-create-manager-category').val(),
 		},

@@ -7,7 +7,7 @@ async function loadAllCategory() {
 	let categoryHTML = '';
 
 	let method = 'get',
-		url = `${api_graduation}category/getAllCategory`,
+		url = `${api_admin}category/getAllCategory`,
 		params = null,
 		data = {};
 

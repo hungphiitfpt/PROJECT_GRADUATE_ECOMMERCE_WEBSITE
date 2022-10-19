@@ -77,6 +77,91 @@
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="row">
+						<div class="col-12 grid-margin stretch-card">
+							<form id="form">
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title">Quản Lý Nhân Vien</h4>
+										<p class="card-description">Trang dành cho người quản trị</p>
+										<div class="row">
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">ID Nhân Viên</label> <input
+													type="text" class="form-control input-not-edit"
+													id="id-create-manager-category" readonly="readonly"
+													name="id-create-manager-category" placeholder="ID">
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Tên Nhân Viên</label> <input
+													type="text" class="form-control"
+													id="name-create-manager-category"
+													name="name_create_manager_category" placeholder="Name">
+												<i
+													class="fas fa-exclamation-circle failure-icon mdi mdi-close-octagon"></i>
+												<i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+											</div>
+
+
+											<div class="form-group col-lg-6 col-sm-12">
+
+
+												<div class="avatar-upload">
+													<div class="avatar-edit">
+														<input type='file' id="imageUpload"
+															onchange="upFile($(this))" accept=".png, .jpg, .jpeg" />
+														<label for="imageUpload"> <i
+															class="icon-upload typcn typcn-upload"></i>
+														</label>
+													</div>
+													<div class="avatar-preview">
+														<div id="imagePreview"
+															style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQqsb6lK-PlD1kHFoubbiC-jN21tqj9ADz9crJ2rBIstz1gKFPE&usqp=CAU);">
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleTextarea1">Mô tả chi tiết</label>
+												<textarea class="form-control"
+													id="description-detail-category" name="description_detail"
+													rows="15"></textarea>
+												<i
+													class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
+												<i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+											</div>
+
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Mã Code</label> <input
+													type="text" class="form-control"
+													id="code-create-manager-category"
+													name="code_create_manager_category" placeholder="Name">
+												<i
+													class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
+												<i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+
+											</div>
+										</div>
+										<button type="submit" onclick="insertCategory()"
+											id="btn-save-product" class="btn  btn-primary mr-2">Lưu</button>
+										<button onclick="updateCategory()" id="btn-update-product"
+											class="btn btn-primary mr-2 d-none">Cập Nhật</button>
+										<button onclick="clearData()" class="btn btn-light">Clear</button>
+
+									</div>
+								</div>
+							</form>
+						</div>
 						<div class="col-lg-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
@@ -137,7 +222,8 @@
 							<div class="modal-body">
 								<div class="row">
 									<div class="col-lg-4 col-sm-12 text-center">
-										<img id="img-eployee-modal-info" class="img-avt-modal" src="" alt="" />
+										<img id="img-eployee-modal-info" class="img-avt-modal" src=""
+											alt="" />
 									</div>
 									<div class="col-lg-8 col-sm-12">
 										<div class="row">
@@ -301,7 +387,7 @@
 	<script src="../admin-static/js/select2.js"></script>
 	<!-- nhúng file js tự customize-->
 	<script src="../template-js/manager_employee/index.js"></script>
-		<script src="../template-js/upload_file_template/index.js"></script>
+	<script src="../template-js/upload_file_template/index.js"></script>
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
