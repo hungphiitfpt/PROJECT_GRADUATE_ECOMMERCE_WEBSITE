@@ -86,10 +86,7 @@ public class ShopProductsEntity {
     @Basic
     @Column(name = "category_id", nullable = true)
     private Long categoryId;
-    
-    @Basic
-    @Column(name = "supplier_id", nullable = true)
-    private Long supplierId;
+
     
     @CreationTimestamp
     @Column(name = "created_at", nullable = true)
@@ -98,6 +95,10 @@ public class ShopProductsEntity {
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = true)
     private Timestamp updatedAt;
+    
+//    @Basic
+//    @Column(name = "category_name", nullable = true)
+//    private String categoryName;
     
     @OneToMany(mappedBy = "shopProductsByProductId")
     private List<ShopProductDiscountEntity> shopProductDiscountsById;
@@ -131,11 +132,20 @@ public class ShopProductsEntity {
 //		this.shopOrderDetailsById = shopOrderDetailsById;
 //	}
 
+    
 	public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+//    public String getCategoryName() {
+//		return categoryName;
+//	}
+//
+//	public void setCategoryName(String categoryName) {
+//		this.categoryName = categoryName;
+//	}
+
+	public void setId(long id) {
         this.id = id;
     }
 
@@ -235,13 +245,6 @@ public class ShopProductsEntity {
         this.categoryId = categoryId;
     }
 
-    public Long getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(Long supplierId) {
-        this.supplierId = supplierId;
-    }
 
     public Timestamp getCreatedAt() {
         return createdAt;

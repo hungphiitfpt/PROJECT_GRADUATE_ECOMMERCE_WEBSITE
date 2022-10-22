@@ -36,7 +36,7 @@ async function drawTableCategoryManager(res) {
 		CategoryHTML += `<tr>
 		<td>${res.data.content[i].id}</td>
 		<td>${res.data.content[i].categoryName}</td>
-		<td><img src="${api_images}${res.data.content[i].image}"></img></td>
+		<td><img src="${res.data.content[i].image}"></img></td>
 	
 		<td>${res.data.content[i].deleted}</td>
 		<td><div class="row justify-content-around">
@@ -187,7 +187,7 @@ async function openModalDetailCategory(r) {
 	$('.modal-title').text("CHI TIẾT DANH MỤC");
 	$('#input-code-modal-info').val(res.data.data.categoryCode);
 	$('#input-name-modal-info').val(res.data.data.categoryName);
-	$('#img-product-modal-info').attr("src", `${api_images}${res.data.data.image}`);
+	$('#img-product-modal-info').attr("src", `${res.data.data.image}`);
 }
 async function getDetailCategory(r) {
 	$('#btn-save-product').addClass("d-none");
@@ -210,7 +210,7 @@ async function getDetailCategory(r) {
 	$('#name-create-manager-category').val(res.data.data.categoryName);
 	$('#description-detail-category').val(res.data.data.description);
 	if (res.data.data.image != null) {
-		$('#imagePreview').css('background-image', `url(${api_images}${res.data.data.image})`);
+		$('#imagePreview').css('background-image', `url(${res.data.data.image})`);
 	} else {
 		$('#imagePreview').css('background-image', `url(${api_images}notFound.png)`);
 	}

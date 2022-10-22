@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.poly.edu.project.graduation.model.UserDto;
 import com.poly.edu.project.graduation.model.UserEntity;
@@ -30,7 +31,7 @@ public class AuthController {
         return "index";
     }
 
-    @GetMapping("/login")
+    @RequestMapping("/login")
     public String loginForm() {
         return "/admin-template/pages/samples/login";
     }

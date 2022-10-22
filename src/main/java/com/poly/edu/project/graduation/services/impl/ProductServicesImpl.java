@@ -74,7 +74,8 @@ public class ProductServicesImpl implements ProductServices {
 	}
 
 	@Override
-	public Page<ShopProductsEntity> findByKeyWord(String keyword, Pageable pageable) {
+	public Page<ShopProductsEntity> findByKeyWord(String keyword, Pageable pageable){
+		
 		// TODO Auto-generated method stub
 		return productsRepository.findByKeyWord(keyword, pageable);
 	}
@@ -122,6 +123,16 @@ public class ProductServicesImpl implements ProductServices {
 		// TODO Auto-generated method stub
 		productsRepository.changeIstock(id);
 	}
+
+
+	@Override
+	public Page<ShopProductsEntity> filterShop(String idCategory, String priceStart, String priceEnd,
+			PageRequest pageRequest) {
+		// TODO Auto-generated method stub
+		return productsRepository.filterShop(idCategory,priceStart,priceEnd,pageRequest);
+	}
+
+
 
 //	@Override
 //	public List<ShopProductsEntity> findAllProducts() throws Exception {

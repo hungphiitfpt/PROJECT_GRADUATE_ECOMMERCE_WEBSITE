@@ -53,7 +53,7 @@ async function openModalDetailEployee(r) {
 
 			break;
 	}
-	$('#img-eployee-modal-info').attr("src", `${api_images}${res.data.data.avatar}`);
+	$('#img-eployee-modal-info').attr("src", `${res.data.data.avatar}`);
 	$('.modal-title').text("CHI TIẾT NHÂN VIÊN");
 	$('#input-idUser-modal-employee-info').val(res.data.data.id);
 	$('#input-username-modal-employee-info').val(res.data.data.username);
@@ -153,6 +153,7 @@ async function UpdateChangeDelete(r) {
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
 	loadAllUsers();
+	uploadImage();
 	sweatAlert(`Cập nhật trạng thái người dùng có id là : ${id} thành công `, "success")
 }
 

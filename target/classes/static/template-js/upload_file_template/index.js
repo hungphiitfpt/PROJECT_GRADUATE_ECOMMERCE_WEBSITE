@@ -1,5 +1,3 @@
-// xử lý giao diện upload file
-
 async function upFile(e) {
 	const files = e.prop('files')
 	const formData = new FormData();
@@ -30,3 +28,35 @@ function readURL(input) {
 		reader.readAsDataURL(input.files[0]);
 	}
 }
+
+
+  function uploadImage() {
+    const ref = firebase.storage().ref("Files/" + "Hungphi/");
+    // Lấy phẩn tử đầu tiên
+    const file = document.querySelector('#imageUpload').files[0]
+    const metadata = {
+        contentType : file.type
+    }
+    const name = file.name;
+    const uploadIMG = ref.child(name).put(file, metadata);
+    uploadIMG
+    .then(snapshot => snapshot.ref.getDownloadURL())
+    .then(url => {
+		sessionStorage.setItem("image", url);
+    }).catch(console.error)
+}
+let a = [];
+const getListImages = () => {
+
+    const storageRef = firebase.storage().ref("Files/" + "Hungphi");
+
+    storageRef.listAll().then((result) => {
+      result.items.forEach((imageRef) => {
+        imageRef.getDownloadURL().then((url) => {
+          a.push(url)
+        })
+       
+      }) 
+      
+    })       
+  }

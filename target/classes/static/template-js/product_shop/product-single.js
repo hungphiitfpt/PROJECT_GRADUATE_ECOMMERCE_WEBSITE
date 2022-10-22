@@ -20,7 +20,7 @@ async function loadAllProductRandomByCategoryId() {
         money = caculatorMoneyDiscount(`${res.data[i].listPrice}`,`${res.data[i].discountinued}`) 
         randomHTML += `<div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated">
         <div class="product">
-            <a href="#" class="img-prod text-center"><img class="img-fluid" src="${api_images}${res.data[i].image}" alt="Colorlib Template"> <span class="status">${res.data[i].discountinued}%</span>
+            <a href="#" class="img-prod text-center"><img class="img-fluid" src="${res.data[i].image}" alt="Colorlib Template"> <span class="status">${res.data[i].discountinued}%</span>
                 <div class="overlay"></div> </a>
             <div class="text py-3 pb-4 px-3 text-center">
                 <h3>

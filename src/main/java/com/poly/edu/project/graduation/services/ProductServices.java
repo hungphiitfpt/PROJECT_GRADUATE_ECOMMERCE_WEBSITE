@@ -50,6 +50,9 @@ public interface ProductServices {
 
 	void changeStatusInstock(long id);
 
+
+	Page<ShopProductsEntity> filterShop(String idCategory, String priceStart, String priceEnd, PageRequest pageRequest);
+
 	
 
 }

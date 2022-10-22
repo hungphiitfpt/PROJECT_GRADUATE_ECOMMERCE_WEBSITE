@@ -102,23 +102,24 @@ public class ProductController {
 //
 //	}
 // 
-
+	
 	@RequestMapping("/getProductByid/{id}")
 	public String getProductById(Model model, @PathVariable Long id) {
 
 		ShopProductsEntity product = productServices.findProductById(id);
 
-		List<ShopProductReviewsEntity> reviewProduct = reviewProductService.findAllReviewProduct(id);
+//		List<ShopProductReviewsEntity> reviewProduct = reviewProductService.findAllReviewProduct(id);
 
-		System.out.println(reviewProduct);
+//		System.out.println(reviewProduct);
 
 		model.addAttribute("product", product);
+		System.out.println(product);
 
 		model.addAttribute("images", product.getShopProductImagesById());
 
 		model.addAttribute("review", product.getShopProductReviewsById());
 
-		return "template/product-single";
+		return "shop-template/product-details";
 
 	}
 

@@ -56,6 +56,12 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+<script
+	src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
+
 </head>
 <body>
 	<div class="container-scroller">
@@ -200,7 +206,7 @@
 												<div class="avatar-upload">
 													<div class="avatar-edit">
 														<input type='file' id="imageUpload"
-															onchange="upFile($(this))" accept=".png, .jpg, .jpeg" />
+															onchange="uploadImage()" accept=".png, .jpg, .jpeg" />
 														<label for="imageUpload"> <i
 															class="icon-upload typcn typcn-upload"></i>
 														</label>
@@ -483,12 +489,9 @@
 	<script src="../template-js/Manager_Product/index.js"></script>
 	<script src="../template-js/upload_file_template/index.js"></script>
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="../template-js/config_firebase/index.js"></script>
 </body>
 
 </html>

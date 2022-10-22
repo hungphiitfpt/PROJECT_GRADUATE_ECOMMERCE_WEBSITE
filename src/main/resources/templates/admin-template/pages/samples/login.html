@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>PolluxUI Admin</title>
-<!-- base:css -->
-<link rel="stylesheet"
-	href="../admin-static/vendors/typicons/typicons.css">
-<link rel="stylesheet"
-	href="../admin-static/vendors/css/vendor.bundle.base.css">
-<!-- endinject -->
-<!-- plugin css for this page -->
-<!-- End plugin css for this page -->
-<!-- inject:css -->
-<link rel="stylesheet"
-	href="../admin-static/css/vertical-layout-light/style.css">
-<!-- endinject -->
+<link rel="stylesheet" href="../admin-static/vendors/typicons/typicons.css">
+<link rel="stylesheet" href="../admin-static/vendors/css/vendor.bundle.base.css">
+<link rel="stylesheet" href="../admin-static/css/vertical-layout-light/style.css">
 <link rel="shortcut icon" href="../admin-static/images/favicon.png" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
+<script src="../template-js/config_firebase/index.js"></script>
 </head>
-
 <body>
 	<div class="container-scroller">
 		<div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -32,7 +26,8 @@
 								<img src="../admin-static/images/logo-dark.svg" alt="logo">
 							</div>
 							<div th:if="${param.error}">
-								<div class="alert alert-danger">Bạn nhập sai email và mật khẩu.</div>
+								<div class="alert alert-danger">Bạn nhập sai email và mật
+									khẩu.</div>
 							</div>
 							<h4>Chào mừng bạn đến với chúng tôi</h4>
 							<h6 class="font-weight-light">Đăng nhập để tiếp tục.</h6>
@@ -63,10 +58,17 @@
 									<a href="#" class="auth-link text-black">Forgot password?</a>
 								</div>
 								<div class="mb-2">
-									<button type="button"
+									<button type="button" id="btnFacebook"
 										class="btn btn-block btn-facebook auth-form-btn">
 										<i class="typcn typcn-social-facebook mr-2"></i>Connect using
 										facebook
+									</button>
+								</div>
+								<div class="mb-2">
+									<button type="button" id="btnGoogle"
+										class="btn btn-block btn-google auth-form-btn">
+										<i class="typcn typcn-social-google-plus mr-2"></i>Connect
+										using google
 									</button>
 								</div>
 								<div class="text-center mt-4 font-weight-light">
@@ -92,6 +94,8 @@
 	<script src="../admin-static/js/template.js"></script>
 	<script src="../admin-static/js/settings.js"></script>
 	<script src="../admin-static/js/todolist.js"></script>
+	<script src="../variable_template/variable_index.js"></script>
+	<script src="../template-js/login_form/index.js"></script>
 	<!-- endinject -->
 </body>
 

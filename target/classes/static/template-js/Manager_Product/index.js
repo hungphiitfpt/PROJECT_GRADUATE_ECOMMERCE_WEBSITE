@@ -1,6 +1,5 @@
 $(function() {
-	loadAllCategory();
-	loadAllSupplier();
+	loadAllCategory();	
 	loadAllProduct();
 })
 async function loadAllCategory() {
@@ -34,6 +33,7 @@ async function loadAllProduct() {
 		data = {};
 
 	let res = await axiosTemplate(method, url, params, data);
+	console.log("rss nf" + res);
 	drawTableProductManager(res, $('#table-list-product-manager'))
 
 }
@@ -61,7 +61,7 @@ async function drawTableProductManager(res) {
 		ProductHTML += `<tr>
 		<td>${res.data.content[i].id}</td>
 		<td>${res.data.content[i].productName}</td>
-		<td><img src="${api_images}${res.data.content[i].image}"></img></td>
+		<td><img src="${res.data.content[i].image}"></img></td>
 		<td value="${res.data.content[i].listPrice}">${price}</td>
 		<td> <div class="progress">
 			 	<div class="progress-bar bg-primary" 
@@ -98,6 +98,7 @@ async function drawTableProductManager(res) {
 }
 
 async function insertProduct() {
+	let imageSession = sessionStorage.getItem("image");
 	validation();
 	if ($('.error.vad-false').length > 0) {
 		return false;
@@ -117,13 +118,17 @@ async function insertProduct() {
 			discountinued: $('#discount-create-manager-product').val(),
 			categoryId: $('#list-category-manager option:selected').val(),
 			supplierId: $('#list-supplier-manager option:selected').val(),
-			image: sessionStorage.getItem("image")
+			image: simageSession
 		};
+		if(imageSession == "" || imageSession == null) {
+			return false;
+		}
 	let res = await axiosTemplate(method, url, params, data);
 	clearData();
 }
 
 async function updateProduct() {
+	let imageSession = sessionStorage.getItem("image");
 	 validation();
 	 if ($('.error.vad-false').length > 0) {
 		return false;
@@ -144,8 +149,12 @@ async function updateProduct() {
 			discountinued: $('#discount-create-manager-product').val(),
 			categoryId: $('#list-category-manager option:selected').val(),
 			supplierId: $('#list-supplier-manager option:selected').val(),
-			image: sessionStorage.getItem("image")
+			image: imageSession
 		};
+	uploadImage();
+	if(imageSession == "" || imageSession == null) {
+		return false;
+	}
 	let res =  await axiosTemplate(method, url, params, data);
 	sweatAlert(`${res.data.message}`, "success")
 	loadAllProduct();
@@ -208,7 +217,7 @@ async function openModalDetailProduct(r) {
 	$("#select-supplier-modal-info").val(res.data.data.supplierId).trigger('change');
 	$("#select-category-modal-info").val(res.data.data.categoryId).trigger('change');
 	$('#input-createDate-modal-info').val(res.data.data.createdAt);
-	$('#img-product-modal-info').attr("src", `${api_images}${res.data.data.image}`);
+	$('#img-product-modal-info').attr("src", `${res.data.data.image}`);
 }
 function closeModalDetailProduct() {
 	$('#input-code-modal-info').val();
@@ -241,9 +250,9 @@ async function getDataDetailProduct(r) {
 	$('#description-detail-product').val(res.data.data.decription);
 
 	if(res.data.data.shopProductImagesById.length > 0) {
-		$('#imagePreview').css('background-image', `url(${api_images}${res.data.data.shopProductImagesById[0].image})`);
+		$('#imagePreview').css('background-image', `url(${res.data.data.shopProductImagesById[0].image})`);
 	} else if (res.data.data.image != null) {
-		$('#imagePreview').css('background-image', `url(url(${api_images}${res.data.data.image})`);
+		$('#imagePreview').css('background-image', `url(url(${res.data.data.image})`);
 	} else if(res.data.data.image == null) {
 		$('#imagePreview').css('background-image', `url(${api_images}notFound.png)`);
 	}

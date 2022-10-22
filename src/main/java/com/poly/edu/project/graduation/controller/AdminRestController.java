@@ -43,7 +43,6 @@ public class AdminRestController {
 			product.setQuantityPerUnit(newProduct.getQuantityPerUnit());
 			product.setShortDecription(newProduct.getShortDecription());
 			product.setStandCost(newProduct.getStandCost());
-			product.setSupplierId(newProduct.getSupplierId());
 			return productsRepository.save(product);
 		}).orElseGet(() -> {
 			newProduct.setId(0);
