@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -113,14 +114,18 @@ public class ProductController {
 //		System.out.println(reviewProduct);
 
 		model.addAttribute("product", product);
-		System.out.println(product);
+
 
 		model.addAttribute("images", product.getShopProductImagesById());
+	
 
 		model.addAttribute("review", product.getShopProductReviewsById());
 
 		return "shop-template/product-details";
 
 	}
+	
+	
+
 
 }

@@ -33,6 +33,7 @@ public class ShopProductVouchersEntity {
     @Basic
     @Column(name = "isdeleted_at", nullable = true)
     private Boolean isdeletedAt;
+    
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)

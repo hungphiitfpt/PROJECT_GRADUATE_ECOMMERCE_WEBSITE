@@ -118,7 +118,7 @@ async function insertProduct() {
 			discountinued: $('#discount-create-manager-product').val(),
 			categoryId: $('#list-category-manager option:selected').val(),
 			supplierId: $('#list-supplier-manager option:selected').val(),
-			image: simageSession
+			image: imageSession,
 		};
 		if(imageSession == "" || imageSession == null) {
 			return false;
