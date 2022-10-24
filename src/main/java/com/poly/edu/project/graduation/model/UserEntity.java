@@ -83,8 +83,8 @@ public class UserEntity {
 					@JoinColumn(name = "role_id", referencedColumnName = "id") })
 	private List<RoleUserEntity> roles = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "UserReviewProduct")
-	private List<ShopProductReviewsEntity> entities;
+//	@OneToMany(mappedBy = "UserReviewProduct")
+//	private List<ShopProductReviewsEntity> entities;
 
 	public long getId() {
 		return id;

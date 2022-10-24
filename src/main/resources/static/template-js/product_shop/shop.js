@@ -124,7 +124,7 @@ async function drawDataProductShop(res) {
                     <li><a href="img/shop/shop-1.jpg" class="image-popup"><span
                             class="arrow_expand"></span></a></li>
                     <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                    <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                    <li onclick="addItemToCart($(this))"><a href="#"><span class="icon_bag_alt"></span></a></li>
                 </ul>
             </div>
             <div class="product__item__text">
@@ -136,7 +136,7 @@ async function drawDataProductShop(res) {
                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                         class="fa fa-star"></i>
                 </div>
-                <div class="product__price">₫ ${formatmoney}</div>
+                <div class="product__price" data-id="${res.data.content[i].id}" data-price="${res.data.content[i].listPrice}">₫ ${formatmoney}</div>
             </div>
         </div>
     </div>`
