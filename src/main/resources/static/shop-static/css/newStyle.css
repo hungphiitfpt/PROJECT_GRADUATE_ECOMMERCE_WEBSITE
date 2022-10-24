@@ -353,4 +353,7 @@ bottom: 40px;
  .pagination__arrow-half:last-child {
 	 transform: translateY(-0.5px) rotate(45deg);
 }
+.cart__product__item img {
+	max-width: 90px;
+}
  

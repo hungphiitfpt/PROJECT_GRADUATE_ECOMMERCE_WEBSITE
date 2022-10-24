@@ -1,3 +1,6 @@
+$(function () {
+	showcart();
+})
 var cart = [];
 cart = JSON.parse(localStorage.getItem("cart"));
 if (cart == null) {
@@ -25,6 +28,37 @@ function addItemToCart(x) {
 		cart.push(product);
 	}
 	localStorage.setItem("cart", JSON.stringify(cart));
-	let cartLocalStorage = JSON.parse(localStorage.getItem("cart"));
 
+}
+
+function showcart() {
+	let cartHTML = '';
+	for (let i = 0; i < cart.length; i++) {
+		let money = formatMoney(`${cart[i].price}`);
+		cartHTML  += `<tr>
+		<td class="cart__product__item">
+			<img src="${cart[i].image}" alt="">
+			<div class="cart__product__item__title">
+				<h6>${cart[i].name}</h6>
+				<div class="rating">
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+				</div>
+			</div>
+		</td>
+		<td class="cart__price">${money}</td>
+		<td class="cart__quantity">
+			<div class="pro-qty">
+				<input type="text" value="${cart[i].quantity}">
+			</div>
+		</td>
+		<td class="cart__total">${money}</td>
+		<td class="cart__close"><span class="icon_close"></span></td>
+	</tr>`;
+		
+	}
+	$('#table-product-orderPage').html(cartHTML)
 }
