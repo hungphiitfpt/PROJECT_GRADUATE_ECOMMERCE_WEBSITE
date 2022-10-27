@@ -4,7 +4,6 @@ var api_admin = `https://agriculturalstorev001.herokuapp.com/api/admin/`;
 var api_images = `https://agriculturalstorev001.herokuapp.com/api/v1/FileUpload/files/`;
 var api_upload = `https://agriculturalstorev001.herokuapp.com/api/v1/FileUpload`;
 
-
 sessionStorage.removeItem("image");
 
 async function axiosTemplate(method, url, params, data) {
