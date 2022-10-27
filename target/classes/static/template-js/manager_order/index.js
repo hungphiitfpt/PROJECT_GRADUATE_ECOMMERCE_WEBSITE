@@ -23,6 +23,9 @@ async function drawTableOrderProducts(res) {
 	var OrderHtml = ``;
 	var pagination = ``;
 	for (let i = 0; i < res.data.content.length; i++) {
+        if (res.data.content[i].orderStatus == 0) {
+			res.data.content[i].orderStatus = `<label class="badge badge-info">Chờ Xác Nhận</label>`;
+		}
         let totalPrice = formatMoney(`${res.data.content[i].totalPrice}`);
 		if (res.data.content[i].paymentTypeId == 1) {
 			res.data.content[i].paymentTypeId = `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2F07b8DkY.png?alt=media&token=e0a98186-3e3a-48e2-ae58-2b8c18b35747`;
@@ -39,7 +42,7 @@ async function drawTableOrderProducts(res) {
 		<td>${res.data.content[i].shipName}</td>
 	
 		<td class="text-center"><img  src="${res.data.content[i].paymentTypeId}"></img></td>
-        <td>${res.data.content[i].orderStatus}</td>
+        <td class="text-center">${res.data.content[i].orderStatus}</td>
         <td>${totalPrice} VND</td>
 		<td style="width: 200px"><div class="row justify-content-around">
 		<button type="button"

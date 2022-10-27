@@ -46,6 +46,7 @@ public class OrderServiceImpl implements OrderService {
 			ordersEntity.setShipState(ordersEntity.getShipState());
 			ordersEntity.setShippingFee(ordersEntity.getShippingFee());
 			ordersEntity.setPaymentTypeId(ordersEntity.getPaymentTypeId());
+			ordersEntity.setOrderStatus(0);
 			Map<String, String> stats = Utils.cartStarts(cart);
 			ordersEntity.setTotalPrice(Long.parseLong(stats.get("amount")));
 			orderRepository.save(ordersEntity);
@@ -58,6 +59,7 @@ public class OrderServiceImpl implements OrderService {
 				detailEntity.setPrice(s.getPrice());
 				detailEntity.setProductName(s.getProductName());
 				detailEntity.setQuantity(s.getQuantity());
+				
 
 				detailRepository.save(detailEntity);
 
