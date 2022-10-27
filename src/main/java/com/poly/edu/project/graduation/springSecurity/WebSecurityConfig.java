@@ -1,5 +1,7 @@
 package com.poly.edu.project.graduation.springSecurity;
 
+import javax.activation.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
 	@Autowired
 	private UserDetailsService userDetailsService;
 
@@ -25,17 +28,12 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
-		.antMatchers("/register/**").permitAll()
-		.antMatchers("/indexx")
-		.permitAll().antMatchers("/users").hasRole("ADMIN")
-		.antMatchers("/manager_employee").hasRole("ADMIN")
-		.antMatchers("/manager_product").hasRole("ADMIN")
-		.and()
-		.formLogin(form -> 
-		form.loginPage("/login")
-		.loginProcessingUrl("/login")
-		.defaultSuccessUrl("/index").permitAll())
+		http.csrf().disable().authorizeRequests().antMatchers("/register/**").permitAll().antMatchers("/index")
+				.permitAll().antMatchers("/users").hasRole("ADMIN").antMatchers("/manager_employee").hasRole("ADMIN")
+				.antMatchers("/manager_product").hasRole("ADMIN").antMatchers("/getPageWarehouse").hasRole("ADMIN")
+				.and()
+				.formLogin(form -> form.loginPage("/logon").loginProcessingUrl("/login").defaultSuccessUrl("/index")
+						.permitAll())
 				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());
 		return http.build();
 	}

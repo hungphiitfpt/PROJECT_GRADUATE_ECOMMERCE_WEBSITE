@@ -31,7 +31,7 @@ public class AuthController {
         return "index";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/logon")
     public String loginForm() {
         return "/admin-template/pages/samples/login";
     }

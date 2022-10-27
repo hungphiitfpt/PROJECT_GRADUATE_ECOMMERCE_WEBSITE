@@ -19,7 +19,6 @@ import com.poly.edu.project.graduation.model.ResponseObject;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 import com.poly.edu.project.graduation.services.ProductServices;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/admin")
 public class AdminRestController {
@@ -28,10 +27,14 @@ public class AdminRestController {
 	@Autowired
 	ProductsRepository productsRepository;
 
+	/*
+	 * API cập nhật sản phẩm
+	 */
 	@RequestMapping(value = "/update_product", method = RequestMethod.POST, consumes = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	@Transactional
-	ResponseEntity<ResponseObject> insertProduct(@RequestBody ShopProductsEntity newProduct, @Param("id") Long id) throws Exception {
+	@Transactional(rollbackFor = {Exception.class, Throwable.class})
+	ResponseEntity<ResponseObject> insertProduct(@RequestBody ShopProductsEntity newProduct, @Param("id") Long id)
+			throws Exception {
 		ShopProductsEntity updatedProduct = productsRepository.findById(id).map(product -> {
 			product.setCategoryId(newProduct.getCategoryId());
 			product.setDiscountinued(newProduct.getDiscountinued());
@@ -51,11 +54,13 @@ public class AdminRestController {
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(new ResponseObject("ok", "Update Product successfully", updatedProduct));
 	}
-	
-	// api thêm sản phẩm, kiểm tra nếu đã có sản phẩm trùng trên không được thêm
+
+	/*
+	 *  api thêm sản phẩm, kiểm tra nếu đã có sản phẩm trùng trên không được thêm
+	 */
 	@RequestMapping(value = "/insert_product", method = RequestMethod.POST, consumes = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	@Transactional
+	@Transactional(rollbackFor = {Exception.class, Throwable.class})
 	ResponseEntity<ResponseObject> insertProduct(@RequestBody ShopProductsEntity shopProductsEntity) {
 		List<ShopProductsEntity> foundProducts = productServices
 				.findByProductName(shopProductsEntity.getProductName().trim());
@@ -67,41 +72,22 @@ public class AdminRestController {
 				.body(new ResponseObject("200", "Thêm Thành Công ", productsRepository.save(shopProductsEntity)));
 	}
 
-//	@RequestMapping(value = "/update/product", method = RequestMethod.POST, consumes = {
-//			MediaType.APPLICATION_JSON_UTF8_VALUE })
-//	ResponseEntity<ResponseObject> updateProduct(@RequestBody ShopProductsEntity newProduct, @Param("id") Long id) {
-//		Optional<ShopProductsEntity> updatedProduct = productsRepository.findById(id).map(product -> {
-//			product.setCategoryId(newProduct.getCategoryId());
-//			product.setCreatedAt(newProduct.getCreatedAt());
-//			product.setDecription(newProduct.getDecription());
-//			product.setDeleted(newProduct.isDeleted());
-//			product.setDiscountinued(newProduct.getDiscountinued());
-//			product.setFeatured(newProduct.isFeatured());
-//			product.setImage(newProduct.getImage());
-//			product.setListPrice(newProduct.getListPrice());
-//			product.setProductCode(newProduct.getProductCode());
-//			product.setProductName(newProduct.getProductName());
-//			product.setQuantityPerUnit(newProduct.getQuantityPerUnit());
-//			return productsRepository.save(product);
-//		});
-//		return ResponseEntity.status(HttpStatus.OK)
-//				.body(new ResponseObject("ok", "Update Product successfully", updatedProduct));
-//	}
-
+	/*
+	 *  api chỉnh sửa  trạng thái của sản phẩm hết hàng
+	 */
 	@RequestMapping(value = "/update/isdeleted", method = RequestMethod.POST, consumes = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	void updateIsDeleted(@Param("id") long id) {
 		productServices.changeStatusIsdeleted(id);
 	}
-	
+
+	/*
+	 *  api chỉnh sửa  trạng thái của sản phẩm còn hàng
+	 */
 	@RequestMapping(value = "/update/in_stock", method = RequestMethod.POST, consumes = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	void updateInstock(@Param("id") long id) {
 		productServices.changeStatusInstock(id);
 	}
-	
-	
-	
-
 
 }

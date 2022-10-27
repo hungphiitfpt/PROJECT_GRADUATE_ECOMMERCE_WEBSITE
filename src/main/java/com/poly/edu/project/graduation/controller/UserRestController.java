@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.edu.project.graduation.dao.UserRepository;
 import com.poly.edu.project.graduation.model.ResponseObject;
-import com.poly.edu.project.graduation.model.ShopProductsEntity;
 import com.poly.edu.project.graduation.model.UserEntity;
 import com.poly.edu.project.graduation.services.UserService;
 

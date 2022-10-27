@@ -14,8 +14,9 @@
 						<i class="typcn typcn-device-desktop menu-icon"></i> <span
 						class="menu-title">Dashboard</span>
 						<div class="badge badge-danger">new</div>
-				</a></li>
-				<li class="nav-item">
+				</a>
+				</li>
+			<!-- 	<li class="nav-item">
 					<a class="nav-link" data-toggle="collapse"
 					href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
 						<i class="typcn typcn-document-text menu-icon"></i> <span
@@ -31,7 +32,7 @@
 								href="pages/ui-features/typography.html">Thống kê....</a></li>
 						</ul>
 					</div>
-				</li>
+				</li> -->
 				<li class="nav-item">
 					<a  class="nav-link" 
 						th:href="@{/manager_category}">
@@ -48,12 +49,26 @@
 				</li>
 				<li class="nav-item">
 					<a  class="nav-link" 
+						th:href="@{/getPageWarehouse}">
+						<i class="typcn typcn-clipboard typcn-font-20px"></i> 
+						<span class="menu-title">QUẢN LÝ XUẤT/NHẬP KHO</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a  class="nav-link" 
 						th:href="@{/manager_employee}">
 						<i class="typcn typcn-key-outline menu-icon typcn-font-20px"></i> 
 						<span class="menu-title">QUẢN LÝ NHÂN VIÊN</span>
 					</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" data-toggle="collapse"
+				<li class="nav-item">
+					<a  class="nav-link" 
+						th:href="@{/manager_order_product}">
+						<i class="typcn typcn-key-outline menu-icon typcn-font-20px"></i> 
+						<span class="menu-title">QUẢN LÝ ĐƠN HÀNG</span>
+					</a>
+				</li>
+				<!-- <li class="nav-item"><a class="nav-link" data-toggle="collapse"
 					href="#form-elements" aria-expanded="false"
 					aria-controls="form-elements"> <i
 						class="typcn typcn-film menu-icon"></i> <span class="menu-title">Form
@@ -130,7 +145,7 @@
 						<i class="typcn typcn-mortar-board menu-icon"></i> 
 						<span class="menu-title">Documentation</span>
 					</a>
-				</li>
+				</li> -->
 			</ul>
 		</nav>
 	</div>

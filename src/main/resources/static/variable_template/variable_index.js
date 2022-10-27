@@ -66,6 +66,13 @@ function formatMoney(str) {
 		return ((index % 3) ? next : (next + ',')) + prev
 	})
 }
+
+function formatVND(x) {
+x = x.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+return x;
+}
+
+
 function formatDate(date) {
 	var d = new Date(date),
 		month = '' + (d.getMonth() + 1),

@@ -116,7 +116,7 @@ async function drawTableUsersManager(res) {
 		<td>${res.data.content[i].id}</td>
 		<td>${res.data.content[i].username}</td>
 		<td>${res.data.content[i].lastName}</td>
-		<td class="text-center"><img class="image-avatar-employee-manager" src="${api_images}${res.data.content[i].avatar}"></img></td>
+		<td class="text-center"><img class="image-avatar-employee-manager" src="${res.data.content[i].avatar}"></img></td>
         <td> ${res.data.content[i].city}</td>
         <td>${res.data.content[i].deleted}</td>
 		<td>${birthday}</td>

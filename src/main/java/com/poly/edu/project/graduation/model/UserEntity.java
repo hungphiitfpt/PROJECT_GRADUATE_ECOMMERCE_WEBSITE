@@ -83,6 +83,9 @@ public class UserEntity {
 					@JoinColumn(name = "role_id", referencedColumnName = "id") })
 	private List<RoleUserEntity> roles = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "userEntity")
+	private List<ShopOrdersEntity> shopOrdersById;
+	
 //	@OneToMany(mappedBy = "UserReviewProduct")
 //	private List<ShopProductReviewsEntity> entities;
 
@@ -223,6 +226,16 @@ public class UserEntity {
 	public void setRoles(List<RoleUserEntity> roles) {
 		this.roles = roles;
 	}
+
+	public List<ShopOrdersEntity> getShopOrdersById() {
+		return shopOrdersById;
+	}
+
+	public void setShopOrdersById(List<ShopOrdersEntity> shopOrdersById) {
+		this.shopOrdersById = shopOrdersById;
+	}
+	
+	
 	
 
 }

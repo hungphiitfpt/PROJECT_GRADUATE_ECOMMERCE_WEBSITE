@@ -33,7 +33,7 @@ async function loadAllProduct() {
 		data = {};
 
 	let res = await axiosTemplate(method, url, params, data);
-	console.log("rss nf" + res);
+	
 	drawTableProductManager(res, $('#table-list-product-manager'))
 
 }

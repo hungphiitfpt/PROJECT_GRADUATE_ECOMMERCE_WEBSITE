@@ -3,6 +3,7 @@ package com.poly.edu.project.graduation.model;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -12,8 +13,8 @@ import java.sql.Timestamp;
 public class ShopOrderDetailEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
-    private long id;
+    @Column(name = "id")
+    private Long id;
     @Basic
     @Column(name = "order_id", nullable = true)
     private Long orderId;
@@ -22,10 +23,13 @@ public class ShopOrderDetailEntity {
     private Long productId;
     @Basic
     @Column(name = "quantity", nullable = true, precision = 4)
-    private BigDecimal quantity;
+    private Integer quantity;
+    
     @Basic
-    @Column(name = "unit_price", nullable = true, precision = 4)
-    private BigDecimal unitPrice;
+    @Column(name = "product_name", nullable = true, precision = 4)
+    private String productName;
+    
+ 
     @Basic
     @Column(name = "discount_percentage", nullable = true, precision = 0)
     private Double discountPercentage;
@@ -39,16 +43,44 @@ public class ShopOrderDetailEntity {
     @Column(name = "date_allocated", nullable = true)
     private Timestamp dateAllocated;
     
+    @Basic
+    @Column(name = "price", nullable = true, length = 50)
+    private Long price;
+    
+    
     @ManyToOne
-    @JsonBackReference
+    @JsonIgnore
     @JoinColumn(name = "order_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopOrdersEntity shopOrdersByOrderId;
     
     @ManyToOne
-    @JsonBackReference
+    @JsonIgnore
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopProductsEntity shopProductsByProductId;
-    public long getId() {
+    
+    
+    
+    public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getPrice() {
+		return price;
+	}
+
+	public void setPrice(Long price) {
+		this.price = price;
+	}
+
+	public long getId() {
         return id;
     }
 
@@ -72,20 +104,12 @@ public class ShopOrderDetailEntity {
         this.productId = productId;
     }
 
-    public BigDecimal getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(BigDecimal quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
     }
 
     public Double getDiscountPercentage() {

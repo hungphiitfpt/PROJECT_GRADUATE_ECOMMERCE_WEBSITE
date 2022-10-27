@@ -43,8 +43,6 @@ public class RoleUserEntity {
 	@Column(name = "is_deleted", nullable = true)
 	private Boolean isDeleted;
 	
-	@OneToMany(mappedBy = "roleUserByEmployeeId")
-	private List<ShopOrdersEntity> shopOrdersById;
 	
 	@ManyToMany(mappedBy = "roles")
 	private List<UserEntity> users;
@@ -89,11 +87,5 @@ public class RoleUserEntity {
 		isDeleted = deleted;
 	}
 
-	public List<ShopOrdersEntity> getShopOrdersById() {
-		return shopOrdersById;
-	}
 
-	public void setShopOrdersById(List<ShopOrdersEntity> shopOrdersById) {
-		this.shopOrdersById = shopOrdersById;
-	}
 }

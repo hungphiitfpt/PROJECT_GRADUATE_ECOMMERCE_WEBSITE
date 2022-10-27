@@ -69,7 +69,7 @@ public class ShopProductsEntity {
     
     @Basic
     @Column(name = "quantity_per_unit", nullable = true, length = 50)
-    private String quantityPerUnit;
+    private Integer quantityPerUnit;
     
     @Basic
     @Column(name = "discountinued", nullable = true)
@@ -205,11 +205,11 @@ public class ShopProductsEntity {
         this.listPrice = listPrice;
     }
 
-    public String getQuantityPerUnit() {
+    public Integer getQuantityPerUnit() {
         return quantityPerUnit;
     }
 
-    public void setQuantityPerUnit(String quantityPerUnit) {
+    public void setQuantityPerUnit(Integer quantityPerUnit) {
         this.quantityPerUnit = quantityPerUnit;
     }
 

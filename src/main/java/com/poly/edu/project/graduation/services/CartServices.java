@@ -1,5 +1,5 @@
 package com.poly.edu.project.graduation.services;
 
-public class CartServices {
+public interface CartServices {
 
 }

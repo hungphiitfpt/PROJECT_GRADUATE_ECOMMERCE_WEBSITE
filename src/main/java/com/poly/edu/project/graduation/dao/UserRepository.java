@@ -37,14 +37,4 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	void changeIstock(long id);
 
 	UserEntity findByEmail(String email);
-
-//	@Query("SELECT u FROM UsersEntity u WHERE u.email = ?1")
-//	UsersEntity findByUsername(String username);
-//
-//	@Query("SELECT u FROM UsersEntity u WHERE u.username = ?1")
-//	Boolean existsByUsername(String username);
-//	
-//	@Query("SELECT u FROM UsersEntity u WHERE u.email = ?1")
-//	Boolean existsByEmail(String email);
-
 }

@@ -126,10 +126,10 @@ public class ProductServicesImpl implements ProductServices {
 
 
 	@Override
-	public Page<ShopProductsEntity> filterShop(String idCategory, String priceStart, String priceEnd,
-			PageRequest pageRequest) {
+	public Page<ShopProductsEntity> filterShop(Long idCategory, String priceStart, String priceEnd,
+			Pageable pageable) {
 		// TODO Auto-generated method stub
-		return productsRepository.filterShop(idCategory,priceStart,priceEnd,pageRequest);
+		return productsRepository.filterShop(idCategory,priceStart,priceEnd,pageable);
 	}
 
 

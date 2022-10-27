@@ -19,12 +19,11 @@ public class ShopOrdersEntity {
     @Column(name = "id", nullable = false)
     private long id;
     @Basic
-    @Column(name = "employee_id", nullable = true)
-    private Long employeeId;
+    @Column(name = "user_id", nullable = true)
+    private Long userId;
+    
     @Basic
-    @Column(name = "customer_id", nullable = true)
-    private Long customerId;
-    @Basic
+    @UpdateTimestamp
     @Column(name = "order_date", nullable = true)
     private Timestamp orderDate;
     @Basic
@@ -37,14 +36,13 @@ public class ShopOrdersEntity {
     @Column(name = "ship_address", nullable = true, length = 500)
     private String shipAddress;
     @Basic
+ 
     @Column(name = "ship_city", nullable = true, length = 255)
     private String shipCity;
     @Basic
     @Column(name = "ship_state", nullable = true, length = 255)
     private String shipState;
-    @Basic
-    @Column(name = "ship_country", nullable = true, length = 255)
-    private String shipCountry;
+
     @Basic
     @Column(name = "shipping_fee", nullable = true, precision = 4)
     private BigDecimal shippingFee;
@@ -56,11 +54,16 @@ public class ShopOrdersEntity {
     private Timestamp paidDate;
     @Basic
     @Column(name = "order_status", nullable = true, length = 50)
-    private String orderStatus;
+    private Integer orderStatus;
     @Basic
     @CreationTimestamp
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
+    
+    @Basic
+    @Column(name = "total_price", nullable = true, length = 50)
+    private Long totalPrice;
+    
     
     @Basic
     @UpdateTimestamp
@@ -72,8 +75,8 @@ public class ShopOrdersEntity {
     
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "employee_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private RoleUserEntity roleUserByEmployeeId;
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private UserEntity userEntity;
 
     
     @ManyToOne
@@ -81,7 +84,24 @@ public class ShopOrdersEntity {
     @JoinColumn(name = "payment_type_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopPaymentTypesEntity shopPaymentTypesByPaymentTypeId;
 
-    public long getId() {
+    
+    public Integer getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(Integer orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	public Long getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Long totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public long getId() {
         return id;
     }
 
@@ -89,23 +109,15 @@ public class ShopOrdersEntity {
         this.id = id;
     }
 
-    public Long getEmployeeId() {
-        return employeeId;
-    }
+    public Long getUserId() {
+		return userId;
+	}
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
-    }
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-
-    public Timestamp getOrderDate() {
+	public Timestamp getOrderDate() {
         return orderDate;
     }
 
@@ -153,13 +165,7 @@ public class ShopOrdersEntity {
         this.shipState = shipState;
     }
 
-    public String getShipCountry() {
-        return shipCountry;
-    }
-
-    public void setShipCountry(String shipCountry) {
-        this.shipCountry = shipCountry;
-    }
+ 
 
     public BigDecimal getShippingFee() {
         return shippingFee;
@@ -185,13 +191,7 @@ public class ShopOrdersEntity {
         this.paidDate = paidDate;
     }
 
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
+ 
 
     public Timestamp getCreatedAt() {
         return createdAt;
@@ -218,16 +218,17 @@ public class ShopOrdersEntity {
         this.shopOrderDetailsById = shopOrderDetailsById;
     }
 
-    public RoleUserEntity getRoleUserByEmployeeId() {
-        return roleUserByEmployeeId;
-    }
-
-    public void setRoleUserByEmployeeId(RoleUserEntity roleUserByEmployeeId) {
-        this.roleUserByEmployeeId = roleUserByEmployeeId;
-    }
 
 
-    public ShopPaymentTypesEntity getShopPaymentTypesByPaymentTypeId() {
+    public UserEntity getUserEntity() {
+		return userEntity;
+	}
+
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
+	}
+
+	public ShopPaymentTypesEntity getShopPaymentTypesByPaymentTypeId() {
         return shopPaymentTypesByPaymentTypeId;
     }
 

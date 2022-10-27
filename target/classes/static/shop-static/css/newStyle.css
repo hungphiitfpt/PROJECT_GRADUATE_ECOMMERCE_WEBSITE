@@ -356,4 +356,15 @@ bottom: 40px;
 .cart__product__item img {
 	max-width: 90px;
 }
+.cut-short-text {
+	white-space: nowrap;
+    width: 180px;
+    overflow: hidden;
+    max-width: 180px;
+    text-overflow: ellipsis; 
+    font-size: 14px;
+    color: #111111;
+    font-weight: 600;
+ 
+}
  
