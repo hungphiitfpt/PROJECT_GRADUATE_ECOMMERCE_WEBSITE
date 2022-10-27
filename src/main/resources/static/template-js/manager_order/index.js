@@ -8,7 +8,7 @@ async function loadAllDataTableOrders(){
 
 		url = `${api_admin}getOrderProducts`,
 
-		params = { keyword: keyWord },
+		params = { keyword: keyWord , size:10},
 
 		data = {};
 
@@ -19,12 +19,28 @@ async function loadAllDataTableOrders(){
 }
 
 async function drawTableOrderProducts(res) {
+	let htmlStatusOrder = '';
 	let button = ``;
 	var OrderHtml = ``;
 	var pagination = ``;
 	for (let i = 0; i < res.data.content.length; i++) {
         if (res.data.content[i].orderStatus == 0) {
-			res.data.content[i].orderStatus = `<label class="badge badge-info">Chờ Xác Nhận</label>`;
+			htmlStatusOrder = `<label class="badge badge-info">Chờ Xác Nhận</label>`;
+		}
+		 if(res.data.content[i].orderStatus == 1) {
+			htmlStatusOrder = `<label class="badge badge-warning">Chờ Shiper</label>`;
+		}
+		 if(res.data.content[i].orderStatus == 2) {
+			htmlStatusOrder = `<label class="badge badge-black">Đã Lấy Hàng</label>`;
+		}
+		 if(res.data.content[i].orderStatus == 3) {
+			htmlStatusOrder = `<label class="badge badge-danger">Đang Vận Chuyển</label>`;
+		}
+		 if(res.data.content[i].orderStatus == 4) {
+			htmlStatusOrder = `<label class="badge badge-primary">Đang Giao Hàng</label>`;
+		}
+		 if(res.data.content[i].orderStatus == 5) {
+			htmlStatusOrder = `<label class="badge badge-success">Đã Giao Hàng</label>`;
 		}
         let totalPrice = formatMoney(`${res.data.content[i].totalPrice}`);
 		if (res.data.content[i].paymentTypeId == 1) {
@@ -42,7 +58,7 @@ async function drawTableOrderProducts(res) {
 		<td>${res.data.content[i].shipName}</td>
 	
 		<td class="text-center"><img  src="${res.data.content[i].paymentTypeId}"></img></td>
-        <td class="text-center">${res.data.content[i].orderStatus}</td>
+        <td class="text-center">${htmlStatusOrder}</td>
         <td>${totalPrice} VND</td>
 		<td style="width: 200px"><div class="row justify-content-around">
 		<button type="button"
@@ -62,7 +78,7 @@ async function drawTableOrderProducts(res) {
 					           class="button-panigation-manager-product btn btn-outline-secondary">${i}
 					   </button>`
 	}
-	$('#panigation-manager-category').html(pagination);
+	$('#panigation-manager-product').html(pagination);
 	$('#table-list-orders-products').html(OrderHtml);
 
 }

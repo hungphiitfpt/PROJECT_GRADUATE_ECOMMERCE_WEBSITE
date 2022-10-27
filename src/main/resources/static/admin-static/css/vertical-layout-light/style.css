@@ -13674,6 +13674,11 @@ a.badge-success:focus, .preview-list .preview-item .preview-thumbnail a.badge.ba
   background-color: #3b86d1;
 }
 
+.badge-black{
+  color: #fff;
+  background-color: black;
+}
+
 a.badge-info:hover, .preview-list .preview-item .preview-thumbnail a.badge.badge-offline:hover, a.badge-info:focus, .preview-list .preview-item .preview-thumbnail a.badge.badge-offline:focus {
   color: #fff;
   background-color: #296db0;
