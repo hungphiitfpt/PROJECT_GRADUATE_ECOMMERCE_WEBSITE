@@ -32,7 +32,7 @@ public class WebSecurityConfig {
 				.permitAll().antMatchers("/users").hasRole("ADMIN").antMatchers("/manager_employee").hasRole("ADMIN")
 				.antMatchers("/manager_product").hasRole("ADMIN").antMatchers("/getPageWarehouse").hasRole("ADMIN")
 				.and()
-				.formLogin(form -> form.loginPage("/logon").loginProcessingUrl("/login").defaultSuccessUrl("/index")
+				.formLogin(form -> form.loginPage("/logon").loginProcessingUrl("/login").defaultSuccessUrl("/shop")
 						.permitAll())
 				.logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll());
 		return http.build();

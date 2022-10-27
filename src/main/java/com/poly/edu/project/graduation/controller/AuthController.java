@@ -33,7 +33,7 @@ public class AuthController {
 
     @RequestMapping("/logon")
     public String loginForm() {
-        return "/admin-template/pages/samples/login";
+        return "admin-template/pages/samples/login";
     }
 
     // handler method to handle user registration request
