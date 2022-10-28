@@ -62,7 +62,7 @@ async function drawTableOrderProducts(res) {
         <td>${totalPrice} VND</td>
 		<td style="width: 200px"><div class="row justify-content-around">
 		<button type="button"
-			class="btn btn-info btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="openModalDetailCategory($(this))" class="btn btn-info btn-lg" data-toggle="modal" data-target="#open_detail_product">
+			class="btn btn-info btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="openModalDetailOrder($(this))" class="btn btn-info btn-lg" data-toggle="modal" data-target="#open_detail_product">
 			<i class="typcn typcn-eye"></i>
 		</button>
 		<button onclick="getDetailCategory($(this))" data-id="${res.data.content[i].id}" type="button"
@@ -112,4 +112,63 @@ async function SearchOrderByKey() {
 	console.log(res);
 	drawTableOrderProducts(res, $('#table-list-orders-products'))
 	sweatAlert("Tìm Kiếm Thành Công", "success")
+}
+
+
+
+
+async function openModalDetailOrder(r) {
+	let listProductOrder = ``;
+	let id = r.data('id');
+	let method = 'get',
+		url = `${api_admin}getOrderDetail`,
+		params = { id: id },
+		data = {};
+	let res = await axiosTemplate(method, url, params, data);
+	$('#name-user-order').val(res.data.data.shipName);
+	$('#addres-user-ship').val(res.data.data.shipAddress);
+	$('#state-user-ship').val(res.data.data.shipState);
+	$('#city-user-ship').val(res.data.data.shipCity);
+	if(res.data.data.paymentTypeId == 0) {
+		$('#credit-card-image').attr('src',`https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpngtree-pack-cash-icon-cartoon-style-png-image_1893446.jpeg?alt=media&token=e3fbbe97-9d3a-4cc5-b875-bbbf89e548bb`);
+	}
+	else if(res.data.data.paymentTypeId == 1){
+		$('#credit-card-image').attr('src',`https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2F07b8DkY.png?alt=media&token=e0a98186-3e3a-48e2-ae58-2b8c18b35747`);
+	}
+	else {
+		$('#credit-card-image').attr('src',`https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpaypal-logo.png?alt=media&token=2bbe128a-2368-4fde-8efa-5a336319d827`);
+	}
+	for (let i = 0; i < res.data.data.shopOrderDetailsById.length; i++) {
+		let money = formatMoney(`${res.data.data.shopOrderDetailsById[i].price}`); 
+		listProductOrder += `<table class="order-table">
+		<tbody>
+		  <tr>
+			<td><img src="${res.data.data.shopOrderDetailsById[i].image}" class="full-width">
+			</td>
+			<td>
+			  <br> <span class="thin">${res.data.data.shopOrderDetailsById[i].productName}</span>
+			  <br> Free Run 3.0 Women<br> <span class="thin small"> Color: Grey/Orange, Size: 10.5<br><br></span>
+			</td>
+
+		  </tr>
+		  <tr>
+			<td>
+			  <div class="price">${money} VND</div>
+			</td>
+		  </tr>
+		</tbody>
+
+	  </table>
+	  <div class="line"></div>`
+		
+	}
+	$('#list-product-ordering').html(listProductOrder);
+	// let checkIsDeleted = res.data.data.deleted;
+	// console.log(checkIsDeleted);
+	// if (checkIsDeleted == true) {
+	// 	$('#pending-product').prop("checked", true);
+	// } else {
+	// 	$('#open-product').prop("checked", true);
+	// }
+
 }

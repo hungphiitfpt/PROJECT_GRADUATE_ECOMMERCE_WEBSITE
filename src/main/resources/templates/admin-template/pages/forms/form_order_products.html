@@ -142,144 +142,75 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<h4 class="modal-title">Modal Header</h4>
+								<h4 class="modal-title">Chi Tiết Đơn Hàng</h4>
 							</div>
 							<div class="modal-body">
-								<div class="row">
-									<div class="col-lg-4 col-sm-12 text-center">
-										<img id="img-product-modal-info" class="img-detail" src=""
-											alt="" />
-									</div>
-									<div class="col-lg-8 col-sm-12">
-										<div class="row">
+							<div class='container'>
+  <div class='window'>
+    <div class='order-info'>
+      <div class='order-info-content'>
+        <h2>Danh Sách Đơn Hàng</h2>
+                <div class='line'></div>
+                <div id="list-product-ordering">
+                <table class='order-table'>
+          <tbody>
+            <tr>
+              <td><img src='https://dl.dropboxusercontent.com/s/sim84r2xfedj99n/%24_32.JPG' class='full-width'></img>
+              </td>
+              <td>
+                <br> <span class='thin'>Nike</span>
+                <br> Free Run 3.0 Women<br> <span class='thin small'> Color: Grey/Orange, Size: 10.5<br><br></span>
+              </td>
 
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Mã Code</label>
-													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="input-code-modal-info">
-													</div>
-												</div>
-											</div>
+            </tr>
+            <tr>
+              <td>
+                <div class='price'>$99.95</div>
+              </td>
+            </tr>
+          </tbody>
 
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Tên Sản Phẩm</label>
-													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="input-name-modal-info">
-													</div>
-												</div>
-											</div>
+        </table>
+                </div>
+        
+        <div class='total'>
+          <span style='float:left;'>
+            <div class='thin dense'>VAT 19%</div>
+            <div class='thin dense'>Delivery</div>
+            TOTAL
+          </span>
+          <span style='float:right; text-align:right;'>
+            <div class='thin dense'>$68.75</div>
+            <div class='thin dense'>$4.95</div>
+            $435.55
+          </span>
+        </div>
+</div>
+</div>
+        <div class='credit-info'>
+          <div class='credit-info-content'>
+            <img src='https://dl.dropboxusercontent.com/s/ubamyu6mzov5c80/visa_logo%20%281%29.png' height='80' class='credit-card-image' id='credit-card-image'></img>
+            Tên Khách Hàng
+            <input class='input-field' id="name-user-order"></input>
+            Địa Chỉ 
+            <input class='input-field' id="addres-user-ship"></input>
+            <table class='half-input-table'>
+              <tr>
+                <td> Huyện
+                  <input class='input-field' id="state-user-ship"></input>
+                </td>
+                <td>Thành Phố
+                  <input class='input-field' id="city-user-ship"></input>
+                </td>
+              </tr>
+            </table>
+          <!--   <button class='pay-btn'>Checkout</button> -->
 
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Phí Ship Cơ
-														Bản</label>
-													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="input-cose-modal-info">
-													</div>
-												</div>
-											</div>
+          </div>
 
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Giá Tiền</label>
-													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="input-code-price-info">
-													</div>
-												</div>
-											</div>
-
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Số Lượng</label>
-													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="input-quantity-modal-info">
-													</div>
-												</div>
-											</div>
-
-											<div class="col-md-6">
-												<div class="form-group row">
-													<label class="col-sm-3 col-form-label">Giảm Giá</label>
-													<div class="col-sm-9">
-														<input type="text" class="form-control"
-															id="input-discount-modal-info">
-													</div>
-												</div>
-											</div>
-
-											<div class="col-md-6">
-												<div class="form-group row is-align-item-center">
-													<label class="col-sm-3 col-form-label">Trạng Thái</label>
-													<div class="col-sm-9 row">
-														<div class="col-lg-6">
-															<div class="form-check form-check-success">
-																<label class="form-check-label"> <input
-																	type="radio" class="form-check-input"
-																	name="ExampleRadio2" id="pending-product"> Hết
-																	Hàng <i class="input-helper"></i></label>
-															</div>
-														</div>
-														<div class="col-lg-6">
-															<div class="form-check form-check-success">
-																<label class="form-check-label"> <input
-																	type="radio" class="form-check-input"
-																	name="ExampleRadio2" id="open-product"> Còn
-																	Hàng <i class="input-helper"></i></label>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="col-md-6">
-												<div class="form-group row is-align-item-center">
-													<label class="col-sm-3 col-form-label">Danh Mục</label>
-													<div class="col-sm-9">
-														<select class="form-control form-control-sm"
-															id="select-category-modal-info">
-															<option>1</option>
-															<option>2</option>
-															<option>3</option>
-															<option>4</option>
-															<option>5</option>
-														</select>
-													</div>
-												</div>
-											</div>
-
-											<div class="col-md-6">
-												<div class="form-group row is-align-item-center">
-													<label class="col-sm-3 col-form-label">Nhà Cung Cấp</label>
-													<div class="col-sm-9">
-														<select class="form-control form-control-sm"
-															id="select-supplier-modal-info">
-														</select>
-													</div>
-												</div>
-											</div>
-
-											<div class="col-md-6">
-												<div class="form-group row is-align-item-center">
-													<label class="col-sm-3 col-form-label">Ngày Tạo</label>
-													<div class="col-sm-9">
-														<input id="input-createDate-modal-info"
-															class="form-control" placeholder="dd/mm/yyyy">
-													</div>
-												</div>
-											</div>
-
-
-
-										</div>
-									</div>
-								</div>
+        </div>
+      </div>
+    </div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
@@ -289,6 +220,10 @@
 
 					</div>
 				</div>
+				
+				
+
+    
 				<!-- content-wrapper ends -->
 				<!-- partial:../../partials/_footer.html -->
 				<div
@@ -299,7 +234,7 @@
 		</div>
 		<!-- page-body-wrapper ends -->
 	</div>
-
+	<script type="text/javascript" src="../template-js/manager_order/animated_status_order/index.js"></script>
 	<script src="../admin-static/vendors/js/vendor.bundle.base.js"></script>
 	<script src="../variable_template/variable_index.js"></script>
 	<script src="../admin-static/js/off-canvas.js"></script>

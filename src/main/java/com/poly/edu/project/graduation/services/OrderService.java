@@ -20,5 +20,9 @@ public interface OrderService {
 	boolean CreateOrder(Map<Long, CartEntity> cart, HttpSession session);
 	
 	Page<ShopOrdersEntity> findByKeyWord(String keyword, Pageable pageable);
+
+	ShopOrdersEntity findOrdersDetailById(Long id);
+	
+	
 	
 }

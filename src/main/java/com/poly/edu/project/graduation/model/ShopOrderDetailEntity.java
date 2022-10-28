@@ -58,9 +58,22 @@ public class ShopOrderDetailEntity {
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopProductsEntity shopProductsByProductId;
     
+    @Basic
+    @Column(name = "image", nullable = true, length = 50)
+    private String image;
     
     
-    public String getProductName() {
+    
+    
+    public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getProductName() {
 		return productName;
 	}
 

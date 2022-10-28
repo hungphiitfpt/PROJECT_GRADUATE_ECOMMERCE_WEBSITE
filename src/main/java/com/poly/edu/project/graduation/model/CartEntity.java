@@ -26,6 +26,8 @@ public class CartEntity {
 	
 	private Long payment_type_id;
 	
+	private String image;
+	
 
 	public Long getPayment_type_id() {
 		return payment_type_id;
@@ -118,5 +120,15 @@ public class CartEntity {
 	public void setDateAllocated(Timestamp dateAllocated) {
 		this.dateAllocated = dateAllocated;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 
 }

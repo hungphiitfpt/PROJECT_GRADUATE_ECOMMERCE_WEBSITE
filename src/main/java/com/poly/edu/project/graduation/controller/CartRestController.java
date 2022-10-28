@@ -32,10 +32,12 @@ public class CartRestController {
 	@RequestMapping(value = "/api/addCart", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Map<String, String>> viewAdd(@RequestBody CartEntity params, HttpSession session) {
+		
 		Map<Long, CartEntity> cartItems = (Map<Long, CartEntity>) session.getAttribute("cart");
 		if (cartItems == null) {
 			cartItems = new HashMap<>();
 		}
+	
 		Long productId = params.getProductId();
 		if (cartItems.containsKey(productId) == true) {// Sản phẩm đã có trong giỏ hàng
 			CartEntity shopsdetail = cartItems.get(productId);
@@ -91,11 +93,9 @@ public class CartRestController {
 		try {
 			Map<Long, CartEntity> cartItems = (Map<Long, CartEntity>) session.getAttribute("cart");
 			if (cartItems != null && cartItems.containsKey(id)) {
-				System.out.printf("id" + id);
 				cartItems.remove(id);
 				session.setAttribute("cart", cartItems);
 			}
-			System.out.println(cartItems);
 			return new ResponseEntity<>(Utils.cartStarts(cartItems), HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception

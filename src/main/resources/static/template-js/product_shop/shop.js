@@ -124,7 +124,7 @@ async function drawDataProductShop(res) {
                     <li><a href="img/shop/shop-1.jpg" class="image-popup"><span
                             class="arrow_expand"></span></a></li>
                     <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                    <li onclick="addItemToCart(${res.data.content[i].id},'${res.data.content[i].productName}',1,${res.data.content[i].listPrice},$(this))"><a href="#"><span class="icon_bag_alt"></span></a></li>
+                    <li onclick="addItemToCart(${res.data.content[i].id},'${res.data.content[i].productName}',1,${res.data.content[i].listPrice},'${res.data.content[i].image}')"><a href="#"><span class="icon_bag_alt"></span></a></li>
                 </ul>
             </div>
             <div class="product__item__text">

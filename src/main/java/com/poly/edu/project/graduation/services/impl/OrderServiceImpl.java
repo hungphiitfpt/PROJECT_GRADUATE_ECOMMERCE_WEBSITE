@@ -59,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
 				detailEntity.setPrice(s.getPrice());
 				detailEntity.setProductName(s.getProductName());
 				detailEntity.setQuantity(s.getQuantity());
-				
+				detailEntity.setImage(s.getImage());
 
 				detailRepository.save(detailEntity);
 
@@ -79,6 +79,12 @@ public class OrderServiceImpl implements OrderService {
 	public Page<ShopOrdersEntity> findByKeyWord(String keyword, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return orderRepository.findByKeyWord(keyword,pageable);
+	}
+
+	@Override
+	public ShopOrdersEntity findOrdersDetailById(Long id) {
+		// TODO Auto-generated method stub
+		return orderRepository.findOrdersDetailById(id);
 	}
 
 

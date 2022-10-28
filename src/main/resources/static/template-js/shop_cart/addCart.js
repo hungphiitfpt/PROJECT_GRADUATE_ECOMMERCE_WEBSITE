@@ -13,7 +13,7 @@ if (cart == null) {
  * @param {*} quantity  số lượng sản phẩm mua
  * @param {*} price số tiền của sản phẩm
  */
-async function addItemToCart(productId, productName, quantity, price){
+async function addItemToCart(productId, productName, quantity, price,image){
 	event.preventDefault();
 	let method = 'post',
 	url = `${host}api/addCart`,
@@ -24,7 +24,8 @@ async function addItemToCart(productId, productName, quantity, price){
 		quantity : quantity, 
 		price: price,
 		discountPercentage : 0,
-		discountAmount: 0
+		discountAmount: 0,
+		image: image
 	};
 let res = await axiosTemplate(method, url, params, data);
 $('.count-quantity-cart').text(res.data.counter);

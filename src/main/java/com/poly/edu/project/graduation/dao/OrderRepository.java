@@ -17,5 +17,8 @@ public interface OrderRepository extends JpaRepository<ShopOrdersEntity, Long> {
 			+ "OR shop_orders.ship_state LIKE CONCAT('%',:keyword,'%'))) "
 			+ "OR ':keyword' = '')", nativeQuery = true)
 	Page<ShopOrdersEntity> findByKeyWord(String keyword, Pageable pageable);
+	
+	@Query(value = " SELECT * FROM shop_orders where id = ?1", nativeQuery =  true)
+	ShopOrdersEntity findOrdersDetailById(Long id);
 
 }

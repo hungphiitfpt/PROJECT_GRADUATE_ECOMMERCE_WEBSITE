@@ -86,7 +86,7 @@
 
 								<tr th:each="cart : ${cart}" class="product" >
 									<td class="cart__product__item"><img
-										src="" alt="">
+										th:src="${cart.image}" alt="">
 										<div class="cart__product__item__title">
 											<h6 th:text="${cart.productName}" class="infoAddCart" th:data-name="${cart.productName}" th:data-id="${cart.productId}" th:data-price="${cart.price}"></h6>
 											<div class="rating">
