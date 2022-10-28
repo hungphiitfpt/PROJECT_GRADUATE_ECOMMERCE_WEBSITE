@@ -45,7 +45,7 @@ public class ShopOrdersEntity {
 
     @Basic
     @Column(name = "shipping_fee", nullable = true, precision = 4)
-    private BigDecimal shippingFee;
+    private Integer shippingFee;
     @Basic
     @Column(name = "payment_type_id", nullable = true)
     private Long paymentTypeId;
@@ -167,11 +167,11 @@ public class ShopOrdersEntity {
 
  
 
-    public BigDecimal getShippingFee() {
+    public Integer getShippingFee() {
         return shippingFee;
     }
 
-    public void setShippingFee(BigDecimal shippingFee) {
+    public void setShippingFee(Integer shippingFee) {
         this.shippingFee = shippingFee;
     }
 

@@ -54,4 +54,11 @@ public class AdminHomeController {
 		return "admin-template/pages/forms/form_order_products";
 
 	}
+	
+	@RequestMapping("/Statistical")
+	public String reportChart() {
+
+		return "admin-template/pages/charts/chartjs";
+
+	}
 }

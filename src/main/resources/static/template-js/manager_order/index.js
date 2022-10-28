@@ -53,7 +53,7 @@ async function drawTableOrderProducts(res) {
 			res.data.content[i].paymentTypeId = `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpngtree-pack-cash-icon-cartoon-style-png-image_1893446.jpeg?alt=media&token=e3fbbe97-9d3a-4cc5-b875-bbbf89e548bb`;
 		}
 		OrderHtml += `<tr>
-		<td>${i}</td>
+		<td>${i + 1}</td>
 		<td>${res.data.content[i].id}</td>
 		<td>${res.data.content[i].shipName}</td>
 	
@@ -83,12 +83,29 @@ async function drawTableOrderProducts(res) {
 
 }
 
+$(document).on('click', '.button-panigation-manager-product', async function() {
+	$('.button-panigation-manager-product').removeClass('active')
+	let page = $(this).val();
+	localStorage.setItem('currentPage', page);
+	let keyWord = $('#input-search-product-keyword').val();
+	let method = 'get',
+	url = `${api_admin}getOrderProducts`,
+	params = { keyword: keyWord , size:10, page: page},
+		data = {
+		};
+	let res = await axiosTemplate(method, url, params, data);
+	drawTableOrderProducts(res, $('#table-list-orders-products'))
+
+	let currentPage = localStorage.getItem('currentPage');
+	$(`.button-panigation-manager-product[value='${currentPage}']`).addClass('active')
+	
+})
 async function SearchOrderByKey() {
 
 	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',
 		url = `${api_admin}getOrderProducts`,
-		params = { keyword: keyWord },
+		params = { keyword: keyWord , page: 0 , size: 10},
 		data = {
 		};
 	let res = await axiosTemplate(method, url, params, data);

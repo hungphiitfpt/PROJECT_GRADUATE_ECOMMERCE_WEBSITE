@@ -1,3 +1,13 @@
+async function LoadStatisticsSales12Month() {
+	let method = 'get',
+		url = `${api_admin}statistics_sales_12_month`,
+		params = { },
+		data = {
+		};
+	let res = await axiosTemplate(method, url, params, data);
+
+}
+
 $(function() {
   /* ChartJS
    * -------
