@@ -19,7 +19,6 @@ async function loadAllDataTableOrders() {
 }
 
  function changeStatusOrder(x) {
-	let name_status = '';
 	let id = x.data('id');
 	let statusOrder = x.data('status');
 	statusOrder++;
@@ -31,25 +30,21 @@ async function loadAllDataTableOrders() {
 		params = { id: id, status: statusOrder },
 
 		data = {};
-	Swal.fire({
-		title: `Bạn có muốn chuyển trạng thái đơn hàng hiện tại thành ${name_status}?`,
-		showDenyButton: true, showCancelButton: true,
-		confirmButtonText: `Đồng Ý`,
-		denyButtonText: `Không Đồng Ý`,
-	}).then((result) => {
-		if (result.isConfirmed) {
-			let res =  axiosTemplate(method, url, params, data);
+
+		swal({
+			title: "Bạn có chắc chắn",
+			text: "thay đổi trạng thái đơn hàng",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Vâng, Tôi chắc chắn",
+			closeOnConfirm: false
+		  },
+		  async function(){
+			let res = await axiosTemplate(method, url, params, data);
 			loadAllDataTableOrders();
-			Swal.fire('Lưu Thành Công!', '', 'success')
-		} else if (result.isDenied) {
-			Swal.fire('Thay Đổi Không Được Lưu', '', 'info')
-		}
-	});
-
-
-
-
-
+			swal("Ok!", "Thay đổi trạng thái thành công", "success");
+		  });
 }
 async function drawTableOrderProducts(res) {
 	
