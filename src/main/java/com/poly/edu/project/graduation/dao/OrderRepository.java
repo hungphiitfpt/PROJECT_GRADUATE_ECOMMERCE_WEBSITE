@@ -1,10 +1,17 @@
 package com.poly.edu.project.graduation.dao;
 
+import java.sql.Timestamp;
+
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.http.ResponseEntity;
 
+import com.poly.edu.project.graduation.model.ResponseObject;
 import com.poly.edu.project.graduation.model.ShopOrdersEntity;
 
 public interface OrderRepository extends JpaRepository<ShopOrdersEntity, Long> {
@@ -20,5 +27,11 @@ public interface OrderRepository extends JpaRepository<ShopOrdersEntity, Long> {
 	
 	@Query(value = " SELECT * FROM shop_orders where id = ?1", nativeQuery =  true)
 	ShopOrdersEntity findOrdersDetailById(Long id);
+	
+	@Modifying  
+	@Query(value = "UPDATE shop_orders SET order_status = :status, updated_at = :update_at, "
+			+ "shipped_date = :shipped_date WHERE id  = :id ", nativeQuery = true)
+	@Transactional
+	void changeStatusOrder(Long status, String update_at, String shipped_date,Long id);
 
 }

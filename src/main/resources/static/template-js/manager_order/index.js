@@ -1,14 +1,14 @@
 $(function() {
 	loadAllDataTableOrders();
 })
-async function loadAllDataTableOrders(){
-    let keyWord = $('#input-search-product-keyword').val();
+async function loadAllDataTableOrders() {
+	let keyWord = $('#input-search-product-keyword').val();
 
 	let method = 'get',
 
 		url = `${api_admin}getOrderProducts`,
 
-		params = { keyword: keyWord , size:10},
+		params = { keyword: keyWord, size: 10 },
 
 		data = {};
 
@@ -18,46 +18,94 @@ async function loadAllDataTableOrders(){
 
 }
 
+ function changeStatusOrder(x) {
+	let name_status = '';
+	let id = x.data('id');
+	let statusOrder = x.data('status');
+	statusOrder++;
+
+	let method = 'post',
+
+		url = `${api_admin}changeStatusOrders`,
+
+		params = { id: id, status: statusOrder },
+
+		data = {};
+	Swal.fire({
+		title: `Bạn có muốn chuyển trạng thái đơn hàng hiện tại thành ${name_status}?`,
+		showDenyButton: true, showCancelButton: true,
+		confirmButtonText: `Đồng Ý`,
+		denyButtonText: `Không Đồng Ý`,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			let res =  axiosTemplate(method, url, params, data);
+			loadAllDataTableOrders();
+			Swal.fire('Lưu Thành Công!', '', 'success')
+		} else if (result.isDenied) {
+			Swal.fire('Thay Đổi Không Được Lưu', '', 'info')
+		}
+	});
+
+
+
+
+
+}
 async function drawTableOrderProducts(res) {
+	
 	let htmlStatusOrder = '';
 	let button = ``;
 	var OrderHtml = ``;
 	var pagination = ``;
 	for (let i = 0; i < res.data.content.length; i++) {
-        if (res.data.content[i].orderStatus == 0) {
+		if (res.data.content[i].orderStatus == 0) {
 			htmlStatusOrder = `<label class="badge badge-info">Chờ Xác Nhận</label>`;
+
 		}
-		 if(res.data.content[i].orderStatus == 1) {
+		else if (res.data.content[i].orderStatus == 1) {
 			htmlStatusOrder = `<label class="badge badge-warning">Chờ Shiper</label>`;
+
 		}
-		 if(res.data.content[i].orderStatus == 2) {
+		else if (res.data.content[i].orderStatus == 2) {
 			htmlStatusOrder = `<label class="badge badge-black">Đã Lấy Hàng</label>`;
+
 		}
-		 if(res.data.content[i].orderStatus == 3) {
+		else if (res.data.content[i].orderStatus == 3) {
 			htmlStatusOrder = `<label class="badge badge-danger">Đang Vận Chuyển</label>`;
+
 		}
-		 if(res.data.content[i].orderStatus == 4) {
+		else if (res.data.content[i].orderStatus == 4) {
 			htmlStatusOrder = `<label class="badge badge-primary">Đang Giao Hàng</label>`;
+
 		}
-		 if(res.data.content[i].orderStatus == 5) {
+		else if (res.data.content[i].orderStatus == 5) {
 			htmlStatusOrder = `<label class="badge badge-success">Đã Giao Hàng</label>`;
+
 		}
-        let totalPrice = formatMoney(`${res.data.content[i].totalPrice}`);
-		if (res.data.content[i].paymentTypeId == 1) {
-			res.data.content[i].paymentTypeId = `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2F07b8DkY.png?alt=media&token=e0a98186-3e3a-48e2-ae58-2b8c18b35747`;
+
+		if(res.data.content[i].orderStatus != 5) {
+			button = `<button onclick="changeStatusOrder($(this))" data-id="${res.data.content[i].id}" data-status="${res.data.content[i].orderStatus}" type="button"
+			class="btn btn-warning btn-rounded btn-icon">
+			<i class="typcn typcn-edit"></i>
+		</button>`
 		}
-        else if (res.data.content[i].paymentTypeId == 2) {
-			res.data.content[i].paymentTypeId = `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpaypal-logo.png?alt=media&token=2bbe128a-2368-4fde-8efa-5a336319d827`;
+		else {
+			button = '';
 		}
-        else {
-			res.data.content[i].paymentTypeId = `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpngtree-pack-cash-icon-cartoon-style-png-image_1893446.jpeg?alt=media&token=e3fbbe97-9d3a-4cc5-b875-bbbf89e548bb`;
-		}
+		let totalPrice = formatMoney(`${res.data.content[i].totalPrice}`);
+		// if (res.data.content[i].paymentTypeId == 1) {
+		// 	res.data.content[i].paymentTypeId = `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2F07b8DkY.png?alt=media&token=e0a98186-3e3a-48e2-ae58-2b8c18b35747`;
+		// }
+		// else if (res.data.content[i].paymentTypeId == 2) {
+		// 	res.data.content[i].paymentTypeId = `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpaypal-logo.png?alt=media&token=2bbe128a-2368-4fde-8efa-5a336319d827`;
+		// }
+		// else {
+		// 	res.data.content[i].paymentTypeId = `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpngtree-pack-cash-icon-cartoon-style-png-image_1893446.jpeg?alt=media&token=e3fbbe97-9d3a-4cc5-b875-bbbf89e548bb`;
+		// }
 		OrderHtml += `<tr>
 		<td>${i + 1}</td>
 		<td>${res.data.content[i].id}</td>
 		<td>${res.data.content[i].shipName}</td>
-	
-		<td class="text-center"><img  src="${res.data.content[i].paymentTypeId}"></img></td>
         <td class="text-center">${htmlStatusOrder}</td>
         <td>${totalPrice} VND</td>
 		<td style="width: 200px"><div class="row justify-content-around">
@@ -65,10 +113,7 @@ async function drawTableOrderProducts(res) {
 			class="btn btn-info btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="openModalDetailOrder($(this))" class="btn btn-info btn-lg" data-toggle="modal" data-target="#open_detail_product">
 			<i class="typcn typcn-eye"></i>
 		</button>
-		<button onclick="getDetailCategory($(this))" data-id="${res.data.content[i].id}" type="button"
-			class="btn btn-success btn-rounded btn-icon">
-			<i class="typcn typcn-edit"></i>
-		</button>
+		
 		${button}
 	</div></td>
 	  </tr>`;
@@ -89,8 +134,8 @@ $(document).on('click', '.button-panigation-manager-product', async function() {
 	localStorage.setItem('currentPage', page);
 	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',
-	url = `${api_admin}getOrderProducts`,
-	params = { keyword: keyWord , size:10, page: page},
+		url = `${api_admin}getOrderProducts`,
+		params = { keyword: keyWord, size: 10, page: page },
 		data = {
 		};
 	let res = await axiosTemplate(method, url, params, data);
@@ -98,14 +143,14 @@ $(document).on('click', '.button-panigation-manager-product', async function() {
 
 	let currentPage = localStorage.getItem('currentPage');
 	$(`.button-panigation-manager-product[value='${currentPage}']`).addClass('active')
-	
+
 })
 async function SearchOrderByKey() {
 
 	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',
 		url = `${api_admin}getOrderProducts`,
-		params = { keyword: keyWord , page: 0 , size: 10},
+		params = { keyword: keyWord, page: 0, size: 10 },
 		data = {
 		};
 	let res = await axiosTemplate(method, url, params, data);
@@ -129,17 +174,17 @@ async function openModalDetailOrder(r) {
 	$('#addres-user-ship').val(res.data.data.shipAddress);
 	$('#state-user-ship').val(res.data.data.shipState);
 	$('#city-user-ship').val(res.data.data.shipCity);
-	if(res.data.data.paymentTypeId == 0) {
-		$('#credit-card-image').attr('src',`https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpngtree-pack-cash-icon-cartoon-style-png-image_1893446.jpeg?alt=media&token=e3fbbe97-9d3a-4cc5-b875-bbbf89e548bb`);
+	if (res.data.data.paymentTypeId == 0) {
+		$('#credit-card-image').attr('src', `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpngtree-pack-cash-icon-cartoon-style-png-image_1893446.jpeg?alt=media&token=e3fbbe97-9d3a-4cc5-b875-bbbf89e548bb`);
 	}
-	else if(res.data.data.paymentTypeId == 1){
-		$('#credit-card-image').attr('src',`https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2F07b8DkY.png?alt=media&token=e0a98186-3e3a-48e2-ae58-2b8c18b35747`);
+	else if (res.data.data.paymentTypeId == 1) {
+		$('#credit-card-image').attr('src', `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2F07b8DkY.png?alt=media&token=e0a98186-3e3a-48e2-ae58-2b8c18b35747`);
 	}
 	else {
-		$('#credit-card-image').attr('src',`https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpaypal-logo.png?alt=media&token=2bbe128a-2368-4fde-8efa-5a336319d827`);
+		$('#credit-card-image').attr('src', `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpaypal-logo.png?alt=media&token=2bbe128a-2368-4fde-8efa-5a336319d827`);
 	}
 	for (let i = 0; i < res.data.data.shopOrderDetailsById.length; i++) {
-		let money = formatMoney(`${res.data.data.shopOrderDetailsById[i].price}`); 
+		let money = formatMoney(`${res.data.data.shopOrderDetailsById[i].price}`);
 		listProductOrder += `<table class="order-table">
 		<tbody>
 		  <tr>
@@ -160,15 +205,9 @@ async function openModalDetailOrder(r) {
 
 	  </table>
 	  <div class="line"></div>`
-		
+
 	}
 	$('#list-product-ordering').html(listProductOrder);
-	// let checkIsDeleted = res.data.data.deleted;
-	// console.log(checkIsDeleted);
-	// if (checkIsDeleted == true) {
-	// 	$('#pending-product').prop("checked", true);
-	// } else {
-	// 	$('#open-product').prop("checked", true);
-	// }
+
 
 }
