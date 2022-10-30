@@ -61,7 +61,7 @@
 					<div class="col-xl-6 col-lg-7">
 						<nav class="header__menu">
 							<ul>
-								<li class="active"><a th:href="@{/index}">Trang Chủ</a></li>
+								<!-- 	<li class="active"><a th:href="@{/index}">Trang Chủ</a></li> -->
 								<!--   <li><a href="#">Women’s</a></li>
                             <li><a href="#">Men’s</a></li> -->
 								<li><a th:href="@{/shop}">Cửa Hàng</a></li>
@@ -74,20 +74,43 @@
 									</ul></li>
 								<li><a th:href="@{/blog}">Blog</a></li>
 								<li><a th:href="@{/contact}">Kết Nối Với Chúng Tôi</a></li>
-								<li><a th:href="@{/manager_product}">Admin</a></li>
+								<li><a th:href="@{/admin/manager_product}">Admin</a></li>
 							</ul>
 						</nav>
 					</div>
 					<div class="col-lg-3">
 						<div class="header__right">
-							<div class="header__right__auth">
-								<a th:href="@{/logon}">Đăng Nhập</a> <a th:href="@{/register}">Đăng Ký</a> <a th:href="@{/manager_product}">Quản Trị</a>
+						<!-- 	<div class="header__right__auth">
+								<a th:if="${userInfo != null}">
+									<h1 th:text="${#request.userPrincipal.name}"></h1>
+								</a> 
+								
+								<a th:if="${#request.userPrincipal != null}"
+									th:href="@{/logout}">Logout</a> 
+									<a th:if="${userInfo == null}"
+									th:href="@{/login}">Đăng Nhập</a> 
+									<a
+									th:if="${userInfo == null}" th:href="@{/register}">Đăng Ký</a> 
+									<a
+									th:href="@{/manager_product}">Quản Trị</a>
+							</div> -->
+							<div class="header__right__auth mb-3">
+								 <span  
+								th:if="${#request.userPrincipal != null}" 
+								th:text="'Hello, '+${#request.userPrincipal.name}" class="name-user-login"></span> 
+								<a th:if="${#request.userPrincipal != null}"
+									th:href="@{/logout}">Logout</a> 
+								
+								<a th:href="@{/login}" th:if="${#request.userPrincipal == null}">Đăng Nhập</a> 
+								<!-- <a th:href="@{/register}" th:if="${#request.userPrincipal == null}">Đăng Ký</a>  -->
+								<a th:href="@{/admin/manager_product}">Quản Lý</a>
 							</div>
 							<ul class="header__right__widget">
 								<li><span class="icon_search search-switch"></span></li>
 								<li><a href="#"><span class="icon_heart_alt"></span>
 										<div class="tip">0</div> </a></li>
-								<li><a  th:href="@{/checkout}"><span class="icon_bag_alt"></span>
+								<li><a th:href="@{/checkout}"><span
+										class="icon_bag_alt"></span>
 
 										<div class="tip count-quantity-cart" th:if="${cartStarts}">
 											<span th:text="${cartStarts.counter}"></span>

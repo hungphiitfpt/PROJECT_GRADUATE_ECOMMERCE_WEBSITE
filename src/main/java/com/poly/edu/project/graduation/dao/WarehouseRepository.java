@@ -9,11 +9,12 @@ import com.poly.edu.project.graduation.model.ShopWarehouseEntity;
 
 public interface WarehouseRepository extends JpaRepository<ShopWarehouseEntity, Integer>{
 
-	@Query(value = "SELECT  * from shop_warehouse where id = :keyword "
-			+ "OR product_id = :keyword "
-			+ "OR quantity =  :keyword "
-			+ "OR note =  :keyword "
-			+ "OR create_date   LIKE CONCAT('%',:keyword,'%') ", nativeQuery = true)
+	@Query(value = "SELECT * FROM shop_warehouse  WHERE (( :keyword <> '' AND (shop_warehouse.note LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_warehouse.product_id LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_warehouse.quantity LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_warehouse.create_date LIKE CONCAT('%',:keyword,'%') "
+			+ "OR shop_warehouse.status LIKE CONCAT('%',:keyword,'%'))) "
+			+ "OR :keyword = '')", nativeQuery = true)
 	Page<ShopWarehouseEntity> findAllWarehouseByKey(String keyword, Pageable pageable);
 
 }

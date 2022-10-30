@@ -34,6 +34,7 @@ public class CheckOutController {
 	  @RequestMapping(value = "/addInfoUser", method = RequestMethod.POST)
 	  public String doAddEmployee(@ModelAttribute("employee") ShopOrdersEntity employee, ModelMap modelMap,HttpSession session) { 
 	    session.setAttribute("userInf", employee);
+	    System.out.println(employee.getShippingFee());
 	    return "redirect:/order-page";
 	  }
 

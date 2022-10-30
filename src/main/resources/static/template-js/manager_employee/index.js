@@ -113,9 +113,9 @@ async function drawTableUsersManager(res) {
 		</button>`
 		}
 		ProductHTML += `<tr>
-		<td>${res.data.content[i].id}</td>
-		<td>${res.data.content[i].username}</td>
-		<td>${res.data.content[i].lastName}</td>
+		<td>${res.data.content[i].userId}</td>
+		<td>${res.data.content[i].userName}</td>
+		<td>${res.data.content[i].firstName} ${res.data.content[i].lastName}</td>
 		<td class="text-center"><img class="image-avatar-employee-manager" src="${res.data.content[i].avatar}"></img></td>
         <td> ${res.data.content[i].city}</td>
         <td>${res.data.content[i].deleted}</td>

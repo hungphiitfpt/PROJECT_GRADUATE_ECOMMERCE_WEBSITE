@@ -25,12 +25,12 @@ async function loadAllProduct() {
 }
 
 async function loadWarehouse() {
-
+	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',
 
 		url = `${api_admin}getAllWarehouse`,
 
-		params = {},
+		params = {keyword: keyWord, size: 10},
 
 		data = {};
 

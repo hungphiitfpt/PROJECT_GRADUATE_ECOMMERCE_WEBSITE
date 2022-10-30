@@ -55,7 +55,8 @@
 				<div class="col-lg-12">
 					<div class="breadcrumb__links">
 						<a th:href="@{/index}"><i class="fa fa-home"></i> Home</a> <a
-							th:href="@{/shop}">Shop </a> <span th:text="${product.productName}"></span>
+							th:href="@{/shop}">Shop </a> <span
+							th:text="${product.productName}"></span>
 					</div>
 				</div>
 			</div>
@@ -68,29 +69,45 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
-					<div class="product__details__pic">
+					<div class="product__details__pic" th:if!="${images.isEmpty()}">
 						<div
 							class="product__details__pic__left product__thumb nice-scroll">
 							<a class="pt active" href="#product-1"
-								th:each="images : ${images}"> <img th:src="${images.image}"
-								alt="">
+								th:each="images : ${images}"> <img th:if="${images.image}"
+								th:src="${images.image}" alt="">
 							</a>
-
 						</div>
 						<div class="product__details__slider__content">
 							<div class="product__details__pic__slider owl-carousel">
-
-								<img th:each="images : ${images}" data-hash="product-1"
+								<img th:each="images : ${images}" th:data-hash="${images.image}"
 									class="product__big__img" th:src="${images.image}" alt="">
-
 							</div>
 						</div>
 					</div>
+
+					<div class="product__details__pic" th:if="${images.isEmpty()}">
+						<div
+							class="product__details__pic__left product__thumb nice-scroll">
+							<a class="pt active" href="#product-1"> <img
+								src="https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fnoimage.jpeg?alt=media&token=da789718-37ac-44c9-9fa3-41f1867eeb64" alt="">
+							</a>
+						</div>
+						<div class="product__details__slider__content">
+							<div class="product__details__pic__slider owl-carousel">
+								<img data-hash="" class="product__big__img"
+									src="https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fnoimage.jpeg?alt=media&token=da789718-37ac-44c9-9fa3-41f1867eeb64"
+									alt="">
+							</div>
+						</div>
+					</div>
+
 				</div>
 				<div class="col-lg-6">
 					<div class="product__details__text">
 						<h3 th:text="${product.productName}" id="title-product-detail"
-							th:data-id="${product.id}" th:data-categoryid="${product.categoryId}">Essential structured blazer</h3>
+							th:data-id="${product.id}"
+							th:data-categoryid="${product.categoryId}">Essential
+							structured blazer</h3>
 						<div class="rating">
 							<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 								class="fa fa-star"></i> <i class="fa fa-star"></i> <i
@@ -99,10 +116,10 @@
 						</div>
 						<div class="row">
 							<div class="product__details__price"
-								th:text="${#numbers.formatDecimal( product.listPrice * (100- product.discountinued)/100, 0, 'COMMA', 0, 'POINT')} + ' ₫' ">$
+								th:text="${#numbers.formatDecimal( product.listPrice * (100- product.discountinued)/100, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' ">$
 								75.0</div>
 							<span class="ml-5 product__details__price"
-								th:text="${#numbers.formatDecimal(product.listPrice, 0, 'COMMA', 0, 'POINT')} + ' ₫'">$
+								th:text="${#numbers.formatDecimal(product.listPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'">$
 								83.0</span>
 						</div>
 						<p th:text="${product.shortDecription}">Nemo enim ipsam
@@ -116,8 +133,12 @@
 									<input type="text" th:value="${product.quantityPerUnit}">
 								</div>
 							</div>
-							<a href="#" class="cart-btn"><span class="icon_bag_alt"></span>
-								Add to cart</a>
+							<a href="#" th:data-id="|${product.id}|"
+								th:data-name="|${product.productName}|"
+								th:data-price="|${product.listPrice}|"
+								th:data-image="|${product.image}|"
+								th:onclick="addCartProductSingle($(this))" th:class="cart-btn"><span
+								class="icon_bag_alt"></span> Add to cart</a>
 							<ul>
 								<li><a href="#"><span class="icon_heart_alt"></span></a></li>
 							</ul>
@@ -126,21 +147,17 @@
 							<ul>
 								<li><span>Số lượng:</span>
 									<div class="stock__checkbox">
-									<div th:switch="${product.quantityPerUnit}">
-									<label for="stockin" th:case="0"> Hết Hàng <input type="checkbox"
-											id="stockin" checked> <span class="checkmark"></span>
-										</label>
-										<label for="stockin" th:case="*"> Còn Hàng <input type="checkbox"
-											id="stockin" checked> <span class="checkmark"></span>
-										</label>					
-									</div>
+										<div th:switch="${product.quantityPerUnit}">
+											<label for="stockin" th:case="0"> Hết Hàng <input
+												type="checkbox" id="stockin" checked> <span
+												class="checkmark"></span>
+											</label> <label for="stockin" th:case="*"> Còn Hàng <input
+												type="checkbox" id="stockin" checked> <span
+												class="checkmark"></span>
+											</label>
+										</div>
 									</div></li>
-								<li><span>Phí ship cơ bản:</span>
-									<div th:switch="${product.standCost}">
-										<p th:case="'0'">Miễn phí giao hàng</p>
-										<p th:case="*" th:text="${product.standCost}"></p>
-									</div>
-									</li>
+								<li><span>Phí ship cơ bản:</span> 23,000 VNĐ</li>
 							</ul>
 						</div>
 					</div>
@@ -197,11 +214,7 @@
 						<h5>RELATED PRODUCTS</h5>
 					</div>
 				</div>
-				<div id="list_product_random" class="col-lg-12 row">
-				
-			
-				
-				</div>
+				<div id="list_product_random" class="col-lg-12 row"></div>
 			</div>
 		</div>
 	</section>

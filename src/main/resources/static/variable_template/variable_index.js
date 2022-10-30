@@ -5,7 +5,7 @@ var api_images = `https://agriculturalstorev001.herokuapp.com/api/v1/FileUpload/
 var api_upload = `https://agriculturalstorev001.herokuapp.com/api/v1/FileUpload`;
 
 sessionStorage.removeItem("image");
-
+localStorage.setItem('currentPage', 0);
 async function axiosTemplate(method, url, params, data) {
 	let res = await axios({
 		method: method, url: url, params: params, data: data

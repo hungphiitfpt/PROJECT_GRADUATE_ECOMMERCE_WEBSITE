@@ -109,6 +109,8 @@ public class CartRestController {
 		
 		orderService.CreateOrder((Map<Long, CartEntity>) session.getAttribute("cart"), session);
 		session.removeAttribute("cart");
+		session.removeAttribute("countCartItems");
+		session.removeAttribute("userInf");
 		return HttpStatus.OK;
 
 	}

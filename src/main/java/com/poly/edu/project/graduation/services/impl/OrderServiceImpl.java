@@ -39,16 +39,18 @@ public class OrderServiceImpl implements OrderService {
 	public boolean CreateOrder(Map<Long, CartEntity> cart,HttpSession session) {
 		try {
 			ShopOrdersEntity ordersEntity = (ShopOrdersEntity) session.getAttribute("userInf");
-			ordersEntity.setUserId((long) 13);
+			System.out.println(ordersEntity.getShippingFee());
+			ordersEntity.setUserId((long) 1);
 			ordersEntity.setShipName(ordersEntity.getShipName());
-			ordersEntity.setShipAddress(ordersEntity.getShipAddress());
+			ordersEntity.setShipAddress(ordersEntity.getShipAddress().trim());
 			ordersEntity.setShipCity(ordersEntity.getShipCity());
 			ordersEntity.setShipState(ordersEntity.getShipState());
 			ordersEntity.setShippingFee(ordersEntity.getShippingFee());
 			ordersEntity.setPaymentTypeId(ordersEntity.getPaymentTypeId());
 			ordersEntity.setOrderStatus(0);
 			Map<String, String> stats = Utils.cartStarts(cart);
-			ordersEntity.setTotalPrice(Long.parseLong(stats.get("amount")));
+			ordersEntity.setTotalPrice(Integer.parseInt(stats.get("amount")));
+			
 			orderRepository.save(ordersEntity);
 			for (CartEntity s : cart.values()) {
 				ShopOrderDetailEntity detailEntity = new ShopOrderDetailEntity();

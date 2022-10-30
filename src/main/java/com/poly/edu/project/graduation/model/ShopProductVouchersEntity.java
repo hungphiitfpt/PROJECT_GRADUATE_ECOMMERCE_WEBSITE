@@ -5,7 +5,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Timestamp;
 
@@ -33,9 +33,8 @@ public class ShopProductVouchersEntity {
     @Basic
     @Column(name = "isdeleted_at", nullable = true)
     private Boolean isdeletedAt;
-    
     @ManyToOne
-    @JsonBackReference
+    @JsonIgnore
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopProductsEntity shopProductsByProductId;
 

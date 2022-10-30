@@ -33,6 +33,7 @@ $('.total-price-cart').text(formatVND(res.data.amount));
 $('.total-quantity-cart').text(formatVND(res.data.counter));
 }
 
+
 async function deleteItemCart(productId, r){
 	let x = r;
 	event.preventDefault();

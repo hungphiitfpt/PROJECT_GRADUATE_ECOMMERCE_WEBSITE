@@ -1,7 +1,5 @@
 package com.poly.edu.project.graduation.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.edu.project.graduation.model.ResponseObject;
-import com.poly.edu.project.graduation.model.ShopProductsEntity;
 import com.poly.edu.project.graduation.model.ShopWarehouseEntity;
-import com.poly.edu.project.graduation.model.UserEntity;
 import com.poly.edu.project.graduation.services.WarehouseService;
 
 @RestController

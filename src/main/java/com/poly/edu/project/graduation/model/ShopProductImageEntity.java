@@ -2,27 +2,23 @@ package com.poly.edu.project.graduation.model;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "shop_product_image", schema = "ecommer_db", catalog = "")
 public class ShopProductImageEntity {
-	
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
     private long id;
-    
     @Basic
     @Column(name = "product_id", nullable = true)
     private Long productId;
-    
     @Basic
     @Column(name = "image", nullable = true, length = 200)
     private String image;
-    
     @ManyToOne
-    @JsonBackReference
+    @JsonIgnore
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopProductsEntity shopProductsByProductId;
 

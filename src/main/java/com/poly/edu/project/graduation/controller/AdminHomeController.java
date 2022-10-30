@@ -11,7 +11,7 @@ import com.poly.edu.project.graduation.dao.ProductsRepository;
 import com.poly.edu.project.graduation.services.ProductServices;
 
 @Controller
-
+@RequestMapping("/admin")
 public class AdminHomeController {
 
 	@Autowired

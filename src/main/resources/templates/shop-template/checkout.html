@@ -113,7 +113,7 @@
 									<p>
 										Phí ship cơ bản <span>*</span>
 									</p>
-									<input type="text" name="shippingFee" >
+									<input type="text" name="shippingFee" value="23000" >
 								</div>
 							</div>
 
@@ -144,8 +144,9 @@
 							</div>
 							<div class="checkout__order__total">
 								<ul>
-									<li>Subtotal <span th:text="${cartStarts.counter}">$ 750.0</span></li>
-									<li>Total <span
+									<li>Số lượng <span th:text="${cartStarts.counter}">$ 750.0</span></li>
+									<li>Phí Ship <span th:text="23000">$ 750.0</span></li>
+									<li>Tổng tiền <span
 										th:text="${#numbers.formatDecimal(cartStarts.amount, 0, 'COMMA', 0, 'POINT')} + ' ₫'">$
 											750.0</span></li>
 								</ul>
@@ -157,9 +158,9 @@
 								<p>Create am acount by entering the information below. If
 									you are a returing customer login at the top of the page.</p>
 								<label for="check-payment"> Thanh toán bằng tiền mặt <input
-									type="checkbox" id="check-payment" name="paymentTypeId" value="0"> <span
+									type="radio" id="check-payment" name="paymentTypeId" value="0"> <span
 									class="checkmark"></span>
-								</label> <label for="paypal"> Thanh toán banking <input type="checkbox" id="paypal" name="paymentTypeId" value="1"> <span class="checkmark"></span>
+								</label> <label for="paypal"> Thanh toán banking <input type="radio" id="paypal" name="paymentTypeId" value="1"> <span class="checkmark"></span>
 								</label>
 							</div>
 							<button type="submit" class="site-btn">

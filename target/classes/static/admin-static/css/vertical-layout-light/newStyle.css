@@ -403,7 +403,7 @@ ul li:hover {
   margin-top:25px;
   font-size:20px;
   font-size:1.3rem;
-  position:absolute;
+/*   position:absolute; */
   bottom:30px;
   right:27px;
   left:35px;
@@ -665,4 +665,8 @@ ul li:hover {
     .process-model.more-icon-preocess {
         text-align: center;
     }
+}
+
+.order-info-content {
+	overflow: auto;
 }

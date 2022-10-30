@@ -25,22 +25,21 @@
 							<div class="brand-logo">
 								<img src="../admin-static/images/logo-dark.svg" alt="logo">
 							</div>
-							<div th:if="${param.error}">
+							<div th:if="${#request.getParameter('error') == 'true'}">
 								<div class="alert alert-danger">Bạn nhập sai email và mật
 									khẩu.</div>
 							</div>
 							<h4>Chào mừng bạn đến với chúng tôi</h4>
 							<h6 class="font-weight-light">Đăng nhập để tiếp tục.</h6>
-							<form class="pt-3" method="post" th:action="@{/login}"
+							<form class="pt-3" name='f' th:action="@{/j_spring_security_check}" method='POST'
 								role="form">
 								<div class="form-group">
-									<input type="email" name="username"
-										class="form-control form-control-lg" id="username"
-										placeholder="Username">
+									<input class="form-control form-control-lg" id="username"
+										type='text' name='username' value='' placeholder="Nhập vào username"/>
 								</div>
 								<div class="form-group">
 									<input type="password" class="form-control form-control-lg"
-										id="password" name="password" placeholder="Password">
+										id="password"  name='password' placeholder="Nhập vào password" />
 								</div>
 								<div class="mt-3">
 									<button type="submit"
@@ -50,8 +49,9 @@
 								<div
 									class="my-2 d-flex justify-content-between align-items-center">
 									<div class="form-check">
-										<label class="form-check-label text-muted"> <input
-											type="checkbox" class="form-check-input"> Keep me
+										<label class="form-check-label text-muted"> 
+										<input class="form-check-input"
+										type="checkbox" name="remember-me"> Keep me
 											signed in
 										</label>
 									</div>
@@ -73,7 +73,7 @@
 								</div>
 								<div class="text-center mt-4 font-weight-light">
 									Tài Khoản DEMO :
-									<p>USER: admin@gmail.com</p>
+									<p>USER: dbadmin1</p>
 									<p>PASS: 123</p>
 								</div>
 								<div class="text-center mt-4 font-weight-light">

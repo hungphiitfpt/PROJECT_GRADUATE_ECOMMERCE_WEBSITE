@@ -25,7 +25,7 @@ import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
 import com.poly.edu.project.graduation.services.CategoryServices;
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/graduation")
 public class CategoryRestController {
 
 	@Autowired

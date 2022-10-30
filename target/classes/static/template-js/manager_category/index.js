@@ -5,7 +5,7 @@ async function loadAllDataTableCategory() {
 
 	let method = 'get',
 
-		url = `${api_admin}getCategory`,
+		url = `${api_graduation}getCategory`,
 
 		params = null,
 
@@ -68,7 +68,7 @@ async function insertCategory() {
 	}
 	console.log($('.error.vad-false').length);
 	let method = 'post',
-		url = `${api_admin}insert_category`,
+		url = `${api_graduation}insert_category`,
 		params = {},
 		data = {
 			categoryCode: $('#code-create-manager-category').val(),
@@ -87,7 +87,7 @@ async function updateCategory() {
 		return false;
 	}
 	let method = 'post',
-		url = `${api_admin}update_category`,
+		url = `${api_graduation}update_category`,
 		params = {
 			id: $('#id-create-manager-category').val(),
 		},
@@ -194,7 +194,7 @@ async function getDetailCategory(r) {
 	$('#btn-update-product').removeClass("d-none")
 	let id = r.data('id');
 	let method = 'get',
-		url = `${api_admin}getCategoryById`,
+		url = `${api_graduation}getCategoryById`,
 		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
@@ -228,7 +228,7 @@ function clearData() {
 async function UpdateChangeCategoryDelete(r) {
 	let id = r.data('id');
 	let method = 'post',
-		url = `${api_admin}update_category/isdeleted`,
+		url = `${api_graduation}update_category/isdeleted`,
 		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
@@ -240,7 +240,7 @@ async function UpdateChangeCategoryDelete(r) {
 async function UpdateCategoryInstock(r) {
 	let id = r.data('id');
 	let method = 'post',
-		url = `${api_admin}update_category/in_stock`,
+		url = `${api_graduation}update_category/in_stock`,
 		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);

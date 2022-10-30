@@ -55,7 +55,7 @@ public class ProductsRestController {
 			@RequestParam(name = "priceStart", required = false, defaultValue = "0") String priceStart,
 			@RequestParam(name = "priceEnd", required = false, defaultValue = "999999999") String priceEnd,
 			@RequestParam(name = "idCategory", required = false, defaultValue = "") Long idCategory,
-			@RequestParam(name = "size", required = false, defaultValue = "10") int size,
+			@RequestParam(name = "size", required = false, defaultValue = "9") int size,
 			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) throws Exception {
 		try {

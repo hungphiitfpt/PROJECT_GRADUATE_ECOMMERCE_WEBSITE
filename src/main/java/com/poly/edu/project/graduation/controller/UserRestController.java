@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.poly.edu.project.graduation.dao.UserRepository;
+import com.poly.edu.project.graduation.model.AppUserEntity;
 import com.poly.edu.project.graduation.model.ResponseObject;
-import com.poly.edu.project.graduation.model.UserEntity;
 import com.poly.edu.project.graduation.services.UserService;
 
 @RestController
@@ -32,13 +32,13 @@ public class UserRestController {
 	
 	// api lấy tất cả sản phẩm search theo keyword nhập vào
 	@RequestMapping(value = "/getUsers", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Page<UserEntity> findListProductByKey(
+	public Page<AppUserEntity> findListProductByKey(
 			@RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
 			@RequestParam(name = "size", required = false, defaultValue = "10") int size,
 			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) throws Exception {
 		try {
-			Page<UserEntity> dataUsers = userService.findByKeyWord(keyword, PageRequest.of(page, size));
+			Page<AppUserEntity> dataUsers = userService.findByKeyWord(keyword, PageRequest.of(page, size));
 			return dataUsers;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -53,7 +53,7 @@ public class UserRestController {
 	// Let's return an object with: data, message, status
 	ResponseEntity<ResponseObject> findById(@RequestParam(name = "id") Long id) {
 		try {
-			Optional<UserEntity> foundProduct = userRepository.findById(id);
+			Optional<AppUserEntity> foundProduct = userRepository.findById(id);
 			return foundProduct.isPresent()
 					? ResponseEntity.status(HttpStatus.OK)
 							.body(new ResponseObject("ok", "Tìm sản phẩm thành công", foundProduct))

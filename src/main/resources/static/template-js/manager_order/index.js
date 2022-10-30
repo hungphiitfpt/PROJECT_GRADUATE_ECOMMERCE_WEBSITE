@@ -1,14 +1,20 @@
+
 $(function() {
 	loadAllDataTableOrders();
 })
 async function loadAllDataTableOrders() {
+	let currentPage = localStorage.getItem('currentPage');
 	let keyWord = $('#input-search-product-keyword').val();
-
+	if(currentPage == null || currentPage == undefined || currentPage == "" ) {
+		currentPage = 0;
+	}
+	console.log(currentPage);
+	
 	let method = 'get',
 
 		url = `${api_admin}getOrderProducts`,
 
-		params = { keyword: keyWord, size: 10 },
+		params = { keyword: keyWord, size: 10, page : currentPage },
 
 		data = {};
 
@@ -19,15 +25,20 @@ async function loadAllDataTableOrders() {
 }
 
  function changeStatusOrder(x) {
+	
 	let id = x.data('id');
+
 	let statusOrder = x.data('status');
+
+	console.log(statusOrder);
+
 	statusOrder++;
 
 	let method = 'post',
 
 		url = `${api_admin}changeStatusOrders`,
 
-		params = { id: id, status: statusOrder },
+		params = { id: id, status: statusOrder  },
 
 		data = {};
 
@@ -47,7 +58,7 @@ async function loadAllDataTableOrders() {
 		  });
 }
 async function drawTableOrderProducts(res) {
-	
+	let currentPage = localStorage.getItem('currentPage');
 	let htmlStatusOrder = '';
 	let button = ``;
 	var OrderHtml = ``;
@@ -105,7 +116,7 @@ async function drawTableOrderProducts(res) {
         <td>${totalPrice} VND</td>
 		<td style="width: 200px"><div class="row justify-content-around">
 		<button type="button"
-			class="btn btn-info btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="openModalDetailOrder($(this))" class="btn btn-info btn-lg" data-toggle="modal" data-target="#open_detail_product">
+			class="btn btn-info btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="openModalDetailOrder($(this))" class="btn btn-info btn-lg" data-toggle="modal"  data-target="#open_detail_product">
 			<i class="typcn typcn-eye"></i>
 		</button>
 		
@@ -120,7 +131,7 @@ async function drawTableOrderProducts(res) {
 	}
 	$('#panigation-manager-product').html(pagination);
 	$('#table-list-orders-products').html(OrderHtml);
-
+	$(`.button-panigation-manager-product[value='${currentPage}']`).addClass('active')
 }
 
 $(document).on('click', '.button-panigation-manager-product', async function() {
@@ -137,19 +148,22 @@ $(document).on('click', '.button-panigation-manager-product', async function() {
 	drawTableOrderProducts(res, $('#table-list-orders-products'))
 
 	let currentPage = localStorage.getItem('currentPage');
+	$(`.button-panigation-manager-product`).removeClass('active')
 	$(`.button-panigation-manager-product[value='${currentPage}']`).addClass('active')
 
 })
 async function SearchOrderByKey() {
-
+	let currentPage = localStorage.getItem('currentPage');
+	if(currentPage == null || currentPage == undefined || currentPage == "" ) {
+		currentPage = 0;
+	}
 	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',
 		url = `${api_admin}getOrderProducts`,
-		params = { keyword: keyWord, page: 0, size: 10 },
+		params = { keyword: keyWord, page: currentPage, size: 10 },
 		data = {
 		};
 	let res = await axiosTemplate(method, url, params, data);
-	console.log(res);
 	drawTableOrderProducts(res, $('#table-list-orders-products'))
 	sweatAlert("Tìm Kiếm Thành Công", "success")
 }
@@ -165,6 +179,10 @@ async function openModalDetailOrder(r) {
 		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
+	
+	
+	$('.fee-dilevery').text(formatMoney(`${res.data.data.shippingFee}`)+ ' VNĐ')
+	$('.total-price').text(formatMoney(`${res.data.data.totalPrice}`)+ ' VNĐ')
 	$('#name-user-order').val(res.data.data.shipName);
 	$('#addres-user-ship').val(res.data.data.shipAddress);
 	$('#state-user-ship').val(res.data.data.shipState);
@@ -178,6 +196,25 @@ async function openModalDetailOrder(r) {
 	else {
 		$('#credit-card-image').attr('src', `https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fpaypal-logo.png?alt=media&token=2bbe128a-2368-4fde-8efa-5a336319d827`);
 	}
+
+	if (res.data.data.orderStatus == 0) {
+		$('#status-delivery').text("Chờ Xác Nhận")
+	}
+	else if (res.data.data.orderStatus == 1) {
+		$('#status-delivery').text("Chờ Shiper Lấy Hàng");
+	}
+	else if (res.data.data.orderStatus == 2) {
+		$('#status-delivery').text("Đã Lấy Hàng");
+	}
+	else if (res.data.data.orderStatus == 3) {
+		$('#status-delivery').text("Đang Vận Chuyển");
+	}
+	else if (res.data.data.orderStatus == 4) {
+		$('#status-delivery').text("Đang Giao Hàng");
+	}
+	else if (res.data.data.orderStatus == 5) {
+		$('#status-delivery').text("Đã Giao Hàng");
+	}
 	for (let i = 0; i < res.data.data.shopOrderDetailsById.length; i++) {
 		let money = formatMoney(`${res.data.data.shopOrderDetailsById[i].price}`);
 		listProductOrder += `<table class="order-table">
@@ -187,7 +224,7 @@ async function openModalDetailOrder(r) {
 			</td>
 			<td>
 			  <br> <span class="thin">${res.data.data.shopOrderDetailsById[i].productName}</span>
-			  <br> Free Run 3.0 Women<br> <span class="thin small"> Color: Grey/Orange, Size: 10.5<br><br></span>
+			  <br> Free Run 3.0 Women<br> <span class="thin small">Số Lượng Đặt Hàng: ${res.data.data.shopOrderDetailsById[i].quantity}<br><br></span>
 			</td>
 
 		  </tr>
@@ -203,6 +240,4 @@ async function openModalDetailOrder(r) {
 
 	}
 	$('#list-product-ordering').html(listProductOrder);
-
-
 }

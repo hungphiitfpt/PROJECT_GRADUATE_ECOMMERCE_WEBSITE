@@ -27,6 +27,7 @@ public class Utils {
 	 * @return
 	 */
 	public static Map<String, String>cartStarts(Map<Long, CartEntity> cart){
+		int shippingFee = 23000;
 		Long totalPrice = 0l;
 		int quantity = 0;
 		if (cart != null)
@@ -36,7 +37,7 @@ public class Utils {
 			}
 		Map<String, String>  kq = new HashMap<>();
 		kq.put("counter", String.valueOf(quantity));
-		kq.put("amount", String.valueOf(totalPrice));
+		kq.put("amount", String.valueOf(totalPrice + shippingFee));
 		return kq;
 
 	}

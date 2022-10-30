@@ -22,12 +22,24 @@ public class CartEntity {
 
 	private Timestamp dateAllocated;
 
-	private Long price;
+	private Integer price;
 	
 	private Long payment_type_id;
 	
+	private Integer shippingFee;
+	 
 	private String image;
 	
+	
+
+	
+	public Integer getShippingFee() {
+		return shippingFee;
+	}
+
+	public void setShippingFee(Integer shippingFee) {
+		this.shippingFee = shippingFee;
+	}
 
 	public Long getPayment_type_id() {
 		return payment_type_id;
@@ -49,11 +61,11 @@ public class CartEntity {
 		this.id = id;
 	}
 
-	public Long getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(Long price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 

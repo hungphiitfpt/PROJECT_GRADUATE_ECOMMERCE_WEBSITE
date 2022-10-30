@@ -31,6 +31,8 @@ public class CartController {
 		  } else {
 			  model.addAttribute("cart", null);
 		  }
+		 ;
+		  model.addAttribute("inf",session.getAttribute("userInf"));
 		  model.addAttribute("cartStarts", Utils.cartStarts(cartItems));
 		// Trả về trang shop cart
 		return "shop-template/shop-cart";

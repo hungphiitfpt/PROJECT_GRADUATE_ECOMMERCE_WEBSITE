@@ -15,15 +15,12 @@ async function loadAlllProductShop() {
 	let res = await axiosTemplate(method, url, params, data);
 	
 	drawDataProductShop(res);
-
-	sweatAlert("Tìm Kiếm Thành Công", "success")
-
 }
 
 async function loadAlllCategoryShop() {
 	let categoryHTML = ``;
 	let method = 'get',
-		url = `${api_admin}getCategory`,
+		url = `${api_graduation}getCategory`,
 		params = { size: 100 },
 		data = {
 		};
@@ -39,12 +36,13 @@ async function loadAlllCategoryShop() {
     </button>`;
 	}
 	$('#list-category-shop').html(categoryHTML);
-	sweatAlert("Tìm Kiếm Thành Công", "success")
+
 }
 
-$(document).on('click', '.button-panigation-manager-product', async function() {
-	$('.button-panigation-manager-product').removeClass('pagination__number pagination__number--active')
-	let page = $(this).val();
+$(document).on('click', '.page-link', async function() {
+	event.preventDefault();
+	$('.page-link').removeClass('pagination__number pagination__number--active')
+	let page = $(this).text();
 	localStorage.setItem('currentPage', page);
 	let method = 'get',
 		url = `${api_graduation}getProducts`,
@@ -55,7 +53,7 @@ $(document).on('click', '.button-panigation-manager-product', async function() {
 	drawDataProductShop(res);
 
 	let currentPage = localStorage.getItem('currentPage');
-	$(`.button-panigation-manager-product[value='${currentPage}']`).addClass('pagination__number pagination__number--active')
+	$(`.page-link[value='${currentPage}']`).addClass('pagination__number pagination__number--active')
 	sweatAlert(`Bạn đang ở trang thứ ${page}`, "success")
 })
 
@@ -113,15 +111,16 @@ $(document).on('click', '.filter-product-by-price', async function() {
 
 
 async function drawDataProductShop(res) {
-	let productHTML = ``, pagination = ``;
+	let productHTML = ``, pagination = ``,  image = ``;
 	for (let i = 0; i < res.data.content.length; i++) {
 		formatmoney = formatMoney(`${res.data.content[i].listPrice}`);
+		image = res.data.content[i].image;
 		productHTML += `<div class="col-lg-4 col-md-6">
         <div class="product__item">
-            <div class="product__item__pic set-bg" data-setbg="${res.data.content[i].image}" style="background-image: url(&quot;${res.data.content[i].image}&quot;);"> 
+            <div class="product__item__pic set-bg" data-setbg="${image}" style="background-image: url(&quot;${image}&quot;);"> 
                 <div class="label new">New</div>
                 <ul class="product__hover">
-                    <li><a href="img/shop/shop-1.jpg" class="image-popup"><span
+                    <li><a href="${res.data.content[i].image}" class="image-popup"><span
                             class="arrow_expand"></span></a></li>
                     <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                     <li onclick="addItemToCart(${res.data.content[i].id},'${res.data.content[i].productName}',1,${res.data.content[i].listPrice},'${res.data.content[i].image}')"><a href="#"><span class="icon_bag_alt"></span></a></li>
@@ -142,15 +141,11 @@ async function drawDataProductShop(res) {
     </div>`
 	}
 	for (let i = 0; i < res.data.totalPages; i++) {
-		// pagination += `<button type="button" value="${i}" 
-		// 			           class="button-panigation-manager-product btn btn-outline-secondary">${i}
-		// 			   </button>`
-		pagination += `<button type="button" value="${i}" 
-		class="button-panigation-manager-product">${i}
-</button>`
-		
+pagination += ` <li class="page-item"  >
+					<a class="page-link" value="${i}" href="#" tabindex="-1">${i}</a>
+				</li> `
 	}
 	$('#list-product-shop').html(productHTML);
-	$('.pagination__option').html(pagination);
+	$('#pagination__option').html(pagination);
 
 }

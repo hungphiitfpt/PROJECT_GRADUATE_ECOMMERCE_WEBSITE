@@ -7,34 +7,39 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import com.poly.edu.project.graduation.model.UserEntity;
 
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+import com.poly.edu.project.graduation.model.AppUserEntity;
+
+public interface UserRepository extends JpaRepository<AppUserEntity, Long> {
 
 	// Câu lệnh tìm kiếm Nhân Viên theo nhiều điều kiện
-	@Query(value = "SELECT * FROM user  where user.is_deleted = false "
-			+ "AND user.id 				LIKE CONCAT('%',:keyword,'%') "
-			+ "OR  user.username 		LIKE CONCAT('%',:keyword,'%') "
-			+ "OR  user.last_name 		LIKE CONCAT('%',:keyword,'%') "
-			+ "OR  user.first_name 			LIKE CONCAT('%',:keyword,'%') "
-			+ "OR  user.email 		LIKE CONCAT('%',:keyword,'%') "
-			+ "OR  user.birthday 	LIKE CONCAT('%',:keyword,'%') "
-			+ "OR  user.address 		LIKE CONCAT('%',:keyword,'%') "
-			+ "OR  user.country 	LIKE CONCAT('%',:keyword,'%') "
-			+ "OR user.city 				LIKE CONCAT('%',:keyword,'%') "
-			+ "OR user.created_at 			LIKE CONCAT('%',:keyword,'%') "
-			+ "OR user.updated_at 			LIKE CONCAT('%',:keyword,'%') ", nativeQuery = true)
-	Page<UserEntity> findByKeyWord(String keyword, Pageable pageable);
+	@Query(value = "SELECT * FROM app_user  where app_user.is_deleted = false "
+			+ "AND app_user.user_id				LIKE CONCAT('%',:keyword,'%') "
+			+ "OR  app_user.user_name 		LIKE CONCAT('%',:keyword,'%') "
+			+ "OR  app_user.last_name 		LIKE CONCAT('%',:keyword,'%') "
+			+ "OR  app_user.first_name 			LIKE CONCAT('%',:keyword,'%') "
+			+ "OR  app_user.email 		LIKE CONCAT('%',:keyword,'%') "
+			+ "OR  app_user.birthday 	LIKE CONCAT('%',:keyword,'%') "
+			+ "OR  app_user.address 		LIKE CONCAT('%',:keyword,'%') "
+			+ "OR  app_user.country 	LIKE CONCAT('%',:keyword,'%') "
+			+ "OR app_user.city 				LIKE CONCAT('%',:keyword,'%') "
+			+ "OR app_user.created_at 			LIKE CONCAT('%',:keyword,'%') "
+			+ "OR app_user.updated_at 			LIKE CONCAT('%',:keyword,'%') ", nativeQuery = true)
+	Page<AppUserEntity> findByKeyWord(String keyword, Pageable pageable);
 
 	@Modifying
-	@Query(value = "UPDATE UserEntity SET isDeleted = TRUE WHERE id = ?1")
+	@Query(value = "UPDATE AppUserEntity SET isDeleted = TRUE WHERE userId = ?1")
 	@Transactional
 	void changeStatusIsdeleted(long id);
 
 	@Modifying
-	@Query(value = "UPDATE UserEntity SET isDeleted = FALSE WHERE id = ?1")
+	@Query(value = "UPDATE AppUserEntity SET isDeleted = FALSE WHERE userId = ?1")
 	@Transactional
 	void changeIstock(long id);
 
-	UserEntity findByEmail(String email);
+	AppUserEntity findByEmail(String email);
+
+
+	
+	
 }

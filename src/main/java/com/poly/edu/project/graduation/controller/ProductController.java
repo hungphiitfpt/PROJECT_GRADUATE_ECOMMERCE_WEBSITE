@@ -1,4 +1,3 @@
-
 package com.poly.edu.project.graduation.controller;
 
 import java.util.List;
@@ -36,30 +35,6 @@ public class ProductController {
 	@Autowired
 	ReviewProductService reviewProductService;
 
-//	@RequestMapping("/shop")
-//	public String index(Model model, HttpServletRequest request,
-//			@ModelAttribute(name = "idCategory") String idCategory,
-//			@RequestParam(name = "size", required = false, defaultValue = "12") int size,
-//			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
-//			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
-//
-//		try {
-//
-//			Page<ShopProductsEntity> listProduct = productServices.findAllProducts(idCategory,
-//					PageRequest.of(page, size));
-//			List<ShopCategoriesEntity> listCategory = categoryServices.findAll();
-//			model.addAttribute("category", listCategory);
-//			model.addAttribute("product", listProduct);
-//		
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//		return "template/shop";
-//
-//	}
-
 	/*
 	 * View trang chủ index
 	 */
@@ -80,8 +55,7 @@ public class ProductController {
 			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
 
 		try {
-			Map<Long, CartEntity> cartItems = (Map<Long, CartEntity>) session
-					.getAttribute("cart");
+			Map<Long, CartEntity> cartItems = (Map<Long, CartEntity>) session.getAttribute("cart");
 			Page<ShopProductsEntity> listProduct;
 			listProduct = productServices.findAllProducts(idCategory, PageRequest.of(page, size));
 			List<ShopCategoriesEntity> listCategory = categoryServices.findAll();
@@ -97,21 +71,19 @@ public class ProductController {
 
 	}
 
-
 	@RequestMapping("/getProductByid/{id}")
 	public String getProductById(Model model, @PathVariable Long id) {
 
 		ShopProductsEntity product = productServices.findProductById(id);
 
-
 		model.addAttribute("product", product);
 
 		model.addAttribute("images", product.getShopProductImagesById());
+		System.out.println(product.getShopProductImagesById());
 
 		model.addAttribute("review", product.getShopProductReviewsById());
 
 		return "shop-template/product-details";
 
 	}
-
 }
