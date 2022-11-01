@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poly.edu.project.graduation.dao.ReviewProductRepository;
+import com.poly.edu.project.graduation.model.MonthDTO;
+import com.poly.edu.project.graduation.model.ShopOrdersEntity;
 import com.poly.edu.project.graduation.model.ShopProductReviewsEntity;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 import com.poly.edu.project.graduation.services.ReviewProductService;
@@ -21,6 +24,9 @@ public class ReviewProductRestController {
 
 	@Autowired
 	ReviewProductService reviewProductService;
+	
+	@Autowired
+	ReviewProductRepository productRepository;
 
 	@RequestMapping(value = "/getAllReviewById", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
@@ -29,6 +35,18 @@ public class ReviewProductRestController {
 
 		List<ShopProductReviewsEntity> reviewProduct = reviewProductService.findAllReviewProduct(id);
 
+		return reviewProduct;
+
+	}
+	
+
+	@RequestMapping(value = "/TESTABC", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public List<String> GETSS() {
+
+		List<String> reviewProduct = productRepository.getTotalPrice();
+		
+	
 		return reviewProduct;
 
 	}

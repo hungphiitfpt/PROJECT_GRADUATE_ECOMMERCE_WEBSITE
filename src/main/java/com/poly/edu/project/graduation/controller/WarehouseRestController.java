@@ -1,5 +1,7 @@
 package com.poly.edu.project.graduation.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poly.edu.project.graduation.dao.ProductsRepository;
 import com.poly.edu.project.graduation.model.ResponseObject;
+import com.poly.edu.project.graduation.model.ShopProductsEntity;
 import com.poly.edu.project.graduation.model.ShopWarehouseEntity;
 import com.poly.edu.project.graduation.services.WarehouseService;
 
@@ -23,6 +27,9 @@ public class WarehouseRestController {
 	
 		@Autowired
 		WarehouseService warehouseService;
+		
+		@Autowired
+		ProductsRepository productsRepository;
 
 	// api lấy tất cả sản phẩm search theo keyword nhập vào
 	@RequestMapping(value = "/getAllWarehouse", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -47,6 +54,13 @@ public class WarehouseRestController {
 	@Transactional
 	ResponseEntity<ResponseObject> insertWarehouse(@RequestBody ShopWarehouseEntity shopWarehouseEntity) {
 		
+		Optional<ShopProductsEntity> foundProducts = productsRepository.findById(shopWarehouseEntity.getProductId());
+		if (!foundProducts.isPresent()) {
+			System.out.println("chưa tồn tại");
+		}
+		else {
+			
+		}
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(new ResponseObject("200", "Thêm Thành Công ", warehouseService.saveQuantityWarehouse(shopWarehouseEntity)));
 	}

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.poly.edu.project.graduation.model.MonthDTO;
+import com.poly.edu.project.graduation.model.ShopOrdersEntity;
 import com.poly.edu.project.graduation.model.ShopProductReviewsEntity;
 
 public interface ReviewProductRepository extends JpaRepository<ShopProductReviewsEntity, Long> {
@@ -57,6 +58,31 @@ public interface ReviewProductRepository extends JpaRepository<ShopProductReview
 //			+ "WHERE order_date LIKE CONCAT('%','2022-09','%') ", nativeQuery = true)
 //	
 
+@Query(value = " "
+		+ "SELECT (sum(total_price))  FROM shop_orders where created_at LIKE CONCAT('%2022-01%') "
+		+ "UNION ALL "
+		+ "SELECT (sum(total_price)) FROM shop_orders where created_at LIKE CONCAT('%2022-02%') "
+		+ "UNION ALL "
+		+ "SELECT (sum(total_price)) FROM shop_orders where created_at LIKE CONCAT('%2022-03%') "
+		+ "UNION ALL "
+		+ "SELECT (sum(total_price)) FROM shop_orders where created_at LIKE CONCAT('%2022-04%') "
+		+ "UNION ALL "
+		+ "SELECT (sum(total_price)) FROM shop_orders where created_at LIKE CONCAT('%2022-05%') "
+		+ "UNION ALL "
+		+ "SELECT (sum(total_price)) FROM shop_orders where created_at LIKE CONCAT('%2022-06%') "
+		+ "UNION ALL "
+		+ "SELECT (sum(total_price)) FROM shop_orders where created_at LIKE CONCAT('%2022-07%') "
+		+ "UNION ALL "
+		+ "SELECT (sum(total_price)) FROM shop_orders where created_at LIKE CONCAT('%2022-08%') "
+		+ "UNION ALL "
+		+ "SELECT (sum(total_price)) FROM shop_orders where created_at LIKE CONCAT('%2022-09%') "
+		+ "UNION ALL "
+		+ "SELECT (sum(total_price)) FROM shop_orders where created_at LIKE CONCAT('%2022-10%') "
+		+ "UNION ALL "
+		+ "SELECT (sum(total_price)) FROM shop_orders where created_at LIKE CONCAT('%2022-11%') "
+		+ "UNION ALL "
+		+ "SELECT (sum(total_price)) FROM shop_orders where created_at LIKE CONCAT('%2022-12%')", nativeQuery = true)
+List<String> getTotalPrice();
 
 
 

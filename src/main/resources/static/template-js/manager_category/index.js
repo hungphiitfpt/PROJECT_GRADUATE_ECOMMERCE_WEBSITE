@@ -12,9 +12,13 @@ async function loadAllDataTableCategory() {
 		data = {};
 
 	let res = await axiosTemplate(method, url, params, data);
-	drawTableCategoryManager(res, $('#table-list-category-manager'))
+	drawTableCategoryManager(res, $('#table-list-category-manager'));
 
 }
+
+
+
+
 async function drawTableCategoryManager(res) {
 	let button = ``;
 	var CategoryHTML = ``;

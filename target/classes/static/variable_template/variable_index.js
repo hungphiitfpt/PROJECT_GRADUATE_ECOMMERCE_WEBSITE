@@ -1,8 +1,8 @@
-var host = `https://agriculturalstorev001.herokuapp.com/`;
-var api_graduation = `https://agriculturalstorev001.herokuapp.com/api/graduation/`;
-var api_admin = `https://agriculturalstorev001.herokuapp.com/api/admin/`;
-var api_images = `https://agriculturalstorev001.herokuapp.com/api/v1/FileUpload/files/`;
-var api_upload = `https://agriculturalstorev001.herokuapp.com/api/v1/FileUpload`;
+var host = `http://localhost:8080/`;
+var api_graduation = `http://localhost:8080/api/graduation/`;
+var api_admin = `http://localhost:8080/api/admin/`;
+var api_images = `http://localhost:8080/api/v1/FileUpload/files/`;
+var api_upload = `http://localhost:8080/api/v1/FileUpload`;
 
 sessionStorage.removeItem("image");
 localStorage.setItem('currentPage', 0);
@@ -92,9 +92,6 @@ async function api_getCountryVietnamese() {
 		params = { depth: 1 },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
-
-	console.log(res)
-
 }
 
 var callAPI = (api) => {

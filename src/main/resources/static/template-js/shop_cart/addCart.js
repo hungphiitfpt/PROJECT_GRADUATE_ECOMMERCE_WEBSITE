@@ -53,6 +53,7 @@ $(document).on('click','.inc.qtybtn',async function () {
 	let productId = $(this).parents('.product').find('.infoAddCart').data('id');
 	let productName = $(this).parents('.product').find('.infoAddCart').data('name');
 	let price = $(this).parents('.product').find('.infoAddCart').data('price');
+	let image = $(this).parents('.product').find('.infoAddCart').data('image');
 	if(quantity == 0) {
 		$(this).parents('.product').remove();
 	}
@@ -80,6 +81,7 @@ $(document).on('click','.dec.qtybtn',async function () {
 	let productId = $(this).parents('.product').find('.infoAddCart').data('id');
 	let productName = $(this).parents('.product').find('.infoAddCart').data('name');
 	let price = $(this).parents('.product').find('.infoAddCart').data('price');
+	let image = $(this).parents('.product').find('.infoAddCart').data('image');
 	if(quantity == 0) {
 		$(this).parents('.product').remove();
 	}
@@ -92,7 +94,8 @@ $(document).on('click','.dec.qtybtn',async function () {
 		quantity : quantity, 
 		price: price,
 		discountPercentage : 0,
-		discountAmount: 0
+		discountAmount: 0,
+		image: image
 	};
 let res = await axiosTemplate(method, url, params, data);
 $('.count-quantity-cart').text(res.data.counter);
@@ -107,6 +110,7 @@ $(document).on('input change','.input-quantity-buy-cart',async function () {
 	let productId = $(this).parents('.product').find('.infoAddCart').data('id');
 	let productName = $(this).parents('.product').find('.infoAddCart').data('name');
 	let price = $(this).parents('.product').find('.infoAddCart').data('price');
+	let image = $(this).parents('.product').find('.infoAddCart').data('image');
 	if(quantity == 0) {
 		$(this).parents('.product').remove();
 	}
@@ -119,7 +123,8 @@ $(document).on('input change','.input-quantity-buy-cart',async function () {
 		quantity : quantity, 
 		price: price,
 		discountPercentage : 0,
-		discountAmount: 0
+		discountAmount: 0,
+		image: image,
 	};
 let res = await axiosTemplate(method, url, params, data);
 $('.count-quantity-cart').text(res.data.counter);
