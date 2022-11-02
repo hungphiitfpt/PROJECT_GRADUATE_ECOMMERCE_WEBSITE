@@ -85,5 +85,12 @@ public interface ReviewProductRepository extends JpaRepository<ShopProductReview
 List<String> getTotalPrice();
 
 
+@Query(value = "select GROUP_CONCAT(shop_order_detail.product_id ) "
+		+ "from shop_order_detail "
+		+ "LEFT JOIN shop_orders "
+		+ "ON shop_order_detail.order_id = shop_orders.id where shop_orders.id = 104;", nativeQuery = true)
+String updatelist();
+
+
 
 }

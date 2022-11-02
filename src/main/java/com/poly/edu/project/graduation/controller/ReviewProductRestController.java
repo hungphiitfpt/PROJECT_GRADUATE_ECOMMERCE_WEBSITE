@@ -50,5 +50,16 @@ public class ReviewProductRestController {
 		return reviewProduct;
 
 	}
+	
+	@RequestMapping(value = "/ok", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public String test() {
+
+		String reviewProduct = productRepository.updatelist();
+		
+	
+		return reviewProduct;
+
+	}
 
 }

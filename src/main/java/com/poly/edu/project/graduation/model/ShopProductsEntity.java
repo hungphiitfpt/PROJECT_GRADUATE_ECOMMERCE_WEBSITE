@@ -63,6 +63,10 @@ public class ShopProductsEntity {
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = true)
     private Timestamp updatedAt;
+    
+    @Column(name = "quantity_sold", nullable = false)
+    private Integer quantity_sold;
+    
     @OneToMany(mappedBy = "shopProductsByProductId")
     private List<ShopOrderDetailEntity> shopOrderDetailsById;
     @OneToMany(mappedBy = "shopProductsByProductId")
@@ -79,8 +83,17 @@ public class ShopProductsEntity {
     private ShopCategoriesEntity shopCategoriesByCategoryId;
     @OneToMany(mappedBy = "shopProductsByProductId")
     private List<ShopWarehouseEntity> shopWarehousesById;
+    
 
-    public long getId() {
+    public Integer getQuantity_sold() {
+		return quantity_sold;
+	}
+
+	public void setQuantity_sold(Integer quantity_sold) {
+		this.quantity_sold = quantity_sold;
+	}
+
+	public long getId() {
         return id;
     }
 

@@ -66,7 +66,8 @@ $(document).on('click','.inc.qtybtn',async function () {
 		quantity : quantity, 
 		price: price,
 		discountPercentage : 0,
-		discountAmount: 0
+		discountAmount: 0,
+		image: image
 	};
 let res = await axiosTemplate(method, url, params, data);
 $('.count-quantity-cart').text(res.data.counter);
