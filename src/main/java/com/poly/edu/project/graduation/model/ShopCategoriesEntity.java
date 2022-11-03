@@ -38,6 +38,7 @@ public class ShopCategoriesEntity {
     @Basic
     @Column(name = "is_deleted", nullable = true)
     private Boolean isDeleted;
+    
     @OneToMany(mappedBy = "shopCategoriesByCategoryId")
     private List<ShopProductsEntity> shopProductsById;
 

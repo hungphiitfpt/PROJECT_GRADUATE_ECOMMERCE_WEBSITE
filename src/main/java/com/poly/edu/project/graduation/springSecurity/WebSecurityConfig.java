@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,6 +21,7 @@ import com.poly.edu.project.graduation.services.impl.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -60,6 +62,12 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
 		// Ngoại lệ AccessDeniedException sẽ ném ra.
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
+		http.oauth2Login()
+		.loginPage("/login")
+		.defaultSuccessUrl("/oauth2/login/success", true)
+		.failureUrl("/auth/login/error")
+		.authorizationEndpoint()
+		.baseUri("/login/oauth2/authorization");// sử dụng để khai báo vào link đăng nhập 
 		// Cấu hình cho Login Form.
 		http.authorizeRequests().and().formLogin()//
 				// Submit URL của trang login
@@ -78,6 +86,8 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
 				.tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
 
 	}
+	
+	
 
 	@Bean
 	public PersistentTokenRepository persistentTokenRepository() {

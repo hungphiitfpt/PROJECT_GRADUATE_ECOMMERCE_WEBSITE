@@ -5,6 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import com.poly.edu.project.graduation.dao.RoleRepository;
@@ -15,6 +21,9 @@ import com.poly.edu.project.graduation.services.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
+	
+	@Autowired
+	PasswordEncoder pe;
 
 	@Autowired
 	UserRepository userRepository;
@@ -101,5 +110,22 @@ public class UserServiceImpl implements UserService {
 	public List<UserDto> findAllUsers() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void loginFromOAuth2(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
+		
+		String email = oAuth2AuthenticationToken.getPrincipal().getAttribute("email");
+		String password = Long.toHexString(System.currentTimeMillis());
+		
+		System.out.println("ádasds");
+		UserDetails userDetails = User.withUsername(email).password(pe.encode(password)).roles("USER").build();
+		
+		UsernamePasswordAuthenticationToken auth = 
+				new UsernamePasswordAuthenticationToken(userDetails, null,userDetails.getAuthorities());
+		
+		SecurityContextHolder.getContext().setAuthentication(auth);
+			
+		
 	}
 }

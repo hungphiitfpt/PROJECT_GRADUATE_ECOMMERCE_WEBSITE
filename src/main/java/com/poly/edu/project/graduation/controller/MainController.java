@@ -2,17 +2,24 @@ package com.poly.edu.project.graduation.controller;
 
 import java.security.Principal;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.poly.edu.project.graduation.model.WebUtils;
+import com.poly.edu.project.graduation.services.UserService;
 
 @Controller
 public class MainController {
+	
+	@Autowired
+	UserService service;
 
     @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
     public String welcomePage(Model model) {
@@ -77,6 +84,13 @@ public class MainController {
         }
 
         return "admin-template/pages/samples/error-403";
+    }
+    
+    @RequestMapping("/oauth2/login/success")
+    public String success(OAuth2AuthenticationToken oAuth2AuthenticationToken) {
+    	service.loginFromOAuth2(oAuth2AuthenticationToken);
+		return "forward:/welcome";
+    	
     }
 
 }

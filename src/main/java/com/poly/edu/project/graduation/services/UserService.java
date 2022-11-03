@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import com.poly.edu.project.graduation.model.AppUserEntity;
@@ -23,5 +24,7 @@ public interface UserService {
 //	UserEntity findByEmail(String email);
 
 	List<UserDto> findAllUsers();
+
+	void loginFromOAuth2(OAuth2AuthenticationToken oAuth2AuthenticationToken);
 
 }
