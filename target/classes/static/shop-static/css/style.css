@@ -1364,13 +1364,13 @@ ol {
 }
 
 .categories__accordion .card-body li:before {
-	position: absolute;
+/* 	position: absolute;
 	left: 4px;
 	top: 14px;
 	height: 1px;
 	width: 4px;
 	background: #666666;
-	content: "";
+	content: ""; */
 }
 
 .categories__accordion .card-body li a {

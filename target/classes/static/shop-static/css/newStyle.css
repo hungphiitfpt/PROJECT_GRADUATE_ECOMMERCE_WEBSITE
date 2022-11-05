@@ -367,4 +367,29 @@ bottom: 40px;
     font-weight: 600;
  
 }
+
+ul.list-category {
+	list-style: none;
+}
+
+.image-sidebar-category {
+	max-width: 30px;
+	max-height: 30px;
+}
+
+.title-filter-category {
+	padding-left: 10px;
+	margin: 0;
+	display: block;
+    overflow: hidden;
+    line-height: 1.4em;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #1d1d1d;
+    cursor: pointer;
+}
+.filter-category-item{
+	align-items: center
+}
  

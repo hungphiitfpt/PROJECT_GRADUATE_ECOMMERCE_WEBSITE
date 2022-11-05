@@ -21,19 +21,16 @@ async function loadAlllCategoryShop() {
 	let categoryHTML = ``;
 	let method = 'get',
 		url = `${api_graduation}getCategory`,
-		params = { size: 100 },
+		params = { size: 1000 },
 		data = {
 		};
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res)
 	for (let i = 0; i < res.data.content.length; i++) {
-		categoryHTML += `
-		<button class="overlap filter-product-by-categoryId" value="${res.data.content[i].id}">
-        <p class="overlapText">${res.data.content[i].categoryName}</p>
-        <div class="overlapTwo">
-            <p class="overlapTwoText">Chọn!</p>
-        </div>
-    </button>`;
+		categoryHTML += `<li class="filter-category-item row mb-3">
+		<img class="image-sidebar-category" src="${res.data.content[i].image}" alt="" />
+		<label class="title-filter-category filter-product-by-categoryId" data-id="${res.data.content[i].id}" value="${res.data.content[i].id}">${res.data.content[i].categoryName}</label>
+	</li>`;
 	}
 	$('#list-category-shop').html(categoryHTML);
 
@@ -59,15 +56,14 @@ $(document).on('click', '.page-link', async function() {
 
 $(document).on('click', '.filter-product-by-categoryId', async function() {
 	let page = localStorage.getItem("currentPage");
-	let idCategory = $(this).val();
+	let idCategory = $(this).data('id');
 	let priceStart = $('#minamount').val();
 	let priceEnd = $('#maxamount').val();
 	$('.filter-product-by-categoryId').removeClass('active-btn-filter-category')
 	$('.overlapTwo').removeClass('active-btn-filter-category')
 	$(this).addClass('active-btn-filter-category')
 	$('.overlapTwo').removeClass('bg-active')
-	$(this).find('.overlapTwo').addClass('bg-active')
-	console.log(idCategory);
+	$(this).find('.overlapTwo').addClass('bg-active');
 	localStorage.setItem('currentPage', page);
 	let method = 'get',
 	url = `${api_graduation}filterDataProduct`,

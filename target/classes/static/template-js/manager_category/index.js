@@ -86,6 +86,7 @@ async function insertCategory() {
 }
 
 async function updateCategory() {
+	let imageSession = sessionStorage.getItem("image");
 	 validation();
 	 if ($('.error.vad-false').length > 0) {
 		return false;
@@ -99,10 +100,13 @@ async function updateCategory() {
 			categoryCode: $('#code-create-manager-category').val(),
 			categoryName: $('#name-create-manager-category').val(),
 			description: $('#description-detail-category').val(),
-			image: sessionStorage.getItem("image")
+			image: imageSession
 		};
+	uploadImage();
+	if(imageSession == "" || imageSession == null) {
+		return false;
+	}
 	let res =  await axiosTemplate(method, url, params, data);
-	console.log(res.status);
 	if(res.status == 200) {
 		sweatAlert(`${res.data.message}`, "success")
 	}
@@ -157,11 +161,12 @@ let engine = (id, serial, message) => {
 $(document).on('click', '.button-panigation-manager-product', async function() {
 	$('.button-panigation-manager-product').removeClass('active')
 	let page = $(this).val();
+	console.log(page);
     console.log(page);
 	localStorage.setItem('currentPage', page);
 	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',
-		url = `${api_admin}getCategory`,
+		url = `${api_graduation}getCategory`,
 		params = { keyWord: keyWord, page: page },
 		data = {
 		};
