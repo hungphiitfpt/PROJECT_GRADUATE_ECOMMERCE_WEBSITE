@@ -1,4 +1,3 @@
-
 var host = `https://agriculturalstorev001.herokuapp.com/`;
 var api_graduation = `https://agriculturalstorev001.herokuapp.com/api/graduation/`;
 var api_admin = `https://agriculturalstorev001.herokuapp.com/api/admin/`;
