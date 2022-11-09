@@ -36,4 +36,9 @@ public class BlogController {
 		return "shop-template/blog-details";
 		
 	}
+	@RequestMapping("/loveYou")
+	public String hearth() {
+		
+		return "hearth";
+	}
 }
