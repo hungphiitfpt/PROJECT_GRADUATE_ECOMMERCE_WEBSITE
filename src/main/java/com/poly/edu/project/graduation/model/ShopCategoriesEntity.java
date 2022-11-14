@@ -41,8 +41,28 @@ public class ShopCategoriesEntity {
     
     @OneToMany(mappedBy = "shopCategoriesByCategoryId")
     private List<ShopProductsEntity> shopProductsById;
+    
+    @OneToMany(mappedBy = "shopOrderDetailByCategoryId")
+    private List<ShopOrderDetailEntity> shopOrderDetailsById;
 
-    public long getId() {
+    
+    public Boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(Boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public List<ShopOrderDetailEntity> getShopOrderDetailsById() {
+		return shopOrderDetailsById;
+	}
+
+	public void setShopOrderDetailsById(List<ShopOrderDetailEntity> shopOrderDetailsById) {
+		this.shopOrderDetailsById = shopOrderDetailsById;
+	}
+
+	public long getId() {
         return id;
     }
 

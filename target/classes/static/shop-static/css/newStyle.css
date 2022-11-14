@@ -1,4 +1,4 @@
-:root {
+_1ERzqw:root {
   --maincolor: #2E294E;
   --secondarycolor:#fff;
 }
@@ -392,4 +392,294 @@ ul.list-category {
 .filter-category-item{
 	align-items: center
 }
- 
+
+/* css order tracking */
+
+.design-process-section .text-align-center {
+    line-height: 25px;
+    margin-bottom: 12px;
+}
+.design-process-content {
+    border: 1px solid #e9e9e9;
+    position: relative;
+    padding: 16px 34% 30px 30px;
+    min-width: 1100px;
+}
+.design-process-content img {
+ /*    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    max-height: 100%; */
+}
+.design-process-content h3 {
+    margin-bottom: 16px;
+}
+.design-process-content p {
+    line-height: 26px;
+    margin-bottom: 12px;
+}
+.process-model {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    max-width: 1200px;
+    margin: 20px auto 26px;
+    border: none;
+    z-index: 0;
+}
+.process-model li::after {
+    background: #e5e5e5 none repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 4px;
+    margin: 0 auto;
+    position: absolute;
+    right: -30px;
+    top: 33px;
+    width: 85%;
+    z-index: -1;
+}
+.process-model li.visited::after {
+    background: #57b87b;
+}
+.process-model li:last-child::after {
+    width: 0;
+}
+.process-model li {
+    display: inline-block;
+    width: 18%;
+    text-align: center;
+    float: none;
+}
+.nav-tabs.process-model > li.active > a, .nav-tabs.process-model > li.active > a:hover, .nav-tabs.process-model > li.active > a:focus, .process-model li a:hover, .process-model li a:focus {
+    border: none;
+    background: transparent;
+
+}
+.process-model li a {
+    padding: 0;
+    border: none;
+    color: #606060;
+}
+.process-model li.active,
+.process-model li.visited {
+    color: #57b87b;
+}
+.process-model li.active a,
+.process-model li.active a:hover,
+.process-model li.active a:focus,
+.process-model li.visited a,
+.process-model li.visited a:hover,
+.process-model li.visited a:focus {
+    color: #57b87b;
+}
+.process-model li.active p,
+.process-model li.visited p {
+    font-weight: 600;
+}
+.process-model li i {
+    display: block;
+    height: 68px;
+    width: 68px;
+    text-align: center;
+    margin: 0 auto;
+    background: #f5f6f7;
+    border: 2px solid #e5e5e5;
+    line-height: 65px;
+    font-size: 30px;
+    border-radius: 50%;
+}
+.process-model li.active i, .process-model li.visited i  {
+    background: #fff;
+    border-color: #57b87b;
+}
+.process-model li p {
+    font-size: 14px;
+    margin-top: 11px;
+}
+.process-model.contact-us-tab li.visited a, .process-model.contact-us-tab li.visited p {
+    color: #606060!important;
+    font-weight: normal
+}
+.process-model.contact-us-tab li::after  {
+    display: none; 
+}
+.process-model.contact-us-tab li.visited i {
+    border-color: #e5e5e5; 
+}
+
+
+
+@media screen and (max-width: 560px) {
+  .more-icon-preocess.process-model li span {
+        font-size: 23px;
+        height: 50px;
+        line-height: 46px;
+        width: 50px;
+    }
+    .more-icon-preocess.process-model li::after {
+        top: 24px;
+    }
+}
+@media screen and (max-width: 380px) { 
+    .process-model.more-icon-preocess li {
+        width: 16%;
+    }
+    .more-icon-preocess.process-model li span {
+        font-size: 16px;
+        height: 35px;
+        line-height: 32px;
+        width: 35px;
+    }
+    .more-icon-preocess.process-model li p {
+        font-size: 8px;
+    }
+    .more-icon-preocess.process-model li::after {
+        top: 18px;
+    }
+    .process-model.more-icon-preocess {
+        text-align: center;
+    }
+}
+.info-order-tracking {
+	padding: 10px;
+	display: inline-flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+._9ca9GU {
+    color: rgba(0,0,0,.54);
+    font-size: 14px;
+}
+.font-bold {
+	font-weight: 500;
+}
+.d12Axb {
+	margin: 0 4px 0 0;
+    -webkit-text-decoration-line: line-through;
+    text-decoration-line: line-through;
+    color: #000;
+    opacity: .26;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+}
+.ghw9hb{
+		color: #ee4d2d;
+}
+.BAMNqz{
+  padding: 12px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;	
+}
+.TDMlX1 {
+    color: #ee4d2d;
+    font-size: 24px;
+    line-height: 30px;
+}
+.Ge6yU5 {
+	margin-right: 15px;
+}
+.boxTotalPriceAndReview {
+ background: #fffefb;
+}
+._1ERzqw {
+    padding: 12px 24px 24px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: center;
+    background: #fffefb;
+    justify-content: flex-end;
+}
+.cLwmWY {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 300px;
+    max-width: 400px;
+    flex-grow: 1;
+    word-wrap: break-word;
+    text-align: left;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(0,0,0,.54);
+}
+.shopee-drawer {
+    display: flex;
+    position: relative;
+    overflow: visible;
+    outline: 0;
+}
+.ZQEJyY .shopee-drawer {
+    display: inline-flex;
+}
+.eGtmE\+ {
+    color: #ee4d2d;
+}
+._8vTqu9, .NIZAp8, .VN6h8\+ {
+    display: flex;
+    overflow: hidden;
+}
+._8vTqu9, .VN6h8\+ {
+    margin: 0 0 0 10px;
+    align-items: center;
+    text-overflow: ellipsis;
+}
+._8vTqu9, .NIZAp8, .VN6h8\+ {
+    display: flex;
+    overflow: hidden;
+}
+.stardust-button--primary {
+    background-color: #ee4d2d;
+    border-color: #cd3011;
+    color: #fff;
+}
+.Kz9HeM, .Kz9HeM:hover {
+    border: 1px solid transparent;
+}
+.Kz9HeM {
+    min-width: 150px;
+    min-height: 40px;
+    padding: 8px 20px;
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+    border-radius: 2px;
+    outline: 0;
+}
+._8vTqu9, .VN6h8\+ {
+    margin: 0 0 0 10px;
+    align-items: center;
+    text-overflow: ellipsis;
+}
+._8vTqu9, .NIZAp8, .VN6h8\+ {
+    display: flex;
+    overflow: hidden;
+}
+._8vTqu9, .VN6h8\+ {
+    margin: 0 0 0 10px;
+    align-items: center;
+    text-overflow: ellipsis;
+}
+._8vTqu9, .NIZAp8, .VN6h8\+ {
+    display: flex;
+    overflow: hidden;
+}
+.Kz9HeM:not(.stardust-button--primary) {
+    color: #555;
+    border: 1px solid rgba(0,0,0,.09);
+}
+.Kz9HeM:not(.stardust-button--primary):hover:not(.y21Zbp) {
+    background-color: rgba(0,0,0,.02);
+    border: 1px solid rgba(0,0,0,.09);
+}
+.stardust-button--primary.stardust-button--active, .stardust-button--primary:hover {
+    background-color: #d73211;
+    border-color: #ba2b0f;
+}

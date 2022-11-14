@@ -1,7 +1,9 @@
 package com.poly.edu.project.graduation.services.impl;
 
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -39,8 +41,7 @@ public class OrderServiceImpl implements OrderService {
 	public boolean CreateOrder(Map<Long, CartEntity> cart,HttpSession session) {
 		try {
 			ShopOrdersEntity ordersEntity = (ShopOrdersEntity) session.getAttribute("userInf");
-			System.out.println(ordersEntity.getShippingFee());
-			ordersEntity.setUserId((long) 1);
+			ordersEntity.setUserId(ordersEntity.getUserId());
 			ordersEntity.setShipName(ordersEntity.getShipName());
 			ordersEntity.setShipAddress(ordersEntity.getShipAddress().trim());
 			ordersEntity.setShipCity(ordersEntity.getShipCity());
@@ -87,6 +88,18 @@ public class OrderServiceImpl implements OrderService {
 	public ShopOrdersEntity findOrdersDetailById(Long id) {
 		// TODO Auto-generated method stub
 		return orderRepository.findOrdersDetailById(id);
+	}
+
+	@Override
+	public List<ShopOrdersEntity> findOrderByIdUser(String id) {
+		// TODO Auto-generated method stub
+		return orderRepository.findByUserId(id);
+	}
+
+	@Override
+	public void cancelOrderById(long id) {
+		// TODO Auto-generated method stub
+		orderRepository.cancelOrderById(id);
 	}
 
 

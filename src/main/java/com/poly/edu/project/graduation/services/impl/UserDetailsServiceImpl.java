@@ -1,8 +1,15 @@
 package com.poly.edu.project.graduation.services.impl;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
+
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,9 +40,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             System.out.println("User not found! " + userName);
             throw new UsernameNotFoundException("User " + userName + " was not found in the database");
         }
-
-        System.out.println("Found User: " + appUser);
-
         // [ROLE_USER, ROLE_ADMIN,..]
         List<String> roleNames = this.appRoleDAO.getRoleNames(appUser.getUserId());
 

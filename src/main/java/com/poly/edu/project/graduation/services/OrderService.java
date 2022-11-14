@@ -1,5 +1,6 @@
 package com.poly.edu.project.graduation.services;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,10 @@ public interface OrderService {
 	Page<ShopOrdersEntity> findByKeyWord(String keyword, Pageable pageable);
 
 	ShopOrdersEntity findOrdersDetailById(Long id);
+
+	List<ShopOrdersEntity> findOrderByIdUser(String id);
+
+	void cancelOrderById(long id);
 	
 	
 	

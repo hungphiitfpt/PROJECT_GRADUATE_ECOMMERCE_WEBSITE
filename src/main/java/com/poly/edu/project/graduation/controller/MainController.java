@@ -41,7 +41,6 @@ public class MainController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model) {
-
         return "admin-template/pages/samples/login";
     }
 
@@ -56,6 +55,8 @@ public class MainController {
 
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
+        
+        
 
         System.out.println("User Name: " + userName);
 

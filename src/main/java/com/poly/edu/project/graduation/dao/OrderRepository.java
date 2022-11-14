@@ -1,5 +1,7 @@
 package com.poly.edu.project.graduation.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
@@ -29,5 +31,13 @@ public interface OrderRepository extends JpaRepository<ShopOrdersEntity, Long> {
 			+ "shipped_date = :shipped_date WHERE id  = :id ", nativeQuery = true)
 	@Transactional
 	void changeStatusOrder(Long status, String update_at, String shipped_date,Long id);
+
+	@Query(value = "SELECT * FROM shop_orders where user_id = :id",nativeQuery = true)
+	List<ShopOrdersEntity> findByUserId(String id);
+
+	@Modifying  
+	@Query(value = "UPDATE ShopOrdersEntity SET orderStatus = 5 WHERE id = ?1")
+	@Transactional
+	void cancelOrderById(long id);
 
 }

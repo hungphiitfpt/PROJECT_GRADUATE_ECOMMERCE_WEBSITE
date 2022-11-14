@@ -2028,7 +2028,7 @@ ol {
 	height: 1px;
 	width: 335px;
 	background: #e1e1e1;
-	content: "";
+	/* content: ""; */
 }
 
 .nav::after {
@@ -2038,7 +2038,7 @@ ol {
 	height: 1px;
 	width: 335px;
 	background: #e1e1e1;
-	content: "";
+/* 	content: ""; */
 }
 
 .nav-item {

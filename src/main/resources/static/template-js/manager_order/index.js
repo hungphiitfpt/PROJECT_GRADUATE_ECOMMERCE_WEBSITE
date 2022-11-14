@@ -69,27 +69,23 @@ async function drawTableOrderProducts(res) {
 
 		}
 		else if (res.data.content[i].orderStatus == 1) {
-			htmlStatusOrder = `<label class="badge badge-warning">Chờ Shiper</label>`;
+			htmlStatusOrder = `<label class="badge badge-warning">Chờ Lấy Hàng</label>`;
 
 		}
 		else if (res.data.content[i].orderStatus == 2) {
-			htmlStatusOrder = `<label class="badge badge-black">Đã Lấy Hàng</label>`;
+			htmlStatusOrder = `<label class="badge badge-danger">Đang Giao hàng</label>`;
 
 		}
 		else if (res.data.content[i].orderStatus == 3) {
-			htmlStatusOrder = `<label class="badge badge-danger">Đang Vận Chuyển</label>`;
+			htmlStatusOrder = `<label class="badge badge-primary">Đã Giao Hàng</label>`;
 
 		}
 		else if (res.data.content[i].orderStatus == 4) {
-			htmlStatusOrder = `<label class="badge badge-primary">Đang Giao Hàng</label>`;
-
-		}
-		else if (res.data.content[i].orderStatus == 5) {
-			htmlStatusOrder = `<label class="badge badge-success">Đã Giao Hàng</label>`;
+			htmlStatusOrder = `<label class="badge badge-success">Đã Huỷ</label>`;
 
 		}
 
-		if(res.data.content[i].orderStatus != 5) {
+		if(res.data.content[i].orderStatus != 4) {
 			button = `<button onclick="changeStatusOrder($(this))" data-id="${res.data.content[i].id}" data-status="${res.data.content[i].orderStatus}" type="button"
 			class="btn btn-warning btn-rounded btn-icon">
 			<i class="typcn typcn-edit"></i>

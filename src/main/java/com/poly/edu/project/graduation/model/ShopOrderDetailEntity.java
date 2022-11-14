@@ -2,6 +2,7 @@ package com.poly.edu.project.graduation.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
@@ -47,6 +48,9 @@ public class ShopOrderDetailEntity {
     @Basic
     @Column(name = "image", nullable = true, length = 500)
     private String image;
+    @Basic
+    @Column(name = "category", nullable = true, length = 500)
+    private String category;
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "order_id", referencedColumnName = "id", insertable = false, updatable = false)
@@ -55,8 +59,29 @@ public class ShopOrderDetailEntity {
     @JsonIgnore
     @JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
     private ShopProductsEntity shopProductsByProductId;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "category", referencedColumnName = "id", insertable = false, updatable = false)
+    private ShopCategoriesEntity shopOrderDetailByCategoryId;
 
-    public long getId() {
+    
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public ShopCategoriesEntity getShopOrderDetailByCategoryId() {
+		return shopOrderDetailByCategoryId;
+	}
+
+	public void setShopOrderDetailByCategoryId(ShopCategoriesEntity shopOrderDetailByCategoryId) {
+		this.shopOrderDetailByCategoryId = shopOrderDetailByCategoryId;
+	}
+
+	public long getId() {
         return id;
     }
 
@@ -150,50 +175,6 @@ public class ShopOrderDetailEntity {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ShopOrderDetailEntity that = (ShopOrderDetailEntity) o;
-
-        if (id != that.id) return false;
-        if (orderId != null ? !orderId.equals(that.orderId) : that.orderId != null) return false;
-        if (productId != null ? !productId.equals(that.productId) : that.productId != null) return false;
-        if (quantity != null ? !quantity.equals(that.quantity) : that.quantity != null) return false;
-        if (discountPercentage != null ? !discountPercentage.equals(that.discountPercentage) : that.discountPercentage != null)
-            return false;
-        if (discountAmount != null ? !discountAmount.equals(that.discountAmount) : that.discountAmount != null)
-            return false;
-        if (orderDetailStatus != null ? !orderDetailStatus.equals(that.orderDetailStatus) : that.orderDetailStatus != null)
-            return false;
-        if (dateAllocated != null ? !dateAllocated.equals(that.dateAllocated) : that.dateAllocated != null)
-            return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        if (productName != null ? !productName.equals(that.productName) : that.productName != null) return false;
-        if (shipDate != null ? !shipDate.equals(that.shipDate) : that.shipDate != null) return false;
-        if (image != null ? !image.equals(that.image) : that.image != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (orderId != null ? orderId.hashCode() : 0);
-        result = 31 * result + (productId != null ? productId.hashCode() : 0);
-        result = 31 * result + (quantity != null ? quantity.hashCode() : 0);
-        result = 31 * result + (discountPercentage != null ? discountPercentage.hashCode() : 0);
-        result = 31 * result + (discountAmount != null ? discountAmount.hashCode() : 0);
-        result = 31 * result + (orderDetailStatus != null ? orderDetailStatus.hashCode() : 0);
-        result = 31 * result + (dateAllocated != null ? dateAllocated.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (productName != null ? productName.hashCode() : 0);
-        result = 31 * result + (shipDate != null ? shipDate.hashCode() : 0);
-        result = 31 * result + (image != null ? image.hashCode() : 0);
-        return result;
     }
 
     public ShopOrdersEntity getShopOrdersByOrderId() {
