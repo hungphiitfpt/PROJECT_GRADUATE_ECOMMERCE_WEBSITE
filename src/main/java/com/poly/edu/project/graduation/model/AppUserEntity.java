@@ -65,8 +65,20 @@ public class AppUserEntity {
     private List<UserRoleEntity> userRolesByUserId;
     @OneToMany(mappedBy = "appUserByUserId")
     private List<ShopOrdersEntity> shopOrdersByUserId;
+    
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+     
 
-    public long getUserId() {
+    public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
+	}
+
+	public long getUserId() {
         return userId;
     }
 

@@ -37,7 +37,12 @@ public interface UserRepository extends JpaRepository<AppUserEntity, Long> {
 	@Transactional
 	void changeIstock(long id);
 
-	AppUserEntity findByEmail(String email);
+//	AppUserEntity findByEmail(String email);
+	
+    @Query("SELECT c FROM AppUserEntity c WHERE c.email = ?1")
+    public AppUserEntity findByEmail(String email); 
+     
+    public AppUserEntity findByResetPasswordToken(String token);
 
 
 	

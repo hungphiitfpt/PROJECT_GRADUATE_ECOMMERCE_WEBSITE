@@ -43,7 +43,7 @@ $(document).on('click', '.page-link', async function() {
 	localStorage.setItem('currentPage', page);
 	let method = 'get',
 		url = `${api_graduation}getProducts`,
-		params = { page: page },
+		params = { page: page,size: 9},
 		data = {
 		};
 	let res = await axiosTemplate(method, url, params, data);
@@ -78,7 +78,6 @@ $(document).on('click', '.filter-product-by-categoryId', async function() {
 	drawDataProductShop(res);
 	let currentPage = localStorage.getItem('currentPage');
 	$(`.button-panigation-manager-product[value='${currentPage}']`).addClass('active')
-	sweatAlert(`Bạn đang ở trang thứ ${page}`, "success")
 
 })
 

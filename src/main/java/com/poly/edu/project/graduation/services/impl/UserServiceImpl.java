@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.poly.edu.project.graduation.dao.RoleRepository;
 import com.poly.edu.project.graduation.dao.UserRepository;
+import com.poly.edu.project.graduation.exception.CustomerNotFoundException;
 import com.poly.edu.project.graduation.model.AppUserEntity;
 import com.poly.edu.project.graduation.model.UserDto;
 import com.poly.edu.project.graduation.services.UserService;
@@ -125,6 +126,36 @@ public class UserServiceImpl implements UserService {
 		
 		SecurityContextHolder.getContext().setAuthentication((org.springframework.security.core.Authentication) auth);
 			
+		
+	}
+
+	@Override
+	public void updateResetPasswordToken(String token, String email) throws CustomerNotFoundException {
+		AppUserEntity customer = userRepository.findByEmail(email);
+        if (customer != null) {
+            customer.setResetPasswordToken(token);
+            userRepository.save(customer);
+        } else {
+            throw new CustomerNotFoundException("Could not find any customer with the email " + email);
+        }
+		
+	}
+
+	@Override
+	public AppUserEntity getByResetPasswordToken(String token) {
+		// TODO Auto-generated method stub
+		return userRepository.findByResetPasswordToken(token);
+	}
+
+	@Override
+	public void updatePassword(AppUserEntity appUserEntity, String newPassword) {
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        appUserEntity.setEncrytedPassword(encodedPassword);
+         
+        appUserEntity.setResetPasswordToken(null);
+        userRepository.save(appUserEntity);
 		
 	}
 }
