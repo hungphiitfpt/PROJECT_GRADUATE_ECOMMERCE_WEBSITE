@@ -56,7 +56,6 @@ async function drawTableProductManager(res) {
 			<i class="typcn typcn-delete"></i>
 		</button>`
 		}
-		console.log(`${res.data.content[i].deleted}`);
 		let price = formatMoney(`${res.data.content[i].listPrice}`);
 		ProductHTML += `<tr>
 		<td>${res.data.content[i].id}</td>
@@ -99,11 +98,6 @@ async function drawTableProductManager(res) {
 
 async function insertProduct() {
 	let imageSession = sessionStorage.getItem("image");
-	validation();
-	if ($('.error.vad-false').length > 0) {
-		return false;
-	}
-	console.log($('.error.vad-false').length);
 	let method = 'post',
 		url = `${api_admin}insert_product`,
 		params = {},
@@ -129,10 +123,7 @@ async function insertProduct() {
 
 async function updateProduct() {
 	let imageSession = sessionStorage.getItem("image");
-	 validation();
-	 if ($('.error.vad-false').length > 0) {
-		return false;
-	}
+	
 	let method = 'post',
 		url = `${api_admin}update_product`,
 		params = {
@@ -199,9 +190,7 @@ async function openModalDetailProduct(r) {
 		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
-	console.log(res);
 	let checkIsDeleted = res.data.data.deleted;
-	console.log(checkIsDeleted);
 	if (checkIsDeleted == true) {
 		$('#pending-product').prop("checked", true);
 	} else {
@@ -248,14 +237,16 @@ async function getDataDetailProduct(r) {
 	$('#discount-create-manager-product').val(res.data.data.discountinued);
 	$('#price-product-manager').val(res.data.data.listPrice);
 	$('#description-detail-product').val(res.data.data.decription);
-
-	if(res.data.data.shopProductImagesById.length > 0) {
-		$('#imagePreview').css('background-image', `url(${res.data.data.shopProductImagesById[0].image})`);
-	} else if (res.data.data.image != null) {
-		$('#imagePreview').css('background-image', `url(url(${res.data.data.image})`);
-	} else if(res.data.data.image == null) {
-		$('#imagePreview').css('background-image', `url(${api_images}notFound.png)`);
+	
+	let imageTable = r.parents('tr').find('td:eq(2) img').attr('src');
+	if(imageTable == "" || imageTable == null) {
+		$('#imagePreview').css('background-image', `url('https://m.media-amazon.com/images/I/61FQCSP7ZIL._SS500_.jpg')`);
 	}
+	else {
+		$('#imagePreview').css('background-image', `url('${imageTable}')`);
+		sessionStorage.setItem('image', imageTable);
+	}
+
 }
 
 async function UpdateChangeDelete(r) {
@@ -293,57 +284,4 @@ function clearData() {
 	$('#discount-create-manager-product').val("");
 	$('#price-product-manager').val("");
 	$('#description-detail-product').val("");
-}
-
-function validation () {
-	let id = (id) => document.getElementById(id);
-
-  let classes = (classes) => document.getElementsByClassName(classes);
-
-  let username = id("name-create-manager-product"),
-  code = id("code-create-manager-product"),
-  descriptionShort = id("description-short-create-manager-product"),
-  feeShip = id("fee-ship-create-manager-product"),
-  quantity = id("quantity-create-manager-product"),
-  discount = id("discount-create-manager-product"),
-  price = id("price-product-manager"),
-  description = id("description-detail-product"),
-  
-  form = id("form"),
-  errorMsg = classes("error"),
-  successIcon = classes("success-icon"),
-  failureIcon = classes("failure-icon");
-
-// Adding the submit event Listener
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  engine(username, 0, "Không được để trống trường này");
-  engine(code, 1, "Không được để trống trường này");
-  engine(descriptionShort, 2, "Không được để trống trường này");
-  engine(feeShip, 3, "Không được để trống trường này");
-  engine(quantity, 4, "Không được để trống trường này");
-  engine(discount, 5, "Không được để trống trường này");
-  engine(price, 6, "Không được để trống trường này");
-  engine(description, 7, "Không được để trống trường này");
-});
-
-// engine function which will do all the works
-
-let engine = (id, serial, message) => {
-  if (id.value.trim() === "") {
-    errorMsg[serial].innerHTML = message;
-    id.style.border = "2px solid red";
-    errorMsg[serial].classList.add("vad-false");
-    failureIcon[serial].style.opacity = "1";
-    successIcon[serial].style.opacity = "0";
-  } else {
-    errorMsg[serial].innerHTML = "";
-    errorMsg[serial].classList.remove("vad-false");
-    id.style.border = "2px solid green";
-    failureIcon[serial].style.opacity = "0";
-    successIcon[serial].style.opacity = "1";
-  }
-};
 }

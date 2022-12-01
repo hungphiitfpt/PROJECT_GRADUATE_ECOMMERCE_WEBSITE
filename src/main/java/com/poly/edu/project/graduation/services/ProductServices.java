@@ -53,6 +53,8 @@ public interface ProductServices {
 
 	Page<ShopProductsEntity> filterShop(Long idCategory, String priceStart, String priceEnd, Pageable pageable);
 
+	Page<ShopProductsEntity> findAllProductEnable(Long idCategory, String priceStart, String priceEnd,Pageable page);
+
 	
 
 }

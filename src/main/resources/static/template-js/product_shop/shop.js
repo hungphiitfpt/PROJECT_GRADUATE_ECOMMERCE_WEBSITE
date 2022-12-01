@@ -8,12 +8,11 @@ async function loadAlllProductShop() {
 
 	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',
-		url = `${api_graduation}getProducts`,
-		params = { keyword: keyWord, size: 9 },
+		url = `${api_graduation}findListProductExist`,
+		params = { keyword: keyWord, size: 9 , page: 0},
 		data = {};
 		
 	let res = await axiosTemplate(method, url, params, data);
-	
 	drawDataProductShop(res);
 }
 
@@ -66,7 +65,7 @@ $(document).on('click', '.filter-product-by-categoryId', async function() {
 	$(this).find('.overlapTwo').addClass('bg-active');
 	localStorage.setItem('currentPage', page);
 	let method = 'get',
-	url = `${api_graduation}filterDataProduct`,
+	url = `${api_graduation}findListProductExist`,
 	params = { 
 	page: page, 
 	size: 9,
@@ -83,10 +82,10 @@ $(document).on('click', '.filter-product-by-categoryId', async function() {
 
 $(document).on('click', '.filter-product-by-price', async function() {
 	let page = localStorage.getItem("currentPage");
-	let idCategory = $('.filter-product-by-categoryId.active-btn-filter-category').val();
+	let idCategory = $('.active-btn-filter-category').data('id');
+	console.log(idCategory)
 	let priceStart = $('#minamount').val();
 	let priceEnd = $('#maxamount').val();
-	console.log(idCategory);
 	localStorage.setItem('currentPage', page);
 	let method = 'get',
 	url = `${api_graduation}filterDataProduct`,

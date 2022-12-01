@@ -64,7 +64,10 @@ public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Lo
 	@Transactional
 	void changeIstock(long id);
 	
-	@Query(value ="SELECT * FROM shop_products where category_id LIKE CONCAT('%',:idCategory,'%') OR list_price BETWEEN :priceStart AND :priceEnd",nativeQuery = true)
+	@Query(value ="SELECT * FROM shop_products where category_id LIKE CONCAT('%',:idCategory,'%') and list_price BETWEEN :priceStart AND :priceEnd",nativeQuery = true)
 	Page<ShopProductsEntity> filterShop(Long idCategory, String priceStart, String priceEnd, Pageable pageable);
+
+	@Query(value ="SELECT * FROM shop_products where is_deleted = false and category_id = :idCategory",nativeQuery = true)
+	Page<ShopProductsEntity> findAllProductEnable(Long idCategory, Pageable page);
 
 }

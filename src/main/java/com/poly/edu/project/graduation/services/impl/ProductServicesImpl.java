@@ -132,6 +132,12 @@ public class ProductServicesImpl implements ProductServices {
 		return productsRepository.filterShop(idCategory,priceStart,priceEnd,pageable);
 	}
 
+	@Override
+	public Page<ShopProductsEntity> findAllProductEnable(Long idCategory, String priceStart, String priceEnd,Pageable page) {
+		// TODO Auto-generated method stub
+		return productsRepository.findAllProductEnable(idCategory,page);
+	}
+
 
 
 //	@Override
