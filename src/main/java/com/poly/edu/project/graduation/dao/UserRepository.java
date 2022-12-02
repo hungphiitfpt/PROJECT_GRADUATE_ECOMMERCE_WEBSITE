@@ -43,8 +43,10 @@ public interface UserRepository extends JpaRepository<AppUserEntity, Long> {
     public AppUserEntity findByEmail(String email); 
      
     public AppUserEntity findByResetPasswordToken(String token);
+    
+
 
 
 	
-	
+
 }

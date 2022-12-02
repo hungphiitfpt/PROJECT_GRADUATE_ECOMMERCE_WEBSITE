@@ -81,11 +81,15 @@ async function drawTableOrderProducts(res) {
 
 		}
 		else if (res.data.content[i].orderStatus == 4) {
-			htmlStatusOrder = `<label class="badge badge-success">Đã Huỷ</label>`;
-
+			htmlStatusOrder = `<label class="badge badge-success">Đã Giao</label>`;
+			button = '';
+		}
+		else if (res.data.content[i].orderStatus == 5) {
+			htmlStatusOrder = `<label class="badge badge-black">Đã Huỷ</label>`;
+			button = '';
 		}
 
-		if(res.data.content[i].orderStatus != 4) {
+		if(res.data.content[i].orderStatus != 5 && res.data.content[i].orderStatus != 4) {
 			button = `<button onclick="changeStatusOrder($(this))" data-id="${res.data.content[i].id}" data-status="${res.data.content[i].orderStatus}" type="button"
 			class="btn btn-warning btn-rounded btn-icon">
 			<i class="typcn typcn-edit"></i>
