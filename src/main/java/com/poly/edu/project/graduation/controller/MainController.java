@@ -55,10 +55,6 @@ public class MainController {
 
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
-        
-        
-
-        System.out.println("User Name: " + userName);
 
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
@@ -78,8 +74,8 @@ public class MainController {
 
             model.addAttribute("userInfo", userInfo);
 
-            String message = "Hi " + principal.getName() //
-                    + "<br> You do not have permission to access this page!";
+            String message = "Chào h" + principal.getName() //
+                    + "<br> Bạn không có quyền truy cập vào trang này !";
             model.addAttribute("message", message);
 
         }

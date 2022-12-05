@@ -221,7 +221,7 @@ h1 {
 }
 
 a, a:visited, a:hover {
-    color: #39599a;
+    color: var(--text-white);
     text-decoration: none;
 }
 

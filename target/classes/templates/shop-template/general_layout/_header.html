@@ -71,7 +71,7 @@
 								
 								<li th:if="${#request.userPrincipal != null}"><a href="#">Tài khoản</a>
 									<ul class="dropdown">
-										<li><a th:href="@{/index}">Tài khoản của tôi</a></li>
+										<li><a th:href="@{/account}">Tài khoản của tôi</a></li>
 										<li><a th:href="@{/tracking-order}">Đơn hàng của tôi</a></li>
 									</ul>
 									</li>
@@ -97,13 +97,12 @@
 							<div class="header__right__auth mb-3">
 								 <span  
 								th:if="${#request.userPrincipal != null}" 
-								th:text="'Hello, '+${#request.userPrincipal.name}" class="name-user-login"></span> 
+								th:text="'Hello, '+${#request.userPrincipal.name}" th:data-name="${#request.userPrincipal.name}" class="name-user-login"></span> 
 								<a th:if="${#request.userPrincipal != null}"
 									th:href="@{/logout}">Logout</a> 
 								
 								<a th:href="@{/login}" th:if="${#request.userPrincipal == null}">Đăng Nhập</a> 
 								<!-- <a th:href="@{/register}" th:if="${#request.userPrincipal == null}">Đăng Ký</a>  -->
-								<a th:href="@{/admin/manager_product}">Quản Lý</a>
 							</div>
 							<ul class="header__right__widget">
 								<!-- <li><span class="icon_search search-switch"></span></li> -->
@@ -115,9 +114,9 @@
 										<div class="tip count-quantity-cart" th:if="${cartStarts}">
 											<span th:text="${cartStarts.counter}"></span>
 										</div>
-										<div class="tip " th:unless="${cartStarts}">
-											<span class="count-quantity-cart"></span>
-										</div> </a></li>
+										<div class="tip" th:unless="${cartStarts}">
+											<span class="count-quantity-cart">0</span>
+										</div></a></li>
 							</ul>
 						</div>
 					</div>

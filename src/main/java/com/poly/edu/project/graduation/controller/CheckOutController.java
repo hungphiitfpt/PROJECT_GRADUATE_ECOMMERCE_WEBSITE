@@ -1,5 +1,6 @@
 package com.poly.edu.project.graduation.controller;
 
+import java.security.Principal;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -18,15 +19,28 @@ import com.poly.edu.project.graduation.model.ShopOrdersEntity;
 public class CheckOutController {
 
 	@RequestMapping(value = {"/checkout", "/addInfoUser"}, method = RequestMethod.GET)
-	public String index(Model model, HttpSession session) {
-		Map<Long, CartEntity> cartItems = (Map<Long, CartEntity>) session.getAttribute("cart");
-		if (cartItems != null) {
-			model.addAttribute("cart", cartItems.values());
-		} else {
-			model.addAttribute("cart", null);
+	public String index(Model model, HttpSession session, Principal principal) throws Exception{
+		try {
+			if(principal.getName() == null) {
+			
+				return "shop-template/shop";
+			}
+			else {
+				Map<Long, CartEntity> cartItems = (Map<Long, CartEntity>) session.getAttribute("cart");
+				if (cartItems != null) {
+					model.addAttribute("cart", cartItems.values());
+				} else {
+					model.addAttribute("cart", null);
+				}
+				model.addAttribute("cartStarts", Utils.cartStarts(cartItems));
+				return "shop-template/checkout";
+			}
+		} catch (NullPointerException ex) {
+			System.out.println(ex);
+			model.addAttribute("messageBuyCart","Bạn phải đăng nhập mới có thể đặt hàng");
+			System.out.println(model.getAttribute("messageBuyCart"));
+			return "redirect:/login";
 		}
-		model.addAttribute("cartStarts", Utils.cartStarts(cartItems));
-		return "shop-template/checkout";
 
 	}
 	
