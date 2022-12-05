@@ -34,4 +34,6 @@ public interface UserService {
 	
 	void updatePassword(AppUserEntity appUserEntity, String newPassword);
 
+	AppUserEntity findUserById(String name);
+
 }

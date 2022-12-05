@@ -2,6 +2,8 @@ package com.poly.edu.project.graduation.controller;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -51,13 +53,13 @@ public class MainController {
     }
 
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
-    public String userInfo(Model model, Principal principal) {
+    public String userInfo(Model model, Principal principal, HttpSession session) {
 
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
-
+        
+//        session.setAttribute(userName, userName);
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
         String userInfo = WebUtils.toString(loginedUser);
         model.addAttribute("userInfo", userInfo);
 

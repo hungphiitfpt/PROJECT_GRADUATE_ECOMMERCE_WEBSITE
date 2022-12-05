@@ -67,7 +67,9 @@ public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Lo
 	@Query(value ="SELECT * FROM shop_products where category_id LIKE CONCAT('%',:idCategory,'%') and list_price BETWEEN :priceStart AND :priceEnd",nativeQuery = true)
 	Page<ShopProductsEntity> filterShop(Long idCategory, String priceStart, String priceEnd, Pageable pageable);
 
-	@Query(value ="SELECT * FROM shop_products where is_deleted = false and category_id = :idCategory",nativeQuery = true)
+	@Query(value ="SELECT * FROM shop_products where is_deleted = false and category_id LIKE CONCAT('%',:idCategory,'%')",nativeQuery = true)
 	Page<ShopProductsEntity> findAllProductEnable(Long idCategory, Pageable page);
+	@Query(value ="SELECT * FROM shop_products where is_deleted = false",nativeQuery = true)
+	Page<ShopProductsEntity> findProductEnable(Pageable page);
 
 }

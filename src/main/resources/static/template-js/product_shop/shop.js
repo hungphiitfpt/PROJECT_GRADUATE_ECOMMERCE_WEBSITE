@@ -105,19 +105,28 @@ $(document).on('click', '.filter-product-by-price', async function() {
 
 
 async function drawDataProductShop(res) {
-	let productHTML = ``, pagination = ``,  image = ``;
+	let productHTML = ``, pagination = ``,  image = ``,labelDiscount=``,buttonAddCart=``,moneyAfterDiscount=``;
 	for (let i = 0; i < res.data.content.length; i++) {
-		formatmoney = formatMoney(`${res.data.content[i].listPrice}`);
+		// formatmoney = formatMoney(`${res.data.content[i].listPrice}`);
+		formatmoney = (res.data.content[i].listPrice * ((100 - res.data.content[i].discountinued) / 100));
+		moneyAfterDiscount = formatVND(formatmoney);
 		image = res.data.content[i].image;
+		if(res.data.content[i].discountinued > 0) {
+			labelDiscount = `<div class="label sale">${res.data.content[i].discountinued}%</div>`;
+			buttonAddCart= `<li onclick="addItemToCart(${res.data.content[i].id},'${res.data.content[i].productName}',1,${formatmoney},'${res.data.content[i].image}')"><a href="#"><span class="icon_bag_alt"></span></a></li>`;
+		}else {
+			labelDiscount = `<div class="label stockout">Hết hàng</div>`;
+			buttonAddCart = ``;
+		}
 		productHTML += `<div class="col-lg-4 col-md-6">
         <div class="product__item">
             <div class="product__item__pic set-bg" data-setbg="${image}" style="background-image: url(&quot;${image}&quot;);"> 
-                <div class="label new">New</div>
+				${labelDiscount}
                 <ul class="product__hover">
                     <li><a href="${res.data.content[i].image}" class="image-popup"><span
                             class="arrow_expand"></span></a></li>
                     <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                    <li onclick="addItemToCart(${res.data.content[i].id},'${res.data.content[i].productName}',1,${res.data.content[i].listPrice},'${res.data.content[i].image}')"><a href="#"><span class="icon_bag_alt"></span></a></li>
+                    ${buttonAddCart}
                 </ul>
             </div>
             <div class="product__item__text">
@@ -129,7 +138,7 @@ async function drawDataProductShop(res) {
                         class="fa fa-star"></i> <i class="fa fa-star"></i> <i
                         class="fa fa-star"></i>
                 </div>
-                <div class="product__price" data-id="${res.data.content[i].id}" data-price="${res.data.content[i].listPrice}"> ${formatmoney} VND</div>
+                <div class="product__price" data-id="${res.data.content[i].id}" data-price="${res.data.content[i].listPrice}"> ${moneyAfterDiscount}</div>
             </div>
         </div>
     </div>`

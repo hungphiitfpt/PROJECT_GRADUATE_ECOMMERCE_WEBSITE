@@ -63,45 +63,25 @@
 		</div>
 	</div>
 	<!-- Breadcrumb End -->
-
+    
 	<!-- Product Details Section Begin -->
-	<section class="product-details spad">
+ <section class="product-details spad">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-6">
-					<div class="product__details__pic" th:if!="${images.isEmpty()}">
-						<div
-							class="product__details__pic__left product__thumb nice-scroll">
-							<a class="pt active" href="#product-1"
-								th:each="images : ${images}"> <img th:if="${images.image}"
-								th:src="${images.image}" alt="">
-							</a>
-						</div>
-						<div class="product__details__slider__content">
-							<div class="product__details__pic__slider owl-carousel">
-								<img th:each="images : ${images}" th:data-hash="${images.image}"
-									class="product__big__img" th:src="${images.image}" alt="">
-							</div>
-						</div>
-					</div>
-
-					<div class="product__details__pic" th:if="${images.isEmpty()}">
-						<div
-							class="product__details__pic__left product__thumb nice-scroll">
-							<a class="pt active" href="#product-1"> <img
-								src="https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fnoimage.jpeg?alt=media&token=da789718-37ac-44c9-9fa3-41f1867eeb64" alt="">
-							</a>
-						</div>
-						<div class="product__details__slider__content">
-							<div class="product__details__pic__slider owl-carousel">
-								<img data-hash="" class="product__big__img"
-									src="https://firebasestorage.googleapis.com/v0/b/project-agricultural.appspot.com/o/Files%2FHungphi%2Fnoimage.jpeg?alt=media&token=da789718-37ac-44c9-9fa3-41f1867eeb64"
-									alt="">
-							</div>
-						</div>
-					</div>
-
-				</div>
+				  <div class="col-lg-6">
+                    <div class="product__details__pic" th:if!="${images.isEmpty()}">
+                        <div class="product__details__pic__left product__thumb nice-scroll">
+                            <a th:each="images : ${images}" class="pt active" th:href="'#'+${images.image}">
+                                <img  th:src="${images.image}" alt="">
+                            </a>
+                        </div>
+                        <div class="product__details__slider__content">
+                            <div class="product__details__pic__slider owl-carousel">
+                                <img th:each="images : ${images}" th:data-hash="${images.image}" class="product__big__img" th:src="${images.image}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 				<div class="col-lg-6">
 					<div class="product__details__text">
 						<h3 th:text="${product.productName}" id="title-product-detail"
@@ -217,8 +197,9 @@
 				<div id="list_product_random" class="col-lg-12 row"></div>
 			</div>
 		</div>
-	</section>
-	<!-- Product Details Section End -->
+	</section> 
+	
+
 
 
 

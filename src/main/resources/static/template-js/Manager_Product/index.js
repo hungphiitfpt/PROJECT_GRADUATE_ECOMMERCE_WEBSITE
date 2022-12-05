@@ -23,12 +23,13 @@ async function loadAllCategory() {
 
 
 async function loadAllProduct() {
-
+	let page = localStorage.getItem("currentPage");
+	console.log("page nè",page);
 	let method = 'get',
-
+		
 		url = `${api_graduation}getProducts`,
 
-		params = null,
+		params = {page: page},
 
 		data = {};
 
@@ -123,7 +124,6 @@ async function insertProduct() {
 
 async function updateProduct() {
 	let imageSession = sessionStorage.getItem("image");
-	
 	let method = 'post',
 		url = `${api_admin}update_product`,
 		params = {
@@ -142,7 +142,6 @@ async function updateProduct() {
 			supplierId: $('#list-supplier-manager option:selected').val(),
 			image: imageSession
 		};
-	uploadImage();
 	if(imageSession == "" || imageSession == null) {
 		return false;
 	}
@@ -268,7 +267,6 @@ async function UpdateInstock(r) {
 		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
-	console.log(res);
 	loadAllProduct();
 	sweatAlert(`Cập nhật trạng thái còn hàng sản phẩm có id là : ${id} thành công `, "success")
 }

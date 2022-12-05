@@ -221,7 +221,7 @@ h1 {
 }
 
 a, a:visited, a:hover {
-    color: var(--text-white);
+    color: #39599a;
     text-decoration: none;
 }
 
@@ -682,4 +682,7 @@ ul.list-category {
 .stardust-button--primary.stardust-button--active, .stardust-button--primary:hover {
     background-color: #d73211;
     border-color: #ba2b0f;
+}
+.header__right__auth a {
+	color: var(--text-white);
 }

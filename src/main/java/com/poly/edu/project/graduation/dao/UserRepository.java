@@ -44,6 +44,9 @@ public interface UserRepository extends JpaRepository<AppUserEntity, Long> {
      
     public AppUserEntity findByResetPasswordToken(String token);
     
+    @Query("SELECT c FROM AppUserEntity c WHERE c.userName = ?1")
+	AppUserEntity findUserById(String name);
+    
 
 
 

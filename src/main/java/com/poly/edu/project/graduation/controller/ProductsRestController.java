@@ -62,14 +62,13 @@ public class ProductsRestController {
 				@RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
 				@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) throws Exception {
 			try {
-				System.out.println(idCategory);
 				if(idCategory == null) {
 					Page<ShopProductsEntity> dataProduct = productServices.findByKeyWord(keyword, PageRequest.of(page, size));
 					return dataProduct;
-				} else {
+				}
 					Page<ShopProductsEntity> dataProduct = productServices.findAllProductEnable(idCategory,priceStart,priceEnd, PageRequest.of(page, size));
 					return dataProduct;
-				}
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

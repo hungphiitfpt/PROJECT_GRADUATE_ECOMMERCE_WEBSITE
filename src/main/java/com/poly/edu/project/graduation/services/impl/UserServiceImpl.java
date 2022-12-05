@@ -158,4 +158,10 @@ public class UserServiceImpl implements UserService {
         userRepository.save(appUserEntity);
 		
 	}
+
+	@Override
+	public AppUserEntity findUserById(String name) {
+		// TODO Auto-generated method stub
+		return userRepository.findUserById(name);
+	}
 }
