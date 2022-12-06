@@ -111,10 +111,15 @@ async function drawDataProductShop(res) {
 		formatmoney = (res.data.content[i].listPrice * ((100 - res.data.content[i].discountinued) / 100));
 		moneyAfterDiscount = formatVND(formatmoney);
 		image = res.data.content[i].image;
-		if(res.data.content[i].discountinued > 0) {
+		if(res.data.content[i].deleted == true) {
+			labelDiscount = `<div class="label stockout">Hết hàng</div>`;
+			buttonAddCart = ``;
+		}
+		else if(res.data.content[i].discountinued > 0) {
 			labelDiscount = `<div class="label sale">${res.data.content[i].discountinued}%</div>`;
 			buttonAddCart= `<li onclick="addItemToCart(${res.data.content[i].id},'${res.data.content[i].productName}',1,${formatmoney},'${res.data.content[i].image}')"><a href="#"><span class="icon_bag_alt"></span></a></li>`;
-		}else {
+		}
+		else {
 			labelDiscount = `<div class="label stockout">Hết hàng</div>`;
 			buttonAddCart = ``;
 		}

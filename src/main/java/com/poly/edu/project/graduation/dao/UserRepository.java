@@ -46,6 +46,9 @@ public interface UserRepository extends JpaRepository<AppUserEntity, Long> {
     
     @Query("SELECT c FROM AppUserEntity c WHERE c.userName = ?1")
 	AppUserEntity findUserById(String name);
+
+    @Query("SELECT c.userId FROM AppUserEntity c WHERE c.userName = ?1")
+	String findIdUserByPricipal(String name);
     
 
 

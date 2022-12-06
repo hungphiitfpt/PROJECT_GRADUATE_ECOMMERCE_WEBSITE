@@ -686,3 +686,9 @@ ul.list-category {
 .header__right__auth a {
 	color: var(--text-white);
 }
+.border-input-25 {
+	border-radius: 25px;
+}
+.product__details__price__old {
+	text-decoration: line-through;
+}

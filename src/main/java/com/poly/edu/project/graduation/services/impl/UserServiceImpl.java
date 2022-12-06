@@ -164,4 +164,10 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userRepository.findUserById(name);
 	}
+
+	@Override
+	public String findIdUserByPrincipal(String name) {
+		// TODO Auto-generated method stub
+		return userRepository.findIdUserByPricipal(name);
+	}
 }

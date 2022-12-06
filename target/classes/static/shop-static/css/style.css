@@ -1742,7 +1742,8 @@ ol {
 }
 
 .product__details__price {
-	font-size: 30px;
+/* 	font-size: 30px; */
+	font-size: 25px;
 	font-weight: 600;
 	color: #ca1515;
 	margin-bottom: 30px;

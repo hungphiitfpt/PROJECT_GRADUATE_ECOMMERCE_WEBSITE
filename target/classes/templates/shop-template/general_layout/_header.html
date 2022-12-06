@@ -97,7 +97,7 @@
 							<div class="header__right__auth mb-3">
 								 <span  
 								th:if="${#request.userPrincipal != null}" 
-								th:text="'Hello, '+${#request.userPrincipal.name}" th:data-name="${#request.userPrincipal.name}" class="name-user-login"></span> 
+								th:text="'Hello, '+${#request.userPrincipal.name}" th:abc="${#request.userPrincipal}" th:data-name="${#request.userPrincipal.name}" class="name-user-login"></span> 
 								<a th:if="${#request.userPrincipal != null}"
 									th:href="@{/logout}">Logout</a> 
 								

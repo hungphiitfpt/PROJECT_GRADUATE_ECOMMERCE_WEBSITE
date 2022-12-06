@@ -36,4 +36,6 @@ public interface UserService {
 
 	AppUserEntity findUserById(String name);
 
+	String findIdUserByPrincipal(String name);
+
 }

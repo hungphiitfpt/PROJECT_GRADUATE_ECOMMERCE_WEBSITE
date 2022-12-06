@@ -95,11 +95,12 @@
 								138 reviews )</span>
 						</div>
 						<div class="row">
-							<div class="product__details__price"
-								th:text="${#numbers.formatDecimal( product.listPrice * (100- product.discountinued)/100, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' ">$
+							<div class="product__details__price product__details__price__old"
+								th:text="${#numbers.formatDecimal(product.listPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'">$
 								75.0</div>
 							<span class="ml-5 product__details__price"
-								th:text="${#numbers.formatDecimal(product.listPrice, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'">$
+								
+								th:text="${#numbers.formatDecimal( product.listPrice * (100- product.discountinued)/100, 0, 'COMMA', 0, 'POINT')} + ' VNĐ' ">$
 								83.0</span>
 						</div>
 						<p th:text="${product.shortDecription}">Nemo enim ipsam
@@ -113,7 +114,7 @@
 									<input type="text" th:value="${product.quantityPerUnit}">
 								</div>
 							</div>
-							<a href="#" th:data-id="|${product.id}|"
+							<a href="#" th:if="${product.isDeleted} != true" th:data-id="|${product.id}|"
 								th:data-name="|${product.productName}|"
 								th:data-price="|${product.listPrice}|"
 								th:data-image="|${product.image}|"

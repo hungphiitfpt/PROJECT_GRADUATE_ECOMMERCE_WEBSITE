@@ -154,6 +154,8 @@ h1 {
 				<ul class="nav nav-tabs list-group">
 					<li class="list-group-item "><a data-toggle="tab"
 						href="#myaccount">Thông tin tài khoản</a></li>
+					<li class="list-group-item "><a data-toggle="tab"
+						href="#changePassword">Đổi Mật Khẩu</a></li>
 				</ul>
 			</div>
 			<div class="col-lg-8 card">
@@ -171,8 +173,8 @@ h1 {
 													accept=".png, .jpg, .jpeg" /> <label for="imageUpload"></label>
 											</div>
 											<div class="avatar-preview">
-												<div id="imagePreview"
-													style="background-image: url(http://i.pravatar.cc/500?img=7);">
+												<div id="imagePreview" th:image="${infoUser.avatar}"
+													th:style="background-image+':'+'url'+'('+${infoUser.avatar}+')'">
 												</div>
 											</div>
 										</div>
@@ -181,12 +183,12 @@ h1 {
 
 								<div class="form-group col-lg-6">
 									<label for=" ">Tên Tài khoản</label> <input type="email"
-										class="form-control" id="" th:value="${infoUser.userName}"
-										aria-describedby=" ">
+										class="form-control border-input-25" id=""
+										th:value="${infoUser.userName}" aria-describedby=" ">
 								</div>
 								<div class="form-group col-lg-6">
 									<label for=" ">Mật Khẩu</label> <input type="text"
-										class="form-control" id=""
+										class="form-control border-input-25" id=""
 										th:value="${infoUser.encrytedPassword}">
 								</div>
 								<div class="form-group col-lg-6 ">
@@ -194,64 +196,61 @@ h1 {
 									<div class="gender-user">
 										<div class="form-check form-check-inline">
 											<input class="form-check-input" type="radio"
-												name="inlineRadioOptions" id="inlineRadio1" value="option1">
-											<label class="form-check-label" for="inlineRadio1">Nam</label>
+												name="inlineRadioOptions" id="inlineRadio1"
+												th:value="${infoUser.gender}"
+												th:checked="${infoUser.gender == false}"> <label
+												class="form-check-label" for="inlineRadio1">Nam</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<input class="form-check-input" type="radio"
-												name="inlineRadioOptions" id="inlineRadio2" value="option2">
-											<label class="form-check-label" for="inlineRadio2">Nữ</label>
+												name="inlineRadioOptions" id="inlineRadio2"
+												th:value="${infoUser.gender}"
+												th:checked="${infoUser.gender == true}"> <label
+												class="form-check-label" for="inlineRadio2">Nữ</label>
 										</div>
 									</div>
 								</div>
 								<div class="form-group col-lg-6">
 									<label for=" ">Họ</label> <input type="text"
-										th:value="${infoUser.firstName}" class="form-control" id=" "
+										th:value="${infoUser.firstName}"
+										class="form-control border-input-25" id=" "
 										aria-describedby=" ">
 								</div>
 								<div class="form-group col-lg-6">
 									<label for=" ">Tên</label> <input type="text"
-										th:value="${infoUser.lastName}" class="form-control" id=" "
+										th:value="${infoUser.lastName}"
+										class="form-control border-input-25" id=" "
 										aria-describedby=" ">
 								</div>
 								<div class="form-group col-lg-6">
 									<label for=" ">Email</label> <input type="email"
-										th:value="${infoUser.email}" class="form-control" id=" "
+										th:value="${infoUser.email}"
+										class="form-control border-input-25" id=" "
 										aria-describedby=" ">
 								</div>
 								<div class="form-group col-lg-6">
-									<label for=" ">Ngày Sinh</label> <input type="email"
-										th:value="${infoUser.birthday}" class="form-control" id=" "
+									<label for=" ">Ngày Sinh</label> <input type="text"
+										th:value="${#dates.format(infoUser.birthday, 'dd/MM/yyyy')}"
+										class="form-control border-input-25" id=" "
 										aria-describedby=" ">
 								</div>
-								
+
 								<div class="form-group col-lg-6">
 									<label for=" ">Thành Phố</label> <input type="email"
-										class="form-control" id=" " aria-describedby=""
-										th:value="${infoUser.country}">
+										class="form-control border-input-25" id="" aria-describedby=""
+										th:value="${infoUser.city}">
 								</div>
 								<div class="form-group col-lg-6">
 									<label for=" ">Địa Chỉ</label>
-									<textarea th:text="${infoUser.address}" class="form-control" rows="7" name="shipAddress">                                    
+									<textarea th:text="${infoUser.address}"
+										class="form-control border-input-25" rows="7"
+										name="shipAddress">                                    
                                     </textarea>
-                                     
-									<div class="form-group">
-										<label for="exampleFormControlSelect1">Example select</label>
-										<select class="form-control" id="exampleFormControlSelect1">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-											<option>5</option>
-										</select>
-									</div>
 								</div>
 							</div>
-							
-							<button type="submit" class="text-center btn btn-primary">Lưu</button>
 						</form>
 					</div>
-					
+
 					<div id="menu1" class="tab-pane fade">
 						<h3>Menu 1</h3>
 						<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco

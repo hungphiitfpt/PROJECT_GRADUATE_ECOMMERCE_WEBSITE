@@ -17,7 +17,7 @@ async function loadOrderTracking() {
 
 	let method = 'get',
 		url = `${api_graduation}tracking-order`,
-		params = { id: 1},
+		params = {},
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
 	for (let i = 0; i < res.data.length; i++) {
