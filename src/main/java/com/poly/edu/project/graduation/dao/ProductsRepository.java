@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.poly.edu.project.graduation.model.ShopProductImageEntity;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 
 @Repository
@@ -69,7 +70,13 @@ public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Lo
 
 	@Query(value ="SELECT * FROM shop_products where category_id LIKE CONCAT('%',:idCategory,'%')",nativeQuery = true)
 	Page<ShopProductsEntity> findAllProductEnable(Long idCategory, Pageable page);
+	
 	@Query(value ="SELECT * FROM shop_products where is_deleted = false",nativeQuery = true)
 	Page<ShopProductsEntity> findProductEnable(Pageable page);
+	
+	@Modifying 
+	@Query(value ="INSERT INTO shop_product_image (product_id,image) VALUES (:id,:image)",nativeQuery = true)
+	@Transactional
+	void uploadListImageById(Long id, String image);
 
 }

@@ -443,6 +443,9 @@ async function TotalPriceOrderDateNow() {
 
   let res = await axiosTemplate(method, url, params, data);
 
+  if(res.data == "") {
+	$('.today_revenue').text("0 VND")
+}
   $('.today_revenue').text(formatVND(res.data))
 }
 

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.poly.edu.project.graduation.dao.ProductsRepository;
 import com.poly.edu.project.graduation.model.ResponseObject;
 import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
+import com.poly.edu.project.graduation.model.ShopProductImageEntity;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 import com.poly.edu.project.graduation.services.ProductServices;
 
@@ -136,6 +137,12 @@ public class ProductServicesImpl implements ProductServices {
 	public Page<ShopProductsEntity> findAllProductEnable(Long idCategory, String priceStart, String priceEnd,Pageable page) {
 		// TODO Auto-generated method stub
 		return productsRepository.findAllProductEnable(idCategory,page);
+	}
+
+	@Override
+	public void uploadImageById(Long id, String image) {
+		// TODO Auto-generated method stub
+		 productsRepository.uploadListImageById(id,image);
 	}
 
 

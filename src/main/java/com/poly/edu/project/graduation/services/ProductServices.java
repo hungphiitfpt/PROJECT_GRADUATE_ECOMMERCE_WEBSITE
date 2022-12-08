@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.poly.edu.project.graduation.model.ResponseObject;
 import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
+import com.poly.edu.project.graduation.model.ShopProductImageEntity;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
 
 @Service
@@ -54,6 +55,8 @@ public interface ProductServices {
 	Page<ShopProductsEntity> filterShop( String priceStart, String priceEnd, Pageable pageable);
 
 	Page<ShopProductsEntity> findAllProductEnable(Long idCategory, String priceStart, String priceEnd,Pageable page);
+
+	void uploadImageById(Long id, String image);
 
 	
 

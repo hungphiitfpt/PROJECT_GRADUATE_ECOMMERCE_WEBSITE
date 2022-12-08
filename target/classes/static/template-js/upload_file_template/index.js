@@ -45,6 +45,31 @@ function readURL(input) {
 		sessionStorage.setItem("image", url);
     }).catch(console.error)
 }
+
+ async function uploadImage2() {
+    const ref = firebase.storage().ref("Files/" + "Hungphi/");
+    // Lấy phẩn tử đầu tiên
+    const file = document.querySelector('#imageUpload2').files[0]
+    console.log(file)
+    const metadata = {
+        contentType : file.type
+    }
+    const name = file.name;
+    const uploadIMG = ref.child(name).put(file, metadata);
+     uploadIMG
+    .then(snapshot => snapshot.ref.getDownloadURL())
+     .then(async url => {
+		await sessionStorage.setItem("imageNew", url);
+    }).catch(console.error)
+
+    let id = $('#id-create-manager-product').val();
+    let image =  sessionStorage.getItem("imageNew");
+    let method = 'post',
+      url = `${api_graduation}uploadListImageByIdProduct`,
+      params = { id: id, image: image },
+      data = {};
+    let res =  axiosTemplate(method, url, params, data);
+}
 let a = [];
 const getListImages = () => {
 

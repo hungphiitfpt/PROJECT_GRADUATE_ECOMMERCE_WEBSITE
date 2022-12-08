@@ -219,6 +219,7 @@ function closeModalDetailProduct() {
 }
 async function getDataDetailProduct(r) {
 	$('#btn-save-product').addClass("d-none");
+	$('#btn-update-list-image-product').removeClass("d-none");
 	$('#btn-update-product').removeClass("d-none")
 	let id = r.data('id');
 	let method = 'get',

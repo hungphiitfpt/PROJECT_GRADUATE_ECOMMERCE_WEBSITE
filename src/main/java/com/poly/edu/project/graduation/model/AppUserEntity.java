@@ -13,7 +13,7 @@ import java.util.List;
 uniqueConstraints = { //
         @UniqueConstraint(name = "APP_USER_UK", columnNames = "user_name") })
 public class AppUserEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "user_id", nullable = false)
     private long userId;
