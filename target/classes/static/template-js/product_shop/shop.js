@@ -92,7 +92,7 @@ $(document).on('click', '.filter-product-by-price', async function() {
 	params = { 
 	page: page, 
 	size: 9,
-	idCategory: idCategory, 
+	// idCategory: idCategory, 
 	priceStart: priceStart,
 	priceEnd: priceEnd},
 	data = {};

@@ -81,12 +81,12 @@ public class ProductsRestController {
 	public Page<ShopProductsEntity> filterDataProduct(
 			@RequestParam(name = "priceStart", required = false, defaultValue = "0") String priceStart,
 			@RequestParam(name = "priceEnd", required = false, defaultValue = "999999999") String priceEnd,
-			@RequestParam(name = "idCategory", required = false, defaultValue = "") Long idCategory,
+//			@RequestParam(name = "idCategory", required = false, defaultValue = "") Long idCategory,
 			@RequestParam(name = "size", required = false, defaultValue = "9") int size,
 			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) throws Exception {
 		try {
-			Page<ShopProductsEntity> dataProduct = productServices.filterShop(idCategory, priceStart, priceEnd,
+			Page<ShopProductsEntity> dataProduct = productServices.filterShop( priceStart, priceEnd,
 					PageRequest.of(page, size));
 			return dataProduct;
 		} catch (Exception e) {

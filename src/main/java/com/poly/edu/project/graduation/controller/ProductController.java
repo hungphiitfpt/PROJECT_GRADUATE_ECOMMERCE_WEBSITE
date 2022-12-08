@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poly.edu.project.graduation.enums.Title;
 import com.poly.edu.project.graduation.model.CartEntity;
 import com.poly.edu.project.graduation.model.ShopCategoriesEntity;
 import com.poly.edu.project.graduation.model.ShopProductsEntity;
@@ -53,7 +54,6 @@ public class ProductController {
 			@RequestParam(name = "size", required = false, defaultValue = "12") int size,
 			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) {
-
 		try {
 			Map<Long, CartEntity> cartItems = (Map<Long, CartEntity>) session.getAttribute("cart");
 			Page<ShopProductsEntity> listProduct;
@@ -66,7 +66,6 @@ public class ProductController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return "shop-template/shop";
 
 	}

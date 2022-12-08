@@ -209,6 +209,11 @@ let res = await axiosTemplate(method, url, params, data);
 console.log(res);
 if(res.status == 200) {
 	$('#table-product-orderPage tr').remove();
+	$('.count-quantity-cart span').text('0');
+	$('.total-quantity-cart').text('0');
+	$('.total-ship-cart').text('0');
+	$('.total-price-cart').text('0 VND');
 	sweatAlert(`Đặt Hàng Thành Công`, "success");
+	
 }
 }

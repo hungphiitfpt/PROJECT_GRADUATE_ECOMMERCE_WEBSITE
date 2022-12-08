@@ -1,5 +1,6 @@
 package com.poly.edu.project.graduation.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -39,5 +40,18 @@ public interface OrderRepository extends JpaRepository<ShopOrdersEntity, Long> {
 	@Query(value = "UPDATE ShopOrdersEntity SET orderStatus = 5 WHERE id = ?1")
 	@Transactional
 	void cancelOrderById(long id);
+	
+	
+	@Query(value = "SELECT COUNT(DISTINCT(user_id)) FROM shop_orders where created_at LIKE CONCAT('%',:date,'%')", nativeQuery = true)
+	String count_number_order_customers(Date date);
+	
+	@Query(value = "SELECT SUM(total_price) FROM shop_orders where created_at LIKE CONCAT('%',:date,'%')", nativeQuery = true)
+	String TotalPriceOrdersDateNow(Date date);
+
+	@Query(value = "SELECT COUNT(id) FROM shop_orders where created_at LIKE CONCAT('%',:date,'%')", nativeQuery = true)
+	String CountOrdersDateNow(Date date);
+	
+	
+
 
 }

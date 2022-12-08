@@ -45,7 +45,7 @@ async function loadWarehouse() {
 async function insertWarehouseProduct() {
 
 	let method = 'post',
-		url = `${api_admin}insert_warehouse`,
+		url = `${api_admin}getAllWarehouse`,
 		params = {},
 		data = {
 			productId: $('.list-product-manager option:selected').data('id'),
@@ -76,6 +76,23 @@ function clearData() {
 	$('#note_create_warehouse').val("");
 	$('#quantity-warhouse').val("");
 }
+$(document).on('click', '.button-panigation-manager-product', async function() {
+	$('.button-panigation-manager-product').removeClass('active')
+	let page = $(this).val();
+	localStorage.setItem('currentPage', page);
+	let keyWord = $('#input-search-product-keyword').val();
+	let method = 'get',
+		url = `${api_admin}getAllWarehouse`,
+		params = { keyWord: keyWord, page: page },
+		data = {
+		};
+	let res = await axiosTemplate(method, url, params, data);
+	drawTableWarehouseManager(res, $('#table-list-create-warehouse'))
+
+	let currentPage = localStorage.getItem('currentPage');
+	$(`.button-panigation-manager-product[value='${currentPage}']`).addClass('active')
+	sweatAlert(`Bạn đang ở trang thứ ${page}`, "success")
+})
 async function drawTableWarehouseManager(res) {
 	var WarehouseHTML = ``;
 	var pagination = ``;

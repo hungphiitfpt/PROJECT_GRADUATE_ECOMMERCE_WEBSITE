@@ -1,5 +1,6 @@
 package com.poly.edu.project.graduation.services.impl;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -100,6 +101,24 @@ public class OrderServiceImpl implements OrderService {
 	public void cancelOrderById(long id) {
 		// TODO Auto-generated method stub
 		orderRepository.cancelOrderById(id);
+	}
+
+	@Override
+	public String countNumberOrders(Date date) {
+		// TODO Auto-generated method stub
+		return orderRepository.count_number_order_customers(date);
+	}
+
+	@Override
+	public String totalPriceOrdersDateNow(Date date) {
+		// TODO Auto-generated method stub
+		return orderRepository.TotalPriceOrdersDateNow(date);
+	}
+
+	@Override
+	public String CountOrdersDateNow(Date date) {
+		// TODO Auto-generated method stub
+		return orderRepository.CountOrdersDateNow(date);
 	}
 
 

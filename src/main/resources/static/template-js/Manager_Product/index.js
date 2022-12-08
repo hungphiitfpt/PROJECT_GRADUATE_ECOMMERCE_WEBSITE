@@ -24,7 +24,7 @@ async function loadAllCategory() {
 
 async function loadAllProduct() {
 	let page = localStorage.getItem("currentPage");
-	console.log("page nè",page);
+
 	let method = 'get',
 		
 		url = `${api_graduation}getProducts`,

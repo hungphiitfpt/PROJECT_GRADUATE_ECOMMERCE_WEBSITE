@@ -95,7 +95,9 @@ $(function() {
    * Data and config for chartjs
    */
 
-
+  countUserOrdersDateNow();
+  TotalPriceOrderDateNow();
+  countOrderDateNow();
   test();
  
   
@@ -413,3 +415,48 @@ $(function() {
     });
   }
 });
+
+async function countUserOrdersDateNow() {
+
+	let method = 'get',
+
+		url = `${api_admin}countUserOrderDateNow`,
+
+		params = {},
+
+		data = {};
+
+	let res = await axiosTemplate(method, url, params, data);
+
+  $('.total_customer_order').text(res.data)
+
+}
+async function TotalPriceOrderDateNow() {
+
+  let method = 'get',
+
+  url = `${api_admin}TotalPriceOrderDateNow`,
+
+  params = {},
+
+  data = {};
+
+  let res = await axiosTemplate(method, url, params, data);
+
+  $('.today_revenue').text(formatVND(res.data))
+}
+
+async function countOrderDateNow() {
+
+  let method = 'get',
+
+  url = `${api_admin}CountOrdersDateNow`,
+
+  params = {},
+
+  data = {};
+
+  let res = await axiosTemplate(method, url, params, data);
+
+  $('.total_orders_date_now').text(res.data)
+}

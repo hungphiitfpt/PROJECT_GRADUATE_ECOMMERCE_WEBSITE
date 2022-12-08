@@ -51,7 +51,7 @@ public interface ProductServices {
 	void changeStatusInstock(long id);
 
 
-	Page<ShopProductsEntity> filterShop(Long idCategory, String priceStart, String priceEnd, Pageable pageable);
+	Page<ShopProductsEntity> filterShop( String priceStart, String priceEnd, Pageable pageable);
 
 	Page<ShopProductsEntity> findAllProductEnable(Long idCategory, String priceStart, String priceEnd,Pageable page);
 

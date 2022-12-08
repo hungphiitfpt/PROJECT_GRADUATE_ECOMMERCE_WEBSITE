@@ -2,12 +2,12 @@ $(function() {
 	loadAllDataTableCategory();
 })
 async function loadAllDataTableCategory() {
-
+	let page = localStorage.getItem("currentPage");
 	let method = 'get',
 
 		url = `${api_graduation}getCategory`,
 
-		params = null,
+		params = {page: page},
 
 		data = {};
 
@@ -161,8 +161,6 @@ let engine = (id, serial, message) => {
 $(document).on('click', '.button-panigation-manager-product', async function() {
 	$('.button-panigation-manager-product').removeClass('active')
 	let page = $(this).val();
-	console.log(page);
-    console.log(page);
 	localStorage.setItem('currentPage', page);
 	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',

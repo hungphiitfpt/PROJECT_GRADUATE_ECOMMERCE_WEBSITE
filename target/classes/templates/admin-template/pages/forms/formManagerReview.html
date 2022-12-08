@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Quản Lý ĐÁNH GIÁ</title>
+
+<link rel="stylesheet"
+	href="../admin-static/vendors/typicons/typicons.css">
+
+<link rel="stylesheet"
+	href="../admin-static/vendors/css/vendor.bundle.base.css">
+
+<link rel="stylesheet"
+	href="../admin-static/vendors/select2/select2.min.css">
+
+
+<link rel="stylesheet"
+	href="../admin-static/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+
+<link rel="stylesheet"
+	href="../admin-static/css/vertical-layout-light/style.css">
+
+<link rel="stylesheet"
+	href="../admin-static/css/vertical-layout-light/newStyle.css">
+
+<link rel="shortcut icon" href="../admin-static/images/favicon.png" />
+
+<script src="../variable_template/variable_index.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="../template-js/validation-template/css/opensans-font.css">
+
+<link rel="stylesheet" type="text/css"
+	href="../template-js/validation-template/fonts/line-awesome/css/line-awesome.min.css">
+
+<link rel="stylesheet"
+	href="https://jqueryvalidation.org/files/demo/site-demos.css">
+
+<link rel="stylesheet"
+	href="../template-js/validation-template/css/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<link rel="stylesheet" href="../admin-static/vendors/mdi/css/materialdesignicons.min.css" />
+</head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
+<script src="../template-js/config_firebase/index.js"></script>
+
+<body>
+	<div class="container-scroller">
+		<!-- partial:../../partials/_navbar.html -->
+		<div
+			th:replace="admin-template/partials/_navbar:: navbar_template_admin"></div>
+		<!-- partial -->
+		<div class="container-fluid page-body-wrapper">
+			<!-- partial:../../partials/_settings-panel.html -->
+			<div
+				th:replace="admin-template/partials/_settings-panel:: settings-panel-template-user"></div>
+			<!-- partial -->
+			<!-- partial:../../partials/_sidebar.html -->
+			<div
+				th:replace="admin-template/partials/_sidebar:: sidebar-template-user"></div>
+			<!-- partial -->
+			<div class="main-panel">
+				<div class="content-wrapper">
+					<div class="row">
+						<div class="col-12 grid-margin stretch-card">
+							<form id="form">
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title">Quản Lý Tài Khoản</h4>
+										<p class="card-description">Trang dành cho người quản trị</p>
+										<div class="row">
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">ID Nhân Viên</label> <input
+													type="text" class="form-control input-not-edit"
+													id="id-create-manager-category" readonly="readonly"
+													name="id-create-manager-category" placeholder="ID">
+											</div>
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Tên Nhân Viên</label> <input
+													type="text" class="form-control"
+													id="name-create-manager-category"
+													name="name_create_manager_category" placeholder="Name">
+												<i
+													class="fas fa-exclamation-circle failure-icon mdi mdi-close-octagon"></i>
+												<i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+											</div>
+
+
+											<div class="form-group col-lg-6 col-sm-12">
+
+
+												<div class="avatar-upload">
+													<div class="avatar-edit">
+														<input type="file" id="imageUpload" /> <label
+															for="imageUpload"> <i
+															class="icon-upload typcn typcn-upload"></i>
+														</label>
+													</div>
+													<div class="avatar-preview">
+														<div id="imagePreview"
+															style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQqsb6lK-PlD1kHFoubbiC-jN21tqj9ADz9crJ2rBIstz1gKFPE&usqp=CAU);">
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleTextarea1">Mô tả chi tiết</label>
+												<textarea class="form-control"
+													id="description-detail-category" name="description_detail"
+													rows="15"></textarea>
+												<i
+													class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
+												<i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+											</div>
+
+
+											<div class="form-group col-lg-6 col-sm-12">
+												<label for="exampleInputName1">Mã Code</label> <input
+													type="text" class="form-control"
+													id="code-create-manager-category"
+													name="code_create_manager_category" placeholder="Name">
+												<i
+													class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
+												<i
+													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+												<div class="error"></div>
+
+											</div>
+										</div>
+										<button type="submit" onclick="insertCategory()"
+											id="btn-save-product" class="btn  btn-primary mr-2">Lưu</button>
+										<button onclick="updateCategory()" id="btn-update-product"
+											class="btn btn-primary mr-2 d-none">Cập Nhật</button>
+										<button onclick="clearData()" class="btn btn-light">Clear</button>
+
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="col-lg-12 grid-margin stretch-card">
+							<div class="card">
+								<div class="card-body">
+									<div class="row">
+										<h4 class="card-title">Danh sách Nhân Viên</h4>
+										<div class="input-group">
+											<input type="text" class="form-control"
+												id="input-search-product-keyword">
+											<div class="input-group-append">
+												<button class="btn btn-sm btn-primary" type="button"
+													onclick="SearchDataByKey()">Search</button>
+											</div>
+										</div>
+									</div>
+									<p class="card-description"></p>
+									<div class="table-responsive">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>TÊN ĐĂNG NHẬP</th>
+													<th>TÊN</th>
+													<th>HÌNH ẢNH</th>
+													<th>THÀNH PHỐ</th>
+													<th>TÌNH TRẠNG</th>
+													<th>NGÀY SINH</th>
+													<th>Chức năng</th>
+												</tr>
+											</thead>
+											<tbody id="table-list-users-manager">
+
+											</tbody>
+
+										</table>
+
+									</div>
+									<div class="panigation-sort text-center">
+										<div id="panigation-manager-product"
+											class="btn-group  pt-3 text-center" role="group"
+											aria-label="Basic example"></div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Modal -->
+				<div class="modal fade" id="open_detail_product" role="dialog">
+					<div class="modal-dialog modal-lg">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Modal Header</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-lg-4 col-sm-12 text-center">
+										<img id="img-eployee-modal-info" class="img-avt-modal" src=""
+											alt="" />
+									</div>
+									<div class="col-lg-8 col-sm-12">
+										<div class="row">
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Id</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="input-idUser-modal-employee-info">
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Tên Đăng
+														Nhập</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="input-username-modal-employee-info">
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Mật Khẩu</label>
+													<div class="col-sm-9">
+														<input type="password" class="form-control"
+															id="input-password-modal-employee-info">
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Tên Họ</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="input-firstname-modal-employee-info">
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row">
+													<label class="col-sm-3 col-form-label">Tên Đệm</label>
+													<div class="col-sm-9">
+														<input type="text" class="form-control"
+															id="input-lastname-modal-employee-info">
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row is-align-item-center">
+													<label class="col-sm-3 col-form-label">Tỉnh</label>
+													<div class="col-sm-9">
+														<select class="form-control form-control-sm"
+															id="select-country-modal-employee-info">
+														</select>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-6">
+												<div class="form-group row is-align-item-center">
+													<label class="col-sm-3 col-form-label">Giới Tính</label>
+													<div class="col-sm-9 row">
+														<div class="col-lg-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input
+																	type="radio" class="form-check-input"
+																	name="ExampleRadio1" id="male-modal-employee">
+																	Nam <i class="input-helper"></i></label>
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input
+																	type="radio" class="form-check-input"
+																	name="ExampleRadio1" id="female-modal-employee">
+																	Nữ <i class="input-helper"></i></label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group row is-align-item-center">
+													<label class="col-sm-3 col-form-label">Trạng Thái</label>
+													<div class="col-sm-9 row">
+														<div class="col-lg-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input
+																	type="radio" class="pending form-check-input"
+																	name="ExampleRadio2" id="pending-work-modal-employee">
+																	Nghỉ Làm <i class="input-helper"></i></label>
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input
+																	type="radio" class="form-check-input"
+																	name="ExampleRadio2" id="open-work-modal-employee">
+																	Còn Làm <i class="input-helper"></i></label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal" onclick="closeModalDetailProduct()">Close
+								</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+
+
+
+
+				<!-- content-wrapper ends -->
+				<!-- partial:../../partials/_footer.html -->
+				<div
+					th:replace="admin-template/partials/_footer:: footer_template_admin"></div>
+				<!-- partial -->
+			</div>
+			<!-- main-panel ends -->
+		</div>
+		<!-- page-body-wrapper ends -->
+	</div>
+	<script src="../admin-static/vendors/js/vendor.bundle.base.js"></script>
+
+	<script src="../admin-static/js/off-canvas.js"></script>
+	<script src="../admin-static/js/hoverable-collapse.js"></script>
+	<script src="../admin-static/js/template.js"></script>
+	<script src="../admin-static/js/settings.js"></script>
+	<script src="../admin-static/js/todolist.js"></script>
+
+	<script
+		src="../admin-static/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+	<script src="../admin-static/vendors/select2/select2.min.js"></script>
+
+	<script src="../admin-static/js/file-upload.js"></script>
+	<script src="../admin-static/js/typeahead.js"></script>
+	<script src="../admin-static/js/select2.js"></script>
+	<!-- nhúng file js tự customize-->
+	<script src="../template-js/manager_employee/index.js"></script>
+	<script src="../template-js/upload_file_template/index.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script src="../template-js/validation-template/validation.js"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</body>
+
+</html>

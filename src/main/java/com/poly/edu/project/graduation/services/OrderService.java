@@ -1,5 +1,6 @@
 package com.poly.edu.project.graduation.services;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,12 @@ public interface OrderService {
 	List<ShopOrdersEntity> findOrderByIdUser(String id);
 
 	void cancelOrderById(long id);
+
+	String countNumberOrders(Date date);
+
+	String totalPriceOrdersDateNow(Date date);
+
+	String CountOrdersDateNow(Date date);
 	
 	
 	
