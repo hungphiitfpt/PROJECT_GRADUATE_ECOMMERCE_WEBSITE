@@ -17,7 +17,7 @@ async function loadAllDataTableCategory() {
 }
 
 async function SearchProductByKey() {
-	let keyWord = $('#input-search-product-keyword').val();
+	let keyWord = $('#input-search-product-keyword').val().trim();
 	let method = 'get',
 		url = `${api_graduation}getCategory`,
 		params = { keyword: keyWord },
@@ -174,7 +174,7 @@ $(document).on('click', '.button-panigation-manager-product', async function() {
 	$('.button-panigation-manager-product').removeClass('active')
 	let page = $(this).val();
 	localStorage.setItem('currentPage', page);
-	let keyWord = $('#input-search-product-keyword').val();
+	let keyWord = $('#input-search-product-keyword').val().trim();
 	let method = 'get',
 		url = `${api_graduation}getCategory`,
 		params = { keyWord: keyWord, page: page },

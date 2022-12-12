@@ -6,7 +6,7 @@ $(function() {
 
 async function loadAlllProductShop() {
 
-	let keyWord = $('#input-search-product-keyword').val();
+	let keyWord = $('#input-search-product-keyword').val().trim();
 	let method = 'get',
 		url = `${api_graduation}findListProductExist`,
 		params = { keyword: keyWord, size: 9 , page: 0},

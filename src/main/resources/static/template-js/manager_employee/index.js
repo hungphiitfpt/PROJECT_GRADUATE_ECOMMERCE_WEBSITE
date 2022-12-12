@@ -13,7 +13,7 @@ async function loadAllUsers() {
 		data = {};
 
 	let res = await axiosTemplate(method, url, params, data);
-	console.log(res.data);
+	
 	drawTableUsersManager(res, $('#table-list-users-manager'))
 
 }
@@ -55,12 +55,11 @@ async function openModalDetailEployee(r) {
 	}
 	$('#img-eployee-modal-info').attr("src", `${res.data.data.avatar}`);
 	$('.modal-title').text("CHI TIẾT NHÂN VIÊN");
-	$('#input-idUser-modal-employee-info').val(res.data.data.id);
-	$('#input-username-modal-employee-info').val(res.data.data.username);
-	$('#input-password-modal-employee-info').val(res.data.data.password);
+	$('#input-idUser-modal-employee-info').val(res.data.data.userId);
+	$('#input-username-modal-employee-info').val(res.data.data.userName);
+	$('#input-password-modal-employee-info').val(res.data.data.encrytedPassword);
 	$('#input-firstname-modal-employee-info').val(res.data.data.firstName);
 	$('#input-lastname-modal-employee-info').val(res.data.data.lastName);
-	ư
 	$("#select-country-modal-employee-info").val(res.data.data.country).trigger('change');
 
 
@@ -80,7 +79,7 @@ async function CallAPIGetCountryVietNam() {
 }
 async function SearchDataByKey() {
 
-	let keyWord = $('#input-search-product-keyword').val();
+	let keyWord = $('#input-search-product-keyword').val().trim();
 	let method = 'get',
 		url = `${api_admin}getUsers`,
 		params = { keyword: keyWord },
@@ -102,13 +101,13 @@ async function drawTableUsersManager(res) {
 		if (res.data.content[i].deleted == true) {
 			res.data.content[i].deleted = `<label class="badge badge-danger">ĐÃ NGHỈ</label>`;
 			button = `<button type="button"
-			class="btn btn-warning btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="UpdateInstock($(this))">
+			class="btn btn-warning btn-rounded btn-icon" data-id="${res.data.content[i].userId}" onclick="UpdateInstock($(this))">
 			<i class="typcn typcn-refresh-outline btn-icon-prepend"></i>
 		</button>`
 		} else {
 			res.data.content[i].deleted = `<label class="badge badge-success">CÒN LÀM VIỆC</label>`;
 			button = `<button type="button"
-			class="btn btn-danger btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="UpdateChangeDelete($(this))">
+			class="btn btn-danger btn-rounded btn-icon" data-id="${res.data.content[i].userId}" onclick="UpdateChangeDelete($(this))">
 			<i class="typcn typcn-delete"></i>
 		</button>`
 		}
@@ -123,10 +122,10 @@ async function drawTableUsersManager(res) {
 	
 		<td><div class="row justify-content-around">
 		<button type="button"
-			class="btn btn-info btn-rounded btn-icon" data-id="${res.data.content[i].id}" onclick="openModalDetailEployee($(this))" class="btn btn-info btn-lg" data-toggle="modal" data-target="#open_detail_product">
+			class="btn btn-info btn-rounded btn-icon" data-id="${res.data.content[i].userId}" onclick="openModalDetailEployee($(this))" class="btn btn-info btn-lg" data-toggle="modal" data-target="#open_detail_product">
 			<i class="typcn typcn-eye"></i>
 		</button>
-		<button onclick="getDataDetailProduct($(this))" data-id="${res.data.content[i].id}" type="button"
+		<button onclick="getDataDetailProduct($(this))" data-id="${res.data.content[i].userId}" type="button"
 			class="btn btn-success btn-rounded btn-icon">
 			<i class="typcn typcn-edit"></i>
 		</button>
