@@ -263,7 +263,7 @@ async function alertCountOrderMarquee() {
 	Thông báo !: Bạn đang có 
 	${res.data[0]} đơn hàng chờ xác nhận , 
 	${res.data[1]} đơn chờ lấy hàng, 
-	${res.data[2]} đã lấy hàng,
+	${res.data[2]} đơn đã lấy hàng,
 	${res.data[3]} đang vận chuyển , 
 	${res.data[4]} đơn đang giao hàng, 
 	${res.data[5]} đơn đã giao hàng,
