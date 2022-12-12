@@ -6,7 +6,7 @@ $(function() {
 
 async function loadAlllProductShop() {
 
-	let keyWord = $('#input-search-product-keyword').val().trim();
+	let keyWord = $('#input-search-product-keyword').val();
 	let method = 'get',
 		url = `${api_graduation}findListProductExist`,
 		params = { keyword: keyWord, size: 9 , page: 0},
@@ -112,6 +112,9 @@ async function drawDataProductShop(res) {
 		moneyAfterDiscount = formatVND(formatmoney);
 		image = res.data.content[i].image;
 		if(res.data.content[i].deleted == true) {
+			labelDiscount = `<div class="label stockout">Hết hàng</div>`;
+			buttonAddCart = ``;
+		}else if(res.data.content[i].quantityPerUnit <= 0) {
 			labelDiscount = `<div class="label stockout">Hết hàng</div>`;
 			buttonAddCart = ``;
 		}

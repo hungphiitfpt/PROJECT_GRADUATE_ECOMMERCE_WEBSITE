@@ -42,7 +42,8 @@ public class OrderServiceImpl implements OrderService {
 	public boolean CreateOrder(Map<Long, CartEntity> cart,HttpSession session) {
 		try {
 			ShopOrdersEntity ordersEntity = (ShopOrdersEntity) session.getAttribute("userInf");
-			ordersEntity.setUserId(ordersEntity.getUserId());
+			System.out.println(session.getAttribute("idUsser"));
+			ordersEntity.setUserId(Long.valueOf((String) session.getAttribute("idUsser")));
 			ordersEntity.setShipName(ordersEntity.getShipName());
 			ordersEntity.setShipAddress(ordersEntity.getShipAddress().trim());
 			ordersEntity.setShipCity(ordersEntity.getShipCity());

@@ -37,7 +37,7 @@ async function loadOrderTracking() {
                 <div class="info-order-tracking">
                     <span class="font-bold">${res.data[i].shopOrderDetailsById[0].productName}</span> 
                     <span class="_9ca9GU">Phân loại hàng: Màu
-                        Xanh,750 ml</span> <span class="font-bold">x ${res.data[i].shopOrderDetailsById.length} sản phẩm</span>
+                        Xanh,750 ml</span> <span class="font-bold">x ${res.data[i].shopOrderDetailsById[0].quantity} sản phẩm</span>
                 </div>
             </div>
             <div class="col-lg-3" style="padding: 25px;">
@@ -83,7 +83,7 @@ async function loadOrderTracking() {
                 <div class="info-order-tracking">
                     <span class="font-bold">${res.data[i].shopOrderDetailsById[0].productName}</span> 
                     <span class="_9ca9GU">Phân loại hàng: Màu
-                        Xanh,750 ml</span> <span class="font-bold">x ${res.data[i].shopOrderDetailsById.length} sản phẩm</span>
+                        Xanh,750 ml</span> <span class="font-bold">x ${res.data[i].shopOrderDetailsById[0].quantity} sản phẩm</span>
                 </div>
             </div>
             <div class="col-lg-3" style="padding: 25px;">

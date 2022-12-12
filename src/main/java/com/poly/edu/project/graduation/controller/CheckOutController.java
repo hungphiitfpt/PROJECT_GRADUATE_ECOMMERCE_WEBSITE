@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,9 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.poly.edu.project.graduation.model.CartEntity;
 import com.poly.edu.project.graduation.model.ShopOrdersEntity;
+import com.poly.edu.project.graduation.services.UserService;
 
 @Controller
 public class CheckOutController {
+	
+	@Autowired
+	UserService service;
 
 	@RequestMapping(value = {"/checkout", "/addInfoUser"}, method = RequestMethod.GET)
 	public String index(Model model, HttpSession session, Principal principal) throws Exception{
@@ -27,6 +32,9 @@ public class CheckOutController {
 			}
 			else {
 				Map<Long, CartEntity> cartItems = (Map<Long, CartEntity>) session.getAttribute("cart");
+				String id = service.findIdUserByPrincipal(principal.getName());
+				session.setAttribute("idUsser", id);
+			
 				if (cartItems != null) {
 					model.addAttribute("cart", cartItems.values());
 				} else {

@@ -22,6 +22,7 @@ async function loadAllDataTableOrders() {
 	let res = await axiosTemplate(method, url, params, data);
 
 	drawTableOrderProducts(res, $('#table-list-orders-products'))
+	alertCountOrderMarquee();
 
 }
 

@@ -121,3 +121,20 @@ async function drawTableWarehouseManager(res) {
 	$('#table-list-create-warehouse').html(WarehouseHTML);
 
 }
+
+
+async function SearchProductByKey() {
+	let currentPage = localStorage.getItem('currentPage');
+	if(currentPage == null || currentPage == undefined || currentPage == "" ) {
+		currentPage = 0;
+	}
+	let keyWord = $('#input-search-product-keyword').val().trim();
+	let method = 'get',
+		url = `${api_admin}getAllWarehouse`,
+		params = { keyword: keyWord, page: currentPage, size: 10 },
+		data = {
+		};
+	let res = await axiosTemplate(method, url, params, data);
+	drawTableWarehouseManager(res, $('#table-list-orders-products'))
+	sweatAlert("Tìm Kiếm Thành Công", "success")
+}
