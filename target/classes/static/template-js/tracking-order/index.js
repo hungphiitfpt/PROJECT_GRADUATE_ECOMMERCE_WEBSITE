@@ -1,5 +1,6 @@
 $(function () {
     loadOrderTracking();
+   
 })
 async function loadOrderTracking() {
 
@@ -108,10 +109,9 @@ async function loadOrderTracking() {
                                 hệ Người bán</button>
                         </div>
                         <div class="VN6h8+">
-                            <button
-                                class="stardust-button stardust-button--secondary Kz9HeM">Mua
-                                lại</button>
-                        </div>
+                        <button
+                            class="stardust-button stardust-button--secondary Kz9HeM" onclick="cancel_order(${res.data[i].id})">Huỷ Đơn Hàng</button>
+                    </div>
                     </div>
                 </div>
         </div>

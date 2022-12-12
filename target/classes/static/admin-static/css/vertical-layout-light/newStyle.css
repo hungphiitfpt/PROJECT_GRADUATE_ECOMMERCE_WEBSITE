@@ -240,7 +240,7 @@ h1 small {
     width: 100%;
     position: absolute;
     text-align: center;
-    margin: 4px -1px;
+margin: -6px -3px;
 }
 .typcn-font-20px {
 	font-size: 20px;
@@ -673,4 +673,10 @@ ul li:hover {
 
 .color-blue{
 	color: #1da1f2;
+}
+.field .tooltip {
+	opacity: 1;
+}
+.bad-input{
+	border: 2px solid red;
 }

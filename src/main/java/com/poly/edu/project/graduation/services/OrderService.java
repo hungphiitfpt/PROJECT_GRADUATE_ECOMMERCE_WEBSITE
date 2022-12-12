@@ -34,6 +34,8 @@ public interface OrderService {
 	String totalPriceOrdersDateNow(Date date);
 
 	String CountOrdersDateNow(Date date);
+
+	List<String> CountMarqueeOrder();
 	
 	
 	

@@ -16,6 +16,18 @@ async function loadAllDataTableCategory() {
 
 }
 
+async function SearchProductByKey() {
+	let keyWord = $('#input-search-product-keyword').val();
+	let method = 'get',
+		url = `${api_graduation}getCategory`,
+		params = { keyword: keyWord },
+		data = {
+		};
+	let res = await axiosTemplate(method, url, params, data);
+	console.log(res);
+	drawTableCategoryManager(res, $('#table-list-category-manager'))
+	sweatAlert("Tìm Kiếm Thành Công", "success")
+}
 
 
 

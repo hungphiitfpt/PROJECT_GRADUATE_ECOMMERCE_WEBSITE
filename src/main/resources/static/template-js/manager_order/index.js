@@ -1,6 +1,7 @@
 
 $(function() {
 	loadAllDataTableOrders();
+	alertCountOrderMarquee();
 })
 async function loadAllDataTableOrders() {
 	let currentPage = localStorage.getItem('currentPage');
@@ -69,27 +70,30 @@ async function drawTableOrderProducts(res) {
 
 		}
 		else if (res.data.content[i].orderStatus == 1) {
-			htmlStatusOrder = `<label class="badge badge-warning">Chờ Lấy Hàng</label>`;
+			htmlStatusOrder = `<label class="badge badge-warning">Chờ Shiper Lấy Hàng</label>`;
 
 		}
 		else if (res.data.content[i].orderStatus == 2) {
-			htmlStatusOrder = `<label class="badge badge-danger">Đang Giao hàng</label>`;
+			htmlStatusOrder = `<label class="badge badge-danger">Đã Lấy Hàng</label>`;
 
 		}
 		else if (res.data.content[i].orderStatus == 3) {
-			htmlStatusOrder = `<label class="badge badge-primary">Đã Giao Hàng</label>`;
+			htmlStatusOrder = `<label class="badge badge-primary">Đang Vận Chuyển</label>`;
 
 		}
 		else if (res.data.content[i].orderStatus == 4) {
-			htmlStatusOrder = `<label class="badge badge-success">Đã Giao</label>`;
-			button = '';
+			htmlStatusOrder = `<label class="badge badge-success">Đang Giao Hàng</label>`;
 		}
 		else if (res.data.content[i].orderStatus == 5) {
+			htmlStatusOrder = `<label class="badge badge-success">Đã Giao Hàng</label>`;
+			button = '';
+		}
+		else if (res.data.content[i].orderStatus == 6) {
 			htmlStatusOrder = `<label class="badge badge-black">Đã Huỷ</label>`;
 			button = '';
 		}
 
-		if(res.data.content[i].orderStatus != 5 && res.data.content[i].orderStatus != 4) {
+		if(res.data.content[i].orderStatus != 6 && res.data.content[i].orderStatus != 5) {
 			button = `<button onclick="changeStatusOrder($(this))" data-id="${res.data.content[i].id}" data-status="${res.data.content[i].orderStatus}" type="button"
 			class="btn btn-warning btn-rounded btn-icon">
 			<i class="typcn typcn-edit"></i>
@@ -215,6 +219,9 @@ async function openModalDetailOrder(r) {
 	else if (res.data.data.orderStatus == 5) {
 		$('#status-delivery').text("Đã Giao Hàng");
 	}
+	else if (res.data.data.orderStatus == 6) {
+		$('#status-delivery').text("Đã huỷ");
+	}
 	for (let i = 0; i < res.data.data.shopOrderDetailsById.length; i++) {
 		let money = formatMoney(`${res.data.data.shopOrderDetailsById[i].price}`);
 		listProductOrder += `<table class="order-table">
@@ -240,4 +247,25 @@ async function openModalDetailOrder(r) {
 
 	}
 	$('#list-product-ordering').html(listProductOrder);
+}
+
+async function alertCountOrderMarquee() {
+    let method = 'get',
+
+    url = `${api_admin}marqueeCountOrder`,
+
+    params = {},
+
+    data = {};
+
+	let res = await axiosTemplate(method, url, params, data);
+	$('.marquee-text-count-order').text(`
+	Thông báo !: Bạn đang có 
+	${res.data[0]} đơn hàng chờ xác nhận , 
+	${res.data[1]} đơn chờ lấy hàng, 
+	${res.data[2]} đã lấy hàng,
+	${res.data[3]} đang vận chuyển , 
+	${res.data[4]} đơn đang giao hàng, 
+	${res.data[5]} đơn đã giao hàng,
+	${res.data[6]} đơn bị huỷ`)
 }

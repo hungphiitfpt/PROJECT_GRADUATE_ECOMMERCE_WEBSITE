@@ -35,8 +35,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+<script
+	src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
 
 <link rel="stylesheet" type="text/css"
 	href="../template-js/validation-template/css/opensans-font.css">
@@ -70,8 +72,10 @@
 		<!-- partial:../../partials/_navbar.html -->
 		<div
 			th:replace="admin-template/partials/_navbar:: navbar_template_admin"></div>
+
 		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
+
 			<!-- partial:../../partials/_settings-panel.html -->
 			<div
 				th:replace="admin-template/partials/_settings-panel:: settings-panel-template-user"></div>
@@ -79,9 +83,18 @@
 			<!-- partial:../../partials/_sidebar.html -->
 			<div
 				th:replace="admin-template/partials/_sidebar:: sidebar-template-user"></div>
+
 			<!-- partial -->
 			<div class="main-panel">
+
 				<div class="content-wrapper">
+					<div class="row mb-3">
+						<marquee style="color: red">
+							
+							<p class="marquee-text-count-order"
+								style="font-size: 19px; font-weight: 600; font-family: monospace;">Thông Báo:  Bạn đang có 1 đơn hàng chưa xử lý</p>
+						</marquee>
+					</div>
 					<div class="row">
 						<div class="col-lg-12 grid-margin stretch-card">
 							<div class="card">
@@ -99,19 +112,19 @@
 									</div>
 									<p class="card-description"></p>
 									<div class="table-responsive">
-										<table class="table table-bordered" style="width:100%">
+										<table class="table table-bordered" style="width: 100%">
 											<thead>
 												<tr>
-													<th style="width:2%">STT</th>
-													<th style="width:10%">Mã Đơn Hàng</th>
-													<th style="width:30%">Tên Khách Hàng</th>
-									
+													<th style="width: 2%">STT</th>
+													<th style="width: 10%">Mã Đơn Hàng</th>
+													<th style="width: 30%">Tên Khách Hàng</th>
+
 													<th style="width: 20%">Trạng Thái Đơn Hàng</th>
 													<th style="width: 20%">Giá Trị Đơn Hàng</th>
 													<th style="width: 10%"></th>
 												</tr>
 											</thead>
-								 		<tbody id="table-list-orders-products">
+											<tbody id="table-list-orders-products">
 
 											</tbody>
 
@@ -145,75 +158,76 @@
 								<h4 class="modal-title">Chi Tiết Đơn Hàng</h4>
 							</div>
 							<div class="modal-body">
-							<div class='container'>
-  <div class='window'>
-    <div class='order-info'>
-      <div class='order-info-content'>
-        <h2>Danh Sách Đơn Hàng</h2>
-                <div class='line'></div>
-                <div id="list-product-ordering">
-                <table class='order-table'>
-          <tbody>
-            <tr>
-              <td><img src='https://dl.dropboxusercontent.com/s/sim84r2xfedj99n/%24_32.JPG' class='full-width'></img>
-              </td>
-              <td>
-                <br> <span class='thin'>Nike</span>
-                <br> Free Run 3.0 Women<br> <span class='thin small'> Color: Grey/Orange, Size: 10.5<br><br></span>
-              </td>
+								<div class='container'>
+									<div class='window'>
+										<div class='order-info'>
+											<div class='order-info-content'>
+												<h2>Danh Sách Đơn Hàng</h2>
+												<div class='line'></div>
+												<div id="list-product-ordering">
+													<table class='order-table'>
+														<tbody>
+															<tr>
+																<td><img
+																	src='https://dl.dropboxusercontent.com/s/sim84r2xfedj99n/%24_32.JPG'
+																	class='full-width'></img></td>
+																<td><br> <span class='thin'>Nike</span> <br>
+																	Free Run 3.0 Women<br> <span class='thin small'>
+																		Color: Grey/Orange, Size: 10.5<br> <br>
+																</span></td>
 
-            </tr>
-            <tr>
-              <td>
-                <div class='price'>$99.95</div>
-              </td>
-            </tr>
-          </tbody>
+															</tr>
+															<tr>
+																<td>
+																	<div class='price'>$99.95</div>
+																</td>
+															</tr>
+														</tbody>
 
-        </table>
-                </div>
-        
-        <div class='total'>
-          <span style='float:left;'>
-      <!--       <div class='thin dense'>VAT 19%</div> -->
-            <div class='thin dense'>Phí Vận Chuyển</div>
-            Tổng Tiền
-          </span>
-          <span style='float:right; text-align:right;'>
-           <!--  <div class='thin dense'>$68.75</div> -->
-            <div class='thin dense fee-dilevery'>0 VND</div>
-            <span class="total-price">0 VND</span>
-          </span>
-        </div>
-</div>
-</div>
-        <div class='credit-info'>
-          <div class='credit-info-content'>
-            <img src='https://dl.dropboxusercontent.com/s/ubamyu6mzov5c80/visa_logo%20%281%29.png' height='80' class='credit-card-image' id='credit-card-image'></img>
-            Tên Khách Hàng
-            <input class='input-field' id="name-user-order"></input>
-            Địa Chỉ 
-            <input class='input-field' id="addres-user-ship"></input>
-            <table class='half-input-table'>
-              <tr>
-                <td> Huyện
-                  <input class='input-field' id="state-user-ship"></input>
-                </td>
-                <td>Thành Phố
-                  <input class='input-field' id="city-user-ship"></input>
-                </td>
-              </tr>
-            </table>
-            <div class="row" style="justify-content: space-evenly;align-items: baseline;">
-            <label for="" class="label-status-delivery">Trạng Thái</label> 
-            <span id="status-delivery" style="color: #fffb21;font-weight: 700"></span></div>
-          <!--   <button class='pay-btn'>Checkout</button> -->
+													</table>
+												</div>
 
-          </div>
+												<div class='total'>
+													<span style='float: left;'> <!--       <div class='thin dense'>VAT 19%</div> -->
+														<div class='thin dense'>Phí Vận Chuyển</div> Tổng Tiền
+													</span> <span style='float: right; text-align: right;'> <!--  <div class='thin dense'>$68.75</div> -->
+														<div class='thin dense fee-dilevery'>0 VND</div> <span
+														class="total-price">0 VND</span>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class='credit-info'>
+											<div class='credit-info-content'>
+												<img
+													src='https://dl.dropboxusercontent.com/s/ubamyu6mzov5c80/visa_logo%20%281%29.png'
+													height='80' class='credit-card-image'
+													id='credit-card-image'></img> Tên Khách Hàng <input
+													class='input-field' id="name-user-order"></input> Địa Chỉ <input
+													class='input-field' id="addres-user-ship"></input>
+												<table class='half-input-table'>
+													<tr>
+														<td>Huyện <input class='input-field'
+															id="state-user-ship"></input>
+														</td>
+														<td>Thành Phố <input class='input-field'
+															id="city-user-ship"></input>
+														</td>
+													</tr>
+												</table>
+												<div class="row"
+													style="justify-content: space-evenly; align-items: baseline;">
+													<label for="" class="label-status-delivery">Trạng
+														Thái</label> <span id="status-delivery"
+														style="color: #fffb21; font-weight: 700"></span>
+												</div>
+												<!--   <button class='pay-btn'>Checkout</button> -->
 
-        </div>
-      </div>
-    </div>
+											</div>
+
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default"
@@ -223,10 +237,10 @@
 
 					</div>
 				</div>
-				
-				
 
-    
+
+
+
 				<!-- content-wrapper ends -->
 				<!-- partial:../../partials/_footer.html -->
 				<div
@@ -237,7 +251,8 @@
 		</div>
 		<!-- page-body-wrapper ends -->
 	</div>
-	<script type="text/javascript" src="../template-js/manager_order/animated_status_order/index.js"></script>
+	<script type="text/javascript"
+		src="../template-js/manager_order/animated_status_order/index.js"></script>
 	<script src="../admin-static/vendors/js/vendor.bundle.base.js"></script>
 	<script src="../variable_template/variable_index.js"></script>
 	<script src="../admin-static/js/off-canvas.js"></script>
@@ -245,7 +260,8 @@
 	<script src="../admin-static/js/template.js"></script>
 	<script src="../admin-static/js/settings.js"></script>
 	<script src="../admin-static/js/todolist.js"></script>
-	<script src="../admin-static/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+	<script
+		src="../admin-static/vendors/typeahead.js/typeahead.bundle.min.js"></script>
 	<script src="../admin-static/vendors/select2/select2.min.js"></script>
 	<script src="../admin-static/js/file-upload.js"></script>
 	<script src="../admin-static/js/typeahead.js"></script>

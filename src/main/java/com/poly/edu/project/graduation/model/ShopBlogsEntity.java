@@ -49,8 +49,7 @@ public class ShopBlogsEntity {
     @JsonBackReference
     @JoinColumn(name = "category_id", referencedColumnName = "id", insertable = false, updatable = false)
     private CategoryBlogEntity categoryBlogByCategoryId;
-    @OneToMany(mappedBy = "shopBlogsByBlogId")
-    private List<ShopCommentsBlogEntity> shopCommentsBlogsById;
+
     
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
@@ -198,11 +197,5 @@ public class ShopBlogsEntity {
         this.categoryBlogByCategoryId = categoryBlogByCategoryId;
     }
 
-    public List<ShopCommentsBlogEntity> getShopCommentsBlogsById() {
-        return shopCommentsBlogsById;
-    }
 
-    public void setShopCommentsBlogsById(List<ShopCommentsBlogEntity> shopCommentsBlogsById) {
-        this.shopCommentsBlogsById = shopCommentsBlogsById;
-    }
 }

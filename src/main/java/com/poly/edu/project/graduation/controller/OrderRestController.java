@@ -1,5 +1,7 @@
 package com.poly.edu.project.graduation.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -88,5 +90,10 @@ public class OrderRestController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	@RequestMapping(value = "/marqueeCountOrder", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public List<String> marqueeCountOrder() {
+		return orderService.CountMarqueeOrder();
 	}
 }

@@ -1,3 +1,69 @@
+// var nameProductError =  $('#name-create-manager-product');
+// var codeProductError = $('#code-create-manager-product').parents('.form-group').find('.error');
+// var descriptionShortError = $('#description_short_create_manager_product').parents('.form-group').find('.error');
+// var feeShipError = $('#fee-ship-create-manager-product').parents('.form-group').find('.error');
+// var categoryProductError = $('#list-category-manager').parents('.form-group').find('.error');
+// var quantityProductError = $('#quantity-create-manager-product').parents('.form-group').find('.error');
+// var discountProductError = $('#discount-create-manager-product').parents('.form-group').find('.error');
+// var priceProductError = $('#price-product-manager').parents('.form-group').find('.error');
+// var descriptionDetailError = $('#description-detail-product').parents('.form-group').find('.error');
+var error = $('.error').length;
+var regexNumber = /^\d+\.?\d*$/;
+ $('.form-group input[type=text]').on('change',function () {
+		if($(this)[0].hasAttribute('data-validate-required')) {
+			$(this)[0].classList.toggle("bad-input");
+			$(this)[0].parentElement.getElementsByClassName("error")[0].innerHTML = `${errorRequired}`;
+		} else {
+			$(this)[0].classList.remove("bad-input");
+			$(this)[0].parentElement.getElementsByClassName("error")[0].innerHTML = '';
+		}
+})
+$('.form-group input[type=number]').on('change',function () {
+	if($(this)[0].hasAttribute("data-validate-number")){
+		if(!$(this)[0].value.match(regexNumber)) {
+			$(this)[0].classList.toggle("bad-input");
+			$(this)[0].parentElement.getElementsByClassName("error")[0].innerHTML = `${errorNumber}`;
+		} else {
+			$(this)[0].classList.remove("bad-input");
+			$(this)[0].parentElement.getElementsByClassName("error")[0].innerHTML = '';
+		}
+	}
+})
+function validateName() {
+	$('.form-group input[type=text]').each(function(i,v) {
+		if(v.hasAttribute("data-validate-required")){
+			if(v.value == '') {
+				v.classList.toggle("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = `${errorRequired}`;
+			} else {
+				v.classList.remove("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = '';
+			}
+		}
+	})
+	$('.form-group input[type=number]').each(function(i,v) {
+		if(v.hasAttribute("data-validate-number")){
+			if(!v.value.match(regexNumber)) {
+				v.classList.toggle("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = `${errorNumber}`;
+			} else {
+				v.classList.remove("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = '';
+			}
+		}
+	})
+	$('.form-group textarea').each(function(i,v) {
+		if(v.hasAttribute("data-validate-required")){
+			if(v.value == '') {
+				v.classList.toggle("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = `${errorRequired}`;
+			} else {
+				v.classList.remove("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = '';
+			}
+		}
+	})
+}
 $(function() {
 	loadAllCategory();	
 	loadAllProduct();
@@ -96,8 +162,8 @@ async function drawTableProductManager(res) {
 	$('#table-list-product-manager').html(ProductHTML);
 
 }
-
 async function insertProduct() {
+	validateName();
 	let imageSession = sessionStorage.getItem("image");
 	let method = 'post',
 		url = `${api_admin}insert_product`,
@@ -116,6 +182,10 @@ async function insertProduct() {
 			image: imageSession,
 		};
 		if(imageSession == "" || imageSession == null) {
+			alert("Bạn chưa upload ảnh sản phẩm")
+			return false;
+		}
+		if($('.error').text() != "") {
 			return false;
 		}
 	let res = await axiosTemplate(method, url, params, data);

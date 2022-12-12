@@ -92,114 +92,118 @@
 
 								<ul class="nav nav-tabs" role="tablist">
 									<li class="nav-item "><a class="nav-link active"
-										href="#profile" role="tab" data-toggle="tab">Tạo Phiếu Nhập Kho</a></li>
+										href="#profile" role="tab" data-toggle="tab">Tạo Phiếu
+											Nhập Kho</a></li>
 									<li class="nav-item"><a class="nav-link" href="#buzz"
 										role="tab" data-toggle="tab">Tạo Phiếu Xuất Kho</a></li>
-									
+
 								</ul>
 
 								<!-- Tab panes -->
 								<div class="tab-content">
-									<div role="tabpanel" class="tab-pane in active"
-										id="profile"><div class="card-body">
-									<h4 class="card-title">Tạo Phiếu Nhập Kho</h4>
-									<p class="card-description">Trang dành cho người quản trị</p>
-									<div class="row">
+									<div role="tabpanel" class="tab-pane in active" id="profile">
+										<div class="card-body">
+											<h4 class="card-title">Tạo Phiếu Nhập Kho</h4>
+											<p class="card-description">Trang dành cho người quản trị</p>
+											<div class="row">
 
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputName1">ID Phiếu Nhập</label> <input
-												type="text" class="form-control input-not-edit"
-												id="id-create-manager-product" readonly="readonly"
-												name="id-create-manager-product" placeholder="ID">
-										</div>
+												<div class="form-group col-lg-6 col-sm-12">
+													<label for="exampleInputName1">ID Phiếu Nhập</label> <input
+														type="text" class="form-control input-not-edit"
+														id="id-create-manager-product" readonly="readonly"
+														name="id-create-manager-product" placeholder="ID">
+												</div>
 
-										<div class="form-group col-lg-6 col-sm-12">
-											<label>Sản Phẩm</label>
-											<select class="list-product-manager form-control form-control-sm">
-											
-											</select>
-										</div>
+												<div class="form-group col-lg-6 col-sm-12">
+													<label>Sản Phẩm</label> <select
+														class="list-product-manager form-control form-control-sm">
 
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputName1">Số Lượng</label> <input
-												type="text" class="quantity-warhouse form-control" 
-												name="code_create_manager_product" placeholder="Name">
-											<i
-												class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
-											<i
-												class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
-											<div class="error"></div>
+													</select>
+												</div>
 
-										</div>
+												<div class="form-group col-lg-6 col-sm-12">
+													<label for="exampleInputName1">Số Lượng</label> <input
+														type="text" class="quantity-warhouse form-control"
+														name="code_create_manager_product" placeholder="Name">
+													<i
+														class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
+													<i
+														class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+													<div class="error"></div>
 
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputName1">Ghi chú</label>
-											<textarea class="note_create_warehouse form-control" 
-												name="note_create_warehouse" rows="15"></textarea>
-											<i
-												class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
-											<i
-												class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
-											<div class="error"></div>
+												</div>
+
+												<div class="form-group col-lg-6 col-sm-12">
+													<label for="exampleInputName1">Ghi chú</label>
+													<textarea class="note_create_warehouse form-control"
+														name="note_create_warehouse" rows="15"></textarea>
+													<i
+														class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
+													<i
+														class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+													<div class="error"></div>
+												</div>
+											</div>
+											<button type="submit" onclick="insertWarehouseProduct()"
+												id="btn-save-product" class="btn  btn-primary mr-2">Nhập
+												Kho</button>
+											<button onclick="clearData()" class="btn btn-light">Clear</button>
+
 										</div>
 									</div>
-									<button type="submit" onclick="insertWarehouseProduct()"
-										id="btn-save-product" class="btn  btn-primary mr-2">Nhập Kho</button>
-									<button onclick="clearData()" class="btn btn-light">Clear</button>
-
-								</div></div>
 									<div role="tabpanel" class="tab-pane fade" id="buzz">
-									<div class="card-body">
-									<h4 class="card-title">Tạo Phiếu Xuất</h4>
-									<p class="card-description">Trang dành cho người quản trị</p>
-									<div class="row">
+										<div class="card-body">
+											<h4 class="card-title">Tạo Phiếu Xuất</h4>
+											<p class="card-description">Trang dành cho người quản trị</p>
+											<div class="row">
 
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputName1">ID Phiếu Xuất</label> <input
-												type="text" class="form-control input-not-edit"
-												id="id-create-manager-product" readonly="readonly"
-												name="id-create-manager-product" placeholder="ID">
-										</div>
+												<div class="form-group col-lg-6 col-sm-12">
+													<label for="exampleInputName1">ID Phiếu Xuất</label> <input
+														type="text" class="form-control input-not-edit"
+														id="id-create-manager-product" readonly="readonly"
+														name="id-create-manager-product" placeholder="ID">
+												</div>
 
-										<div class="form-group col-lg-6 col-sm-12">
-											<label>Sản Phẩm</label> 
-											<select class="list-export-product-manager form-control form-control-sm">
-											
-											</select>
-										</div>
+												<div class="form-group col-lg-6 col-sm-12">
+													<label>Sản Phẩm</label> <select
+														class="list-export-product-manager form-control form-control-sm">
 
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputName1">Số Lượng</label> <input
-												type="text" class="quantity-export-warhouse form-control" 
-												name="code_create_manager_product" placeholder="Name">
-											<i
-												class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
-											<i
-												class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
-											<div class="error"></div>
+													</select>
+												</div>
 
-										</div>
+												<div class="form-group col-lg-6 col-sm-12">
+													<label for="exampleInputName1">Số Lượng</label> <input
+														type="text" class="quantity-export-warhouse form-control"
+														name="code_create_manager_product" placeholder="Name">
+													<i
+														class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
+													<i
+														class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+													<div class="error"></div>
 
-										<div class="form-group col-lg-6 col-sm-12">
-											<label for="exampleInputName1">Ghi chú</label>
-											<textarea class="note_create_export_warehouse form-control" 
-												name="note_create_warehouse" rows="15"></textarea>
-											<i
-												class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
-											<i
-												class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
-											<div class="error"></div>
+												</div>
+
+												<div class="form-group col-lg-6 col-sm-12">
+													<label for="exampleInputName1">Ghi chú</label>
+													<textarea class="note_create_export_warehouse form-control"
+														name="note_create_warehouse" rows="15"></textarea>
+													<i
+														class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
+													<i
+														class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
+													<div class="error"></div>
+												</div>
+											</div>
+											<button type="submit" onclick="updateWarehouseProduct()"
+												id="btn-save-product" class="btn  btn-primary mr-2">Xuất
+												Kho</button>
+											<button onclick="clearData()" class="btn btn-light">Clear</button>
+
 										</div>
 									</div>
-									<button type="submit" onclick="updateWarehouseProduct()"
-										id="btn-save-product" class="btn  btn-primary mr-2">Xuất Kho</button>
-									<button onclick="clearData()" class="btn btn-light">Clear</button>
 
 								</div>
-								</div>
-									
-								</div>
-								
+
 							</div>
 
 						</div>

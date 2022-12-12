@@ -121,5 +121,11 @@ public class OrderServiceImpl implements OrderService {
 		return orderRepository.CountOrdersDateNow(date);
 	}
 
+	@Override
+	public List<String> CountMarqueeOrder() {
+		// TODO Auto-generated method stub
+		return orderRepository.countOrderMarquee();
+	}
+
 
 }

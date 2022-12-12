@@ -45,7 +45,7 @@ async function loadWarehouse() {
 async function insertWarehouseProduct() {
 
 	let method = 'post',
-		url = `${api_admin}getAllWarehouse`,
+		url = `${api_admin}insert_warehouse`,
 		params = {},
 		data = {
 			productId: $('.list-product-manager option:selected').data('id'),

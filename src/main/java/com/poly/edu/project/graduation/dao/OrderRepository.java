@@ -37,7 +37,7 @@ public interface OrderRepository extends JpaRepository<ShopOrdersEntity, Long> {
 	List<ShopOrdersEntity> findByUserId(String id);
 
 	@Modifying  
-	@Query(value = "UPDATE ShopOrdersEntity SET orderStatus = 5 WHERE id = ?1")
+	@Query(value = "UPDATE ShopOrdersEntity SET orderStatus = 6 WHERE id = ?1")
 	@Transactional
 	void cancelOrderById(long id);
 	
@@ -50,6 +50,21 @@ public interface OrderRepository extends JpaRepository<ShopOrdersEntity, Long> {
 
 	@Query(value = "SELECT COUNT(id) FROM shop_orders where created_at LIKE CONCAT('%',:date,'%')", nativeQuery = true)
 	String CountOrdersDateNow(Date date);
+
+	@Query(value = "SELECT count(id) FROM shop_orders where order_status = 0 "
+			+ "UNION ALL "
+			+ "SELECT count(id) FROM shop_orders where order_status = 1 "
+			+ "UNION ALL "
+			+ "SELECT count(id) FROM shop_orders where order_status = 2 "
+			+ "UNION ALL "
+			+ "SELECT count(id) FROM shop_orders where order_status = 3 "
+			+ "UNION ALL "
+			+ "SELECT count(id) FROM shop_orders where order_status = 4 "
+			+ "UNION ALL "
+			+ "SELECT count(id) FROM shop_orders where order_status = 5 "
+			+ "UNION ALL "
+			+ "SELECT count(id) FROM shop_orders where order_status = 6", nativeQuery = true)
+	List<String> countOrderMarquee();
 	
 	
 
