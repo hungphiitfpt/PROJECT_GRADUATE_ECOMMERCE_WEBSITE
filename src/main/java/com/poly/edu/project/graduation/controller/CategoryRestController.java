@@ -53,6 +53,8 @@ public class CategoryRestController {
 			// Phương thức này được xử lý theo trình tự CategoryRepository tạo ra phương thức findByKeyWord,
 			// sau đó categoryServiceImpl gọi phương thức findByKeyWord trong lớp CategoryRepository.
 			// sau đó categoryServiceImpl implement categoryServices
+			// tạo biến dataCategory để hứng dữ liệu từ phương thức findByKeyWord trả dữ liệu theo dạng page 
+			// của lớp Repository
 			Page<ShopCategoriesEntity> dataCategory = categoryServices.findByKeyWord(keyword,
 					PageRequest.of(page, size));
 			return dataCategory;
