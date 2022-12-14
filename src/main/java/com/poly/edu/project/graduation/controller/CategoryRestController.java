@@ -50,7 +50,6 @@ public class CategoryRestController {
 			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) throws Exception {
 		// thực hiện đoạn code trong try catch nếu lỗi trả về dữ liệu null
 		try {
-			
 			// Phương thức này được xử lý theo trình tự CategoryRepository tạo ra phương thức findByKeyWord,
 			// sau đó categoryServiceImpl gọi phương thức findByKeyWord trong lớp CategoryRepository.
 			// sau đó categoryServiceImpl implement categoryServices
