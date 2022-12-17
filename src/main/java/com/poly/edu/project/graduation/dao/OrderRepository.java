@@ -15,7 +15,8 @@ import com.poly.edu.project.graduation.model.ShopOrdersEntity;
 
 public interface OrderRepository extends JpaRepository<ShopOrdersEntity, Long> {
 
-	@Query(value = " SELECT * FROM shop_orders  " 	
+	// Viết câu lệnh native query để trả về danh sách đơn hàng theo keyword nhập vào
+	@Query(value = "SELECT * FROM shop_orders  " 	
 			+ "WHERE (( :keyword <> '' AND (shop_orders.user_id LIKE CONCAT('%',:keyword,'%') "
 			+ "OR shop_orders.ship_name LIKE CONCAT('%',:keyword,'%') "
 			+ "OR shop_orders.ship_address LIKE CONCAT('%',:keyword,'%') "
@@ -27,9 +28,11 @@ public interface OrderRepository extends JpaRepository<ShopOrdersEntity, Long> {
 	@Query(value = " SELECT * FROM shop_orders where id = ?1", nativeQuery =  true)
 	ShopOrdersEntity findOrdersDetailById(Long id);
 	
+	// Câu lệnh native query thay đổi trạng thái đơn hàng
 	@Modifying  
 	@Query(value = "UPDATE shop_orders SET order_status = :status, updated_at = :update_at, "
 			+ "shipped_date = :shipped_date WHERE id  = :id ", nativeQuery = true)
+	// Quay ngược hành động nếu không thành công
 	@Transactional
 	void changeStatusOrder(Long status, String update_at, String shipped_date,Long id);
 

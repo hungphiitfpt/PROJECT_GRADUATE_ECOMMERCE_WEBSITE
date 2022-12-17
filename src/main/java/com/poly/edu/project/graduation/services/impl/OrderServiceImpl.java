@@ -80,6 +80,7 @@ public class OrderServiceImpl implements OrderService {
 	/**
 	 * Truy vấn danh sách ORDER theo keyword truyền vào, có sử dụng phân trang
 	 */
+	// Gọi phương thức findByKeyWord ở lớp repository để xử lý tìm kiếm
 	@Override
 	public Page<ShopOrdersEntity> findByKeyWord(String keyword, Pageable pageable) {
 		// TODO Auto-generated method stub
