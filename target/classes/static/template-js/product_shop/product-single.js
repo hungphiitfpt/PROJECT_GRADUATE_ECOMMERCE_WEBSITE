@@ -34,7 +34,7 @@ async function loadAllProductRandomByCategoryId() {
 			</div>
 			<div class="product__item__text">
 				<h6>
-					<a href="#">${res.data[i].productName}</a>
+					<a href="${host}getProductByid/${res.data[i].id}">${res.data[i].productName}</a>
 				</h6>
 				<div class="rating">
 					<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i

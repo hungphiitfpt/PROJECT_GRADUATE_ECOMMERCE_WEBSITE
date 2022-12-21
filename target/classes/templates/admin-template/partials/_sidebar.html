@@ -10,7 +10,7 @@
 	<div th:fragment="sidebar-template-user">
 		<nav class="sidebar sidebar-offcanvas" id="sidebar">
 			<ul class="nav">
-				<li class="nav-item"><a class="nav-link" href="index.html">
+				<li class="nav-item"><a class="nav-link" th:href="@{/shop}">
 						<i class="typcn typcn-device-desktop menu-icon"></i> <span
 						class="menu-title">Dashboard</span>
 						<div class="badge badge-danger">new</div>
@@ -64,13 +64,6 @@
 						th:href="@{/admin/manager_order_product}">
 						<i class="typcn typcn-map menu-icon typcn-font-20px"></i> 
 						<span class="menu-title">QUẢN LÝ ĐƠN HÀNG</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a  class="nav-link" 
-						>
-						<i class="typcn typcn-map menu-icon typcn-font-20px"></i> 
-						<span class="menu-title">QUẢN LÝ ĐÁNH GIÁ</span>
 					</a>
 				</li>
 				<!-- <li class="nav-item"><a class="nav-link" data-toggle="collapse"

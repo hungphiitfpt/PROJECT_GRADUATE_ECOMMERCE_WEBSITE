@@ -7,7 +7,7 @@ async function loadAllDataTableCategory() {
 
 		url = `${api_graduation}getCategory`,
 
-		params = {page: page},
+		params = { page: page },
 
 		data = {};
 
@@ -90,17 +90,17 @@ async function insertCategory() {
 			categoryCode: $('#code-create-manager-category').val(),
 			categoryName: $('#name-create-manager-category').val(),
 			description: $('#description-detail-category').val(),
-			image: sessionStorage.getItem("image")
+			image: sessionStorage.getItem("image"),
+			isDeleted: 0,
 		};
 	let res = await axiosTemplate(method, url, params, data);
-    loadAllDataTableCategory();
+	loadAllDataTableCategory();
 	clearData();
 }
 
 async function updateCategory() {
 	let imageSession = sessionStorage.getItem("image");
-	 validation();
-	 if ($('.error.vad-false').length > 0) {
+	if ($('.error.vad-false').length > 0) {
 		return false;
 	}
 	let method = 'post',
@@ -114,60 +114,61 @@ async function updateCategory() {
 			description: $('#description-detail-category').val(),
 			image: imageSession
 		};
-	uploadImage();
-	if(imageSession == "" || imageSession == null) {
+
+	if (imageSession == "" || imageSession == null) {
+		alert("bạn chưa upload hình")
 		return false;
 	}
-	let res =  await axiosTemplate(method, url, params, data);
-	if(res.status == 200) {
+	let res = await axiosTemplate(method, url, params, data);
+	if (res.status == 200) {
 		sweatAlert(`${res.data.message}`, "success")
 	}
 	loadAllDataTableCategory();
 }
 
-function validation () {
+function validation() {
 	let id = (id) => document.getElementById(id);
 
-  let classes = (classes) => document.getElementsByClassName(classes);
+	let classes = (classes) => document.getElementsByClassName(classes);
 
-  let
-  username = id("name-create-manager-category"),
-  code = id("code-create-manager-category"),
-  description = id("description-detail-category"),
-  
-  form = id("form"),
-  errorMsg = classes("error"),
-  successIcon = classes("success-icon"),
-  failureIcon = classes("failure-icon");
+	let
+		username = id("name-create-manager-category"),
+		code = id("code-create-manager-category"),
+		description = id("description-detail-category"),
 
-// Adding the submit event Listener
+		form = id("form"),
+		errorMsg = classes("error"),
+		successIcon = classes("success-icon"),
+		failureIcon = classes("failure-icon");
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+	// Adding the submit event Listener
 
-  engine(username, 0, "Không được để trống trường này");
-  engine(description, 1, "Không được để trống trường này");
-  engine(code,2, "Không được để trống trường này");
-  
-});
+	form.addEventListener("submit", (e) => {
+		e.preventDefault();
 
-// engine function which will do all the works
+		engine(username, 0, "Không được để trống trường này");
+		engine(description, 1, "Không được để trống trường này");
+		engine(code, 2, "Không được để trống trường này");
 
-let engine = (id, serial, message) => {
-  if (id.value.trim() === "") {
-    errorMsg[serial].innerHTML = message;
-    id.style.border = "2px solid red";
-    errorMsg[serial].classList.add("vad-false");
-    failureIcon[serial].style.opacity = "1";
-    successIcon[serial].style.opacity = "0";
-  } else {
-    errorMsg[serial].innerHTML = "";
-    errorMsg[serial].classList.remove("vad-false");
-    id.style.border = "2px solid green";
-    failureIcon[serial].style.opacity = "0";
-    successIcon[serial].style.opacity = "1";
-  }
-};
+	});
+
+	// engine function which will do all the works
+
+	let engine = (id, serial, message) => {
+		if (id.value.trim() === "") {
+			errorMsg[serial].innerHTML = message;
+			id.style.border = "2px solid red";
+			errorMsg[serial].classList.add("vad-false");
+			failureIcon[serial].style.opacity = "1";
+			successIcon[serial].style.opacity = "0";
+		} else {
+			errorMsg[serial].innerHTML = "";
+			errorMsg[serial].classList.remove("vad-false");
+			id.style.border = "2px solid green";
+			failureIcon[serial].style.opacity = "0";
+			successIcon[serial].style.opacity = "1";
+		}
+	};
 }
 
 $(document).on('click', '.button-panigation-manager-product', async function() {
@@ -192,12 +193,12 @@ async function openModalDetailCategory(r) {
 
 	let id = r.data('id');
 	let method = 'get',
-		url = `${api_admin}getCategoryById`,
+		url = `${api_graduation}getCategoryById`,
 		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
+	console.log(res)
 	let checkIsDeleted = res.data.data.deleted;
-	console.log(checkIsDeleted);
 	if (checkIsDeleted == true) {
 		$('#pending-product').prop("checked", true);
 	} else {
@@ -207,6 +208,7 @@ async function openModalDetailCategory(r) {
 	$('#input-code-modal-info').val(res.data.data.categoryCode);
 	$('#input-name-modal-info').val(res.data.data.categoryName);
 	$('#img-product-modal-info').attr("src", `${res.data.data.image}`);
+	$('#input-createDate-modal-info').val(formatDate(res.data.data.createdAt))
 }
 async function getDetailCategory(r) {
 	$('#btn-save-product').addClass("d-none");
@@ -228,10 +230,14 @@ async function getDetailCategory(r) {
 	$('#code-create-manager-category').val(res.data.data.categoryCode);
 	$('#name-create-manager-category').val(res.data.data.categoryName);
 	$('#description-detail-category').val(res.data.data.description);
-	if (res.data.data.image != null) {
-		$('#imagePreview').css('background-image', `url(${res.data.data.image})`);
-	} else {
-		$('#imagePreview').css('background-image', `url(${api_images}notFound.png)`);
+	$('#input-createDate-modal-info').val(formatDate(res.data.data.createdAt))
+	let imageTable = r.parents('tr').find('td:eq(2) img').attr('src');
+	if (imageTable == "" || imageTable == null) {
+		$('#imagePreview').css('background-image', `url('https://m.media-amazon.com/images/I/61FQCSP7ZIL._SS500_.jpg')`);
+	}
+	else {
+		$('#imagePreview').css('background-image', `url('${imageTable}')`);
+		sessionStorage.setItem('image', imageTable);
 	}
 }
 
@@ -241,7 +247,7 @@ function clearData() {
 	$('#name-create-manager-category').val("");
 	$('#description-detail-category').val("");
 	$('#code-create-manager-category').val("");
-	$('#imagePreview').css('background-image', `url(${api_images}notFound.png)`);
+	$('#imagePreview').css('background-image', `url()`);
 }
 
 async function UpdateChangeCategoryDelete(r) {

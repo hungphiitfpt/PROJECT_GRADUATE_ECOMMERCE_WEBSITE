@@ -43,10 +43,14 @@ public class CategoryRestController {
 	//	Viết api lấy danh sách các danh mục , tìm kiếm sản phẩm theo key word theo chữ cái (điều kiện “” thì lấy tất cả)
 	//	Truyền param keyword, size, page, sort
 	@RequestMapping(value = "/getCategory", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Page<ShopCategoriesEntity> findListProductByKey(
+	public Page<ShopCategoriesEntity> findListCategoryByKey(
+			// param keyword là dữ liệu người dùng nhập vào để tìm kiếm
 			@RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
+			// param size là số record muốn lấy
 			@RequestParam(name = "size", required = false, defaultValue = "5") int size,
+			// param size là số record muốn lấy
 			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+			// DESC , ASC
 			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) throws Exception {
 		// thực hiện đoạn code trong try catch nếu lỗi trả về dữ liệu null
 		try {
@@ -55,8 +59,11 @@ public class CategoryRestController {
 			// sau đó categoryServiceImpl implement categoryServices
 			// tạo biến dataCategory để hứng dữ liệu từ phương thức findByKeyWord trả dữ liệu theo dạng page 
 			// của lớp Repository
+			
+			// => TẠO RA BIẾN dataCategory để hứng data từ phương thức findByKeyWord , 
 			Page<ShopCategoriesEntity> dataCategory = categoryServices.findByKeyWord(keyword,
 					PageRequest.of(page, size));
+//			trả về data dưới dạng list object
 			return dataCategory;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -81,6 +88,7 @@ public class CategoryRestController {
 	ResponseEntity<ResponseObject> findById(@RequestParam(name = "id") Long id) {
 		try {
 			// Sử dụng lớp Optional có sẵn của Java 8 để tìm kiếm id
+			//tạo ra biến foundCategory để hứng dữ liệu từ phương thức findbyid của lớp categoryRepository
 			Optional<ShopCategoriesEntity> foundCategory = categoryRepository.findById(id);
 			// nếu tồn tại thì trả về đối tượng category đó
 			return foundCategory.isPresent()
