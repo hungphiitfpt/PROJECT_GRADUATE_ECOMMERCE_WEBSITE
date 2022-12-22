@@ -11,11 +11,10 @@ async function upFile(e) {
 		$('#image_product_add_product').attr("data-image", resp.data.data)
 	})
 }
-
-
 $("#imageUpload").on("change", function() {
 	readURL(this);
 })
+
 
 function readURL(input) {
 	if (input.files && input.files[0]) {
@@ -31,6 +30,7 @@ function readURL(input) {
 
 
   function uploadImage() {
+	sessionStorage.removeItem("image")
     const ref = firebase.storage().ref("Files/" + "Hungphi/");
     // Lấy phẩn tử đầu tiên
     const file = document.querySelector('#imageUpload').files[0]

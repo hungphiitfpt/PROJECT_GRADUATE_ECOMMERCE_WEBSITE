@@ -25,8 +25,6 @@ async function registerUser() {
 	} else {
 		alert("bạn chưa đồng ý xác nhận tạo tài khoản")
 	}
-
-
 }
 function validateName() {
 	$('.form-group input[type=text]').each(function(i, v) {

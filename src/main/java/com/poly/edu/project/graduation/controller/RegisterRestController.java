@@ -36,6 +36,7 @@ public class RegisterRestController {
 	        	AppUserEntity user = new AppUserEntity();
 	        	user.setUserId(dto.getUserId());
 	        	user.setUserName(dto.getUserName());
+	        	user.setBirthday(dto.getBirthday());
 	        	user.setAddress(dto.getAddress());  
 	        	user.setLastName(dto.getLastName());  
 	        	user.setFirstName(dto.getFirstName());  
@@ -45,6 +46,7 @@ public class RegisterRestController {
 	        	user.setAddress(dto.getAddress());  
 	        	user.setCountry(dto.getCountry());  
 	        	user.setCity(dto.getCity()); 
+	        	user.setAvatar(dto.getAvatar());
 	        	String password = passwordEncoder.encode(dto.getEncrytedPassword());
 	        	user.setEncrytedPassword(password);
 	        

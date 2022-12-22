@@ -2,18 +2,89 @@ $(function() {
 	loadAllUsers()
 })
 
+function validateName() {
+	$('.form-group input[type=text]').each(function(i, v) {
+		if (v.hasAttribute("data-validate-required")) {
+			if (v.value == '') {
+				v.classList.toggle("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = `${errorRequired}`;
+			} else {
+				v.classList.remove("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = '';
+			}
+		}
+	})
+	$('.form-group input[type=number]').each(function(i, v) {
+		if (v.hasAttribute("data-validate-number")) {
+			if (!v.value.match(regexNumber)) {
+				v.classList.toggle("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = `${errorNumber}`;
+			} else {
+				v.classList.remove("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = '';
+			}
+		}
+	})
+	$('.form-group textarea').each(function(i, v) {
+		if (v.hasAttribute("data-validate-required")) {
+			if (v.value == '') {
+				v.classList.toggle("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = `${errorRequired}`;
+			} else {
+				v.classList.remove("bad-input");
+				v.parentElement.getElementsByClassName("error")[0].innerHTML = '';
+			}
+		}
+	})
+}
+
+async function create_User_Manager() {
+	let imageSession = sessionStorage.getItem("image");
+	validateName();
+	if ($('input[class="form-control bad-input"]').length > 0) {
+		sweatAlert(`Lỗi thêm người dùng`, "error")
+		return false;
+	}
+	let method = 'post',
+		url = `${host}signup`,
+		params = {},
+		data = {
+			userName: $('#username-create-manager-category').val(),
+			encrytedPassword: $('#password-create-manager-category').val(),
+			firstName: $('#firtsname-create-manager-category').val(),
+			lastName: $('#lastname-create-manager-category').val(),
+			birthday: $('#birthday-create-manager-category').val(),
+			address: $('#address-create-user').val(),
+			country: $('#district-create-user').val(),
+			gender: $("input[class='form-check-input is_gender']:checked").val(),
+			email: $("#email-create-manager-category").val(),
+			avatar: imageSession,
+		};
+	if (imageSession == "" || imageSession == null) {
+		sweatAlert(`Bạn chưa upload hình ảnh người dùng`, "error")
+		return false;
+	}
+	let res = await axiosTemplate(method, url, params, data);
+	if (res.status == 200) {
+		sweatAlert(`Thêm mới người dùng thành công`, "success")
+	}
+
+}
+
 async function loadAllUsers() {
 
+	let page = localStorage.getItem("currentPage");
+	
 	let method = 'get',
 
 		url = `${api_admin}getUsers`,
 
-		params = null,
+		params = {page: page},
 
 		data = {};
 
 	let res = await axiosTemplate(method, url, params, data);
-	
+
 	drawTableUsersManager(res, $('#table-list-users-manager'))
 
 }
@@ -116,7 +187,7 @@ async function drawTableUsersManager(res) {
 		<td>${res.data.content[i].userName}</td>
 		<td>${res.data.content[i].firstName} ${res.data.content[i].lastName}</td>
 		<td class="text-center"><img class="image-avatar-employee-manager" src="${res.data.content[i].avatar}"></img></td>
-        <td> ${res.data.content[i].city}</td>
+        <td> ${res.data.content[i].country}</td>
         <td>${res.data.content[i].deleted}</td>
 		<td>${birthday}</td>
 	
@@ -156,6 +227,24 @@ async function UpdateChangeDelete(r) {
 	sweatAlert(`Cập nhật trạng thái người dùng có id là : ${id} thành công `, "success")
 }
 
+$(document).on('click', '.button-panigation-manager-product', async function() {
+	$('.button-panigation-manager-product').removeClass('active')
+	let page = $(this).val();
+	localStorage.setItem('currentPage', page);
+	let keyWord = $('#input-search-product-keyword').val().trim();
+	let method = 'get',
+		url = `${api_admin}getUsers`,
+		params = { keyWord: keyWord, page: page, size: 10 },
+		data = {
+		};
+	let res = await axiosTemplate(method, url, params, data);
+	drawTableUsersManager(res, $('#table-list-users-manager'))
+
+	let currentPage = localStorage.getItem('currentPage');
+	$(`.button-panigation-manager-product[value='${currentPage}']`).addClass('active')
+	sweatAlert(`Bạn đang ở trang thứ ${page}`, "success")
+})
+
 async function UpdateInstock(r) {
 	let id = r.data('id');
 	let method = 'post',
@@ -165,5 +254,5 @@ async function UpdateInstock(r) {
 	let res = await axiosTemplate(method, url, params, data);
 	console.log(res);
 	loadAllUsers();
-	sweatAlert(`Cập nhật trạng thái người dùng có id là : ${id} thành công `, "success")
+	sweatAlert(`Cập nhật trạng thái người dùng có id là : ${id} thành công `, "success");
 }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -40,7 +41,7 @@ public class AppUserEntity {
     private String email;
     @Basic
     @Column(name = "birthday", nullable = true)
-    private Timestamp birthday;
+    private Date birthday;
     @Basic
     @Column(name = "avatar", nullable = true, length = 200)
     private String avatar;
@@ -142,11 +143,11 @@ public class AppUserEntity {
         this.email = email;
     }
 
-    public Timestamp getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Timestamp birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

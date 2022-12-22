@@ -52,16 +52,20 @@
 	href="../template-js/validation-template/css/style.css" />
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<link rel="stylesheet" href="../admin-static/vendors/mdi/css/materialdesignicons.min.css" />
+<link rel="stylesheet"
+	href="../admin-static/vendors/mdi/css/materialdesignicons.min.css" />
 </head>
 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
-<script src="../template-js/config_firebase/index.js"></script>
+<script
+	src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
 
 <body>
 	<div class="container-scroller">
@@ -82,88 +86,169 @@
 				<div class="content-wrapper">
 					<div class="row">
 						<div class="col-12 grid-margin stretch-card">
-					
-								<div class="card">
-									<div class="card-body">
-										<h4 class="card-title">Quản Lý Tài Khoản</h4>
-										<p class="card-description">Trang dành cho người quản trị</p>
-										<div class="row">
 
-											<div class="form-group col-lg-6 col-sm-12">
-												<label for="exampleInputName1">ID Nhân Viên</label> <input
-													type="text" class="form-control input-not-edit"
-													id="id-create-manager-category" readonly="readonly"
-													name="id-create-manager-category" placeholder="ID">
-											</div>
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">Quản Lý Tài Khoản</h4>
+									<p class="card-description">Trang dành cho người quản trị</p>
+									<div class="row">
 
-											<div class="form-group col-lg-6 col-sm-12">
-												<label for="exampleInputName1">Tên Nhân Viên</label> <input
-													type="text" class="form-control"
-													id="name-create-manager-category"
-													name="name_create_manager_category" placeholder="Name">
-												<i
-													class="fas fa-exclamation-circle failure-icon mdi mdi-close-octagon"></i>
-												<i
-													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
-												<div class="error"></div>
-											</div>
+										<div class="form-group col-lg-6 col-sm-12">
+											<label for="exampleInputName1">ID Nhân Viên</label> <input
+												type="text" class="form-control input-not-edit"
+												id="id-create-manager-category" readonly="readonly"
+												name="id-create-manager-category" placeholder="ID">
+										</div>
 
+										<div class="form-group col-lg-6 col-sm-12">
+											<label for="exampleInputName1">Tên đăng nhập</label> <input
+												type="text" class="form-control" data-validate-required
+												id="username-create-manager-category"
+												name="name_create_manager_category" placeholder="Name">
+											<div class="error"></div>
+										</div>
 
-											<div class="form-group col-lg-6 col-sm-12">
+										<div class="form-group col-lg-6 col-sm-12">
+											<label for="exampleInputName1">Mật khẩu</label> <input
+												type="text" class="form-control" data-validate-required
+												id="password-create-manager-category"
+												name="name_create_manager_category" placeholder="Name">
+											<div class="error"></div>
+										</div>
 
+										<div class="form-group col-lg-6 col-sm-12">
+											<label for="exampleInputName1">Họ</label> <input type="text"
+												data-validate-required class="form-control"
+												id="firtsname-create-manager-category"
+												name="name_create_manager_category" placeholder="Name">
 
-												<div class="avatar-upload">
-													<div class="avatar-edit">
-														<input type="file" id="imageUpload" /> <label
-															for="imageUpload"> <i
-															class="icon-upload typcn typcn-upload"></i>
-														</label>
-													</div>
-													<div class="avatar-preview">
-														<div id="imagePreview"
-															style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQqsb6lK-PlD1kHFoubbiC-jN21tqj9ADz9crJ2rBIstz1gKFPE&usqp=CAU);">
+											<div class="error"></div>
+										</div>
+
+										<div class="form-group col-lg-6 col-sm-12">
+											<label for="exampleInputName1">Tên</label> <input type="text"
+												data-validate-required class="form-control"
+												id="lastname-create-manager-category"
+												name="name_create_manager_category" placeholder="Name">
+
+											<div class="error"></div>
+										</div>
+
+										<div class="form-group col-lg-6 col-sm-12">
+											<label for="exampleInputName1">Email</label> <input
+												data-validate-required type="text" class="form-control"
+												id="email-create-manager-category"
+												name="name_create_manager_category" placeholder="Name">
+											<div class="error"></div>
+										</div>
+
+										<div class="form-group col-lg-6 col-sm-12">
+											<label for="exampleInputName1">Ngày Sinh</label> <input
+												data-validate-required type="text" class="form-control"
+												id="birthday-create-manager-category"
+												name="name_create_manager_category" placeholder="Name">
+											<div class="error"></div>
+										</div>
+
+										<div class="form-group col-lg-6 col-sm-12">
+								
+											<div class="form-group row is-align-item-center">
+													<label class="col-sm-3 col-form-label">Giới Tính</label>
+													<div class="col-sm-9 row">
+														<div class="col-lg-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input checked
+																	type="radio" class="form-check-input is_gender"
+																	name="ExampleRadio1" id="male-modal-employee" value="true">
+																	Nam <i class="input-helper"></i></label>
+															</div>
 														</div>
-
+														<div class="col-lg-6">
+															<div class="form-check form-check-success">
+																<label class="form-check-label"> <input
+																	type="radio" class="form-check-input is_gender"
+																	name="ExampleRadio1" id="female-modal-employee" value="false">
+																	Nữ <i class="input-helper"></i></label>
+															</div>
+														</div>
 													</div>
 												</div>
-											</div>
+
+										</div>
+
+										<div class="form-group col-lg-6 col-sm-12">
+											<label for="exampleTextarea1">Địa chỉ</label>
+											<textarea class="form-control" data-validate-required
+												id="address-create-user" rows="8"></textarea>
+											<div class="error"></div>
+										</div>
+
+										<div class="form-group col-lg-6 col-sm-12">
+											<label for="exampleInputName1">Quận</label> <select
+												class="form-control form-control-sm"
+												id="district-create-user" name="shipState"><option
+													value="Quận Ba Đình">Quận Ba Đình</option>
+												<option value="Quận Hoàn Kiếm">Quận Hoàn Kiếm</option>
+												<option value="Quận Tây Hồ">Quận Tây Hồ</option>
+												<option value="Quận Long Biên">Quận Long Biên</option>
+												<option value="Quận Cầu Giấy">Quận Cầu Giấy</option>
+												<option value="Quận Đống Đa">Quận Đống Đa</option>
+												<option value="Quận Hai Bà Trưng">Quận Hai Bà Trưng</option>
+												<option value="Quận Hoàng Mai">Quận Hoàng Mai</option>
+												<option value="Quận Thanh Xuân">Quận Thanh Xuân</option>
+												<option value="Huyện Sóc Sơn">Huyện Sóc Sơn</option>
+												<option value="Huyện Đông Anh">Huyện Đông Anh</option>
+												<option value="Huyện Gia Lâm">Huyện Gia Lâm</option>
+												<option value="Quận Nam Từ Liêm">Quận Nam Từ Liêm</option>
+												<option value="Huyện Thanh Trì">Huyện Thanh Trì</option>
+												<option value="Quận Bắc Từ Liêm">Quận Bắc Từ Liêm</option>
+												<option value="Huyện Mê Linh">Huyện Mê Linh</option>
+												<option value="Quận Hà Đông">Quận Hà Đông</option>
+												<option value="Thị xã Sơn Tây">Thị xã Sơn Tây</option>
+												<option value="Huyện Ba Vì">Huyện Ba Vì</option>
+												<option value="Huyện Phúc Thọ">Huyện Phúc Thọ</option>
+												<option value="Huyện Đan Phượng">Huyện Đan Phượng</option>
+												<option value="Huyện Hoài Đức">Huyện Hoài Đức</option>
+												<option value="Huyện Quốc Oai">Huyện Quốc Oai</option>
+												<option value="Huyện Thạch Thất">Huyện Thạch Thất</option>
+												<option value="Huyện Chương Mỹ">Huyện Chương Mỹ</option>
+												<option value="Huyện Thanh Oai">Huyện Thanh Oai</option>
+												<option value="Huyện Thường Tín">Huyện Thường Tín</option>
+												<option value="Huyện Phú Xuyên">Huyện Phú Xuyên</option>
+												<option value="Huyện Ứng Hòa">Huyện Ứng Hòa</option>
+												<option value="Huyện Mỹ Đức">Huyện Mỹ Đức</option></select>
+											<div class="error"></div>
+										</div>
 
 
-											<div class="form-group col-lg-6 col-sm-12">
-												<label for="exampleTextarea1">Mô tả chi tiết</label>
-												<textarea class="form-control"
-													id="description-detail-category" name="description_detail"
-													rows="15"></textarea>
-												<i
-													class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
-												<i
-													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
-												<div class="error"></div>
-											</div>
+										<div class="form-group col-lg-6 col-sm-12">
 
 
-											<div class="form-group col-lg-6 col-sm-12">
-												<label for="exampleInputName1">Mã Code</label> <input
-													type="text" class="form-control"
-													id="code-create-manager-category"
-													name="code_create_manager_category" placeholder="Name">
-												<i
-													class="fas fa-exclamation-circle failure-icon failure-icon mdi mdi-close-octagon"></i>
-												<i
-													class="far fa-check-circle success-icon mdi mdi-checkbox-marked-circle"></i>
-												<div class="error"></div>
+											<div class="avatar-upload">
+												<div class="avatar-edit">
+													<input type='file' id="imageUpload"
+														onchange="uploadImage()" accept=".png, .jpg, .jpeg" /> <label
+														for="imageUpload"> <i
+														class="icon-upload typcn typcn-upload"></i>
+													</label>
+												</div>
+												<div class="avatar-preview">
+													<div id="imagePreview"></div>
 
+												</div>
 											</div>
 										</div>
-										<button type="submit" onclick="insertCategory()"
-											id="btn-save-product" class="btn  btn-primary mr-2">Lưu</button>
-										<button onclick="updateCategory()" id="btn-update-product"
-											class="btn btn-primary mr-2 d-none">Cập Nhật</button>
-										<button onclick="clearData()" class="btn btn-light">Clear</button>
-
+										
 									</div>
+									<button type="submit" onclick="create_User_Manager()"
+										id="btn-save-product" class="btn  btn-primary mr-2">Lưu</button>
+									<button onclick="updateCategory()" id="btn-update-product"
+										class="btn btn-primary mr-2 d-none">Cập Nhật</button>
+									<button onclick="clearData()" class="btn btn-light">Clear</button>
+
 								</div>
-							
+							</div>
+
 						</div>
 						<div class="col-lg-12 grid-margin stretch-card">
 							<div class="card">
@@ -188,7 +273,7 @@
 													<th>TÊN ĐĂNG NHẬP</th>
 													<th>TÊN</th>
 													<th>HÌNH ẢNH</th>
-													<th>THÀNH PHỐ</th>
+													<th>QUẬN</th>
 													<th>TÌNH TRẠNG</th>
 													<th>NGÀY SINH</th>
 													<th>Chức năng</th>
@@ -374,23 +459,21 @@
 		<!-- page-body-wrapper ends -->
 	</div>
 	<script src="../admin-static/vendors/js/vendor.bundle.base.js"></script>
-
 	<script src="../admin-static/js/off-canvas.js"></script>
 	<script src="../admin-static/js/hoverable-collapse.js"></script>
 	<script src="../admin-static/js/template.js"></script>
 	<script src="../admin-static/js/settings.js"></script>
 	<script src="../admin-static/js/todolist.js"></script>
-
+	<script src="../template-js/upload_file_template/index.js"></script>
 	<script
 		src="../admin-static/vendors/typeahead.js/typeahead.bundle.min.js"></script>
 	<script src="../admin-static/vendors/select2/select2.min.js"></script>
 
-	<script src="../admin-static/js/file-upload.js"></script>
 	<script src="../admin-static/js/typeahead.js"></script>
 	<script src="../admin-static/js/select2.js"></script>
 	<!-- nhúng file js tự customize-->
 	<script src="../template-js/manager_employee/index.js"></script>
-	<script src="../template-js/upload_file_template/index.js"></script>
+
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
@@ -400,6 +483,7 @@
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+			<script src="../template-js/config_firebase/index.js"></script>
 </body>
 
 </html>
