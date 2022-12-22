@@ -38,6 +38,78 @@ function validateName() {
 	})
 }
 
+async function getDataDetailProduct(r) {
+	$('#btn-save-product').addClass("d-none");
+	$('#btn-update-list-image-product').removeClass("d-none");
+	$('#btn-update-product').removeClass("d-none")
+	let id = r.data('id');
+	let method = 'get',
+		url = `${api_admin}getEmployeeById`,
+		params = { id: id },
+		data = {};
+	let res = await axiosTemplate(method, url, params, data);
+	let checkGender = res.data.data.gender;
+	switch (checkGender) {
+
+		case true:
+			$('#male-modal-employee-1').prop("checked", true);
+			break;
+
+		default:
+
+			$('#female-modal-employee-1').prop("checked", true);
+
+			break;
+	}
+	$('#id-create-manager-category').val(res.data.data.userId);
+	$('#username-create-manager-category').val(res.data.data.userName);
+	$('#password-create-manager-category').val(res.data.data.encrytedPassword);
+	$('#firtsname-create-manager-category').val(res.data.data.firstName);
+	$('#lastname-create-manager-category').val(res.data.data.lastName);
+	$('#email-create-manager-category').val(res.data.data.email);
+	$('#birthday-create-manager-category').val(formatDate(res.data.data.birthday));
+	$('#district-create-user option[value ="' + res.data.data.country + '"]').prop('selected', 'selected').change()
+
+	let imageTable = r.parents('tr').find('td:eq(3) img').attr('src');
+	if (imageTable == "" || imageTable == null) {
+		$('#imagePreview').css('background-image', `url('https://m.media-amazon.com/images/I/61FQCSP7ZIL._SS500_.jpg')`);
+	}
+	else {
+		$('#imagePreview').css('background-image', `url('${imageTable}')`);
+		sessionStorage.setItem('image', imageTable);
+	}
+
+}
+
+async function updateUser() {
+	let imageSession = sessionStorage.getItem("image");
+	let method = 'post',
+		url = `${host}updateUser`,
+		params = {
+			id: $('#id-create-manager-category').val(),
+		},
+		data = {
+			userName: $('#username-create-manager-category').val(),
+			encrytedPassword: $('#password-create-manager-category').val(),
+			firstName: $('#firtsname-create-manager-category').val(),
+			lastName: $('#lastname-create-manager-category').val(),
+			birthday: $('#birthday-create-manager-category').val(),
+			address: $('#address-create-user').val(),
+			country: $('#district-create-user').val(),
+			gender: $("input[class='form-check-input is_gender']:checked").val(),
+			email: $("#email-create-manager-category").val(),
+			avatar: imageSession,
+		};
+	if (imageSession == "" || imageSession == null) {
+		sweatAlert(`bạn chưa upload hình ảnh người dùng`, "error")
+		return false;
+	}
+	let res = await axiosTemplate(method, url, params, data);
+	sweatAlert(`${res.data.message}`, "success")
+	loadAllUsers();
+
+}
+
 async function create_User_Manager() {
 	let imageSession = sessionStorage.getItem("image");
 	validateName();
@@ -97,11 +169,8 @@ async function openModalDetailEployee(r) {
 		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
-	console.log(res);
 	let checkGender = res.data.data.gender;
 	let checkIsDeleted = res.data.data.deleted;
-	console.log("checkGender", checkGender)
-	console.log("checkIsDeleted", checkIsDeleted)
 	switch (checkIsDeleted) {
 		case true:
 			$('#pending-work-modal-employee').prop("checked", true);
@@ -111,19 +180,7 @@ async function openModalDetailEployee(r) {
 			$('#open-work-modal-employee').prop("checked", true);
 			break;
 	}
-
-	switch (checkGender) {
-
-		case true:
-			$('#male-modal-employee').prop("checked", true);
-			break;
-
-		default:
-
-			$('#female-modal-employee').prop("checked", true);
-
-			break;
-	}
+	
 	$('#img-eployee-modal-info').attr("src", `${res.data.data.avatar}`);
 	$('.modal-title').text("CHI TIẾT NHÂN VIÊN");
 	$('#input-idUser-modal-employee-info').val(res.data.data.userId);
@@ -132,10 +189,6 @@ async function openModalDetailEployee(r) {
 	$('#input-firstname-modal-employee-info').val(res.data.data.firstName);
 	$('#input-lastname-modal-employee-info').val(res.data.data.lastName);
 	$("#select-country-modal-employee-info").val(res.data.data.country).trigger('change');
-
-
-
-
 
 }
 
@@ -244,6 +297,20 @@ $(document).on('click', '.button-panigation-manager-product', async function() {
 	$(`.button-panigation-manager-product[value='${currentPage}']`).addClass('active')
 	sweatAlert(`Bạn đang ở trang thứ ${page}`, "success")
 })
+function clearData() {
+	sessionStorage.removeItem("image");
+	$('#id-create-manager-category').val("");
+	$('#username-create-manager-category').val("");
+	$('#password-create-manager-category').val("");
+	$('#firtsname-create-manager-category').val("");
+	$('#lastname-create-manager-category').val("");
+	$('#email-create-manager-category').val("");
+	$('#birthday-create-manager-category').val("");
+	$('#quantity-create-manager-product').val("");
+	$('#discount-create-manager-product').val("");
+	$('#price-product-manager').val("");
+	$('#description-detail-product').val("");
+}
 
 async function UpdateInstock(r) {
 	let id = r.data('id');

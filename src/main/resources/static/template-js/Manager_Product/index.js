@@ -278,6 +278,17 @@ async function getDataDetailProduct(r) {
 		params = { id: id },
 		data = {};
 	let res = await axiosTemplate(method, url, params, data);
+		let checkGender = res.data.data.gender;
+	switch (checkGender) {
+
+		case true:
+			$('#male-modal-employee').prop("checked", true);
+			break;
+
+		default:
+			$('#female-modal-employee').prop("checked", true);
+			break;
+	}
 	$('#id-create-manager-product').val(res.data.data.id);
 	$('#name-create-manager-product').val(res.data.data.productName);
 	$('#code-create-manager-product').val(res.data.data.productCode);
