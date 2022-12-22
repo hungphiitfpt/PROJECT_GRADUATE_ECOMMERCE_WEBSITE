@@ -10,9 +10,9 @@
 var error = $('.error').length;
 var regexNumber = /^\d+\.?\d*$/;
 function validateName() {
-	$('.form-group input[type=text]').each(function(i,v) {
-		if(v.hasAttribute("data-validate-required")){
-			if(v.value == '') {
+	$('.form-group input[type=text]').each(function(i, v) {
+		if (v.hasAttribute("data-validate-required")) {
+			if (v.value == '') {
 				v.classList.toggle("bad-input");
 				v.parentElement.getElementsByClassName("error")[0].innerHTML = `${errorRequired}`;
 			} else {
@@ -21,9 +21,9 @@ function validateName() {
 			}
 		}
 	})
-	$('.form-group input[type=number]').each(function(i,v) {
-		if(v.hasAttribute("data-validate-number")){
-			if(!v.value.match(regexNumber)) {
+	$('.form-group input[type=number]').each(function(i, v) {
+		if (v.hasAttribute("data-validate-number")) {
+			if (!v.value.match(regexNumber)) {
 				v.classList.toggle("bad-input");
 				v.parentElement.getElementsByClassName("error")[0].innerHTML = `${errorNumber}`;
 			} else {
@@ -32,9 +32,9 @@ function validateName() {
 			}
 		}
 	})
-	$('.form-group textarea').each(function(i,v) {
-		if(v.hasAttribute("data-validate-required")){
-			if(v.value == '') {
+	$('.form-group textarea').each(function(i, v) {
+		if (v.hasAttribute("data-validate-required")) {
+			if (v.value == '') {
 				v.classList.toggle("bad-input");
 				v.parentElement.getElementsByClassName("error")[0].innerHTML = `${errorRequired}`;
 			} else {
@@ -45,7 +45,7 @@ function validateName() {
 	})
 }
 $(function() {
-	loadAllCategory();	
+	loadAllCategory();
 	loadAllProduct();
 })
 async function loadAllCategory() {
@@ -72,15 +72,15 @@ async function loadAllProduct() {
 	let page = localStorage.getItem("currentPage");
 
 	let method = 'get',
-		
+
 		url = `${api_graduation}getProducts`,
 
-		params = {page: page},
+		params = { page: page },
 
 		data = {};
 
 	let res = await axiosTemplate(method, url, params, data);
-	
+
 	drawTableProductManager(res, $('#table-list-product-manager'))
 
 }
@@ -144,6 +144,10 @@ async function drawTableProductManager(res) {
 }
 async function insertProduct() {
 	validateName();
+	if ($('input[class="form-control bad-input"]').length > 0) {
+		sweatAlert(`Lỗi thêm sản phẩm`, "error")
+		return false;
+	}
 	let imageSession = sessionStorage.getItem("image");
 	let method = 'post',
 		url = `${api_admin}insert_product`,
@@ -161,13 +165,10 @@ async function insertProduct() {
 			supplierId: $('#list-supplier-manager option:selected').val(),
 			image: imageSession,
 		};
-		if(imageSession == "" || imageSession == null) {
-			alert("Bạn chưa upload ảnh sản phẩm")
-			return false;
-		}
-		if($('.error').text() != "") {
-			return false;
-		}
+	if (imageSession == "" || imageSession == null) {
+		sweatAlert(`Bạn chưa upload ảnh sản phẩm`, "error")
+		return false;
+	}
 	let res = await axiosTemplate(method, url, params, data);
 	clearData();
 }
@@ -192,10 +193,10 @@ async function updateProduct() {
 			supplierId: $('#list-supplier-manager option:selected').val(),
 			image: imageSession
 		};
-	if(imageSession == "" || imageSession == null) {
+	if (imageSession == "" || imageSession == null) {
 		return false;
 	}
-	let res =  await axiosTemplate(method, url, params, data);
+	let res = await axiosTemplate(method, url, params, data);
 	sweatAlert(`${res.data.message}`, "success")
 	loadAllProduct();
 
@@ -287,9 +288,9 @@ async function getDataDetailProduct(r) {
 	$('#discount-create-manager-product').val(res.data.data.discountinued);
 	$('#price-product-manager').val(res.data.data.listPrice);
 	$('#description-detail-product').val(res.data.data.decription);
-	
+
 	let imageTable = r.parents('tr').find('td:eq(2) img').attr('src');
-	if(imageTable == "" || imageTable == null) {
+	if (imageTable == "" || imageTable == null) {
 		$('#imagePreview').css('background-image', `url('https://m.media-amazon.com/images/I/61FQCSP7ZIL._SS500_.jpg')`);
 	}
 	else {

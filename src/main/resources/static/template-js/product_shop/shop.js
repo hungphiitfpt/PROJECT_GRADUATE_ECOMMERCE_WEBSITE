@@ -67,7 +67,7 @@ $(document).on('click', '.filter-product-by-categoryId', async function() {
 	let method = 'get',
 	url = `${api_graduation}findListProductExist`,
 	params = { 
-	page: page, 
+	page: 0, 
 	size: 9,
 	idCategory: idCategory, 
 	priceStart: priceStart,
@@ -90,7 +90,7 @@ $(document).on('click', '.filter-product-by-price', async function() {
 	let method = 'get',
 	url = `${api_graduation}filterDataProduct`,
 	params = { 
-	page: page, 
+	page: 0, 
 	size: 9,
 	// idCategory: idCategory, 
 	priceStart: priceStart,

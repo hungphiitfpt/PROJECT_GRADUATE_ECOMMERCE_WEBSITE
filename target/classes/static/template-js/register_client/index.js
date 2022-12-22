@@ -1,5 +1,9 @@
 async function registerUser() {
 	validateName();
+		if ($('input[class="form-control bad-input"]').length > 0) {
+		sweatAlert(`Lỗi thêm người dùng`, "error")
+		return false;
+	}
 	let method = 'post',
 		url = `${host}signup`,
 		params = {},
@@ -14,7 +18,6 @@ async function registerUser() {
 			gender: $("input[class='is_gender']:checked").val(),
 			email: $("#email_register_user").val(),
 		};
-		console.log(data);
 	if ($('input[type="checkbox"]').prop("checked") == true) {
 		let res = await axiosTemplate(method, url, params, data);
 		if (res.status == 200) {
@@ -28,7 +31,6 @@ async function registerUser() {
 }
 function validateName() {
 	$('.form-group input[type=text]').each(function(i, v) {
-		console.log(i, v.value)
 		if (v.hasAttribute("data-validate-required")) {
 			if (v.value == '') {
 				v.classList.toggle("bad-input");

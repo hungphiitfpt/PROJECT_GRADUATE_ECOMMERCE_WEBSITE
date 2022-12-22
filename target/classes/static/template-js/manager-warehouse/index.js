@@ -54,7 +54,7 @@ async function insertWarehouseProduct() {
             status: 0
 		};
 	let res = await axiosTemplate(method, url, params, data);
-	loadAllProduct();
+	loadWarehouse();
 	clearData();
 }
 async function updateWarehouseProduct() {
@@ -69,7 +69,7 @@ async function updateWarehouseProduct() {
             status: 1
 		};
 	let res = await axiosTemplate(method, url, params, data);
-	loadAllProduct();
+	loadWarehouse();
 	clearData();
 }
 function clearData() {
