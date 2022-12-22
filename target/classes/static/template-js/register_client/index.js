@@ -14,6 +14,7 @@ async function registerUser() {
 			gender: $("input[class='is_gender']:checked").val(),
 			email: $("#email_register_user").val(),
 		};
+		console.log(data);
 	if ($('input[type="checkbox"]').prop("checked") == true) {
 		let res = await axiosTemplate(method, url, params, data);
 		if (res.status == 200) {
