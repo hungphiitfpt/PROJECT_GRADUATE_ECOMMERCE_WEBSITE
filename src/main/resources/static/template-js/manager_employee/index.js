@@ -107,7 +107,7 @@ async function updateUser() {
 	let res = await axiosTemplate(method, url, params, data);
 	sweatAlert(`${res.data.message}`, "success")
 	loadAllUsers();
-
+clearData();
 }
 
 async function create_User_Manager() {
@@ -140,7 +140,7 @@ async function create_User_Manager() {
 	if (res.status == 200) {
 		sweatAlert(`Thêm mới người dùng thành công`, "success")
 	}
-
+clearData();
 }
 
 async function loadAllUsers() {
@@ -310,6 +310,9 @@ function clearData() {
 	$('#discount-create-manager-product').val("");
 	$('#price-product-manager').val("");
 	$('#description-detail-product').val("");
+	$('#btn-save-product').removeClass("d-none");
+	$('#btn-update-list-image-product').removeClass("d-none");
+	$('#btn-update-product').addClass("d-none")
 }
 
 async function UpdateInstock(r) {
