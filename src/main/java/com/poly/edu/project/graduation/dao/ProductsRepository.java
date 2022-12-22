@@ -67,6 +67,9 @@ public interface ProductsRepository extends JpaRepository<ShopProductsEntity, Lo
 	
 	@Query(value ="SELECT * FROM shop_products where list_price BETWEEN :priceStart AND :priceEnd",nativeQuery = true)
 	Page<ShopProductsEntity> filterShop( String priceStart, String priceEnd, Pageable pageable);
+	
+	@Query(value ="SELECT * FROM shop_products where list_price BETWEEN :priceStart AND :priceEnd AND category_id = :category_id",nativeQuery = true)
+	Page<ShopProductsEntity> filterShopPriceAndCategory( String priceStart, String priceEnd,String category_id, Pageable pageable);
 
 	@Query(value ="SELECT * FROM shop_products where category_id LIKE CONCAT('%',:idCategory,'%')",nativeQuery = true)
 	Page<ShopProductsEntity> findAllProductEnable(Long idCategory, Pageable page);

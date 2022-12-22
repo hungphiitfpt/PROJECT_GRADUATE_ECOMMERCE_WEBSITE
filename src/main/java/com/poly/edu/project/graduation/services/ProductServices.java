@@ -58,6 +58,8 @@ public interface ProductServices {
 
 	void uploadImageById(Long id, String image);
 
+	Page<ShopProductsEntity> filterShopPriceAndCategory(String priceStart, String priceEnd, String cagegory_id,Pageable page);
+
 	
 
 	

@@ -145,6 +145,13 @@ public class ProductServicesImpl implements ProductServices {
 		 productsRepository.uploadListImageById(id,image);
 	}
 
+	@Override
+	public Page<ShopProductsEntity> filterShopPriceAndCategory(String priceStart, String priceEnd, String cagegory_id,
+			Pageable page) {
+		// TODO Auto-generated method stub
+		return productsRepository.filterShopPriceAndCategory(priceStart, priceEnd, cagegory_id, page);
+	}
+
 
 
 

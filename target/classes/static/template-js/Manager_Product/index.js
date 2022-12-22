@@ -9,26 +9,6 @@
 // var descriptionDetailError = $('#description-detail-product').parents('.form-group').find('.error');
 var error = $('.error').length;
 var regexNumber = /^\d+\.?\d*$/;
- $('.form-group input[type=text]').on('change',function () {
-		if($(this)[0].hasAttribute('data-validate-required')) {
-			$(this)[0].classList.toggle("bad-input");
-			$(this)[0].parentElement.getElementsByClassName("error")[0].innerHTML = `${errorRequired}`;
-		} else {
-			$(this)[0].classList.remove("bad-input");
-			$(this)[0].parentElement.getElementsByClassName("error")[0].innerHTML = '';
-		}
-})
-$('.form-group input[type=number]').on('change',function () {
-	if($(this)[0].hasAttribute("data-validate-number")){
-		if(!$(this)[0].value.match(regexNumber)) {
-			$(this)[0].classList.toggle("bad-input");
-			$(this)[0].parentElement.getElementsByClassName("error")[0].innerHTML = `${errorNumber}`;
-		} else {
-			$(this)[0].classList.remove("bad-input");
-			$(this)[0].parentElement.getElementsByClassName("error")[0].innerHTML = '';
-		}
-	}
-})
 function validateName() {
 	$('.form-group input[type=text]').each(function(i,v) {
 		if(v.hasAttribute("data-validate-required")){

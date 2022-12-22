@@ -99,6 +99,27 @@ public class ProductsRestController {
 		}
 		return null;
 	}
+	
+	@RequestMapping(value = "/filterDataProductByCateAndPrice", method = RequestMethod.GET, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public Page<ShopProductsEntity> filterDataProductByCategoryAndPrice(
+			@RequestParam(name = "priceStart", required = false, defaultValue = "0") String priceStart,
+			@RequestParam(name = "priceEnd", required = false, defaultValue = "999999999") String priceEnd,
+			@RequestParam(name = "category_id", required = false, defaultValue = "") String category_id,
+//			@RequestParam(name = "idCategory", required = false, defaultValue = "") Long idCategory,
+			@RequestParam(name = "size", required = false, defaultValue = "9") int size,
+			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
+			@RequestParam(name = "sort", required = false, defaultValue = "ASC") String sort) throws Exception {
+		try {
+			Page<ShopProductsEntity> dataProduct = productServices.filterShopPriceAndCategory(priceStart, priceEnd,category_id,
+					PageRequest.of(page, size));
+			return dataProduct;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	// Lấy chi tiết sản phẩm
 	@RequestMapping(value = "/getProductById", method = RequestMethod.GET, produces = {
